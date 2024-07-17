@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 
 // uso da biblioteca react-icons para utilizar icones externo
@@ -12,7 +11,7 @@ import { ProjectsContainer } from './components/ProjectsContainer/Projects';
 import { ContactContainer } from './components/ContactContainer/Contact';
 import { FooterContainer } from './components/FooterContainer/Footer';
 
-import './App.css';
+import './App.scss';
 
 export function App() {
 	// adicionar o valor do scroll da página

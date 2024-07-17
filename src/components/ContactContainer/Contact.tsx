@@ -1,5 +1,4 @@
-import React from 'react';
-import './Contact.css';
+import './Contact.scss';
 
 export const ContactContainer = () => {
 	return (

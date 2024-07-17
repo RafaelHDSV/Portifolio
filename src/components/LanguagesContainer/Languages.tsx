@@ -1,9 +1,7 @@
-import React from 'react';
-
 // dados dos projetos
 import LanguagesData from '../../constants/LanguagesData';
 
-import './Languages.css';
+import './Languages.scss';
 
 export const LanguagesContainer = () => {
 	return (

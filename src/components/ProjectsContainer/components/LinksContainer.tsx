@@ -1,5 +1,3 @@
-import React from 'react';
-
 // icones das linguagens
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 

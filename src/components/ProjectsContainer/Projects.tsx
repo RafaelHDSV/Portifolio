@@ -1,5 +1,3 @@
-import React from 'react';
-
 // icones das linguagens
 import { FaGithub } from 'react-icons/fa';
 
@@ -10,7 +8,7 @@ import { LinksContainer } from './components/LinksContainer';
 // dados dos projetos
 import ProjectsData from '../../constants/ProjectsData';
 
-import './Project.css';
+import './Project.scss';
 
 export const ProjectsContainer = () => {
 	return (

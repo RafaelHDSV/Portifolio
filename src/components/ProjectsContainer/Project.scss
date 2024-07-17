@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .projects-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -32,8 +34,8 @@
 	align-items: center;
 	padding: 1rem;
 	gap: 1.5rem;
-	background-color: var(--white);
-	color: var(--black);
+	background-color: $white;
+	color: $black;
 	border-radius: 0 0 1rem 1rem;
 }
 
@@ -59,7 +61,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--black);
+	background-color: $black;
 	padding: 0.3rem;
 	border-radius: 100%;
 	transform: scale(1.5);
@@ -75,7 +77,7 @@
 	bottom: -2.3rem;
 	width: 0.7rem;
 	height: 0.7rem;
-	background-color: var(--black);
+	background-color: $black;
 	transform: rotate(135deg);
 }
 
@@ -84,8 +86,8 @@
 	bottom: -4rem;
 	display: flex;
 	font-size: 14px;
-	background-color: var(--black);
-	color: var(--white);
+	background-color: $black;
+	color: $white;
 	padding: 0.5rem;
 	border-radius: 0.5rem;
 }
@@ -102,7 +104,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: var(--black);
+	color: $black;
 	padding: 0.5rem;
 	border-radius: 1rem;
 	gap: 0.5rem;
@@ -110,8 +112,8 @@
 }
 
 .project-card .text-content .links .link-container:hover {
-	background-color: var(--black);
-	color: var(--blue);
+	background-color: $black;
+	color: $blue;
 }
 
 .btn-github {
@@ -121,16 +123,16 @@
 	align-items: center;
 	gap: 1rem;
 	font-size: 18px;
-	background-color: var(--black);
-	color: var(--white);
-	border: 1px solid var(--white);
+	background-color: $black;
+	color: $white;
+	border: 1px solid $white;
 	margin-top: 2rem;
 	padding: 1rem;
 	border-radius: 3rem;
 }
 
 .btn-github:hover {
-	background-color: var(--white);
-	color: var(--black);
+	background-color: $white;
+	color: $black;
 	transform: scale(0.9);
 }

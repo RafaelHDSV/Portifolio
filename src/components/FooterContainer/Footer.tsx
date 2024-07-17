@@ -1,10 +1,8 @@
-import React from 'react';
-
 import { MdEmail } from 'react-icons/md';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaSquareWhatsapp, FaSquareGithub } from 'react-icons/fa6';
 
-import './Footer.css';
+import './Footer.scss';
 
 export const FooterContainer = () => {
 	return (

@@ -1,8 +1,6 @@
-import React from 'react';
-
 import Logo from '../../assets/logo-completed.png';
 
-import './About.css';
+import './About.scss';
 
 export const AboutContainer = () => {
 	return (
