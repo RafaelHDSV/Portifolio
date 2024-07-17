@@ -1,5 +1,5 @@
 // dados dos projetos
-import LanguagesData from '../../constants/LanguagesData';
+import { LanguagesData } from '../../constants/LanguagesData';
 
 import './Languages.scss';
 

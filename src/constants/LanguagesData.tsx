@@ -1,5 +1,3 @@
-import React from 'react';
-
 // importação das logos das linguagens
 import {
 	FaReact,
@@ -10,10 +8,11 @@ import {
 	FaGitAlt,
 	FaGithub,
 } from 'react-icons/fa';
+
 import { IoLogoJavascript } from 'react-icons/io5';
 import { SiCplusplus, SiMysql } from 'react-icons/si';
 
-const LanguagesData = [
+export const LanguagesData = [
 	{
 		name: 'React',
 		logo: <FaReact />,
@@ -74,5 +73,3 @@ const LanguagesData = [
 		description: '',
 	},
 ];
-
-export default LanguagesData;

@@ -1,35 +1,41 @@
 import { useState } from 'react';
 
-export const LanguagesContainer = ({ project }) => {
+interface ProjectProps {
+	key: string;
+	languages: {
+		name: string;
+		logo: JSX.Element;
+	}[];
+}
+
+export const LanguagesContainer = (props: ProjectProps) => {
 	// visibilidade do nome da linguagem
-	const [languageVisible, setLanguageVisible] = useState(null);
-	const [keyVisible, setKeyVisible] = useState(null);
+	const [languageVisible, setLanguageVisible] = useState<string | null>();
+	const [keyVisible, setKeyVisible] = useState<string | null>();
 
 	return (
 		<div className='languages-container'>
-			{project.languages.map((language) => (
+			{props.languages.map((language) => (
 				<div className='single-language-container'>
 					<span
 						className='language'
 						key={Math.random()}
 						style={{
-							color: `var(--${language.name})`,
+							color: '$' + language.name + ';',
 						}}
 						onMouseEnter={() => {
 							setLanguageVisible(language.name);
-
-							setKeyVisible(project.key);
+							setKeyVisible(props.key);
 						}}
 						onMouseLeave={() => {
 							setLanguageVisible(null);
-
 							setKeyVisible(null);
 						}}>
 						{language.logo}
 					</span>
 
 					{language.name === languageVisible &&
-						project.key === keyVisible && (
+						props.key === keyVisible && (
 							<>
 								<span className='triangle'></span>
 								<span className={'language-name'}>

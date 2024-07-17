@@ -6,7 +6,7 @@ import { LanguagesContainer } from './components/LanguagesContainer';
 import { LinksContainer } from './components/LinksContainer';
 
 // dados dos projetos
-import ProjectsData from '../../constants/ProjectsData';
+import { ProjectsData } from '../../constants/ProjectsData';
 
 import './Project.scss';
 
@@ -30,11 +30,17 @@ export const ProjectsContainer = () => {
 						<div className='text-content'>
 							<h2>{project.name}</h2>
 
-							<LanguagesContainer project={project} />
+							<LanguagesContainer
+								key={project.key}
+								languages={project.languages}
+							/>
 
 							<article>{project.description}</article>
 
-							<LinksContainer project={project} />
+							<LinksContainer
+								urlProject={project.urlProject}
+								urlGitHub={project.urlGitHub}
+							/>
 						</div>
 					</div>
 				))}

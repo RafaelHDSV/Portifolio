@@ -12,7 +12,7 @@ import tipCalculatorApp from '../assets/tip-calculator-app.mp4';
 import loopstudiosLandingPage from '../assets/loopstudios-landing-page.mp4';
 import sunnysideAgencyLandingPage from '../assets/sunnyside-agency-landing-page.mp4';
 
-const images = {
+export const images = {
 	logo,
 	netflixClone,
 	productList,
@@ -27,5 +27,3 @@ const images = {
 	loopstudiosLandingPage,
 	sunnysideAgencyLandingPage,
 };
-
-export default images;

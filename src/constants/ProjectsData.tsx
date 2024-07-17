@@ -1,14 +1,12 @@
-import React from 'react';
-
 // importação das imagens para os projetos do portifólio
-import images from './images';
+import { images } from './images';
 
 // importação das logos das linguagens
 import { FaReact, FaCss3Alt, FaHtml5 } from 'react-icons/fa';
 import { IoLogoJavascript, IoLibrary, IoSettings } from 'react-icons/io5';
 
 // array de projetos
-const ProjectsData = [
+export const ProjectsData = [
 	// template de um projeto para criar novos projetos futuramente
 	// {
 	//  key: '',
@@ -342,5 +340,3 @@ const ProjectsData = [
 			'https://github.com/RafaelHDSV/Sunnyside-agency-landing-page',
 	},
 ];
-
-export default ProjectsData;

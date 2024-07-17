@@ -1,12 +1,17 @@
 // icones das linguagens
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
-export const LinksContainer = ({ project }) => {
+interface ProjectProps {
+	urlProject: string;
+	urlGitHub: string;
+}
+
+export const LinksContainer = (props: ProjectProps) => {
 	return (
 		<div className='links'>
-			{project.urlProject && (
+			{props.urlProject && (
 				<a
-					href={project.urlProject}
+					href={props.urlProject}
 					target='_blank'
 					rel='noreferrer'
 					className='link-container'>
@@ -15,9 +20,9 @@ export const LinksContainer = ({ project }) => {
 				</a>
 			)}
 
-			{project.urlGitHub && (
+			{props.urlGitHub && (
 				<a
-					href={project.urlGitHub}
+					href={props.urlGitHub}
 					target='_blank'
 					rel='noreferrer'
 					className='link-container'>
