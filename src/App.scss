@@ -1,3 +1,6 @@
+// cores
+@import './styles/colors.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 /* font-family: "Cinzel Decorative", serif; */
 
@@ -6,8 +9,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
 /* font-family: 'Open Sans', sans-serif; */
-
-@import './styles/colors.scss';
 
 * {
 	padding: 0;
@@ -63,6 +64,28 @@ html {
 	font-size: 32px;
 	padding: 2rem 0;
 	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.1);
+		color: $blue;
+
+		&::after {
+			content: '';
+			display: block;
+			background-color: $blue;
+			width: 100%;
+			height: 1px;
+		}
+	}
+
+	&::after {
+		content: '';
+		display: block;
+		background-color: $blue;
+		width: 0%;
+		height: 1px;
+		transition: 700ms ease-in-out;
+	}
 }
 
 .main-container {
@@ -84,12 +107,12 @@ html {
 	margin: 1rem;
 	border-radius: 100%;
 	cursor: pointer;
-}
 
-.btn-up:hover {
-	background-color: $black;
-	color: $white;
-	border: 1px solid $white;
+	&:hover {
+		background-color: $black;
+		color: $white;
+		border: 1px solid $white;
+	}
 }
 
 .arrow-up {
@@ -108,16 +131,16 @@ html {
 	width: 100%;
 	height: 100vh;
 	z-index: 999;
-}
 
-.loading::after {
-	content: '';
-	width: 4rem;
-	height: 4rem;
-	border-radius: 100%;
-	border: 1rem solid;
-	border-color: $white $blue $white $white;
-	animation: loadingAnimation 1s infinite linear;
+	&::after {
+		content: '';
+		width: 4rem;
+		height: 4rem;
+		border-radius: 100%;
+		border: 1rem solid;
+		border-color: $white $blue $white $white;
+		animation: loadingAnimation 1s infinite linear;
+	}
 }
 
 .visible {
