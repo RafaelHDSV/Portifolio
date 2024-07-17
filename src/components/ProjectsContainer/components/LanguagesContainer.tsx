@@ -21,7 +21,7 @@ export const LanguagesContainer = (props: ProjectProps) => {
 						className='language'
 						key={Math.random()}
 						style={{
-							color: '$' + language.name + ';',
+							color: `var(--${language.name})`,
 						}}
 						onMouseEnter={() => {
 							setLanguageVisible(language.name);
