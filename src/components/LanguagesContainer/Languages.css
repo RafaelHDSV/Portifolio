@@ -1,0 +1,19 @@
+#languages main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 0 5rem;
+}
+
+#languages aside {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	max-height: 25rem;
+	height: 100vh;
+	border: 1px solid var(--white);
+}
