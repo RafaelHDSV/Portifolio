@@ -4,6 +4,8 @@ import { FaLinkedin } from 'react-icons/fa';
 import { FaSquareWhatsapp, FaSquareGithub } from 'react-icons/fa6';
 import { IoIosArrowDown } from 'react-icons/io';
 
+import Typewriter from 'typewriter-effect';
+
 import './Header.scss';
 
 export const HeaderContainer = () => {
@@ -23,7 +25,22 @@ export const HeaderContainer = () => {
 			</nav>
 
 			<h1>Rafael Vieira</h1>
-			<span>Desenvolvedor Front-end</span>
+
+			<Typewriter
+				options={{
+					autoStart: true,
+					loop: true,
+					delay: 60,
+					deleteSpeed: 30,
+					strings: [
+						'Desenvolvedor Front-End',
+						'React | Sass | Typescript | Javascript',
+						'Desenvolvedor Web',
+						'Front End Developer',
+						'Web Developer',
+					],
+				}}
+			/>
 
 			<div className='social'>
 				<a href='mailto:rafaelvieira1720@gmail.com'>

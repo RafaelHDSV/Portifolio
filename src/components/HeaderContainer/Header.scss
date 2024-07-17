@@ -16,7 +16,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		box-shadow: 0 0 50rem 10rem $blue;
-		animation: bubbleAnimation 4s infinite alternate-reverse;
+		animation: bubbleAnimation 3s infinite alternate-reverse;
 	}
 
 	nav {
@@ -140,6 +140,10 @@
 	h1 {
 		font-family: 'Cinzel Decorative', serif;
 		font-size: 54px;
+	}
+
+	.Typewriter {
+		font-size: 22px;
 	}
 
 	.social {
