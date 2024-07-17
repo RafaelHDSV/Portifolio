@@ -1,6 +1,4 @@
 // uso da biblioteca react-icons para utilizar icones externo
-
-import { CiLight, CiDark } from 'react-icons/ci';
 import { MdEmail } from 'react-icons/md';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaSquareWhatsapp, FaSquareGithub } from 'react-icons/fa6';
@@ -21,17 +19,6 @@ export const HeaderContainer = () => {
 					<a href='#languages'>Linguagens</a>
 					<a href='#projects'>Projetos</a>
 					<a href='#contact'>Contatos</a>
-
-					<div className='toggle-language'>
-						<CiDark size={'1.5rem'} />
-
-						<label className='switch'>
-							<input type='checkbox' />
-							<span className='slider'></span>
-						</label>
-
-						<CiLight size={'1.5rem'} />
-					</div>
 				</div>
 			</nav>
 

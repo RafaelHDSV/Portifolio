@@ -13,21 +13,26 @@
 		border-radius: 3rem;
 		padding: 2rem 0;
 		position: relative;
+		overflow: hidden;
 
 		&::before {
 			content: '';
+			position: absolute;
+			left: -6rem;
 			height: 6rem;
-			width: 2rem;
+			width: 6rem;
 			background-color: $white;
-			border-radius: 0 1rem 1rem 0;
+			transform: rotate(135deg);
 		}
 
 		&::after {
 			content: '';
+			position: absolute;
+			right: -6rem;
 			height: 6rem;
-			width: 2rem;
+			width: 6rem;
 			background-color: $white;
-			border-radius: 1rem 0 0 1rem;
+			transform: rotate(135deg);
 		}
 	}
 
@@ -76,7 +81,7 @@
 			display: grid;
 			justify-content: center;
 			align-items: center;
-			grid-template-columns: repeat(auto-fit, minmax(1rem, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
 			column-gap: 5rem;
 			row-gap: 5rem;
 			width: 100%;
