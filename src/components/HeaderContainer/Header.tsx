@@ -1,10 +1,8 @@
-// uso da biblioteca react-icons para utilizar icones externo
-import { MdEmail } from 'react-icons/md';
-import { FaLinkedin } from 'react-icons/fa';
-import { FaSquareWhatsapp, FaSquareGithub } from 'react-icons/fa6';
-import { IoIosArrowDown } from 'react-icons/io';
-
+// biblioteca para auto escrever títulos
 import Typewriter from 'typewriter-effect';
+
+// uso da biblioteca react-icons para utilizar icones externo
+import { FaArrowDownLong } from 'react-icons/fa6';
 
 import './Header.scss';
 
@@ -42,35 +40,7 @@ export const HeaderContainer = () => {
 				}}
 			/>
 
-			<div className='social'>
-				<a href='mailto:rafaelvieira1720@gmail.com'>
-					<MdEmail className='social-icon' size='3rem' />
-				</a>
-
-				<a href='https://wa.me/5511947100007' target='blank'>
-					<FaSquareWhatsapp
-						className='social-icon'
-						size='2.5rem'
-					/>
-				</a>
-
-				<a href='https://github.com/RafaelHDSV' target='blank'>
-					<FaSquareGithub
-						className='social-icon'
-						size='2.5rem'
-					/>
-				</a>
-
-				<a
-					href='https://www.linkedin.com/in/rafael-vieira1720/'
-					target='blank'>
-					<FaLinkedin className='social-icon' size='2.5rem' />
-				</a>
-			</div>
-
-			<a href='#about'>
-				<IoIosArrowDown className='arrow-down' size='2rem' />
-			</a>
+			<FaArrowDownLong className='arrow-down' size='2rem' />
 		</div>
 	);
 };

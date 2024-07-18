@@ -8,6 +8,10 @@
 	align-items: center;
 	width: 100%;
 	height: 100vh;
+	background: url('../../assets/background.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 70%;
 
 	&::after {
 		content: '';
@@ -36,7 +40,7 @@
 			font-size: 28px;
 
 			&:hover {
-				font-size: 48px;
+				font-size: 36px;
 				color: $blue;
 			}
 		}
@@ -75,65 +79,6 @@
 					transition: 700ms ease-in-out;
 				}
 			}
-
-			.toggle-language {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				gap: 0.5rem;
-
-				.switch {
-					position: relative;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					width: 3rem;
-					height: 1.5rem;
-
-					input {
-						opacity: 0;
-						width: 0;
-						height: 0;
-
-						&:checked + .slider {
-							background-color: $white;
-							background-position: center;
-							background-size: cover;
-							background-repeat: no-repeat;
-						}
-
-						&:checked + .slider:before {
-							transform: translateX(100%);
-						}
-					}
-
-					.slider {
-						width: 100%;
-						height: 100%;
-						background-color: $black;
-						background-position: center;
-						background-size: cover;
-						background-repeat: no-repeat;
-						border-radius: 1rem;
-						cursor: pointer;
-
-						&:before {
-							content: '';
-							position: absolute;
-							height: 1.5rem;
-							width: 1.5rem;
-							border-radius: 100%;
-							background-color: $white;
-							box-shadow: 0 0 0 1px $black;
-						}
-
-						&:hover:before {
-							transition: 300ms all ease;
-							background-color: $blue;
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -146,31 +91,13 @@
 		font-size: 22px;
 	}
 
-	.social {
-		position: absolute;
-		bottom: 7rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 1rem;
-
-		.social-icon:hover {
-			transform: scale(1.2);
-			color: $blue;
-		}
-	}
-
 	.arrow-down {
 		position: absolute;
-		bottom: 2rem;
+		bottom: 3rem;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translate(-50%);
 		cursor: pointer;
 		animation: arrowDown 500ms ease-in-out alternate infinite;
-
-		&:hover {
-			color: $blue;
-		}
 	}
 }
 
@@ -186,10 +113,10 @@
 
 @keyframes arrowDown {
 	0% {
-		bottom: 2rem;
+		bottom: 7rem;
 	}
 
 	100% {
-		bottom: 1rem;
+		bottom: 3rem;
 	}
 }
