@@ -21,8 +21,8 @@ export const ProjectsData = [
 
 	{
 		key: '1',
-		name: 'PLann.er',
-		image: images.netflixClone,
+		name: 'Plann.er',
+		image: images.planner,
 		description:
 			'Este projeto é um clone do Netflix, feito para testar conhecimentos em React. Foi utilizada a API TMDB e diversas funcionalidades foram adicionadas, como: seleção da foto do usuário e armazenamento em localStorage, filtro por filmes e séries ou por todos, opção de ver detalhes mais precisos de cada filme.',
 		languages: [
@@ -43,12 +43,12 @@ export const ProjectsData = [
 				logo: <FaHtml5 />,
 			},
 			{
-				name: 'API',
-				logo: <IoSettings />,
+				name: 'Bibliotecas',
+				logo: <IoLibrary />,
 			},
 		],
-		urlProject: 'https://netflix-clone-rafael.vercel.app',
-		urlGitHub: 'https://github.com/RafaelHDSV/Netflix-Clone',
+		urlProject: 'https://plann-er-rafael.vercel.app',
+		urlGitHub: 'https://github.com/RafaelHDSV/Plann.er',
 	},
 
 	{

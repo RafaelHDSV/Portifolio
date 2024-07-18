@@ -42,7 +42,7 @@ export const ProjectsContainer = () => {
 
 			<a
 				className='btn-github'
-				href='https://github.com/RafaelHDSV'
+				href='https://github.com/RafaelHDSV?tab=repositories'
 				target='_blank'
 				rel='noreferrer'>
 				<FaGithub />

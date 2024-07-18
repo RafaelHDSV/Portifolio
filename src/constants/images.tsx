@@ -1,4 +1,5 @@
 import logo from '../assets/logo-completed.png';
+import planner from '../assets/planner.png';
 import netflixClone from '../assets/netflix-clone.png';
 import productList from '../assets/product-list.png';
 import financialControl from '../assets/financial-control.png';
@@ -14,6 +15,7 @@ import sunnysideAgencyLandingPage from '../assets/sunnyside-agency-landing-page.
 
 export const images = {
 	logo,
+	planner,
 	netflixClone,
 	productList,
 	financialControl,
