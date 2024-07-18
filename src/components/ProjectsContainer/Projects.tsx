@@ -19,13 +19,7 @@ export const ProjectsContainer = () => {
 				{/* transformar os dados para um card do projeto */}
 				{ProjectsData.map((project) => (
 					<div className='project-card' key={project.key}>
-						<video controls>
-							<source
-								src={project.image}
-								type='video/mp4'
-							/>
-							Seu navegador não suportar o vídeo.
-						</video>
+						<img src={project.image} alt={project.name} />
 
 						<div className='text-content'>
 							<h2>{project.name}</h2>

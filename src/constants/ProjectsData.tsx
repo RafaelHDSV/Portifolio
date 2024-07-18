@@ -4,6 +4,7 @@ import { images } from './images';
 // importação das logos das linguagens
 import { FaReact, FaCss3Alt, FaHtml5 } from 'react-icons/fa';
 import { IoLogoJavascript, IoLibrary, IoSettings } from 'react-icons/io5';
+import { SiTypescript } from 'react-icons/si';
 
 // array de projetos
 export const ProjectsData = [
@@ -20,6 +21,38 @@ export const ProjectsData = [
 
 	{
 		key: '1',
+		name: 'PLann.er',
+		image: images.netflixClone,
+		description:
+			'Este projeto é um clone do Netflix, feito para testar conhecimentos em React. Foi utilizada a API TMDB e diversas funcionalidades foram adicionadas, como: seleção da foto do usuário e armazenamento em localStorage, filtro por filmes e séries ou por todos, opção de ver detalhes mais precisos de cada filme.',
+		languages: [
+			{
+				name: 'React',
+				logo: <FaReact />,
+			},
+			{
+				name: 'Typescript',
+				logo: <SiTypescript />,
+			},
+			{
+				name: 'CSS',
+				logo: <FaCss3Alt />,
+			},
+			{
+				name: 'HTML',
+				logo: <FaHtml5 />,
+			},
+			{
+				name: 'API',
+				logo: <IoSettings />,
+			},
+		],
+		urlProject: 'https://netflix-clone-rafael.vercel.app',
+		urlGitHub: 'https://github.com/RafaelHDSV/Netflix-Clone',
+	},
+
+	{
+		key: '2',
 		name: 'Clone da Netflix',
 		image: images.netflixClone,
 		description:
@@ -51,7 +84,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '2',
+		key: '3',
 		name: 'Listagem Automática de Produtos',
 		image: images.productList,
 		description:
@@ -79,7 +112,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '3',
+		key: '4',
 		name: 'Controle Financeiro',
 		image: images.financialControl,
 		description:
@@ -107,7 +140,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '4',
+		key: '5',
 		name: 'Aplicativo de tarefas',
 		image: images.todoApp,
 		description:
@@ -135,7 +168,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '5',
+		key: '6',
 		name: 'Aplicativo gerador de conselhos',
 		image: images.adviceGeneratorApp,
 		description:
@@ -163,7 +196,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '6',
+		key: '7',
 		name: 'MARG',
 		image: images.roboticHand,
 		description:
@@ -191,7 +224,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '7',
+		key: '8',
 		name: 'Mazzi Fiori Casamentos',
 		image: images.mazziFioriCasamentos,
 		description:
@@ -219,7 +252,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '8',
+		key: '9',
 		name: 'Gerador de Senhas',
 		image: images.passwordGenerator,
 		description:
@@ -243,7 +276,7 @@ export const ProjectsData = [
 	},
 
 	{
-		key: '9',
+		key: '10',
 		name: 'Aplicativo Calculadora',
 		image: images.calculatorApp,
 		description:
@@ -264,30 +297,6 @@ export const ProjectsData = [
 		],
 		urlProject: 'https://calculator-app-rafael.netlify.app/',
 		urlGitHub: 'https://github.com/RafaelHDSV/Calculator-app',
-	},
-
-	{
-		key: '10',
-		name: 'Calculadora de gorjetas',
-		image: images.tipCalculatorApp,
-		description:
-			'Este pequeno aplicativo é perfeito para quem está começando a se familiarizar com JavaScript. A funcionalidade da calculadora será um bom teste!',
-		languages: [
-			{
-				name: 'HTML',
-				logo: <FaHtml5 />,
-			},
-			{
-				name: 'CSS',
-				logo: <FaCss3Alt />,
-			},
-			{
-				name: 'Javascript',
-				logo: <IoLogoJavascript />,
-			},
-		],
-		urlProject: 'https://tip-calculator-app-rafael.netlify.app/',
-		urlGitHub: 'https://github.com/RafaelHDSV/Tip-Calculator-App',
 	},
 
 	{

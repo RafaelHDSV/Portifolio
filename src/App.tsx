@@ -33,11 +33,11 @@ export function App() {
 	return (
 		<div className='App'>
 			<HeaderContainer></HeaderContainer>
-			{/* <AboutContainer></AboutContainer> */}
+			<AboutContainer></AboutContainer>
 			<LanguagesContainer></LanguagesContainer>
-			{/* <ProjectsContainer></ProjectsContainer> */}
-			{/* <ContactContainer></ContactContainer> */}
-			{/* <FooterContainer></FooterContainer> */}
+			<ProjectsContainer></ProjectsContainer>
+			<ContactContainer></ContactContainer>
+			<FooterContainer></FooterContainer>
 
 			{/* visibilidade da seta para inicio da página */}
 			{scrollY >= 250 && (
