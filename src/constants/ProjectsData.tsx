@@ -24,7 +24,7 @@ export const ProjectsData = [
 		name: 'Plann.er',
 		image: images.planner,
 		description:
-			'Este projeto é um clone do Netflix, feito para testar conhecimentos em React. Foi utilizada a API TMDB e diversas funcionalidades foram adicionadas, como: seleção da foto do usuário e armazenamento em localStorage, filtro por filmes e séries ou por todos, opção de ver detalhes mais precisos de cada filme.',
+			'Plann.er é um planejador de viagens desenvolvido durante a NLW Journey da Rocketseat. Esta aplicação permite aos usuários organizar suas viagens de forma eficiente, incluindo a inserção de locais, gerenciamento de convidados e organização de datas e horários.',
 		languages: [
 			{
 				name: 'React',
