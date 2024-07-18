@@ -20,7 +20,7 @@ export const HeaderContainer = () => {
 					<a href='#about'>Sobre</a>
 					<a href='#languages'>Linguagens</a>
 					<a href='#projects'>Projetos</a>
-					<a href='#contact'>Contatos</a>
+					<a href='#contact'>Contato</a>
 				</div>
 			</nav>
 

@@ -105,11 +105,11 @@
 					border-radius: 1rem;
 					gap: 0.5rem;
 					transition: 100ms all ease;
-				}
 
-				& :hover {
-					background-color: $black;
-					color: $blue;
+					&:hover {
+						background-color: $black;
+						color: $blue;
+					}
 				}
 			}
 		}
@@ -133,6 +133,6 @@
 	&:hover {
 		background-color: $white;
 		color: $black;
-		transform: scale(0.9);
+		transform: scale(1.1);
 	}
 }
