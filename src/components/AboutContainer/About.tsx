@@ -13,7 +13,7 @@ export const AboutContainer = () => {
 				<aside>
 					<h1>Rafael Henrique de Sousa Vieira</h1>
 
-					{/* <article>
+					<article>
 						Sou desenvolvedor frontend com 4 anos de
 						experiência em desenvolvimento de interfaces e
 						desenvolvimento WEB. Tenho habilidades sólidas em
@@ -27,7 +27,7 @@ export const AboutContainer = () => {
 						acompanhar as tendências e tecnologias emergentes,
 						garantindo sempre a entrega de projetos de alta
 						qualidade.
-					</article> */}
+					</article>
 
 					<a
 						className='btn-cv'
