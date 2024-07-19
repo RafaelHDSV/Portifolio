@@ -19,9 +19,14 @@
 
 <h2 id="about">📌 About</h2>
 
-Este portfólio de desenvolvedor frontend foi criado com React.js, HTML, CSS e Javascript. Demonstra minhas habilidades em desenvolvimento web com uma interface moderna e responsiva. Inclui seções para projetos, habilidades e contato, destacando componentes reutilizáveis e uma estilização avançada.
+This is my frontend developer portfolio, designed to showcase my top projects and skills. Using modern technologies such as React, TypeScript, SASS and HTML, this portfolio highlights the creation of dynamic and responsive user interfaces.
 
 <h2 id="started">🚀 Getting started</h2>
+
+In this project we used some libraries, such as:
+
+-    React Icons
+-    Typewriter
 
 <h3>Cloning</h3>
 
@@ -37,19 +42,16 @@ cd Portifolio
 npm start
 ```
 
-<!-- <h2 id="routes">📍 Application Routes</h2> -->
+<h2 id="routes">📍 Application Routes</h2>
 
-<!-- {Introdução breve das rotas da sua aplicação} -->
+There is only one route in this project
 
-​
-
-<!-- | route | description
-|----------------------|-----------------------------------------------------
-| <kbd>/</kbd> | home page -->
-
-<!-- | <kbd>/movie</kbd> | page to get more detailed information about the selected film -->
-<!-- | <kbd>/user</kbd> | page to select the user icon -->
-<!-- | <kbd>/_error_</kbd> | page when the route does not exist or is not found -->
+| route               | description                                                   |
+| ------------------- | ------------------------------------------------------------- |
+| <kbd>/</kbd>        | home page                                                     |
+| <kbd>/movie</kbd>   | page to get more detailed information about the selected film |
+| <kbd>/user</kbd>    | page to select the user icon                                  |
+| <kbd>/_error_</kbd> | page when the route does not exist or is not found            |
 
 <!-- <hr/>
 
