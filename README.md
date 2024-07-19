@@ -46,31 +46,14 @@ npm start
 
 There is only one route in this project
 
-| route               | description                                                   |
-| ------------------- | ------------------------------------------------------------- |
-| <kbd>/</kbd>        | home page                                                     |
-| <kbd>/movie</kbd>   | page to get more detailed information about the selected film |
-| <kbd>/user</kbd>    | page to select the user icon                                  |
-| <kbd>/_error_</kbd> | page when the route does not exist or is not found            |
+| route        | description |
+| ------------ | ----------- |
+| <kbd>/</kbd> | root page   |
 
-<!-- <hr/>
+<hr/>
 
 ### route: <kbd>/</kbd>
 
-<img src="./public/images/root.png"/>
+<img src="./public/root.png"/>
 
 <hr/>
-
-### route: <kbd>/movie</kbd>
-
--    movie
-     <img src="./public/images/movie.png"/>
-
--    tv
-     <img src="./public/images/tv.png"/>
-
-<hr/>
-
-### route: <kbd>/user</kbd>
-
-<img src="./public/images/user.png"/> -->
