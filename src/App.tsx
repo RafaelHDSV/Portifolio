@@ -32,6 +32,11 @@ export function App() {
 
 	return (
 		<div className='App'>
+			<div className='loader'>
+					<h1>Este projeto ainda está em desenvolvimento</h1>
+					<p>Aguarde...</p>
+			</div>
+
 			<HeaderContainer></HeaderContainer>
 			<AboutContainer></AboutContainer>
 			<LanguagesContainer></LanguagesContainer>
