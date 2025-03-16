@@ -1,69 +1,55 @@
-import { useState } from 'react';
-
-// uso da biblioteca react-icons para utilizar icones externo
-import { FaArrowUp } from 'react-icons/fa';
-
-// componentes da página
-import { HeaderContainer } from './components/HeaderContainer/Header';
-import { AboutContainer } from './components/AboutContainer/About';
-import { LanguagesContainer } from './components/LanguagesContainer/Languages';
-import { ProjectsContainer } from './components/ProjectsContainer/Projects';
-import { ContactContainer } from './components/ContactContainer/Contact';
-import { FooterContainer } from './components/FooterContainer/Footer';
-
-import './App.scss';
+import { useState } from 'react'
+import { FaArrowUp } from 'react-icons/fa'
+import { HeaderContainer } from './components/HeaderContainer/Header'
+import { AboutContainer } from './components/AboutContainer/About'
+import { LanguagesContainer } from './components/LanguagesContainer/Languages'
+import { ProjectsContainer } from './components/ProjectsContainer/Projects'
+import { ContactContainer } from './components/ContactContainer/Contact'
+import { FooterContainer } from './components/FooterContainer/Footer'
+import styles from './App.module.scss'
 
 export function App() {
-	// adicionar o valor do scroll da página
-	const [scrollY, setScrollY] = useState(0);
+  const [loading, setLoading] = useState(true)
+  const [scrollY, setScrollY] = useState(0)
+  window.addEventListener('scroll', () => {
+    setScrollY(window.scrollY)
+  })
 
-	// quando ocorrer o evento de scroll, atualiza o valor
-	window.addEventListener('scroll', () => {
-		setScrollY(window.scrollY);
-	});
+  window.addEventListener('load', () => {
+    setLoading(false)
+  })
 
-	// estado do carregamento da página
-	const [loading, setLoading] = useState(true);
+  const isDevelopment = true
+  if (!isDevelopment) {
+    return (
+      <div className={styles.loader}>
+        <h1>Este projeto ainda está em desenvolvimento</h1>
+        <p>Aguarde...</p>
+      </div>
+    )
+  }
 
-	// Esconde o loader quando a página está totalmente carregada
-	window.addEventListener('load', () => {
-		setLoading(false);
-	});
+  return (
+    <div className={styles.app}>
+      <HeaderContainer></HeaderContainer>
+      <AboutContainer></AboutContainer>
+      <LanguagesContainer></LanguagesContainer>
+      <ProjectsContainer></ProjectsContainer>
+      <ContactContainer></ContactContainer>
+      <FooterContainer></FooterContainer>
 
-	return (
-		<div className='App'>
-			<div className='loader'>
-					<h1>Este projeto ainda está em desenvolvimento</h1>
-					<p>Aguarde...</p>
-			</div>
+      {scrollY >= 250 && (
+        <button
+          className={styles.btnUp}
+          onClick={() => {
+            window.scrollTo(0, 0)
+          }}
+        >
+          <FaArrowUp className={styles.arrowUp} />
+        </button>
+      )}
 
-			<HeaderContainer></HeaderContainer>
-			<AboutContainer></AboutContainer>
-			<LanguagesContainer></LanguagesContainer>
-			<ProjectsContainer></ProjectsContainer>
-			<ContactContainer></ContactContainer>
-			<FooterContainer></FooterContainer>
-
-			{/* visibilidade da seta para inicio da página */}
-			{scrollY >= 250 && (
-				<button
-					className='btn-up'
-					onClick={() => {
-						window.scrollTo(0, 0);
-					}}>
-					<FaArrowUp className='arrow-up' />
-				</button>
-			)}
-
-			{
-				/* loader da página */
-				loading && (
-					<div
-						className={`loading ${
-							loading ? 'visible' : ''
-						}`}></div>
-				)
-			}
-		</div>
-	);
+      {loading && <div className={`${styles.loading} ${loading && styles.visible}`}></div>}
+    </div>
+  )
 }

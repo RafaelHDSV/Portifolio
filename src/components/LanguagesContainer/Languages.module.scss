@@ -1,0 +1,107 @@
+@import '../../styles/colors.scss';
+@import '../../App.module.scss';
+
+#languages {
+  padding: 0 5rem;
+
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 1px solid $white;
+    border-radius: 3rem;
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -6rem;
+      height: 6rem;
+      width: 6rem;
+      background-color: $white;
+      transform: rotate(135deg);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -6rem;
+      height: 6rem;
+      width: 6rem;
+      background-color: $white;
+      transform: rotate(135deg);
+    }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+    width: 100vw;
+  }
+
+  .info {
+    text-align: justify;
+    padding: 0 5rem;
+
+    h3 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 32px;
+      padding: 2rem 0;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+        color: $blue;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 1px;
+      background-color: $white;
+    }
+  }
+
+  .languages {
+    .languagesGrid {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+      column-gap: 5rem;
+      row-gap: 5rem;
+      width: 100%;
+      height: 100%;
+      padding: 5rem;
+
+      .languagesLogo svg {
+        transform: scale(3);
+        cursor: pointer;
+
+        &:hover {
+          color: $blue;
+        }
+      }
+
+      .activity {
+        color: $blue;
+        transform: scale(1.5);
+      }
+    }
+  }
+}

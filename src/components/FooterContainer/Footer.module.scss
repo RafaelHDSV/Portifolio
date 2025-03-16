@@ -1,0 +1,38 @@
+@import '../../styles/colors.scss';
+@import '../../App.module.scss';
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  color: $white;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .social-icon {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+
+      a {
+        &:first-child {
+          transform: scale(1.1);
+        }
+
+        &:hover {
+          transform: scale(1.2);
+          color: $blue;
+        }
+      }
+    }
+  }
+}
