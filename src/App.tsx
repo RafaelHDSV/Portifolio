@@ -23,8 +23,8 @@ export function App() {
   if (!isDevelopment) {
     return (
       <div className={styles.loader}>
-        <h1>Este projeto ainda está em desenvolvimento</h1>
-        <p>Aguarde...</p>
+        <h1>Obrigado por acessar o meu projeto!</h1>
+        <p>Porém este projeto ainda está em desenvolvimento. Aguarde até a finalização do projeto</p>
       </div>
     )
   }
