@@ -2,7 +2,7 @@ import Typewriter from 'typewriter-effect'
 import { FaArrowDownLong } from 'react-icons/fa6'
 import styles from './Header.module.scss'
 
-export const HeaderContainer = () => {
+export default function HeaderContainer() {
   return (
     <div className={styles.headerContainer}>
       <nav>

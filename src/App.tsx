@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FaArrowUp } from 'react-icons/fa'
-import { HeaderContainer } from './components/HeaderContainer/Header'
+import HeaderContainer from './components/HeaderContainer/Header'
 import { AboutContainer } from './components/AboutContainer/About'
 import { LanguagesContainer } from './components/LanguagesContainer/Languages'
 import { ProjectsContainer } from './components/ProjectsContainer/Projects'
