@@ -5,38 +5,36 @@ import { FaLinkedin } from 'react-icons/fa'
 import styles from './Contact.module.scss'
 
 export const ContactContainer = () => {
-  const [email, setEmail] = useState(false)
-  const [phone, setPhone] = useState(false)
-  const [github, setGithub] = useState(false)
-  const [linkedin, setLinkedin] = useState(false)
+  const [isMouseOver, setIsMouseOver] = useState<string | null>(null)
 
   return (
     <div id={styles.contact} className={styles.mainContainer}>
       <h2 className={styles.titleContainer}>Contato</h2>
 
       <main>
-        <a href='mailto:rafaelvieira1720@gmail.com' onMouseEnter={() => setEmail(true)} onMouseLeave={() => setEmail(false)}>
+        <a href='mailto:rafaelvieira1720@gmail.com' target='_blank' onMouseOver={() => setIsMouseOver('email')} onMouseLeave={() => setIsMouseOver(null)}>
           <MdEmail size='2.5rem' />
-
-          {!email ? <span>Email</span> : <span>rafaelvieira1720@gmail.com</span>}
+          {isMouseOver === 'email' ? <span>rafaelvieira1720@gmail.com</span> : <span>Email</span>}
         </a>
 
-        <a href='https://wa.me/5511947100007' target='blank' onMouseEnter={() => setPhone(true)} onMouseLeave={() => setPhone(false)}>
+        <a href='https://wa.me/5511947100007' target='_blank' onMouseOver={() => setIsMouseOver('whatsapp')} onMouseLeave={() => setIsMouseOver(null)}>
           <FaSquareWhatsapp size='2.5rem' />
-
-          {!phone ? <span>Whatsapp</span> : <span>+55 11 94710007</span>}
+          {isMouseOver === 'whatsapp' ? <span>(11) 94710-0007</span> : <span>Whatsapp</span>}
         </a>
 
-        <a href='https://github.com/RafaelHDSV' target='blank' onMouseEnter={() => setGithub(true)} onMouseLeave={() => setGithub(false)}>
+        <a href='https://github.com/RafaelHDSV' target='_blank' onMouseOver={() => setIsMouseOver('github')} onMouseLeave={() => setIsMouseOver(null)}>
           <FaSquareGithub size='2.5rem' />
-
-          {!github ? <span>Github</span> : <span>/RafaelHDSV</span>}
+          {isMouseOver === 'github' ? <span>/RafaelHDSV</span> : <span>Github</span>}
         </a>
 
-        <a href='https://www.linkedin.com/in/rafael-vieira1720/' target='blank' onMouseEnter={() => setLinkedin(true)} onMouseLeave={() => setLinkedin(false)}>
+        <a
+          href='https://www.linkedin.com/in/rafael-vieira1720/'
+          target='_blank'
+          onMouseOver={() => setIsMouseOver('linkedin')}
+          onMouseLeave={() => setIsMouseOver(null)}
+        >
           <FaLinkedin size='2.5rem' />
-
-          {!linkedin ? <span>Linkedin</span> : <span>/in/rafael-vieira1720/</span>}
+          {isMouseOver === 'linkedin' ? <span>/in/rafael-vieira1720/</span> : <span>Linkedin</span>}
         </a>
       </main>
     </div>
