@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss';
+@use '../../styles/colors.scss' as colors;
 @use '../../App.module.scss';
 
 .projectsContainer {
@@ -29,8 +29,8 @@
       align-items: center;
       padding: 1rem;
       gap: 1.5rem;
-      background-color: $white;
-      color: $black;
+      background-color: colors.$white;
+      color: colors.$black;
       border-radius: 0 0 1rem 1rem;
 
       & * {
@@ -57,7 +57,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: $black;
+            background-color: colors.$black;
             padding: 0.3rem;
             border-radius: 100%;
             transform: scale(1.5);
@@ -73,7 +73,7 @@
             bottom: -2.3rem;
             width: 0.7rem;
             height: 0.7rem;
-            background-color: $black;
+            background-color: colors.$black;
             transform: rotate(135deg);
           }
 
@@ -82,8 +82,8 @@
             bottom: -4rem;
             display: flex;
             font-size: 14px;
-            background-color: $black;
-            color: $white;
+            background-color: colors.$black;
+            color: colors.$white;
             padding: 0.5rem;
             border-radius: 0.5rem;
           }
@@ -101,15 +101,15 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          color: $black;
+          color: colors.$black;
           padding: 0.5rem;
           border-radius: 1rem;
           gap: 0.5rem;
           transition: 100ms all ease;
 
           &:hover {
-            background-color: $black;
-            color: $blue;
+            background-color: colors.$black;
+            color: colors.$blue;
           }
         }
       }
@@ -124,16 +124,16 @@
   align-items: center;
   gap: 1rem;
   font-size: 18px;
-  background-color: $black;
-  color: $white;
-  border: 1px solid $white;
+  background-color: colors.$black;
+  color: colors.$white;
+  border: 1px solid colors.$white;
   margin-top: 2rem;
   padding: 1rem;
   border-radius: 3rem;
 
   &:hover {
-    background-color: $white;
-    color: $black;
+    background-color: colors.$white;
+    color: colors.$black;
     transform: scale(1.1);
   }
 }

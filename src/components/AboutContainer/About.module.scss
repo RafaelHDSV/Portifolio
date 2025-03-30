@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss';
+@use '../../styles/colors.scss' as colors;
 @use '../../App.module.scss';
 
 #about {
@@ -35,7 +35,7 @@
     article {
       text-indent: 2rem;
       text-align: justify;
-      color: $gray;
+      color: colors.$gray;
     }
 
     .btnCv {
@@ -45,15 +45,15 @@
       border-radius: 3rem;
       font-family: 'Roboto Condensed', sans-serif;
       font-size: 20px;
-      background-color: $white;
-      color: $black;
+      background-color: colors.$white;
+      color: colors.$black;
       cursor: pointer;
 
       &:hover {
         font-size: 22px;
-        background-color: $black;
-        color: $white;
-        border: 1px solid $white;
+        background-color: colors.$black;
+        color: colors.$white;
+        border: 1px solid colors.$white;
       }
     }
   }

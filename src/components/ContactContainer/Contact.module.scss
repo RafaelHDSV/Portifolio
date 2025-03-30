@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss';
+@use '../../styles/colors.scss' as colors;
 @use '../../App.module.scss';
 
 #contact {
@@ -15,15 +15,15 @@
       max-width: 9rem;
       width: 100vw;
       gap: 0.25rem;
-      border: 1px solid $white;
+      border: 1px solid colors.$white;
       border-radius: 1rem;
       text-wrap: nowrap;
 
       &:hover {
         max-width: 20rem;
-        background-color: $dark-gray;
-        color: $white-opacity;
-        border-color: $black;
+        background-color: colors.$dark-gray;
+        color: colors.$white-opacity;
+        border-color: colors.$black;
       }
     }
   }
