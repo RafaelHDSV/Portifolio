@@ -23,7 +23,7 @@ export function App() {
   })
 
   const isDevelopment = process.env.NODE_ENV !== 'development'
-  if (!isDevelopment && devClickCount < 30) {
+  if (isDevelopment && devClickCount < 30) {
     return <ErrorPage clickCount={setDevClickCount} />
   }
 
