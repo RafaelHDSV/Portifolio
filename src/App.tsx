@@ -11,16 +11,17 @@ import ErrorPage from './components/ErrorPage/ErrorPage'
 
 export function App() {
   const [devClickCount, setDevClickCount] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [loading] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
   window.addEventListener('scroll', () => {
     setScrollY(window.scrollY)
   })
 
-  window.addEventListener('load', () => {
-    setLoading(false)
-  })
+  // FIXME: Corrigir loading inicial
+  // window.addEventListener('load', () => {
+  //   setLoading(false)
+  // })
 
   if (loading) return <div className={`${styles.loading} ${loading && styles.visible}`}></div>
 
