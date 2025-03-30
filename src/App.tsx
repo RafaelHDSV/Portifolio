@@ -14,8 +14,6 @@ export function App() {
   const [loading, setLoading] = useState(true)
   const [scrollY, setScrollY] = useState(0)
 
-  console.log(devClickCount)
-
   window.addEventListener('scroll', () => {
     setScrollY(window.scrollY)
   })
@@ -23,6 +21,8 @@ export function App() {
   window.addEventListener('load', () => {
     setLoading(false)
   })
+
+  if (loading) return <div className={`${styles.loading} ${loading && styles.visible}`}></div>
 
   const isDevelopment = process.env.NODE_ENV === 'development'
   if (!isDevelopment && devClickCount < 30) {
@@ -48,8 +48,6 @@ export function App() {
           <FaArrowUp className={styles.arrowUp} />
         </button>
       )}
-
-      {loading && <div className={`${styles.loading} ${loading && styles.visible}`}></div>}
     </div>
   )
 }
