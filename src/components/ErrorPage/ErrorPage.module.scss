@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Schoolbell&display=swap');
 
 .main {
-  overflow-y: none;
+  height: 100vh;
+  overflow: hidden;
 
   .errorPage {
     display: flex;
