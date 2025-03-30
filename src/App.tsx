@@ -7,11 +7,13 @@ import { ProjectsContainer } from './components/ProjectsContainer/Projects'
 import { ContactContainer } from './components/ContactContainer/Contact'
 import { FooterContainer } from './components/FooterContainer/Footer'
 import styles from './App.module.scss'
+import DevelopmentScreen from './components/DevelopmentScreen/DevelopmentScreen'
 
 export function App() {
-  const [developmentClick, setDevelopmentClick] = useState(0)
+  const [devClickCount, setDevClickCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [scrollY, setScrollY] = useState(0)
+
   window.addEventListener('scroll', () => {
     setScrollY(window.scrollY)
   })
@@ -20,14 +22,9 @@ export function App() {
     setLoading(false)
   })
 
-  const isDevelopment = process.env.NODE_ENV === 'development'
-  if (!isDevelopment && developmentClick < 30) {
-    return (
-      <div className={styles.loader} onClick={() => setDevelopmentClick(developmentClick + 1)}>
-        <h1>Obrigado por acessar o meu projeto!</h1>
-        <p>Porém este projeto ainda está em desenvolvimento. Aguarde até a finalização do projeto</p>
-      </div>
-    )
+  const isDevelopment = process.env.NODE_ENV !== 'development'
+  if (!isDevelopment && devClickCount < 30) {
+    return <DevelopmentScreen setDevClickCount={setDevClickCount} />
   }
 
   return (
