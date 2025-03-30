@@ -6,7 +6,7 @@ interface IDevelopmentScreenProps {
 
 export default function DevelopmentScreen({ clickCount }: IDevelopmentScreenProps) {
   return (
-    <>
+    <main className={styles.main}>
       <div className={styles.errorPage}>
         <img className={styles.leftAstronaut} src='./astronaut.png' alt='astronaut.png' onClick={() => clickCount(prev => prev + 1)} />
         <img className={styles.rightAstronaut} src='./astronaut2.svg' alt='astronaut2.svg' />
@@ -25,6 +25,6 @@ export default function DevelopmentScreen({ clickCount }: IDevelopmentScreenProp
         <div className={styles.layer}></div>
         <div className={styles.layer}></div>
       </div>
-    </>
+    </main>
   )
 }
