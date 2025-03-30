@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss' as colors;
+@use '../../constants/variables.scss' as variables;
 @use '../../App.module.scss';
 
 #languages {
@@ -10,7 +10,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    border: 1px solid colors.$white;
+    border: 1px solid variables.$white;
     border-radius: 3rem;
     padding: 2rem 0;
     position: relative;
@@ -22,7 +22,7 @@
       left: -6rem;
       height: 6rem;
       width: 6rem;
-      background-color: colors.$white;
+      background-color: variables.$white;
       transform: rotate(135deg);
     }
 
@@ -32,7 +32,7 @@
       right: -6rem;
       height: 6rem;
       width: 6rem;
-      background-color: colors.$white;
+      background-color: variables.$white;
       transform: rotate(135deg);
     }
   }
@@ -62,7 +62,7 @@
 
       &:hover {
         transform: scale(1.1);
-        color: colors.$blue;
+        color: variables.$blue;
       }
     }
 
@@ -73,7 +73,7 @@
       left: 50%;
       height: 100%;
       width: 1px;
-      background-color: colors.$white;
+      background-color: variables.$white;
     }
   }
 
@@ -94,12 +94,12 @@
         cursor: pointer;
 
         &:hover {
-          color: colors.$blue;
+          color: variables.$blue;
         }
       }
 
       .activity {
-        color: colors.$blue;
+        color: variables.$blue;
         transform: scale(1.5);
       }
     }

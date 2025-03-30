@@ -1,18 +1,15 @@
-@use './styles/colors.scss' as colors;
+@use './constants/variables.scss' as variables;
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
-/* font-family: "Cinzel Decorative", serif; */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-/*   font-family: "Roboto Condensed", sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
-/* font-family: 'Open Sans', sans-serif; */
+// font-family: 'Open Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+// font-family: "Roboto Condensed", sans-serif;
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 
-  font-family: 'Open Sans', sans-serif;
   user-select: none;
 
   transition: 300ms all ease;
@@ -20,7 +17,7 @@
 
 a {
   text-decoration: none;
-  color: colors.$white;
+  color: variables.$white;
 }
 
 html {
@@ -29,18 +26,18 @@ html {
 }
 
 ::-webkit-scrollbar {
-  background-color: colors.$gray;
+  background-color: variables.$gray;
   width: 0.7rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: colors.$white;
+  background-color: variables.$white;
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: colors.$white-opacity;
+  background-color: variables.$white-opacity;
 }
 
 .loader {
@@ -52,10 +49,11 @@ html {
   height: 100vh;
   width: 100vw;
   position: fixed;
+  font-family: 'Open Sans', sans-serif;
   z-index: 999999999;
   overflow: hidden;
-  background: colors.$black;
-  color: colors.$white;
+  background: variables.$black;
+  color: variables.$white;
 }
 
 .app {
@@ -63,8 +61,8 @@ html {
   flex-direction: column;
   max-width: 100vw;
   min-height: 100vh;
-  background-color: colors.$black;
-  color: colors.$white;
+  background-color: variables.$black;
+  color: variables.$white;
   overflow: hidden;
 }
 
@@ -80,12 +78,12 @@ html {
 
   &:hover {
     transform: scale(1.1);
-    color: colors.$blue;
+    color: variables.$blue;
 
     &::after {
       content: '';
       display: block;
-      background-color: colors.$blue;
+      background-color: variables.$blue;
       width: 100%;
       height: 1px;
     }
@@ -94,7 +92,7 @@ html {
   &::after {
     content: '';
     display: block;
-    background-color: colors.$blue;
+    background-color: variables.$blue;
     width: 0%;
     height: 1px;
     transition: 700ms ease-in-out;
@@ -122,9 +120,9 @@ html {
   cursor: pointer;
 
   &:hover {
-    background-color: colors.$black;
-    color: colors.$white;
-    border: 1px solid colors.$white;
+    background-color: variables.$black;
+    color: variables.$white;
+    border: 1px solid variables.$white;
   }
 }
 
@@ -140,7 +138,7 @@ html {
   opacity: 0;
   justify-content: center;
   align-items: center;
-  background-color: colors.$black;
+  background-color: variables.$black;
   width: 100%;
   height: 100vh;
   z-index: 999;
@@ -151,7 +149,7 @@ html {
     height: 4rem;
     border-radius: 100%;
     border: 1rem solid;
-    border-color: colors.$white colors.$blue colors.$white colors.$white;
+    border-color: variables.$white variables.$blue variables.$white variables.$white;
     animation: loadingAnimation 1s infinite linear;
   }
 }
