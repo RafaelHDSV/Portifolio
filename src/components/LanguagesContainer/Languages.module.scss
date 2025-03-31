@@ -2,39 +2,18 @@
 @use '../../App.module.scss';
 
 .languagesContainer {
-  padding: 0 5rem;
+  padding: 0 10rem;
 
   main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 80%;
     border: 1px solid variables.$white;
     border-radius: 3rem;
-    padding: 2rem 0;
     position: relative;
     overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: -6rem;
-      height: 6rem;
-      width: 6rem;
-      background-color: variables.$white;
-      transform: rotate(135deg);
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      right: -6rem;
-      height: 6rem;
-      width: 6rem;
-      background-color: variables.$white;
-      transform: rotate(135deg);
-    }
   }
 
   aside {
@@ -48,7 +27,7 @@
 
   .info {
     text-align: justify;
-    padding: 0 5rem;
+    padding: 0 3rem;
 
     h3 {
       display: flex;
@@ -57,7 +36,7 @@
       align-items: center;
       font-family: 'Open Sans', sans-serif;
       font-size: 32px;
-      padding: 2rem 0;
+      padding-bottom: 1rem;
       cursor: pointer;
 
       &:hover {
@@ -80,13 +59,12 @@
   .languages {
     .languagesGrid {
       display: grid;
-      justify-content: center;
-      align-items: center;
       grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
       column-gap: 5rem;
       row-gap: 5rem;
       width: 100%;
       height: 100%;
+      text-align: center;
       padding: 5rem;
 
       .languagesLogo svg {
