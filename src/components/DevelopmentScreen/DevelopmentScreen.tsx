@@ -1,4 +1,4 @@
-import styles from './ErrorPage.module.scss'
+import styles from './DevelopmentScreen.module.scss'
 
 interface IDevelopmentScreenProps {
   clickCount: (value: (prev: number) => number) => void

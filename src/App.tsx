@@ -7,7 +7,7 @@ import { ProjectsContainer } from './components/ProjectsContainer/Projects'
 import { ContactContainer } from './components/ContactContainer/Contact'
 import { FooterContainer } from './components/FooterContainer/Footer'
 import styles from './App.module.scss'
-import ErrorPage from './components/ErrorPage/ErrorPage'
+import DevelopmentScreen from './components/DevelopmentScreen/DevelopmentScreen'
 
 export function App() {
   const [devClickCount, setDevClickCount] = useState(0)
@@ -27,7 +27,7 @@ export function App() {
 
   const isDevelopment = process.env.NODE_ENV === 'development'
   if (!isDevelopment && devClickCount < 30) {
-    return <ErrorPage clickCount={setDevClickCount} />
+    return <DevelopmentScreen clickCount={setDevClickCount} />
   }
 
   return (
