@@ -32,12 +32,12 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      <HeaderContainer></HeaderContainer>
-      <AboutContainer></AboutContainer>
-      <LanguagesContainer></LanguagesContainer>
-      <ProjectsContainer></ProjectsContainer>
-      <ContactContainer></ContactContainer>
-      <FooterContainer></FooterContainer>
+      <HeaderContainer />
+      <AboutContainer />
+      <LanguagesContainer />
+      <ProjectsContainer />
+      <ContactContainer />
+      <FooterContainer />
 
       {scrollY >= 250 && (
         <button

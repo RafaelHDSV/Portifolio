@@ -1,6 +1,13 @@
 @use '../../constants/variables.scss' as variables;
 @use '../../App.module.scss';
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+// font-family: "Cinzel Decorative", serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+// font-family: "Roboto Condensed", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Schoolbell&display=swap');
+// font-family: "Outfit", sans-serif;
+
 .headerContainer {
   position: relative;
   display: flex;
@@ -85,11 +92,14 @@
 
   h1 {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 54px;
+    font-size: 52px;
   }
 
-  .Typewriter {
+  .typewriter {
+    font-family: 'Outfit', sans-serif;
     font-size: 22px;
+    color: variables.$white;
+    font-weight: 100;
   }
 
   .arrowDown {
