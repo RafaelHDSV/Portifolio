@@ -3,7 +3,7 @@ import styles from './About.module.scss'
 
 export const AboutContainer = () => {
   return (
-    <div id={styles.about} className={styles.mainContainer}>
+    <div id='about' className={`${styles.mainContainer} ${styles.about}`}>
       <h2 className={styles.titleContainer}>Sobre mim</h2>
 
       <main>

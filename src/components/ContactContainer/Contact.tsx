@@ -8,7 +8,7 @@ export const ContactContainer = () => {
   const [isMouseOver, setIsMouseOver] = useState<string | null>(null)
 
   return (
-    <div id={styles.contact} className={styles.mainContainer}>
+    <div id='contact' className={`${styles.mainContainer} ${styles.contact}`}>
       <h2 className={styles.titleContainer}>Contato</h2>
 
       <main>

@@ -1,7 +1,7 @@
 @use '../../constants/variables.scss' as variables;
 @use '../../App.module.scss';
 
-#contact {
+.contact {
   main {
     display: flex;
     gap: 2rem;

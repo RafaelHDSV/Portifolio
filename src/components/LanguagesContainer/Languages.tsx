@@ -6,7 +6,7 @@ export const LanguagesContainer = () => {
   const [languageActivity, setLanguageActivity] = useState(0)
 
   return (
-    <div id={styles.languages} className={styles.mainContainer}>
+    <div id='languages' className={`${styles.mainContainer} ${styles.languagesContainer}`}>
       <h2 className={styles.titleContainer}>Linguagens e Tecnologias</h2>
 
       <main>

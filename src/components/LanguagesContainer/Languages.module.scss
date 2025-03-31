@@ -1,7 +1,7 @@
 @use '../../constants/variables.scss' as variables;
 @use '../../App.module.scss';
 
-#languages {
+.languagesContainer {
   padding: 0 5rem;
 
   main {

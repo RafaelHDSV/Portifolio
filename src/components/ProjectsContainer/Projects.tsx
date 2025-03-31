@@ -6,7 +6,7 @@ import styles from './Project.module.scss'
 
 export const ProjectsContainer = () => {
   return (
-    <div id={styles.projects} className={styles.mainContainer}>
+    <div id='projects' className={`${styles.mainContainer} ${styles.projects}`}>
       <h2 className={styles.titleContainer}>Projetos</h2>
 
       <div className={styles.projectsContainer}>
