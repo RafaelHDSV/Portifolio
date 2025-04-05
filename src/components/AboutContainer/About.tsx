@@ -1,3 +1,4 @@
+import { Bounce } from 'react-awesome-reveal'
 import Logo from '../../assets/logo-completed.png'
 import styles from './About.module.scss'
 
@@ -7,7 +8,9 @@ export default function AboutContainer() {
       <h2 className={styles.titleContainer}>Sobre mim</h2>
 
       <main>
-        <img src={Logo} alt='logo-completed.png' />
+        <Bounce>
+          <img src={Logo} alt='logo-completed.png' />
+        </Bounce>
 
         <aside>
           <h1>Rafael Henrique de Sousa Vieira</h1>
@@ -19,9 +22,11 @@ export default function AboutContainer() {
             meus conhecimentos para acompanhar as tendências e tecnologias emergentes, garantindo sempre a entrega de projetos de alta qualidade.
           </article>
 
-          <a className={styles.btnCv} href='cv.pdf' download='Rafael Vieira - Currículo'>
-            Baixar CV
-          </a>
+          <Bounce>
+            <a className={styles.btnCv} href='cv.pdf' download='Rafael Vieira - Currículo'>
+              Baixar CV
+            </a>
+          </Bounce>
         </aside>
       </main>
     </div>
