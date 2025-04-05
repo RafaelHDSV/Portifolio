@@ -1,7 +1,7 @@
 import Logo from '../../assets/logo-completed.png'
 import styles from './About.module.scss'
 
-export const AboutContainer = () => {
+export default function AboutContainer() {
   return (
     <div id='about' className={`${styles.mainContainer} ${styles.about}`}>
       <h2 className={styles.titleContainer}>Sobre mim</h2>
