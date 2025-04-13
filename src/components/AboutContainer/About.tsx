@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { Bounce, Fade } from 'react-awesome-reveal'
 import { useGetMe } from '../../hooks/useGithubApi'
 import styles from './About.module.scss'
@@ -32,6 +33,14 @@ function AboutContent() {
 
         <aside>
           <h1>{user?.name}</h1>
+
+          <span>Trabalhando atulmente: {user?.company}</span>
+          <span>Localização: {user?.location}</span>
+          <span>Bio: {user?.bio}</span>
+          <span>Repositórios públicos: {user?.public_repos}</span>
+          <span>Seguidores: {user?.followers}</span>
+          <span>Seguindo: {user?.following}</span>
+          <span>Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}</span>
 
           <article>
             Sou desenvolvedor frontend com 4 anos de experiência em desenvolvimento de interfaces e desenvolvimento WEB. Tenho habilidades sólidas em HTML, CSS
