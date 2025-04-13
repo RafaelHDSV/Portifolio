@@ -3,34 +3,47 @@ import { LanguagesContainer } from './components/LanguagesContainer'
 import { LinksContainer } from './components/LinksContainer'
 import { ProjectsData } from '../../constants/ProjectsData'
 import styles from './Project.module.scss'
+import { useGetRepos } from '../../hooks/useGithubApi'
 
 export const ProjectsContainer = () => {
+  const { repos, loading, error } = useGetRepos()
+
+  console.log('repos', repos)
+  console.log('loading', loading)
+  console.log('error', error)
+
   return (
-    <div id='projects' className={`${styles.mainContainer} ${styles.projects}`}>
-      <h2 className={styles.titleContainer}>Projetos</h2>
+    <>
+      {repos.map(repo => (
+        <p>{repo.name}</p>
+      ))}
 
-      <div className={styles.projectsContainer}>
-        {ProjectsData.map(project => (
-          <div className={styles.projectCard} key={project.key}>
-            <img src={project.image} alt={project.name} />
+      <div id='projects' className={`${styles.mainContainer} ${styles.projects}`}>
+        <h2 className={styles.titleContainer}>Projetos</h2>
 
-            <div className={styles.textContent}>
-              <h2>{project.name}</h2>
+        <div className={styles.projectsContainer}>
+          {ProjectsData.map(project => (
+            <div className={styles.projectCard} key={project.key}>
+              <img src={project.image} alt={project.name} />
 
-              <LanguagesContainer key={project.key} languages={project.languages} />
+              <div className={styles.textContent}>
+                <h2>{project.name}</h2>
 
-              <article>{project.description}</article>
+                <LanguagesContainer key={project.key} languages={project.languages} />
 
-              <LinksContainer urlProject={project.urlProject} urlGitHub={project.urlGitHub} />
+                <article>{project.description}</article>
+
+                <LinksContainer urlProject={project.urlProject} urlGitHub={project.urlGitHub} />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <a className={styles.btnGithub} href='https://github.com/RafaelHDSV?tab=repositories' target='_blank' rel='noreferrer'>
-        <FaGithub />
-        Ver mais projetos
-      </a>
-    </div>
+        <a className={styles.btnGithub} href='https://github.com/RafaelHDSV?tab=repositories' target='_blank' rel='noreferrer'>
+          <FaGithub />
+          Ver mais projetos
+        </a>
+      </div>
+    </>
   )
 }
