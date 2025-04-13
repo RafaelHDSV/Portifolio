@@ -5,7 +5,7 @@ import AboutContainer from './components/AboutContainer/About'
 import { LanguagesContainer } from './components/LanguagesContainer/Languages'
 import { ProjectsContainer } from './components/ProjectsContainer/Projects'
 import { ContactContainer } from './components/ContactContainer/Contact'
-import { FooterContainer } from './components/FooterContainer/Footer'
+import FooterContainer from './components/FooterContainer/Footer'
 import styles from './App.module.scss'
 import DevelopmentScreen from './components/DevelopmentScreen/DevelopmentScreen'
 import { Fade } from 'react-awesome-reveal'
@@ -51,7 +51,6 @@ export function App() {
       <Fade>
         <FooterContainer />
       </Fade>
-
       {scrollY >= 250 && (
         <button
           className={styles.btnUp}
