@@ -1,19 +1,29 @@
 import { Bounce } from 'react-awesome-reveal'
-import Logo from '../../assets/logo-completed.png'
 import styles from './About.module.scss'
+import { useGetMe } from '../../hooks/useGithubApi'
 
 export default function AboutContainer() {
+  const { user, loading, error } = useGetMe()
+
+  if (!user || error) {
+    return error
+  }
+
+  if (loading) {
+    return <div className={styles.loading}>Carregando...</div>
+  }
+
   return (
     <div id='about' className={`${styles.mainContainer} ${styles.about}`}>
       <h2 className={styles.titleContainer}>Sobre mim</h2>
 
       <main>
         <Bounce>
-          <img src={Logo} alt='logo-completed.png' />
+          <img src={user.avatar_url} alt='logo-completed.png' />
         </Bounce>
 
         <aside>
-          <h1>Rafael Henrique de Sousa Vieira</h1>
+          <h1>{user?.name}</h1>
 
           <article>
             Sou desenvolvedor frontend com 4 anos de experiência em desenvolvimento de interfaces e desenvolvimento WEB. Tenho habilidades sólidas em HTML, CSS
