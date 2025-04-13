@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { FaArrowUp } from 'react-icons/fa'
-import HeaderContainer from './components/HeaderContainer/Header'
-import AboutContainer from './components/AboutContainer/About'
-import { LanguagesContainer } from './components/LanguagesContainer/Languages'
-import { ProjectsContainer } from './components/ProjectsContainer/Projects'
-import { ContactContainer } from './components/ContactContainer/Contact'
-import FooterContainer from './components/FooterContainer/Footer'
 import styles from './App.module.scss'
+import AboutContainer from './components/AboutContainer/About'
+import ContactContainer from './components/ContactContainer/Contact'
 import DevelopmentScreen from './components/DevelopmentScreen/DevelopmentScreen'
-import { Fade } from 'react-awesome-reveal'
+import FooterContainer from './components/FooterContainer/Footer'
+import HeaderContainer from './components/HeaderContainer/Header'
+import LanguagesContainer from './components/LanguagesContainer/Languages'
+import ProjectsContainer from './components/ProjectsContainer/Projects'
 
 export function App() {
   const [devClickCount, setDevClickCount] = useState(0)
@@ -33,24 +32,13 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      <Fade>
-        <HeaderContainer />
-      </Fade>
-      <Fade>
-        <AboutContainer />
-      </Fade>
-      <Fade>
-        <LanguagesContainer />
-      </Fade>
-      <Fade>
-        <ProjectsContainer />
-      </Fade>
-      <Fade>
-        <ContactContainer />
-      </Fade>
-      <Fade>
-        <FooterContainer />
-      </Fade>
+      <HeaderContainer />
+      <AboutContainer />
+      <LanguagesContainer />
+      <ProjectsContainer />
+      <ContactContainer />
+      <FooterContainer />
+
       {scrollY >= 250 && (
         <button
           className={styles.btnUp}

@@ -1,9 +1,17 @@
-import Typewriter from 'typewriter-effect'
-import { FaArrowDownLong } from 'react-icons/fa6'
-import styles from './Header.module.scss'
 import { Fade, Slide } from 'react-awesome-reveal'
+import { FaArrowDownLong } from 'react-icons/fa6'
+import Typewriter from 'typewriter-effect'
+import styles from './Header.module.scss'
 
 export default function HeaderContainer() {
+  return (
+    <Fade>
+      <HeaderContent />
+    </Fade>
+  )
+}
+
+function HeaderContent() {
   return (
     <div className={styles.headerContainer}>
       <nav>

@@ -1,8 +1,16 @@
-import { Bounce } from 'react-awesome-reveal'
-import styles from './About.module.scss'
+import { Bounce, Fade } from 'react-awesome-reveal'
 import { useGetMe } from '../../hooks/useGithubApi'
+import styles from './About.module.scss'
 
 export default function AboutContainer() {
+  return (
+    <Fade>
+      <AboutContent />
+    </Fade>
+  )
+}
+
+function AboutContent() {
   const { user, loading, error } = useGetMe()
 
   if (!user || error) {

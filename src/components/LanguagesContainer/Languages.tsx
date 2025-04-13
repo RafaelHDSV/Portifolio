@@ -1,8 +1,17 @@
 import { useState } from 'react'
+import { Fade } from 'react-awesome-reveal'
 import { LanguagesData } from '../../constants/LanguagesData'
 import styles from './Languages.module.scss'
 
-export const LanguagesContainer = () => {
+export default function LanguagesContainer() {
+  return (
+    <Fade>
+      <LanguagesContent />
+    </Fade>
+  )
+}
+
+function LanguagesContent() {
   const [languageActivity, setLanguageActivity] = useState(0)
 
   return (

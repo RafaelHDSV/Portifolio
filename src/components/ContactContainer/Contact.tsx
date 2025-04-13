@@ -1,10 +1,19 @@
 import { useState } from 'react'
-import { MdEmail } from 'react-icons/md'
-import { FaSquareGithub, FaSquareWhatsapp } from 'react-icons/fa6'
+import { Fade } from 'react-awesome-reveal'
 import { FaLinkedin } from 'react-icons/fa'
+import { FaSquareGithub, FaSquareWhatsapp } from 'react-icons/fa6'
+import { MdEmail } from 'react-icons/md'
 import styles from './Contact.module.scss'
 
-export const ContactContainer = () => {
+export default function ContactContainer() {
+  return (
+    <Fade>
+      <ContactContent />
+    </Fade>
+  )
+}
+
+function ContactContent() {
   const [isMouseOver, setIsMouseOver] = useState<string | null>(null)
 
   return (
