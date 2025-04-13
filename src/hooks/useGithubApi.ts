@@ -12,7 +12,7 @@ export function useGetMe() {
       try {
         setLoading(true)
 
-        const user = await GithubRepository.getUserDetails('RafaelHDSV')
+        const user = await GithubRepository.getUserDetails()
         setUser(user)
       } catch (err) {
         console.error('Error fetching user from GitHub:', err)
@@ -42,12 +42,8 @@ export function useGetRepos() {
     const getReposApi = async () => {
       try {
         setLoading(true)
-        const params = {
-          sort: 'updated',
-          per_page: '100'
-        }
 
-        const repos = await GithubRepository.getRepos('RafaelHDSV', { params })
+        const repos = await GithubRepository.getRepos()
         setRepos(repos)
       } catch (err) {
         console.error('Error fetching user repos from GitHub:', err)

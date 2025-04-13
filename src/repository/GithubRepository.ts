@@ -9,9 +9,9 @@ class GithubRepositoryClass {
    * @param config Configurações opcionais do Axios
    * @returns Promise com array de repositórios
    */
-  async getUserDetails(username: string, config?: AxiosRequestConfig): Promise<IGithubUser> {
+  async getUserDetails(config?: AxiosRequestConfig): Promise<IGithubUser> {
     try {
-      const response = await githubApi.get<IGithubUser>(`/users/${username}`, config)
+      const response = await githubApi.get<IGithubUser>('/user', config)
 
       const filteredUser = {
         id: response.data.id,
@@ -39,9 +39,14 @@ class GithubRepositoryClass {
    * @param config Configurações opcionais do Axios
    * @returns Promise com array de repositórios públicos
    */
-  async getRepos(username: string, config?: AxiosRequestConfig): Promise<IGithubRepo[]> {
+  async getRepos(config?: AxiosRequestConfig): Promise<IGithubRepo[]> {
     try {
-      const response = await githubApi.get<IGithubRepo[]>(`/users/${username}/repos`, config)
+      const params = {
+        sort: 'updated',
+        per_page: '100'
+      }
+
+      const response = await githubApi.get<IGithubRepo[]>('/user/repos', { params, ...config })
 
       const filteredRepos = response.data.map((repo: IGithubRepo) => ({
         id: repo.id,
