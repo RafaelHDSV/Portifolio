@@ -11,17 +11,19 @@
   }
 
   img {
-    max-width: 25rem;
+    transform: scale(0.8);
+    width: 20rem;
     width: 100%;
-    border-radius: 2rem 5rem;
+    border-radius: 50%;
     cursor: pointer;
-
+  
     &:hover {
-      border-radius: 5rem 2rem;
-      opacity: 0.8;
-      transform: scale(0.8);
+      border-radius: 5rem;
+      transform: scale(1);
+      transition: all 0.3s ease-in-out;
     }
   }
+
 
   aside {
     display: flex;
