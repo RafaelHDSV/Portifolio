@@ -15,16 +15,15 @@ class GithubRepositoryClass {
 
       const filteredUser = {
         id: response.data.id,
-        login: response.data.login,
         avatar_url: response.data.avatar_url,
-        html_url: response.data.html_url,
         name: response.data.name,
+        company: response.data.company,
+        location: response.data.location,
         bio: response.data.bio,
         public_repos: response.data.public_repos,
         followers: response.data.followers,
         following: response.data.following,
-        created_at: response.data.created_at,
-        updated_at: response.data.updated_at
+        created_at: response.data.created_at
       }
 
       return filteredUser
