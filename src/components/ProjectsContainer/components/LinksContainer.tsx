@@ -6,18 +6,18 @@ interface ProjectProps {
   urlGitHub: string
 }
 
-export const LinksContainer = (props: ProjectProps) => {
+export default function LinksContainer({ urlProject, urlGitHub }: ProjectProps) {
   return (
     <div className={styles.links}>
-      {props.urlProject && (
-        <a href={props.urlProject} target='_blank' rel='noreferrer' className={styles.linkContainer}>
+      {urlProject && (
+        <a href={urlProject} target='_blank' rel='noreferrer' className={styles.linkContainer}>
           <FaExternalLinkAlt />
           <span>Projeto</span>
         </a>
       )}
 
-      {props.urlGitHub && (
-        <a href={props.urlGitHub} target='_blank' rel='noreferrer' className={styles.linkContainer}>
+      {urlGitHub && (
+        <a href={urlGitHub} target='_blank' rel='noreferrer' className={styles.linkContainer}>
           <FaGithub />
           <span>Github</span>
         </a>

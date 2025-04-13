@@ -1,11 +1,20 @@
+import { Fade } from 'react-awesome-reveal'
 import { FaGithub } from 'react-icons/fa'
-import { LanguagesContainer } from './components/LanguagesContainer'
-import { LinksContainer } from './components/LinksContainer'
 import { ProjectsData } from '../../constants/ProjectsData'
-import styles from './Project.module.scss'
 import { useGetRepos } from '../../hooks/useGithubApi'
+import LanguagesContainer from './components/LanguagesContainer'
+import LinksContainer from './components/LinksContainer'
+import styles from './Project.module.scss'
 
-export const ProjectsContainer = () => {
+export default function ProjectsContainer() {
+  return (
+    <Fade>
+      <ProjectsContent />
+    </Fade>
+  )
+}
+
+function ProjectsContent() {
   const { repos, loading, error } = useGetRepos()
 
   console.log('repos', repos)

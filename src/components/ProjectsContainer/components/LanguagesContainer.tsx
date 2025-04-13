@@ -9,13 +9,13 @@ interface ProjectProps {
   }[]
 }
 
-export const LanguagesContainer = (props: ProjectProps) => {
+export default function LanguagesContainer({ key, languages }: ProjectProps) {
   const [languageVisible, setLanguageVisible] = useState<string | null>()
   const [keyVisible, setKeyVisible] = useState<string | null>()
 
   return (
     <div className={styles.languagesContainer}>
-      {props.languages.map(language => (
+      {languages.map(language => (
         <div className={styles.singleLanguageContainer}>
           <span
             className={styles.language}
@@ -25,7 +25,7 @@ export const LanguagesContainer = (props: ProjectProps) => {
             }}
             onMouseEnter={() => {
               setLanguageVisible(language.name)
-              setKeyVisible(props.key)
+              setKeyVisible(key)
             }}
             onMouseLeave={() => {
               setLanguageVisible(null)
@@ -35,7 +35,7 @@ export const LanguagesContainer = (props: ProjectProps) => {
             {language.logo}
           </span>
 
-          {language.name === languageVisible && props.key === keyVisible && (
+          {language.name === languageVisible && key === keyVisible && (
             <>
               <span className={styles.triangle}></span>
               <span className={styles.languageName}>{language.name}</span>
