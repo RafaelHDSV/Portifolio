@@ -34,20 +34,18 @@ function AboutContent() {
         <aside>
           <h1>{user?.name}</h1>
 
-          <span>Trabalhando atulmente: {user?.company}</span>
-          <span>Localização: {user?.location}</span>
-          <span>Bio: {user?.bio}</span>
+          <span>
+            Trabalhando atulmente:
+            <a href='https://github.com/AGX-Software' target='_blank'>
+              {user?.company}
+            </a>
+          </span>
+          <span>📍 {user?.location}</span>
+          <span>💻 Bio: {user?.bio}</span>
           <span>Repositórios públicos: {user?.public_repos}</span>
           <span>Seguidores: {user?.followers}</span>
           <span>Seguindo: {user?.following}</span>
-          <span>Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}</span>
-
-          <article>
-            Sou desenvolvedor frontend com 4 anos de experiência em desenvolvimento de interfaces e desenvolvimento WEB. Tenho habilidades sólidas em HTML, CSS
-            e JavaScript (JS), com especialização em React JS. Apaixonado por criar soluções de Frontend que são não apenas visualmente atraentes, mas também
-            funcionais e intuitivas. Meu foco é transformar ideias em experiências digitais dinâmicas e responsivas na WEB. Estou constantemente atualizando
-            meus conhecimentos para acompanhar as tendências e tecnologias emergentes, garantindo sempre a entrega de projetos de alta qualidade.
-          </article>
+          <span>📅 Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}</span>
 
           <Bounce>
             <a className={styles.btnCv} href='cv.pdf' download='Rafael Vieira - Currículo'>

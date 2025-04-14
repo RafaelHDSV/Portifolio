@@ -16,14 +16,13 @@
     width: 100%;
     border-radius: 50%;
     cursor: pointer;
-  
+
     &:hover {
       border-radius: 5rem;
       transform: scale(1);
       transition: all 0.3s ease-in-out;
     }
   }
-
 
   aside {
     display: flex;
@@ -33,12 +32,8 @@
     gap: 2rem;
     max-width: 30rem;
     width: 100%;
-
-    article {
-      text-indent: 2rem;
-      text-align: justify;
-      color: variables.$gray;
-    }
+    background: rgb(74, 73, 73);
+    border-radius: 5rem;
 
     .btnCv {
       outline: 0;
