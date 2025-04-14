@@ -17,8 +17,8 @@ function ContactContent() {
   const [isMouseOver, setIsMouseOver] = useState<string | null>(null)
 
   return (
-    <div id='contact' className={`${styles.mainContainer} ${styles.contact}`}>
-      <h2 className={styles.titleContainer}>Contato</h2>
+    <div id='contact' className={`mainContainer ${styles.contact}`}>
+      <h2 className='titleContainer'>Contato</h2>
 
       <main>
         <a href='mailto:rafaelvieira1720@gmail.com' target='_blank' onMouseOver={() => setIsMouseOver('email')} onMouseLeave={() => setIsMouseOver(null)}>

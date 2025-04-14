@@ -8,6 +8,7 @@ import FooterContainer from './components/FooterContainer/Footer'
 import HeaderContainer from './components/HeaderContainer/Header'
 import LanguagesContainer from './components/LanguagesContainer/Languages'
 import ProjectsContainer from './components/ProjectsContainer/Projects'
+import './styles/main.scss'
 
 export function App() {
   const [devClickCount, setDevClickCount] = useState(0)
@@ -41,12 +42,12 @@ export function App() {
 
       {scrollY >= 250 && (
         <button
-          className={styles.btnUp}
+          className='btnUp'
           onClick={() => {
             window.scrollTo(0, 0)
           }}
         >
-          <FaArrowUp className={styles.arrowUp} />
+          <FaArrowUp className='arrowUp' />
         </button>
       )}
     </div>

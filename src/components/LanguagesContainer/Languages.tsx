@@ -15,8 +15,8 @@ function LanguagesContent() {
   const [languageActivity, setLanguageActivity] = useState(0)
 
   return (
-    <div id='languages' className={`${styles.mainContainer} ${styles.languagesContainer}`}>
-      <h2 className={styles.titleContainer}>Linguagens e Tecnologias</h2>
+    <div id='languages' className={`mainContainer ${styles.languagesContainer}`}>
+      <h2 className='titleContainer'>Linguagens e Tecnologias</h2>
 
       <main>
         <aside className={styles.info}>
