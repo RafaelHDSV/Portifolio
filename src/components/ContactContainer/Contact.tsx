@@ -43,7 +43,7 @@ function ContactContent() {
           onMouseLeave={() => setIsMouseOver(null)}
         >
           <FaLinkedin size='2.5rem' />
-          {isMouseOver === 'linkedin' ? <span>/in/rafael-vieira1720/</span> : <span>Linkedin</span>}
+          {isMouseOver === 'linkedin' ? <span>/in/rafael-vieira1720</span> : <span>Linkedin</span>}
         </a>
       </main>
     </div>
