@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import { IGithubRepo, IGithubUser } from '../interfaces'
+import { IGithubRepo, IGithubUser } from '../interfaces/IGithub'
 import { githubApi } from '../services/gitHub'
 
 class GithubRepositoryClass {

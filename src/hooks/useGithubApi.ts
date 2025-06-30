@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IGithubRepo, IGithubUser } from '../interfaces'
+import { IGithubRepo, IGithubUser } from '../interfaces/IGithub'
 import { GithubRepository } from '../repository/GithubRepository'
 
 export function useGetMe() {
