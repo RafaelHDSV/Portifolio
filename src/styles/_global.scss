@@ -1,4 +1,4 @@
-@use './_variables.scss';
+@use './_variables.scss' as variables;
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +6,7 @@
 
   user-select: none;
   transition: 300ms all ease;
-  font-family: $font-open-sans;
+  font-family: variables.$font-open-sans;
 }
 
 html {
@@ -15,27 +15,27 @@ html {
 }
 
 body {
-  font-family: $font-cinzel;
+  font-family: variables.$font-cinzel;
 }
 
 ::-webkit-scrollbar {
-  background-color: $gray;
+  background-color: variables.$gray;
   width: 0.7rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $white;
+  background-color: variables.$white;
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $white-opacity;
+  background-color: variables.$white-opacity;
 }
 
 a {
   text-decoration: none;
-  color: $white;
+  color: variables.$white;
 }
 
 .mainContainer {
@@ -52,19 +52,19 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: $font-roboto;
+  font-family: variables.$font-roboto;
   font-size: 32px;
   padding: 2rem 0;
   cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
-    color: $blue;
+    color: variables.$blue;
 
     &::after {
       content: '';
       display: block;
-      background-color: $blue;
+      background-color: variables.$blue;
       width: 100%;
       height: 1px;
     }
@@ -73,7 +73,7 @@ a {
   &::after {
     content: '';
     display: block;
-    background-color: $blue;
+    background-color: variables.$blue;
     width: 0%;
     height: 1px;
     transition: 700ms ease-in-out;
@@ -92,9 +92,9 @@ a {
   cursor: pointer;
 
   &:hover {
-    background-color: $black;
-    color: $white;
-    border: 1px solid $white;
+    background-color: variables.$black;
+    color: variables.$white;
+    border: 1px solid variables.$white;
   }
 }
 
