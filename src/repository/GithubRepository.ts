@@ -45,7 +45,10 @@ class GithubRepositoryClass {
         per_page: '100'
       }
 
-      const response = await githubApi.get<IGithubRepo[]>('/user/repos', { params, ...config })
+      const response = await githubApi.get<IGithubRepo[]>('/user/repos', {
+        params,
+        ...config
+      })
 
       const filteredRepos = response.data.map((repo: IGithubRepo) => ({
         id: repo.id,

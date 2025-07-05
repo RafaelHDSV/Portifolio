@@ -15,7 +15,10 @@ function LanguagesContent() {
   const [languageActivity, setLanguageActivity] = useState(0)
 
   return (
-    <div id='languages' className={`mainContainer ${styles.languagesContainer}`}>
+    <div
+      id='languages'
+      className={`mainContainer ${styles.languagesContainer}`}
+    >
       <h2 className='titleContainer'>Linguagens e Tecnologias</h2>
 
       <main>
@@ -27,7 +30,7 @@ function LanguagesContent() {
 
         <aside className={styles.languages}>
           <div className={styles.languagesGrid}>
-            {LanguagesData.map(language => (
+            {LanguagesData.map((language) => (
               <span
                 className={`${styles.languagesLogo} ${language.id === languageActivity ? styles.activity : ''}`}
                 onClick={() => setLanguageActivity(language.id)}

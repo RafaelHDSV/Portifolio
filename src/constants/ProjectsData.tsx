@@ -255,7 +255,8 @@ export const ProjectsData = [
     key: '9',
     name: 'Gerador de Senhas',
     image: images.passwordGenerator,
-    description: 'Este projeto é ideal para iniciantes em Javascript com um breve conhecimento da linguagem',
+    description:
+      'Este projeto é ideal para iniciantes em Javascript com um breve conhecimento da linguagem',
     languages: [
       {
         name: 'HTML',

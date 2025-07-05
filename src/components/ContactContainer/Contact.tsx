@@ -21,19 +21,46 @@ function ContactContent() {
       <h2 className='titleContainer'>Contato</h2>
 
       <main>
-        <a href='mailto:rafaelvieira1720@gmail.com' target='_blank' onMouseOver={() => setIsMouseOver('email')} onMouseLeave={() => setIsMouseOver(null)}>
+        <a
+          href='mailto:rafaelvieira1720@gmail.com'
+          target='_blank'
+          onMouseOver={() => setIsMouseOver('email')}
+          onMouseLeave={() => setIsMouseOver(null)}
+        >
           <MdEmail size='2.5rem' />
-          {isMouseOver === 'email' ? <span>rafaelvieira1720@gmail.com</span> : <span>Email</span>}
+          {isMouseOver === 'email' ? (
+            <span>rafaelvieira1720@gmail.com</span>
+          ) : (
+            <span>Email</span>
+          )}
         </a>
 
-        <a href='https://wa.me/5511947100007' target='_blank' onMouseOver={() => setIsMouseOver('whatsapp')} onMouseLeave={() => setIsMouseOver(null)}>
+        <a
+          href='https://wa.me/5511947100007'
+          target='_blank'
+          onMouseOver={() => setIsMouseOver('whatsapp')}
+          onMouseLeave={() => setIsMouseOver(null)}
+        >
           <FaSquareWhatsapp size='2.5rem' />
-          {isMouseOver === 'whatsapp' ? <span>(11) 94710-0007</span> : <span>Whatsapp</span>}
+          {isMouseOver === 'whatsapp' ? (
+            <span>(11) 94710-0007</span>
+          ) : (
+            <span>Whatsapp</span>
+          )}
         </a>
 
-        <a href='https://github.com/RafaelHDSV' target='_blank' onMouseOver={() => setIsMouseOver('github')} onMouseLeave={() => setIsMouseOver(null)}>
+        <a
+          href='https://github.com/RafaelHDSV'
+          target='_blank'
+          onMouseOver={() => setIsMouseOver('github')}
+          onMouseLeave={() => setIsMouseOver(null)}
+        >
           <FaSquareGithub size='2.5rem' />
-          {isMouseOver === 'github' ? <span>/RafaelHDSV</span> : <span>Github</span>}
+          {isMouseOver === 'github' ? (
+            <span>/RafaelHDSV</span>
+          ) : (
+            <span>Github</span>
+          )}
         </a>
 
         <a
@@ -43,7 +70,11 @@ function ContactContent() {
           onMouseLeave={() => setIsMouseOver(null)}
         >
           <FaLinkedin size='2.5rem' />
-          {isMouseOver === 'linkedin' ? <span>/in/rafael-vieira1720</span> : <span>Linkedin</span>}
+          {isMouseOver === 'linkedin' ? (
+            <span>/in/rafael-vieira1720</span>
+          ) : (
+            <span>Linkedin</span>
+          )}
         </a>
       </main>
     </div>

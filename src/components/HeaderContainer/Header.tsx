@@ -43,7 +43,13 @@ function HeaderContent() {
           deleteSpeed: 30,
           skipAddStyles: true,
           wrapperClassName: styles.typewriter,
-          strings: ['Desenvolvedor Front-End', 'React | Sass | Typescript | Javascript', 'Desenvolvedor Web', 'Front End Developer', 'Web Developer']
+          strings: [
+            'Desenvolvedor Front-End',
+            'React | Sass | Typescript | Javascript',
+            'Desenvolvedor Web',
+            'Front End Developer',
+            'Web Developer'
+          ]
         }}
       />
 

@@ -1,4 +1,13 @@
-import { FaBootstrap, FaCss3Alt, FaGitAlt, FaGithub, FaHtml5, FaPython, FaReact, FaSass } from 'react-icons/fa'
+import {
+  FaBootstrap,
+  FaCss3Alt,
+  FaGitAlt,
+  FaGithub,
+  FaHtml5,
+  FaPython,
+  FaReact,
+  FaSass
+} from 'react-icons/fa'
 import { IoLogoJavascript } from 'react-icons/io5'
 import { SiCplusplus, SiMysql, SiTypescript } from 'react-icons/si'
 

@@ -23,7 +23,7 @@ function ProjectsContent() {
 
   return (
     <>
-      {repos.map(repo => (
+      {repos.map((repo) => (
         <p>{repo.name}</p>
       ))}
 
@@ -31,24 +31,35 @@ function ProjectsContent() {
         <h2 className='titleContainer'>Projetos</h2>
 
         <div className={styles.projectsContainer}>
-          {ProjectsData.map(project => (
+          {ProjectsData.map((project) => (
             <div className={styles.projectCard} key={project.key}>
               <img src={project.image} alt={project.name} />
 
               <div className={styles.textContent}>
                 <h2>{project.name}</h2>
 
-                <LanguagesContainer key={project.key} languages={project.languages} />
+                <LanguagesContainer
+                  key={project.key}
+                  languages={project.languages}
+                />
 
                 <article>{project.description}</article>
 
-                <LinksContainer urlProject={project.urlProject} urlGitHub={project.urlGitHub} />
+                <LinksContainer
+                  urlProject={project.urlProject}
+                  urlGitHub={project.urlGitHub}
+                />
               </div>
             </div>
           ))}
         </div>
 
-        <a className={styles.btnGithub} href='https://github.com/RafaelHDSV?tab=repositories' target='_blank' rel='noreferrer'>
+        <a
+          className={styles.btnGithub}
+          href='https://github.com/RafaelHDSV?tab=repositories'
+          target='_blank'
+          rel='noreferrer'
+        >
           <FaGithub />
           Ver mais projetos
         </a>

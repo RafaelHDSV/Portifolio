@@ -8,5 +8,7 @@ export default function FooterContainer() {
   )
 }
 function FooterContent() {
-  return <footer>{`Copyright © ${new Date().getFullYear()} | Rafael Vieira. Todos os direitos reservados.`}</footer>
+  return (
+    <footer>{`Copyright © ${new Date().getFullYear()} | Rafael Vieira. Todos os direitos reservados.`}</footer>
+  )
 }

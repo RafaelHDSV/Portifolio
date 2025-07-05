@@ -45,10 +45,16 @@ function AboutContent() {
           <span>Repositórios públicos: {user?.public_repos}</span>
           <span>Seguidores: {user?.followers}</span>
           <span>Seguindo: {user?.following}</span>
-          <span>📅 Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}</span>
+          <span>
+            📅 Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
+          </span>
 
           <Bounce>
-            <a className={styles.btnCv} href='cv.pdf' download='Rafael Vieira - Currículo'>
+            <a
+              className={styles.btnCv}
+              href='cv.pdf'
+              download='Rafael Vieira - Currículo'
+            >
               Baixar CV
             </a>
           </Bounce>

@@ -15,7 +15,7 @@ export default function LanguagesContainer({ key, languages }: ProjectProps) {
 
   return (
     <div className={styles.languagesContainer}>
-      {languages.map(language => (
+      {languages.map((language) => (
         <div className={styles.singleLanguageContainer}>
           <span
             className={styles.language}
