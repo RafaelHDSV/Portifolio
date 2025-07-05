@@ -24,11 +24,19 @@ export function App() {
   //   setLoading(false)
   // })
 
-  if (loading) return <div className={`${styles.loading} ${loading && styles.visible}`}></div>
+  if (loading)
+    return (
+      <div className={`${styles.loading} ${loading && styles.visible}`}></div>
+    )
 
   const isDevelopment = process.env.NODE_ENV === 'development'
   if (!isDevelopment && devClickCount < 30) {
-    return <DevelopmentScreen clickCount={setDevClickCount} />
+    return (
+      <DevelopmentScreen
+        devClickCount={devClickCount}
+        setDevClickCount={setDevClickCount}
+      />
+    )
   }
 
   return (
