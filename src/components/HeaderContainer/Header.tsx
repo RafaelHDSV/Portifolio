@@ -54,6 +54,8 @@ function HeaderContent() {
       />
 
       <FaArrowDownLong className={styles.arrowDown} size='2rem' />
+
+      <img className={styles.wave} src='/wave.svg' alt='wave.svg' />
     </div>
   )
 }
