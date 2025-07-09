@@ -82,19 +82,31 @@ a {
 
 .btnUp {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 1rem;
+  right: 1rem;
   outline: 0;
   border: none;
-  padding: 1rem;
-  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
   border-radius: 100%;
+  background-color: variables.$black;
+  color: variables.$white;
+  opacity: 0;
+  border: 1px solid variables.$white;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
   cursor: pointer;
 
   &:hover {
-    background-color: variables.$black;
-    color: variables.$white;
-    border: 1px solid variables.$white;
+    background-color: variables.$white;
+    color: variables.$black;
+  }
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
   }
 }
 
