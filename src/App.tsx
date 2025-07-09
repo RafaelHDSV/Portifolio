@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { FaArrowUp } from 'react-icons/fa'
+import { useState } from 'react'
 import styles from './App.module.scss'
+import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
 import AboutContainer from './screens/AboutContainer/About'
 import ContactContainer from './screens/ContactContainer/Contact'
 import DevelopmentScreen from './screens/DevelopmentScreen/DevelopmentScreen'
@@ -13,13 +13,6 @@ import './styles/main.scss'
 export function App() {
   const [devClickCount, setDevClickCount] = useState(0)
   const [loading] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   // FIXME: Corrigir loading inicial
   // window.addEventListener('load', () => {
@@ -50,12 +43,7 @@ export function App() {
       <ContactContainer />
       <FooterContainer />
 
-      <button
-        className={`btnUp ${scrollY >= 250 ? 'visible' : ''}`}
-        onClick={() => window.scrollTo(0, 0)}
-      >
-        <FaArrowUp className='arrowUp' />
-      </button>
+      <ScrollToTopButton />
     </div>
   )
 }
