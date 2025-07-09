@@ -1,35 +1,43 @@
-@use '../../styles/variables' as variables;
+@use '../../styles/variables' as *;
 
-.btnUp {
+.backToTopButton {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  outline: 0;
-  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 0.8rem;
-  border-radius: 100%;
-  background-color: variables.$black;
-  color: variables.$white;
-  opacity: 0;
-  border: 1px solid variables.$white;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+  border: 1px solid $white;
+  border-radius: 50%;
+  background-color: $black;
+  color: $white;
+
+  outline: none;
   cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    background-color 0.3s,
+    color 0.3s;
 
   &:hover {
-    background-color: variables.$white;
-    color: variables.$black;
+    background-color: $white;
+    color: $black;
   }
-}
 
-.visible {
-  opacity: 1;
-  pointer-events: all;
-}
+  &.isVisible {
+    opacity: 0.5;
+    pointer-events: all;
 
-.arrowUp {
-  transform: scale(1.3);
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .icon {
+    transform: scale(1.3);
+  }
 }

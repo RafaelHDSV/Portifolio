@@ -16,12 +16,12 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      className={`${styles.btnUp} ${visible ? styles.visible : ''}`}
+      className={`${styles.backToTopButton} ${visible ? styles.isVisible : ''}`}
       onClick={handleClick}
       aria-label='Scroll to top'
       type='button'
     >
-      <FaArrowUp className={styles.arrowUp} />
+      <FaArrowUp className={styles.icon} />
     </button>
   )
 }
