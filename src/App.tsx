@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaArrowUp } from 'react-icons/fa'
 import styles from './App.module.scss'
 import AboutContainer from './components/AboutContainer/About'
@@ -15,9 +15,11 @@ export function App() {
   const [loading] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
-  window.addEventListener('scroll', () => {
-    setScrollY(window.scrollY)
-  })
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // FIXME: Corrigir loading inicial
   // window.addEventListener('load', () => {
@@ -48,16 +50,12 @@ export function App() {
       <ContactContainer />
       <FooterContainer />
 
-      {scrollY >= 250 && (
-        <button
-          className='btnUp'
-          onClick={() => {
-            window.scrollTo(0, 0)
-          }}
-        >
-          <FaArrowUp className='arrowUp' />
-        </button>
-      )}
+      <button
+        className={`btnUp ${scrollY >= 250 ? 'visible' : ''}`}
+        onClick={() => window.scrollTo(0, 0)}
+      >
+        <FaArrowUp className='arrowUp' />
+      </button>
     </div>
   )
 }
