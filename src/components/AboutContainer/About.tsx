@@ -23,7 +23,7 @@ function AboutContent() {
   }
 
   return (
-    <div id='about' className={`secondaryContainer ${styles.about}`}>
+    <div id='about' className={`mainContainer ${styles.about}`}>
       <h2 className='titleContainer'>Sobre mim</h2>
 
       <main>

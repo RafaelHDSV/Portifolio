@@ -109,14 +109,6 @@
     transform: translate(-50%);
     animation: arrowDown 500ms ease-in-out alternate infinite;
   }
-
-  .wave {
-    position: absolute;
-    bottom: -5rem;
-    left: 50%;
-    transform: translate(-50%);
-    width: 100%;
-  }
 }
 
 @keyframes bubbleAnimation {

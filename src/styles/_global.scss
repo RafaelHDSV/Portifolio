@@ -47,11 +47,6 @@ a {
   padding-bottom: 3rem;
 }
 
-.secondaryContainer {
-  @extend .mainContainer;
-  background-color: #273036;
-}
-
 .titleContainer {
   display: flex;
   flex-direction: column;

@@ -23,9 +23,9 @@ function ProjectsContent() {
 
   return (
     <>
-      {repos.map((repo) => (
+      {/* {repos.map((repo) => (
         <p>{repo.name}</p>
-      ))}
+      ))} */}
 
       <div id='projects' className={`mainContainer ${styles.projects}`}>
         <h2 className='titleContainer'>Projetos</h2>
