@@ -4,16 +4,14 @@ $font-open-sans: 'Open Sans', sans-serif;
 $font-outfit: 'Outfit', sans-serif;
 $font-schoolbell: 'Schoolbell', cursive;
 
-$white: #d4d4d4;
-$white-opacity: #d6d6d6d4;
-$gray: #a8a8a8;
 $blue: #349bd3;
+$white: #d4d4d4;
+$gray: #827f7f;
+$gray-opacity: #242424cc;
 $dark-gray: #161616;
 $black: #0f0f0f;
 
 :root {
-  --color-primary: $blue;
-
   --React: #61dbfb;
   --Typescript: #358ef1;
   --Javascript: #f0db4f;
