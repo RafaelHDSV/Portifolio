@@ -1,5 +1,4 @@
-@use '../../styles/variables.scss' as variables;
-@use '../../App.module.scss';
+@use '../../styles/variables.scss' as *;
 
 .contact {
   main {
@@ -15,15 +14,15 @@
       max-width: 9rem;
       width: 100vw;
       gap: 0.25rem;
-      border: 1px solid variables.$white;
+      border: 1px solid $white;
       border-radius: 1rem;
       text-wrap: nowrap;
 
       &:hover {
         max-width: 20rem;
-        background-color: variables.$dark-gray;
-        color: variables.$white-opacity;
-        border-color: variables.$black;
+        background-color: $dark-gray;
+        color: $white;
+        border-color: $black;
       }
     }
   }

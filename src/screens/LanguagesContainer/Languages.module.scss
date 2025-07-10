@@ -1,5 +1,4 @@
-@use '../../styles/variables.scss' as variables;
-@use '../../App.module.scss';
+@use '../../styles/variables.scss' as *;
 
 .languagesContainer {
   padding: 0 10rem;
@@ -41,14 +40,14 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Open Sans', sans-serif;
+      font-family: $font-open-sans;
       font-size: 32px;
       padding-bottom: 1rem;
       cursor: pointer;
 
       &:hover {
         transform: scale(1.1);
-        color: variables.$blue;
+        color: $blue;
       }
     }
 
@@ -59,7 +58,7 @@
       left: 50%;
       height: 100%;
       width: 1px;
-      background-color: variables.$white;
+      background-color: $white;
     }
   }
 
@@ -79,12 +78,12 @@
         cursor: pointer;
 
         &:hover {
-          color: variables.$blue;
+          color: $blue;
         }
       }
 
       .activity {
-        color: variables.$blue;
+        color: $blue;
         transform: scale(1.5);
       }
     }

@@ -1,4 +1,4 @@
-@use './styles/variables.scss' as variables;
+@use './styles/variables.scss' as *;
 
 .loader {
   display: flex;
@@ -9,11 +9,11 @@
   height: 100vh;
   width: 100vw;
   position: fixed;
-  font-family: variables.$font-open-sans;
-  z-index: 999999999;
+  font-family: $font-open-sans;
+  z-index: 999;
   overflow: hidden;
-  background: variables.$black;
-  color: variables.$white;
+  background: $black;
+  color: $white;
 }
 
 .app {
@@ -21,8 +21,8 @@
   flex-direction: column;
   max-width: 100vw;
   min-height: 100vh;
-  background-color: variables.$black;
-  color: variables.$white;
+  background-color: $black;
+  color: $white;
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@
   opacity: 0;
   justify-content: center;
   align-items: center;
-  background-color: variables.$black;
+  background-color: $black;
   width: 100%;
   height: 100vh;
   z-index: 999;
@@ -45,8 +45,7 @@
     height: 4rem;
     border-radius: 100%;
     border: 1rem solid;
-    border-color: variables.$white variables.$blue variables.$white
-      variables.$white;
+    border-color: $white $blue $white $white;
     animation: loadingAnimation 1s infinite linear;
   }
 }

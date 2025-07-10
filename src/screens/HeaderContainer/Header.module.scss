@@ -1,12 +1,4 @@
-@use '../../styles/variables.scss' as variables;
-@use '../../App.module.scss';
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
-// font-family: "Cinzel Decorative", serif;
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-// font-family: "Roboto Condensed", sans-serif;
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Schoolbell&display=swap');
-// font-family: "Outfit", sans-serif;
+@use '../../styles/variables.scss' as *;
 
 .headerContainer {
   position: relative;
@@ -27,7 +19,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 50rem 10rem variables.$blue;
+    box-shadow: 0 0 50rem 10rem $blue;
     animation: bubbleAnimation 3s infinite alternate-reverse;
   }
 
@@ -38,18 +30,18 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: $font-roboto;
     width: 100%;
     padding: 1.5rem 4rem;
-    background-color: variables.$dark-gray;
+    background-color: $dark-gray;
 
     h2 {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: $font-cinzel;
       font-size: 28px;
 
       &:hover {
         font-size: 36px;
-        color: variables.$blue;
+        color: $blue;
       }
     }
 
@@ -62,17 +54,17 @@
       }
 
       a {
-        color: variables.$white;
+        color: $white;
         cursor: pointer;
 
         &:hover {
           transform: scale(1.1);
-          color: variables.$blue;
+          color: $blue;
 
           &::after {
             content: '';
             display: block;
-            background-color: variables.$blue;
+            background-color: $blue;
             width: 100%;
             height: 1px;
           }
@@ -81,7 +73,7 @@
         &::after {
           content: '';
           display: block;
-          background-color: variables.$blue;
+          background-color: $blue;
           width: 0%;
           height: 1px;
           transition: 700ms ease-in;
@@ -91,14 +83,14 @@
   }
 
   h1 {
-    font-family: 'Cinzel Decorative', serif;
+    font-family: $font-cinzel;
     font-size: 52px;
   }
 
   .typewriter {
-    font-family: 'Outfit', sans-serif;
+    font-family: $font-outfit;
     font-size: 22px;
-    color: variables.$white;
+    color: $white;
     font-weight: 100;
   }
 
@@ -113,11 +105,11 @@
 
 @keyframes bubbleAnimation {
   0% {
-    box-shadow: 0 0 2rem 1rem variables.$blue;
+    box-shadow: 0 0 2rem 1rem $blue;
   }
 
   100% {
-    box-shadow: 0 0 50rem 5rem variables.$blue;
+    box-shadow: 0 0 50rem 5rem $blue;
   }
 }
 

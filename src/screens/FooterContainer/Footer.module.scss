@@ -1,5 +1,4 @@
-@use '../../styles/variables.scss' as variables;
-@use '../../App.module.scss';
+@use '../../styles/variables.scss' as *;
 
 footer {
   display: flex;
@@ -8,7 +7,7 @@ footer {
   align-items: center;
   width: 100%;
   padding: 1rem 0;
-  color: variables.$white;
+  color: $white;
 
   .left {
     display: flex;
@@ -30,7 +29,7 @@ footer {
 
         &:hover {
           transform: scale(1.2);
-          color: variables.$blue;
+          color: $blue;
         }
       }
     }
