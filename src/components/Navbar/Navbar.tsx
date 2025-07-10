@@ -9,13 +9,13 @@ export default function Navbar() {
           <h2>RV</h2>
         </a>
       </Fade>
-      Theme
       <div className={styles.optionsNav}>
         <Fade cascade damping={0.3}>
           <a href='#about'>Sobre</a>
           <a href='#languages'>Linguagens</a>
           <a href='#projects'>Projetos</a>
           <a href='#contact'>Contato</a>
+          <a href=''>Theme</a>
         </Fade>
       </div>
     </nav>
