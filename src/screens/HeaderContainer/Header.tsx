@@ -14,23 +14,6 @@ export default function HeaderContainer() {
 function HeaderContent() {
   return (
     <div className={styles.headerContainer}>
-      <nav>
-        <Fade damping={0.3}>
-          <a href='/'>
-            <h2>RV</h2>
-          </a>
-        </Fade>
-
-        <div className={styles.optionsNav}>
-          <Fade cascade damping={0.3}>
-            <a href='#about'>Sobre</a>
-            <a href='#languages'>Linguagens</a>
-            <a href='#projects'>Projetos</a>
-            <a href='#contact'>Contato</a>
-          </Fade>
-        </div>
-      </nav>
-
       <Slide direction='left' triggerOnce>
         <h1>Rafael Vieira</h1>
       </Slide>
