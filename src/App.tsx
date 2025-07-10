@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './App.module.scss'
 import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
@@ -11,19 +11,19 @@ import LanguagesContainer from './screens/LanguagesContainer/Languages'
 import ProjectsContainer from './screens/ProjectsContainer/Projects'
 import './styles/main.scss'
 
-export function App() {
+export default function App() {
   const [devClickCount, setDevClickCount] = useState(0)
-  const [loading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
-  // FIXME: Corrigir loading inicial
-  // window.addEventListener('load', () => {
-  //   setLoading(false)
-  // })
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+    return () => clearTimeout(timeout)
+  }, [])
 
   if (loading)
-    return (
-      <div className={`${styles.loading} ${loading && styles.visible}`}></div>
-    )
+    return <div className={`${styles.loading} ${loading && styles.visible}`} />
 
   const isDevelopment = process.env.NODE_ENV === 'development'
   if (!isDevelopment && devClickCount < 30) {
