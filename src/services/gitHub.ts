@@ -1,11 +1,10 @@
 import axios from 'axios'
-
-const token = import.meta.env.VITE_GITHUB_ACCESS_TOKEN
+import { gitHubToken } from '../utils/environment'
 
 export const githubApi = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
-    ...(token && { Authorization: `Bearer ${token}` }),
+    ...(gitHubToken && { Authorization: `Bearer ${gitHubToken}` }),
     'Content-Type': 'application/json'
   }
 })
