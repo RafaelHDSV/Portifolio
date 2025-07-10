@@ -2,6 +2,16 @@
 @use '../../App.module.scss';
 
 .about {
+  position: relative;
+
+  .booble {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15rem;
+    box-shadow: -15rem 10rem 10rem 3rem variables.$blue;
+  }
+
   main {
     display: flex;
     justify-content: space-between;

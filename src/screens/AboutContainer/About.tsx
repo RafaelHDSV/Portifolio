@@ -26,6 +26,8 @@ function AboutContent() {
     <div id='about' className={`mainContainer ${styles.about}`}>
       <h2 className='titleContainer'>Sobre mim</h2>
 
+      <div className={styles.booble}></div>
+
       <main>
         <Bounce>
           <img src={user.avatar_url} alt='logo-completed.png' />
