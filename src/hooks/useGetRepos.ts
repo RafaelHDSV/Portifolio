@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GithubRepository } from '../repository/GithubRepository'
 import { IGithubRepo } from '../types/IGithub'
 
-export function useGetRepos() {
+export default function useGetRepos() {
   const [repos, setRepos] = useState<IGithubRepo[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

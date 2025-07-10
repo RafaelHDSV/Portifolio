@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GithubRepository } from '../repository/GithubRepository'
 import { IGithubUser } from '../types/IGithub'
 
-export function useGetMe() {
+export default function useGetMe() {
   const [user, setUser] = useState<IGithubUser>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
