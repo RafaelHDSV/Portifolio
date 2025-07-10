@@ -32,6 +32,7 @@ function LanguagesContent() {
           <div className={styles.languagesGrid}>
             {LanguagesData.map((language) => (
               <span
+                key={language.id}
                 className={`${styles.languagesLogo} ${language.id === languageActivity ? styles.activity : ''}`}
                 onClick={() => setLanguageActivity(language.id)}
               >

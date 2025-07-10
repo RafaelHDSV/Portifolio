@@ -32,14 +32,14 @@ function ProjectsContent() {
 
         <div className={styles.projectsContainer}>
           {ProjectsData.map((project) => (
-            <div className={styles.projectCard} key={project.key}>
+            <div key={project.key} className={styles.projectCard}>
               <img src={project.image} alt={project.name} />
 
               <div className={styles.textContent}>
                 <h2>{project.name}</h2>
 
                 <LanguagesContainer
-                  key={project.key}
+                  projectKey={project.key}
                   languages={project.languages}
                 />
 

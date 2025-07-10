@@ -1,22 +1,25 @@
 import { useState } from 'react'
 import styles from '../Project.module.scss'
 
-interface ProjectProps {
-  key: string
+interface IProjectProps {
+  projectKey: string
   languages: {
     name: string
     logo: JSX.Element
   }[]
 }
 
-export default function LanguagesContainer({ key, languages }: ProjectProps) {
+export default function LanguagesContainer({
+  projectKey,
+  languages
+}: IProjectProps) {
   const [languageVisible, setLanguageVisible] = useState<string | null>()
   const [keyVisible, setKeyVisible] = useState<string | null>()
 
   return (
     <div className={styles.languagesContainer}>
-      {languages.map((language) => (
-        <div className={styles.singleLanguageContainer}>
+      {languages.map((language, idx) => (
+        <div key={idx} className={styles.singleLanguageContainer}>
           <span
             className={styles.language}
             key={Math.random()}
@@ -25,7 +28,7 @@ export default function LanguagesContainer({ key, languages }: ProjectProps) {
             }}
             onMouseEnter={() => {
               setLanguageVisible(language.name)
-              setKeyVisible(key)
+              setKeyVisible(projectKey)
             }}
             onMouseLeave={() => {
               setLanguageVisible(null)
@@ -35,7 +38,7 @@ export default function LanguagesContainer({ key, languages }: ProjectProps) {
             {language.logo}
           </span>
 
-          {language.name === languageVisible && key === keyVisible && (
+          {language.name === languageVisible && projectKey === keyVisible && (
             <>
               <span className={styles.triangle}></span>
               <span className={styles.languageName}>{language.name}</span>
