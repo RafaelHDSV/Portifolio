@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
+import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
 import AboutContainer from './screens/AboutContainer/About'
 import ContactContainer from './screens/ContactContainer/Contact'
@@ -36,6 +37,8 @@ export function App() {
 
   return (
     <div className={styles.app}>
+      <Navbar />
+
       <HeaderContainer />
       <AboutContainer />
       <LanguagesContainer />
