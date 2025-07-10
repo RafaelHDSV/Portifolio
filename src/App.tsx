@@ -10,6 +10,7 @@ import HeaderContainer from './screens/HeaderContainer/Header'
 import LanguagesContainer from './screens/LanguagesContainer/Languages'
 import ProjectsContainer from './screens/ProjectsContainer/Projects'
 import './styles/main.scss'
+import { isDevelopment } from './utils/environment'
 
 export default function App() {
   const [devClickCount, setDevClickCount] = useState(0)
@@ -25,7 +26,6 @@ export default function App() {
   if (loading)
     return <div className={`${styles.loading} ${loading && styles.visible}`} />
 
-  const isDevelopment = process.env.NODE_ENV === 'development'
   if (!isDevelopment && devClickCount < 30) {
     return (
       <DevelopmentScreen
