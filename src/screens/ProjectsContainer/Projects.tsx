@@ -1,7 +1,7 @@
 import { Fade } from 'react-awesome-reveal'
 import { FaGithub } from 'react-icons/fa'
 import { ProjectsData } from '../../constants/ProjectsData'
-import { useGetRepos } from '../../hooks/useGithubApi'
+import { useGetRepos } from '../../hooks/useGetRepos'
 import LanguagesContainer from './components/LanguagesContainer'
 import LinksContainer from './components/LinksContainer'
 import styles from './Project.module.scss'
