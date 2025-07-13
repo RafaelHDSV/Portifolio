@@ -8,7 +8,14 @@
     top: 0;
     left: 0;
     width: 15rem;
-    box-shadow: -15rem 10rem 10rem 3rem $blue;
+    box-shadow: -15rem 15rem 20rem 5rem $blue;
+  }
+  .booble_2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15rem;
+    box-shadow: 15rem -15rem 20rem 5rem $blue;
   }
 
   main {

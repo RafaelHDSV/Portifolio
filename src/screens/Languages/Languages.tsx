@@ -17,7 +17,7 @@ function LanguagesContent() {
   return (
     <div
       id='languages'
-      className={`mainContainer ${styles.languages}`}
+      className={`mainContainer ${styles.languagesContainer}`}
     >
       <h2 className='titleContainer'>Linguagens e Tecnologias</h2>
 

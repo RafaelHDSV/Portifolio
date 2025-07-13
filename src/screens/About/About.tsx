@@ -27,6 +27,7 @@ function AboutContent() {
       <h2 className='titleContainer'>Sobre mim</h2>
 
       <div className={styles.booble}></div>
+      <div className={styles.booble_2}></div>
 
       <main>
         <Bounce>
