@@ -17,9 +17,9 @@ export default function Projects() {
 function ProjectsContent() {
   const { repos, loading, error } = useGetRepos()
 
-  console.log('repos', repos)
-  console.log('loading', loading)
-  console.log('error', error)
+  // console.log('repos', repos)
+  // console.log('loading', loading)
+  // console.log('error', error)
 
   return (
     <>
@@ -27,7 +27,10 @@ function ProjectsContent() {
         <p>{repo.name}</p>
       ))} */}
 
-      <div id='projects' className={`mainContainer ${styles.projectsContainer}`}>
+      <div
+        id='projects'
+        className={`mainContainer ${styles.projectsContainer}`}
+      >
         <h2 className='titleContainer'>Projetos</h2>
 
         <div className={styles.projects}>
