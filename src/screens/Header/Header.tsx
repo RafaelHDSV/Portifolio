@@ -3,7 +3,7 @@ import { FaArrowDownLong } from 'react-icons/fa6'
 import Typewriter from 'typewriter-effect'
 import styles from './Header.module.scss'
 
-export default function HeaderContainer() {
+export default function Header() {
   return (
     <Fade>
       <HeaderContent />
@@ -13,7 +13,7 @@ export default function HeaderContainer() {
 
 function HeaderContent() {
   return (
-    <div className={styles.headerContainer}>
+    <div className={styles.header}>
       <Slide direction='left' triggerOnce>
         <h1>Rafael Vieira</h1>
       </Slide>

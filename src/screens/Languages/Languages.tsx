@@ -3,7 +3,7 @@ import { Fade } from 'react-awesome-reveal'
 import { LanguagesData } from '../../constants/LanguagesData'
 import styles from './Languages.module.scss'
 
-export default function LanguagesContainer() {
+export default function Languages() {
   return (
     <Fade>
       <LanguagesContent />
@@ -17,7 +17,7 @@ function LanguagesContent() {
   return (
     <div
       id='languages'
-      className={`mainContainer ${styles.languagesContainer}`}
+      className={`mainContainer ${styles.languages}`}
     >
       <h2 className='titleContainer'>Linguagens e Tecnologias</h2>
 

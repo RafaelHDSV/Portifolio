@@ -3,7 +3,7 @@ import { Bounce, Fade } from 'react-awesome-reveal'
 import useGetMe from '../../hooks/useGetMe'
 import styles from './About.module.scss'
 
-export default function AboutContainer() {
+export default function About() {
   return (
     <Fade>
       <AboutContent />

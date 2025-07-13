@@ -1,6 +1,6 @@
 @use '../../styles/variables.scss' as *;
 
-.projectsContainer {
+.projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   column-gap: 2rem;
@@ -40,12 +40,12 @@
         text-align: justify;
       }
 
-      .languagesContainer {
+      .languages {
         display: flex;
         justify-content: space-around;
         width: 75%;
 
-        .singleLanguageContainer {
+        .singleLanguage {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -96,7 +96,7 @@
         align-items: center;
         gap: 1rem;
 
-        .linkContainer {
+        .link {
           display: flex;
           justify-content: center;
           align-items: center;

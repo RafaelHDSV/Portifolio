@@ -5,7 +5,7 @@ import { FaSquareGithub, FaSquareWhatsapp } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import styles from './Contact.module.scss'
 
-export default function ContactContainer() {
+export default function Contact() {
   return (
     <Fade>
       <ContactContent />

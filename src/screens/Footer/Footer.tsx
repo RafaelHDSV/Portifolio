@@ -1,6 +1,6 @@
 import { Fade } from 'react-awesome-reveal'
 
-export default function FooterContainer() {
+export default function Footer() {
   return (
     <Fade>
       <FooterContent />

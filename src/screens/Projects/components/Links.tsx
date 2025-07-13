@@ -6,7 +6,7 @@ interface ProjectProps {
   urlGitHub: string
 }
 
-export default function LinksContainer({
+export default function Links({
   urlProject,
   urlGitHub
 }: ProjectProps) {
@@ -17,7 +17,7 @@ export default function LinksContainer({
           href={urlProject}
           target='_blank'
           rel='noreferrer'
-          className={styles.linkContainer}
+          className={styles.link}
         >
           <FaExternalLinkAlt />
           <span>Projeto</span>
@@ -29,7 +29,7 @@ export default function LinksContainer({
           href={urlGitHub}
           target='_blank'
           rel='noreferrer'
-          className={styles.linkContainer}
+          className={styles.link}
         >
           <FaGithub />
           <span>Github</span>

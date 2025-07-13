@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import styles from './App.module.scss'
 import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
-import AboutContainer from './screens/AboutContainer/About'
-import ContactContainer from './screens/ContactContainer/Contact'
+import About from './screens/About/About'
+import Contact from './screens/Contact/Contact'
 import DevelopmentScreen from './screens/DevelopmentScreen/DevelopmentScreen'
-import FooterContainer from './screens/FooterContainer/Footer'
-import HeaderContainer from './screens/HeaderContainer/Header'
-import LanguagesContainer from './screens/LanguagesContainer/Languages'
-import ProjectsContainer from './screens/ProjectsContainer/Projects'
+import Footer from './screens/Footer/Footer'
+import Header from './screens/Header/Header'
+import Languages from './screens/Languages/Languages'
+import Projects from './screens/Projects/Projects'
 import './styles/main.scss'
 import { isDevelopment } from './utils/environment'
 
@@ -39,12 +39,12 @@ export default function App() {
     <div className={styles.app}>
       <Navbar />
 
-      <HeaderContainer />
-      <AboutContainer />
-      <LanguagesContainer />
-      <ProjectsContainer />
-      <ContactContainer />
-      <FooterContainer />
+      <Header />
+      <About />
+      <Languages />
+      <Projects />
+      <Contact />
+      <Footer />
 
       <ScrollToTopButton />
     </div>

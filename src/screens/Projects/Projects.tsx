@@ -2,11 +2,11 @@ import { Fade } from 'react-awesome-reveal'
 import { FaGithub } from 'react-icons/fa'
 import { ProjectsData } from '../../constants/ProjectsData'
 import useGetRepos from '../../hooks/useGetRepos'
-import LanguagesContainer from './components/LanguagesContainer'
-import LinksContainer from './components/LinksContainer'
+import LanguagesOptions from './components/LanguagesOptions'
+import Links from './components/Links'
 import styles from './Project.module.scss'
 
-export default function ProjectsContainer() {
+export default function Projects() {
   return (
     <Fade>
       <ProjectsContent />
@@ -30,7 +30,7 @@ function ProjectsContent() {
       <div id='projects' className={`mainContainer ${styles.projects}`}>
         <h2 className='titleContainer'>Projetos</h2>
 
-        <div className={styles.projectsContainer}>
+        <div className={styles.projects}>
           {ProjectsData.map((project) => (
             <div key={project.key} className={styles.projectCard}>
               <img src={project.image} alt={project.name} />
@@ -38,14 +38,14 @@ function ProjectsContent() {
               <div className={styles.textContent}>
                 <h2>{project.name}</h2>
 
-                <LanguagesContainer
+                <LanguagesOptions
                   projectKey={project.key}
                   languages={project.languages}
                 />
 
                 <article>{project.description}</article>
 
-                <LinksContainer
+                <Links
                   urlProject={project.urlProject}
                   urlGitHub={project.urlGitHub}
                 />

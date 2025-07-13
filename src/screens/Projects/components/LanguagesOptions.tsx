@@ -9,7 +9,7 @@ interface IProjectProps {
   }[]
 }
 
-export default function LanguagesContainer({
+export default function LanguagesOptions({
   projectKey,
   languages
 }: IProjectProps) {
@@ -17,9 +17,9 @@ export default function LanguagesContainer({
   const [keyVisible, setKeyVisible] = useState<string | null>()
 
   return (
-    <div className={styles.languagesContainer}>
+    <div className={styles.languages}>
       {languages.map((language, idx) => (
-        <div key={idx} className={styles.singleLanguageContainer}>
+        <div key={idx} className={styles.singleLanguage}>
           <span
             className={styles.language}
             key={Math.random()}
