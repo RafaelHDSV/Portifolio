@@ -1,7 +1,6 @@
 import { Fade } from 'react-awesome-reveal'
 import { FaGithub } from 'react-icons/fa'
 import { ProjectsData } from '../../constants/ProjectsData'
-import useGetRepos from '../../hooks/useGetRepos'
 import LanguagesOptions from './components/LanguagesOptions'
 import Links from './components/Links'
 import styles from './Project.module.scss'
@@ -15,7 +14,7 @@ export default function Projects() {
 }
 
 function ProjectsContent() {
-  const { repos, loading, error } = useGetRepos()
+  // const { repos, loading, error } = useGetRepos()
 
   // console.log('repos', repos)
   // console.log('loading', loading)
