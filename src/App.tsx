@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './App.module.scss'
+import CustomCursor from './components/CustomCursor/CustomCursor'
 import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
 import About from './screens/About/About'
@@ -47,6 +48,7 @@ export default function App() {
       <Footer />
 
       <ScrollToTopButton />
+      <CustomCursor />
     </div>
   )
 }
