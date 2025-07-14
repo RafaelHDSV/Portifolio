@@ -1,6 +1,10 @@
 import { AxiosRequestConfig } from 'axios'
 import { githubApi } from '../services/gitHub'
-import { IGithubRepo, IGithubUser } from '../types/IGithub'
+import {
+  IGithubResponseRepo,
+  IGithubResponseUser,
+  IUser
+} from '../types/IGithub'
 
 class GithubRepositoryClass {
   /**
@@ -9,21 +13,34 @@ class GithubRepositoryClass {
    * @param config Configurações opcionais do Axios
    * @returns Promise com array de repositórios
    */
-  async getUserDetails(config?: AxiosRequestConfig): Promise<IGithubUser> {
+  async getUserDetails(config?: AxiosRequestConfig): Promise<IUser> {
     try {
-      const response = await githubApi.get<IGithubUser>('/user', config)
+      const response = await githubApi.get<IGithubResponseUser>('/user', config)
 
-      const filteredUser = {
-        id: response.data.id,
-        avatar_url: response.data.avatar_url,
-        name: response.data.name,
-        company: response.data.company,
-        location: response.data.location,
-        bio: response.data.bio,
-        public_repos: response.data.public_repos,
-        followers: response.data.followers,
-        following: response.data.following,
-        created_at: response.data.created_at
+      const {
+        id,
+        avatar_url,
+        name,
+        company,
+        location,
+        bio,
+        public_repos,
+        followers,
+        following,
+        created_at
+      } = response.data
+
+      const filteredUser: IUser = {
+        id,
+        avatar_url,
+        name,
+        company,
+        location,
+        bio,
+        public_repos,
+        followers,
+        following,
+        created_at
       }
 
       return filteredUser
@@ -38,19 +55,22 @@ class GithubRepositoryClass {
    * @param config Configurações opcionais do Axios
    * @returns Promise com array de repositórios públicos
    */
-  async getRepos(config?: AxiosRequestConfig): Promise<IGithubRepo[]> {
+  async getRepos(config?: AxiosRequestConfig): Promise<IGithubResponseRepo[]> {
     try {
       const params = {
         sort: 'updated',
         per_page: '100'
       }
 
-      const response = await githubApi.get<IGithubRepo[]>('/user/repos', {
-        params,
-        ...config
-      })
+      const response = await githubApi.get<IGithubResponseRepo[]>(
+        '/user/repos',
+        {
+          params,
+          ...config
+        }
+      )
 
-      const filteredRepos = response.data.map((repo: IGithubRepo) => ({
+      const filteredRepos = response.data.map((repo: IGithubResponseRepo) => ({
         id: repo.id,
         name: repo.name,
         description: repo.description,
