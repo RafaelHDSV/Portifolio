@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { GithubRepository } from '../repository/GithubRepository'
-import { IGithubUser } from '../types/IGithub'
+import { IUser } from '../types/IGithub'
 
 export default function useGetMe() {
-  const [user, setUser] = useState<IGithubUser>()
+  const [user, setUser] = useState<IUser>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -13,7 +13,7 @@ export default function useGetMe() {
 
       try {
         const user = await GithubRepository.getUserDetails()
-        setUser(user)
+        if (user) setUser(user)
       } catch (err) {
         console.error('Error fetching user from GitHub:', err)
         setError(err as string)
