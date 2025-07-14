@@ -43,7 +43,6 @@
       font-family: $font-open-sans;
       font-size: 32px;
       padding-bottom: 1rem;
-      cursor: pointer;
 
       &:hover {
         transform: scale(1.1);
@@ -75,8 +74,6 @@
 
       .languagesLogo svg {
         transform: scale(3);
-        cursor: pointer;
-
         &:hover {
           color: $blue;
         }
