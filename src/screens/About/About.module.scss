@@ -54,18 +54,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    padding: 2rem;
     max-width: 30rem;
     width: 100%;
-    // FIXME: Remove this hardcoded color
-    background: rgb(160, 118, 118);
-    border-radius: 5rem;
+    background: $gray-opacity;
+    border-radius: 1rem;
 
     .btnCv {
       outline: 0;
       border: none;
-      padding: 1rem 4rem;
+      // padding: 1rem 4rem;
       border-radius: 3rem;
       font-family: $font-roboto;
       font-size: 20px;

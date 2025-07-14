@@ -12,11 +12,7 @@ export default function About() {
 }
 
 function AboutContent() {
-  const { user, loading, error } = useGetMe()
-
-  if (!user || error) {
-    return error
-  }
+  const { user, loading } = useGetMe()
 
   if (loading) {
     return <div className={styles.loading}>Carregando...</div>
@@ -32,24 +28,22 @@ function AboutContent() {
       <main>
         <Bounce>
           <div className={styles.avatar}>
-            <img src={user.avatar_url} alt='logo-completed.png' />
+            <img src={user?.avatar_url} alt='logo-completed.png' />
           </div>
         </Bounce>
 
         <aside>
-          <h1>{user?.name}</h1>
-
           <span>
             Trabalhando atulmente:
-            <a href='https://github.com/AGX-Software' target='_blank'>
+            <a href='https://agxsoftware.com/' target='_blank'>
               {user?.company}
             </a>
           </span>
           <span>📍 {user?.location}</span>
           <span>💻 Bio: {user?.bio}</span>
           <span>Repositórios públicos: {user?.public_repos}</span>
-          <span>Seguidores: {user?.followers}</span>
-          <span>Seguindo: {user?.following}</span>
+          {/* <span>Seguidores: {user?.followers}</span>
+          <span>Seguindo: {user?.following}</span> */}
           <span>
             📅 Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
           </span>
