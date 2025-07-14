@@ -31,7 +31,9 @@ function AboutContent() {
 
       <main>
         <Bounce>
-          <img src={user.avatar_url} alt='logo-completed.png' />
+          <div className={styles.avatar}>
+            <img src={user.avatar_url} alt='logo-completed.png' />
+          </div>
         </Bounce>
 
         <aside>
