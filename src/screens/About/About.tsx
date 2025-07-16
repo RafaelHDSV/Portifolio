@@ -1,3 +1,9 @@
+import {
+  BuildingOfficeIcon,
+  CalendarDotsIcon,
+  FilesIcon,
+  MapPinIcon
+} from '@phosphor-icons/react'
 import dayjs from 'dayjs'
 import { Bounce, Fade } from 'react-awesome-reveal'
 import Tooltip from '../../components/Tooltip/Tooltip'
@@ -35,22 +41,27 @@ function AboutContent() {
         </Bounce>
 
         <aside>
-          <Tooltip text='Nome'>
-            Nome: {user?.name} ({user?.login})
-          </Tooltip>
-          <Tooltip text='Trabalhando em'>
-            Trabalhando em: {user?.company}
-          </Tooltip>
-          <Tooltip text='Localização'>Localização: {user?.location}</Tooltip>
+          <h2>
+            {user?.name} ({user?.login})
+          </h2>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <Tooltip text='Trabalhando em'>
+              <BuildingOfficeIcon /> {user?.company}
+            </Tooltip>
+            <Tooltip text='Localização'>
+              <MapPinIcon /> {user?.location}
+            </Tooltip>
+          </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
             <Tooltip text='Seguidores'>Seguidores: {user?.followers}</Tooltip>
             <Tooltip text='Seguindo'>Seguindo: {user?.following}</Tooltip>
+            <Tooltip text='Repositórios Públicos'>
+              <FilesIcon /> {user?.public_repos}
+            </Tooltip>
           </div>
-          <Tooltip text='Repositórios Públicos'>
-            Repositórios Públicos: {user?.public_repos}
-          </Tooltip>
           <Tooltip text='Programando desde'>
-            Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
+            <CalendarDotsIcon />
+            {dayjs(user?.created_at).format('DD/MM/YYYY')}
           </Tooltip>
 
           <Bounce>
