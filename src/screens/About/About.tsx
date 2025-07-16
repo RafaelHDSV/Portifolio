@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { Bounce, Fade } from 'react-awesome-reveal'
+import Tooltip from '../../components/Tooltip/Tooltip'
 import useGetMe from '../../hooks/useGetMe'
 import styles from './About.module.scss'
 
@@ -34,19 +35,23 @@ function AboutContent() {
         </Bounce>
 
         <aside>
-          <span>
+          <Tooltip text='Nome'>
             Nome: {user?.name} ({user?.login})
-          </span>
-          <span>Trabalhando em: {user?.company}</span>
-          <span>Localização: {user?.location}</span>
+          </Tooltip>
+          <Tooltip text='Trabalhando em'>
+            Trabalhando em: {user?.company}
+          </Tooltip>
+          <Tooltip text='Localização'>Localização: {user?.location}</Tooltip>
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <span>Seguidores: {user?.followers}</span>
-            <span>Seguindo: {user?.following}</span>
+            <Tooltip text='Seguidores'>Seguidores: {user?.followers}</Tooltip>
+            <Tooltip text='Seguindo'>Seguindo: {user?.following}</Tooltip>
           </div>
-          <p>Repositórios Públicos: {user?.public_repos}</p>
-          <p>
+          <Tooltip text='Repositórios Públicos'>
+            Repositórios Públicos: {user?.public_repos}
+          </Tooltip>
+          <Tooltip text='Programando desde'>
             Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
-          </p>
+          </Tooltip>
 
           <Bounce>
             <a
