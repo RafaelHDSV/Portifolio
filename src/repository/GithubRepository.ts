@@ -20,32 +20,33 @@ class GithubRepositoryClass {
       const {
         id,
         avatar_url,
-        name,
         company,
-        location,
-        bio,
-        public_repos,
+        created_at,
         followers,
         following,
-        created_at
+        location,
+        login,
+        name,
+        public_repos
       } = response.data
 
       const filteredUser: IUser = {
         id,
         avatar_url,
-        name,
         company,
-        location,
-        bio,
-        public_repos,
+        created_at,
         followers,
         following,
-        created_at
+        location,
+        login,
+        name,
+        public_repos
       }
 
       return filteredUser
-    } catch (error) {
-      throw new Error(`Failed to fetch repositories for user: ${error}`)
+    } catch (err) {
+      console.error(err)
+      throw new Error(`Failed to fetch repositories for user: ${err}`)
     }
   }
 
@@ -79,8 +80,9 @@ class GithubRepositoryClass {
       }))
 
       return filteredRepos
-    } catch (error) {
-      throw new Error(`Failed to fetch public repositories for user: ${error}`)
+    } catch (err) {
+      console.error(err)
+      throw new Error(`Failed to fetch public repositories for user: ${err}`)
     }
   }
 }

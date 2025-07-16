@@ -37,14 +37,14 @@ export interface IGithubResponseUser {
 export interface IUser {
   id: number
   avatar_url: string
-  name: string
   company: string
-  location: string
-  bio: string
-  public_repos: number
+  created_at: string
   followers: number
   following: number
-  created_at: string
+  location: string
+  login: string
+  name: string
+  public_repos: number
 }
 
 export interface IGithubResponseRepo {
