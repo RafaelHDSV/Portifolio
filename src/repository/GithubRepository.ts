@@ -18,7 +18,6 @@ class GithubRepositoryClass {
       const response = await githubApi.get<IGithubResponseUser>('/user', config)
 
       const {
-        id,
         avatar_url,
         company,
         created_at,
@@ -31,7 +30,6 @@ class GithubRepositoryClass {
       } = response.data
 
       const filteredUser: IUser = {
-        id,
         avatar_url,
         company,
         created_at,

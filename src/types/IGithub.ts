@@ -35,7 +35,6 @@ export interface IGithubResponseUser {
 }
 
 export interface IUser {
-  id: number
   avatar_url: string
   company: string
   created_at: string
