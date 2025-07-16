@@ -14,6 +14,7 @@ export default function About() {
 function AboutContent() {
   const { user, loading } = useGetMe()
 
+  // FIXME: Correct loading
   if (loading) {
     return <div className={styles.loading}>Carregando...</div>
   }
@@ -34,19 +35,18 @@ function AboutContent() {
 
         <aside>
           <span>
-            Trabalhando atulmente:
-            <a href='https://agxsoftware.com/' target='_blank'>
-              {user?.company}
-            </a>
+            Nome: {user?.name} ({user?.login})
           </span>
-          <span>📍 {user?.location}</span>
-          <span>💻 Bio: {user?.bio}</span>
-          <span>Repositórios públicos: {user?.public_repos}</span>
-          {/* <span>Seguidores: {user?.followers}</span>
-          <span>Seguindo: {user?.following}</span> */}
-          <span>
-            📅 Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
-          </span>
+          <span>Trabalhando em: {user?.company}</span>
+          <span>Localização: {user?.location}</span>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <span>Seguidores: {user?.followers}</span>
+            <span>Seguindo: {user?.following}</span>
+          </div>
+          <p>Repositórios Públicos: {user?.public_repos}</p>
+          <p>
+            Programando desde: {dayjs(user?.created_at).format('DD/MM/YYYY')}
+          </p>
 
           <Bounce>
             <a
