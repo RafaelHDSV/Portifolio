@@ -6,10 +6,7 @@ interface ProjectProps {
   urlGitHub: string
 }
 
-export default function Links({
-  urlProject,
-  urlGitHub
-}: ProjectProps) {
+export default function Links({ urlProject, urlGitHub }: ProjectProps) {
   return (
     <div className={styles.links}>
       {urlProject && (
