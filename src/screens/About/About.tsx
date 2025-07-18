@@ -2,11 +2,12 @@ import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
   FilesIcon,
-  MapPinIcon
+  MapPinIcon,
+  TrayArrowDownIcon,
+  TrayArrowUpIcon
 } from '@phosphor-icons/react'
 import dayjs from 'dayjs'
 import { Bounce, Fade } from 'react-awesome-reveal'
-import Tooltip from '../../components/Tooltip/Tooltip'
 import useGetMe from '../../hooks/useGetMe'
 import styles from './About.module.scss'
 
@@ -20,11 +21,7 @@ export default function About() {
 
 function AboutContent() {
   const { user, loading } = useGetMe()
-
-  // FIXME: Correct loading
-  if (loading) {
-    return <div className={styles.loading}>Carregando...</div>
-  }
+  if (loading) return
 
   return (
     <div id='about' className={`mainContainer ${styles.about}`}>
@@ -44,25 +41,57 @@ function AboutContent() {
           <h2>
             {user?.name} ({user?.login})
           </h2>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip text='Trabalhando em'>
-              <BuildingOfficeIcon /> {user?.company}
-            </Tooltip>
-            <Tooltip text='Localização'>
-              <MapPinIcon /> {user?.location}
-            </Tooltip>
+          <div className={styles.item}>
+            <BuildingOfficeIcon
+              className={styles.icon}
+              size={22}
+              weight='light'
+            />
+            <span>Trabalhando em:</span>
+            <span>{user?.company}</span>
           </div>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip text='Seguidores'>Seguidores: {user?.followers}</Tooltip>
-            <Tooltip text='Seguindo'>Seguindo: {user?.following}</Tooltip>
-            <Tooltip text='Repositórios Públicos'>
-              <FilesIcon /> {user?.public_repos}
-            </Tooltip>
+          <div className={styles.item}>
+            <MapPinIcon className={styles.icon} size={22} weight='light' />
+            <span>Localização:</span>
+            <span>{user?.location}</span>
           </div>
-          <Tooltip text='Programando desde'>
-            <CalendarDotsIcon />
-            {dayjs(user?.created_at).format('DD/MM/YYYY')}
-          </Tooltip>
+
+          <div className='flex space-between'>
+            <div className={styles.item}>
+              <TrayArrowDownIcon
+                className={styles.icon}
+                size={22}
+                weight='light'
+              />
+              <span>Seguidores:</span>
+              <span>{user?.followers}</span>
+            </div>
+            <div className={styles.item}>
+              <TrayArrowUpIcon
+                className={styles.icon}
+                size={22}
+                weight='light'
+              />
+              <span>Seguindo:</span>
+              <span>{user?.following}</span>
+            </div>
+          </div>
+
+          <div className={styles.item}>
+            <FilesIcon className={styles.icon} size={22} weight='light' />
+            <span>Repositórios Públicos:</span>
+            <span>{user?.public_repos}</span>
+          </div>
+
+          <div className={styles.item}>
+            <CalendarDotsIcon
+              className={styles.icon}
+              size={22}
+              weight='light'
+            />
+            <span>Programando desde:</span>
+            <span>{dayjs(user?.created_at).format('DD/MM/YYYY')}</span>
+          </div>
 
           <Bounce>
             <a
