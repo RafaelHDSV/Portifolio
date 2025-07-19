@@ -1,59 +1,77 @@
-# Portifolio
+# 📁 Portfolio
 
-![React language](https://img.shields.io/badge/React-005CFE?style=for-the-badge&logo=react)
-![Typescript language](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Sass language](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
-![HTML language](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![GitHub language count](https://img.shields.io/github/languages/count/RafaelHDSV/Portifolio?style=for-the-badge)
-![GitHub repo size](https://img.shields.io/github/repo-size/RafaelHDSV/Portifolio?style=for-the-badge)
+![React](https://img.shields.io/badge/React-005CFE?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![Languages Count](https://img.shields.io/github/languages/count/RafaelHDSV/Portifolio?style=for-the-badge)
+![Repo Size](https://img.shields.io/github/repo-size/RafaelHDSV/Portifolio?style=for-the-badge)
 
 <p align="center">
-    <img src="./public/main.png" alt="main.png">
+  <img src="./public/main.png" alt="Portfolio preview"/>
 </p>
 
 <p align="center">
-    <a href="#about">About |</a> 
-    <a href="#started">Getting Started</a> 
-    <a href="#routes">| App Routes</a> 
+  <a href="#about">About</a> • 
+  <a href="#getting-started">Getting Started</a> • 
+  <a href="#routes">Routes</a> • 
+  <a href="#contributing">Contributing</a>
 </p>
 
-<h2 id="about">📌 About</h2>
+---
 
-This is my frontend developer portfolio, designed to showcase my top projects and skills. Using modern technologies such as React, TypeScript, SASS and HTML, this portfolio highlights the creation of dynamic and responsive user interfaces.
+## 📌 About
 
-<h2 id="started">🚀 Getting started</h2>
+This is my portfolio as a Frontend Developer, built to showcase selected projects and key skills. It demonstrates modern UI development using **React**, **TypeScript**, **SASS**, and **HTML** with a focus on responsive and dynamic interfaces.
 
-In this project we used some libraries, such as:
+---
 
--    React Icons
--    Typewriter
+## 🚀 Getting Started
 
-<h3>Cloning</h3>
+### 🧩 Dependencies
+
+The project uses:
+
+- [`react-icons`](https://react-icons.github.io/react-icons/)
+- [`typewriter-effect`](https://www.npmjs.com/package/typewriter-effect)
+
+### 📥 Clone the repository
 
 ```bash
 git clone https://github.com/RafaelHDSV/Portifolio.git
-npm install
-```
+cd Portifolio
+npm install || yarn
+````
 
-<h3>Starting</h3>
+### ▶ Run the project
 
 ```bash
-cd Portifolio
-npm start
+npm start || yarn dev
 ```
 
-<h2 id="routes">📍 Application Routes</h2>
+---
 
-There is only one route in this project
+## 📍 Routes
 
-| route        | description |
-| ------------ | ----------- |
-| <kbd>/</kbd> | root page   |
+| Path | Description |
+| ---- | ----------- |
+| `/`  | Main page   |
 
-<hr/>
+### `/` - Main Page
 
-### route: <kbd>/</kbd>
+<p>
+  <img src="./public/root.png" alt="Main route preview"/>
+</p>
 
-<img src="./public/root.png"/>
+---
 
-<hr/>
+## 🤝 Contributing
+
+Contributions are welcome and appreciated!  
+Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started..
+
+---
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
