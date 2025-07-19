@@ -1,4 +1,4 @@
-# Contributing to My Portfolio
+# How to contribute
 
 First off, thank you for considering contributing to this project!  
 This portfolio was built to showcase my skills as a Front-End Developer using modern technologies like React, TypeScript, SASS, and HTML.  
