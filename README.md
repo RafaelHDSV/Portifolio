@@ -18,13 +18,9 @@
   <a href="#contributing">Contributing</a>
 </p>
 
----
-
 ## 📌 About
 
 This is my portfolio as a Frontend Developer, built to showcase selected projects and key skills. It demonstrates modern UI development using **React**, **TypeScript**, **SASS**, and **HTML** with a focus on responsive and dynamic interfaces.
-
----
 
 ## 🚀 Getting Started
 
@@ -49,12 +45,10 @@ npm install || yarn
 npm start || yarn dev
 ```
 
----
-
 ## 📍 Routes
 
 | Path | Description |
-| ---- | ----------- |
+| - | -- |
 | `/`  | Main page   |
 
 ### `/` - Main Page
@@ -62,8 +56,6 @@ npm start || yarn dev
 <p>
   <img src="./public/root.png" alt="Main route preview"/>
 </p>
-
----
 
 ## 🤝 Contributing
 
