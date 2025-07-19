@@ -68,9 +68,7 @@ npm start || yarn dev
 ## 🤝 Contributing
 
 Contributions are welcome and appreciated!  
-Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started..
-
----
+Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started.
 
 ## 📝 License
 
