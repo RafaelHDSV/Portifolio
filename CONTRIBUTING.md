@@ -66,7 +66,7 @@ To start contributing:
 
 ## 💬 Feedback & Issues
 
-If you're unsure about something or want to propose a feature/idea before coding, feel free to [open an issue](https://github.com/RafaelHDSV/Portfolio/issues) and start a discussion!
+If you're unsure about something or want to propose a feature/idea before coding, feel free to [open an issue](https://github.com/RafaelHDSV/Portifolio/issues) and start a discussion!
 
 ## 🧾 License
 
