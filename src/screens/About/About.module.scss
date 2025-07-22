@@ -48,46 +48,49 @@
     }
   }
 
-  aside {
+  section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
     padding: 2rem;
-    max-width: 30rem;
     width: 100%;
     background: $gray-opacity;
     border-radius: 1rem;
 
-    .item {
+    .info {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
 
-      .icon {
-        color: $blue;
-      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
 
-      span:last-child {
-        font-weight: bold;
+        .icon {
+          color: $blue;
+        }
+
+        span:last-child {
+          font-weight: bold;
+        }
       }
     }
 
     .btnCv {
-      outline: 0;
-      border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.7rem 1.5rem;
       border-radius: 2rem;
       font-family: $font-roboto;
-      font-size: 18px;
+      font-size: 16px;
       background-color: $white;
       color: $black;
 
       &:hover {
-        font-size: 22px;
         background-color: $black;
-        color: $white;
-        border: 1px solid $white;
+        color: $blue;
       }
     }
   }
