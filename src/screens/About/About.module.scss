@@ -1,18 +1,20 @@
 .about {
   position: relative;
 
-  .booble {
+  .booble,
+  .booble_2 {
     position: absolute;
+    width: 15rem;
+  }
+
+  .booble {
     top: 0;
     left: 0;
-    width: 15rem;
     box-shadow: -15rem 15rem 20rem 5rem $blue;
   }
   .booble_2 {
-    position: absolute;
     bottom: 0;
     right: 0;
-    width: 15rem;
     box-shadow: 15rem -15rem 20rem 5rem $blue;
   }
 
@@ -84,9 +86,12 @@
       padding: 0.7rem 1.5rem;
       border-radius: 2rem;
       font-family: $font-roboto;
-      font-size: 16px;
+      font-size: 1rem;
       background-color: $white;
       color: $black;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 
       &:hover {
         background-color: $black;
