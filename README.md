@@ -28,8 +28,20 @@ This is my portfolio as a Frontend Developer, built to showcase selected project
 
 The project uses:
 
-- [`react-icons`](https://react-icons.github.io/react-icons/)
-- [`typewriter-effect`](https://www.npmjs.com/package/typewriter-effect)
+| Pacote                  | Versão   | Função/Descrição                                                    |
+| ----------------------- | -------- | ------------------------------------------------------------------- |
+| `@emotion/react`        | ^11.14.0 | Biblioteca para estilos com CSS-in-JS                               |
+| `@phosphor-icons/react` | ^2.1.10  | Ícones vetoriais reativos                                           |
+| `axios`                 | ^1.8.4   | Cliente HTTP para requisições                                       |
+| `dayjs`                 | ^1.11.13 | Manipulação de datas leve                                           |
+| `npm`                   | ^11.4.2  | Gerenciador de pacotes (geralmente desnecessário em `dependencies`) |
+| `react`                 | ^18.3.1  | Biblioteca principal React                                          |
+| `react-animated-cursor` | ^2.11.2  | Efeito de cursor animado                                            |
+| `react-awesome-reveal`  | ^4.3.1   | Animações usando `react-awesome-reveal`                             |
+| `react-dom`             | ^18.3.1  | Dom renderer para React                                             |
+| `react-icons`           | ^5.2.1   | Ícones populares como FontAwesome, Feather, etc                     |
+| `typewriter-effect`     | ^2.21.0  | Efeito de digitação animada                                         |
+
 
 ### 📥 Clone the repository
 
