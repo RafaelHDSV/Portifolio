@@ -3,6 +3,8 @@ main {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  height: 100%;
+  padding: 1rem;
 
   @mixin white-gradient {
     background: linear-gradient(
@@ -48,7 +50,7 @@ main {
     .slideTrack {
       display: flex;
       animation: scroll $animationSpeed linear infinite;
-      width: fit-content;
+      width: calc(#{$slideSize} * 24); // 24 ícones (12 duplicados)
     }
 
     .slide {
@@ -70,15 +72,12 @@ main {
     }
   }
 
-  // Keyframes para o scroll
   @keyframes scroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(
-        calc(-#{$slideSize} * 6)
-      ); // ajuste para metade do total
+      transform: translateX(calc(-#{$slideSize} * 12));
     }
   }
 }
