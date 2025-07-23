@@ -1,6 +1,16 @@
-import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { LanguagesData } from '../../constants/LanguagesData'
+import {
+  FaBootstrap,
+  FaCss3Alt,
+  FaGitAlt,
+  FaGithub,
+  FaHtml5,
+  FaPython,
+  FaReact,
+  FaSass
+} from 'react-icons/fa'
+import { IoLogoJavascript } from 'react-icons/io5'
+import { SiCplusplus, SiMysql, SiTypescript } from 'react-icons/si'
 import styles from './Languages.module.scss'
 
 export default function Languages() {
@@ -12,35 +22,35 @@ export default function Languages() {
 }
 
 function LanguagesContent() {
-  const [languageActivity, setLanguageActivity] = useState(0)
+  const icons = [
+    { icon: <FaReact />, name: 'React' },
+    { icon: <SiTypescript />, name: 'TypeScript' },
+    { icon: <IoLogoJavascript />, name: 'JavaScript' },
+    { icon: <FaSass />, name: 'Sass' },
+    { icon: <FaCss3Alt />, name: 'CSS3' },
+    { icon: <FaHtml5 />, name: 'HTML5' },
+    { icon: <FaPython />, name: 'Python' },
+    { icon: <SiCplusplus />, name: 'C++' },
+    { icon: <SiMysql />, name: 'MySQL' },
+    { icon: <FaBootstrap />, name: 'Bootstrap' },
+    { icon: <FaGitAlt />, name: 'Git' },
+    { icon: <FaGithub />, name: 'GitHub' }
+  ]
+
+  const repeatedIcons = [...icons, ...icons]
 
   return (
-    <div
-      id='languages'
-      className={`mainContainer ${styles.languagesContainer}`}
-    >
-      <h2 className='titleContainer'>Linguagens e Tecnologias</h2>
-
+    <div id='languages' className='mainContainer'>
       <main>
-        <aside className={styles.info}>
-          <h3>{LanguagesData[languageActivity].name}</h3>
-
-          <article>{LanguagesData[languageActivity].description}</article>
-        </aside>
-
-        <aside className={styles.languages}>
-          <div className={styles.languagesGrid}>
-            {LanguagesData.map((language) => (
-              <span
-                key={language.id}
-                className={`${styles.languagesLogo} ${language.id === languageActivity ? styles.activity : ''}`}
-                onClick={() => setLanguageActivity(language.id)}
-              >
-                {language.logo}
-              </span>
+        <div className={styles.slider}>
+          <div className={styles.slideTrack}>
+            {repeatedIcons.map(({ icon, name }, index) => (
+              <div key={index} className={styles.slide} aria-label={name}>
+                {icon}
+              </div>
             ))}
           </div>
-        </aside>
+        </div>
       </main>
     </div>
   )
