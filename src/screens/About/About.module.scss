@@ -21,7 +21,7 @@
 
   main {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 10rem;
     gap: 5rem;
@@ -58,7 +58,7 @@
     align-items: center;
     gap: 1.5rem;
     padding: 2rem;
-    width: 100%;
+    width: 25rem;
     background: $gray-opacity;
     border-radius: 1rem;
 

@@ -14,7 +14,7 @@ export default function UserInfoItem({
   return (
     <div className={styles.item}>
       <Icon className={styles.icon} size={22} weight='light' />
-      <span>{label}</span>
+      <span>{label}:</span>
       <span>{value}</span>
     </div>
   )
