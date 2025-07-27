@@ -1,4 +1,5 @@
 import { Fade } from 'react-awesome-reveal'
+import ThemeSwitcher from '../SwitchTheme/SwitchTheme'
 import styles from './Navbar.module.scss'
 
 export default function Navbar() {
@@ -15,7 +16,7 @@ export default function Navbar() {
           <a href='#languages'>Linguagens</a>
           <a href='#projects'>Projetos</a>
           <a href='#contact'>Contato</a>
-          <a href=''>Theme</a>
+          <ThemeSwitcher />
         </Fade>
       </div>
     </nav>
