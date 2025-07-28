@@ -12,15 +12,15 @@
       max-width: 9rem;
       width: 100vw;
       gap: 0.25rem;
-      border: 1px solid $white;
+      border: 1px solid var(--text-color);
       border-radius: 1rem;
       text-wrap: nowrap;
 
       &:hover {
         max-width: 20rem;
-        background-color: $dark-gray;
-        color: $white;
-        border-color: $black;
+        background-color: var(--navbar-color);
+        color: var(--text-color);
+        border-color: var(--bg-color);
       }
     }
   }

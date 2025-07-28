@@ -19,7 +19,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background-color: $dark-gray;
+  background-color: var(--navbar-color);
   width: 0.4rem;
 }
 
@@ -34,7 +34,7 @@ body {
 
 a {
   text-decoration: none;
-  color: $white;
+  color: var(--text-color);
 }
 
 .mainContainer {

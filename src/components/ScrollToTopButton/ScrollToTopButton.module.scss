@@ -9,10 +9,10 @@
   align-items: center;
 
   padding: 0.8rem;
-  border: 1px solid $white;
+  border: 1px solid var(--text-color);
   border-radius: 50%;
-  background-color: $black;
-  color: $white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 
   outline: none;
   pointer-events: none;
@@ -23,8 +23,8 @@
     color 0.3s;
 
   &:hover {
-    background-color: $white;
-    color: $black;
+    background-color: var(--text-color);
+    color: var(--bg-color);
   }
 
   &.isVisible {

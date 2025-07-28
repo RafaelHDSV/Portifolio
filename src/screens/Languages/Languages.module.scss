@@ -18,7 +18,7 @@ main {
   $slideSize: 100px;
 
   .slider {
-    background: white;
+    background: var(--text-color);
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
     height: $slideSize;
     margin: auto;
@@ -60,13 +60,13 @@ main {
       align-items: center;
       justify-content: center;
       font-size: 64px;
-      color: #1d1d1d;
+      color: var(--navbar-color);
 
       svg {
         transition: transform 0.3s ease;
         &:hover {
           transform: scale(1.2);
-          color: #007bff; // azul vibrante
+          color: $blue; // azul vibrante
         }
       }
     }

@@ -59,7 +59,7 @@
     gap: 1.5rem;
     padding: 2rem;
     width: 25rem;
-    background: $gray-opacity;
+    background: var(--card-color);
     border-radius: 1rem;
 
     .info {
@@ -88,14 +88,14 @@
       border-radius: 2rem;
       font-family: $font-roboto;
       font-size: 1rem;
-      background-color: $white;
-      color: $black;
+      background-color: var(--text-color);
+      color: var(--bg-color);
       transition:
         background-color 0.3s ease,
         color 0.3s ease;
 
       &:hover {
-        background-color: $black;
+        background-color: var(--bg-color);
         color: $blue;
       }
     }
