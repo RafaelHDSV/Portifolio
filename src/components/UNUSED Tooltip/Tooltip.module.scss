@@ -11,8 +11,8 @@
   top: -3rem;
   left: 50%;
   transform: translateX(-50%);
-  background-color: $dark-gray;
-  color: $white;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
   text-align: center;
   width: max-content;
   visibility: hidden;
@@ -28,7 +28,7 @@
     transform: translateX(-50%);
     border-width: 0.5rem;
     border-style: solid;
-    border-color: $dark-gray transparent transparent transparent;
+    border-color: var(--navbar-color) transparent transparent transparent;
   }
 }
 
