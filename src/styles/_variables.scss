@@ -14,6 +14,11 @@ $black: #0f0f0f;
 :root {
   --primary-color: #349bd3;
 
+  --bg-color: #d4d4d4;
+  --text-color: #0f0f0f;
+  --navbar-color: #9f9f9f;
+  --card-color: #aaaaaacc;
+
   --React: #61dbfb;
   --Typescript: #358ef1;
   --Javascript: #f0db4f;
@@ -21,4 +26,11 @@ $black: #0f0f0f;
   --HTML: #e34c26;
   --API: #c7c7c7;
   --Bibliotecas: #8b8b8b;
+}
+
+.dark {
+  --bg-color: #0f0f0f;
+  --text-color: #d4d4d4;
+  --navbar-color: #161616;
+  --card-color: #242424cc;
 }
