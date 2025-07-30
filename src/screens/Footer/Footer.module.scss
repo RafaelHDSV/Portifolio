@@ -8,7 +8,7 @@
 
   .footerBottom {
     font-size: 0.85rem;
-    color: var(--navbar-color);
+    color: var(--gray);
   }
 
   .footerNav {
@@ -19,7 +19,7 @@
 
     a {
       text-decoration: none;
-      color: var(--navbar-color);
+      color: var(--gray);
       font-weight: 400;
       transition: color 0.2s ease;
 
