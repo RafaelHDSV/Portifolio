@@ -2,18 +2,20 @@
   main {
     display: flex;
     gap: 2rem;
+    padding-bottom: 2rem;
 
     a {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2.4rem 0;
       max-width: 9rem;
+      max-height: 9rem;
       width: 100vw;
+      height: 100vh;
       gap: 0.25rem;
       border: 1px solid var(--text-color);
-      border-radius: 1rem;
+      border-radius: 1.5rem;
       text-wrap: nowrap;
 
       &:hover {

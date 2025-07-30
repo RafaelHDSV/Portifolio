@@ -1,8 +1,11 @@
+import {
+  EnvelopeIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  WhatsappLogoIcon
+} from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { FaLinkedin } from 'react-icons/fa'
-import { FaSquareGithub, FaSquareWhatsapp } from 'react-icons/fa6'
-import { MdEmail } from 'react-icons/md'
 import styles from './Contact.module.scss'
 
 export default function Contact() {
@@ -14,69 +17,64 @@ export default function Contact() {
 }
 
 function ContactContent() {
-  const [isMouseOver, setIsMouseOver] = useState<string | null>(null)
-
   return (
     <div id='contact' className={`mainContainer ${styles.contact}`}>
       <h2 className='titleContainer'>Contato</h2>
 
       <main>
-        <a
-          href='mailto:rafaelvieira1720@gmail.com'
-          target='_blank'
-          onMouseOver={() => setIsMouseOver('email')}
-          onMouseLeave={() => setIsMouseOver(null)}
-        >
-          <MdEmail size='2.5rem' />
-          {isMouseOver === 'email' ? (
-            <span>rafaelvieira1720@gmail.com</span>
-          ) : (
-            <span>Email</span>
-          )}
-        </a>
+        <ContactItem
+          name='Email'
+          focusedName='rafaelvieira1720@gmail.com'
+          link='mailto:rafaelvieira1720@gmail.com'
+          Icon={EnvelopeIcon}
+        />
 
-        <a
-          href='https://wa.me/5511947100007'
-          target='_blank'
-          onMouseOver={() => setIsMouseOver('whatsapp')}
-          onMouseLeave={() => setIsMouseOver(null)}
-        >
-          <FaSquareWhatsapp size='2.5rem' />
-          {isMouseOver === 'whatsapp' ? (
-            <span>(11) 94710-0007</span>
-          ) : (
-            <span>Whatsapp</span>
-          )}
-        </a>
+        <ContactItem
+          name='Whatsapp'
+          focusedName='(11) 94710-0007'
+          link='https://wa.me/5511947100007'
+          Icon={WhatsappLogoIcon}
+        />
 
-        <a
-          href='https://github.com/RafaelHDSV'
-          target='_blank'
-          onMouseOver={() => setIsMouseOver('github')}
-          onMouseLeave={() => setIsMouseOver(null)}
-        >
-          <FaSquareGithub size='2.5rem' />
-          {isMouseOver === 'github' ? (
-            <span>/RafaelHDSV</span>
-          ) : (
-            <span>Github</span>
-          )}
-        </a>
+        <ContactItem
+          name='Github'
+          focusedName='/RafaelHDSV'
+          link='https://github.com/RafaelHDSV'
+          Icon={GithubLogoIcon}
+        />
 
-        <a
-          href='https://www.linkedin.com/in/rafael-vieira1720/'
-          target='_blank'
-          onMouseOver={() => setIsMouseOver('linkedin')}
-          onMouseLeave={() => setIsMouseOver(null)}
-        >
-          <FaLinkedin size='2.5rem' />
-          {isMouseOver === 'linkedin' ? (
-            <span>/in/rafael-vieira1720</span>
-          ) : (
-            <span>Linkedin</span>
-          )}
-        </a>
+        <ContactItem
+          name='LinkedIn'
+          focusedName='/in/rafael-vieira1720'
+          link='https://www.linkedin.com/in/rafael-vieira1720/'
+          Icon={LinkedinLogoIcon}
+        />
       </main>
     </div>
+  )
+}
+
+interface IContactItemProps {
+  name: string
+  focusedName: string
+  link: string
+  Icon: React.ElementType
+}
+
+function ContactItem({ name, focusedName, link, Icon }: IContactItemProps) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <a
+      href={link}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      target='_blank'
+      rel='noopener noreferrer'
+      aria-label={name}
+    >
+      <Icon size={42} weight='light' aria-hidden='true' />
+      <span>{isHovered ? focusedName : name}</span>
+    </a>
   )
 }
