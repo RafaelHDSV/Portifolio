@@ -4,7 +4,7 @@ import styles from './Navbar.module.scss'
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav className={styles.navbar}>
       <Fade damping={0.3}>
         <a href='/'>
           <h2>RV</h2>
