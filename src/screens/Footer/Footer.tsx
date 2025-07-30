@@ -25,8 +25,6 @@ function FooterContent() {
         <div className={styles.footerSection}>
           <p className={styles.footerTitle}>Informações</p>
           <ul className={styles.footerInfo}>
-            <li>Atualizado em: Julho de 2025</li>
-            <li>Feito com React, TypeScript e Sass</li>
             <li>
               <a
                 href='/cv-rafael-vieira.pdf'
