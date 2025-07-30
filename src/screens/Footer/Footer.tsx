@@ -8,40 +8,20 @@ export default function Footer() {
     </Fade>
   )
 }
+
 function FooterContent() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerContainer}>
-        <div className={styles.footerSection}>
-          <p className={styles.footerTitle}>Navegação</p>
-          <nav className={styles.footerNav}>
-            <a href='#about'>Sobre</a>
-            <a href='#languages'>Linguagens</a>
-            <a href='#projects'>Projetos</a>
-            <a href='#contact'>Contato</a>
-          </nav>
-        </div>
-
-        <div className={styles.footerSection}>
-          <p className={styles.footerTitle}>Informações</p>
-          <ul className={styles.footerInfo}>
-            <li>
-              <a
-                href='/cv-rafael-vieira.pdf'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                Baixar currículo
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
       <div className={styles.footerBottom}>
         <span>© {new Date().getFullYear()} Rafael Vieira</span>
-        <span>Todos os direitos reservados.</span>
       </div>
+
+      <nav className={styles.footerNav}>
+        <a href='#about'>sobre</a>
+        <a href='#languages'>linguagens</a>
+        <a href='#projects'>projetos</a>
+        <a href='#contact'>contato</a>
+      </nav>
     </footer>
   )
 }
