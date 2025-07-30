@@ -4,10 +4,10 @@
 
 This is a personal portfolio project, and only the latest version is actively maintained. Older versions are not supported.
 
-| Version     | Security Support     |
-|-------------|----------------------|
-| Latest      | ✅ Supported          |
-| Older       | ❌ Not supported      |
+| Version | Security Support |
+| ------- | ---------------- |
+| Latest  | ✅ Supported     |
+| Older   | ❌ Not supported |
 
 ## 🛡️ Reporting a Vulnerability
 

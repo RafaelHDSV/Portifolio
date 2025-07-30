@@ -27,6 +27,7 @@ To start contributing:
 
 1. **Fork** this repository
 2. **Clone** your fork to your local machine:
+
    ```bash
    git clone https://github.com/RafaelHDSV/Portifolio.git
    ```
@@ -36,6 +37,7 @@ To start contributing:
    ```bash
    npm install || yarn
    ```
+
 4. **Start the development server**:
 
    ```bash
@@ -44,25 +46,27 @@ To start contributing:
 
 ## 🔀 Submitting a Pull Request
 
-* Create a new branch:
+- Create a new branch:
 
   ```bash
   git checkout -b your-feature-name
   ```
-* Commit your changes with clear messages.
-* Push to your fork:
+
+- Commit your changes with clear messages.
+- Push to your fork:
 
   ```bash
   git push origin your-feature-name
   ```
-* Open a Pull Request with a clear description of what you’ve done.
+
+- Open a Pull Request with a clear description of what you’ve done.
 
 ## ✅ Code Guidelines
 
-* Follow the existing project structure and naming conventions.
-* Keep components modular and reusable where possible.
-* Use `TypeScript` types consistently.
-* Style components using the existing SASS structure.
+- Follow the existing project structure and naming conventions.
+- Keep components modular and reusable where possible.
+- Use `TypeScript` types consistently.
+- Style components using the existing SASS structure.
 
 ## 💬 Feedback & Issues
 
