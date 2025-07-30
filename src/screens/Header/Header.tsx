@@ -1,5 +1,5 @@
+import { ArrowDownIcon } from '@phosphor-icons/react'
 import { Fade, Slide } from 'react-awesome-reveal'
-import { FaArrowDownLong } from 'react-icons/fa6'
 import Typewriter from 'typewriter-effect'
 import styles from './Header.module.scss'
 
@@ -36,7 +36,7 @@ function HeaderContent() {
         }}
       />
 
-      <FaArrowDownLong className={styles.arrowDown} size='2rem' />
+      <ArrowDownIcon className={styles.arrowDown} size='2rem' weight='bold' />
     </div>
   )
 }

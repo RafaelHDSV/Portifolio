@@ -1,5 +1,5 @@
+import { ArrowUpIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
-import { FaArrowUp } from 'react-icons/fa'
 import styles from './ScrollToTopButton.module.scss'
 
 export default function ScrollToTopButton() {
@@ -21,7 +21,7 @@ export default function ScrollToTopButton() {
       aria-label='Scroll to top'
       type='button'
     >
-      <FaArrowUp className={styles.icon} />
+      <ArrowUpIcon className={styles.icon} weight='bold' />
     </button>
   )
 }
