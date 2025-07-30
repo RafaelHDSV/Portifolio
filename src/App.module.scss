@@ -44,7 +44,8 @@
     height: 4rem;
     border-radius: 100%;
     border: 1rem solid;
-    border-color: var(--text-color) $blue var(--text-color) var(--text-color);
+    border-color: var(--text-color) var(--primary-color) var(--text-color)
+      var(--text-color);
     animation: loadingAnimation 1s infinite linear;
   }
 }

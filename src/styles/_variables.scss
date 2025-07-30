@@ -4,15 +4,10 @@ $font-open-sans: 'Open Sans', sans-serif;
 $font-outfit: 'Outfit', sans-serif;
 $font-schoolbell: 'Schoolbell', cursive;
 
-$blue: #349bd3;
-$white: #d4d4d4;
-$gray: #827f7f;
-$gray-opacity: #242424cc;
-$dark-gray: #161616;
-$black: #0f0f0f;
-
 :root {
   --primary-color: #349bd3;
+  --gray: #827f7f;
+  --gray-opacity: #242424cc;
   --border-color: #80808033;
 
   --bg-color: #d4d4d4;

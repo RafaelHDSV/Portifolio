@@ -17,7 +17,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 50rem 10rem $blue;
+    box-shadow: 0 0 50rem 10rem var(--primary-color);
     animation: bubbleAnimation 3s infinite alternate-reverse;
   }
 
@@ -44,11 +44,11 @@
 
 @keyframes bubbleAnimation {
   0% {
-    box-shadow: 0 0 2rem 1rem $blue;
+    box-shadow: 0 0 2rem 1rem var(--primary-color);
   }
 
   100% {
-    box-shadow: 0 0 50rem 5rem $blue;
+    box-shadow: 0 0 50rem 5rem var(--primary-color);
   }
 }
 

@@ -11,12 +11,12 @@
   .booble {
     top: 0;
     left: 0;
-    box-shadow: -15rem 15rem 20rem 5rem $blue;
+    box-shadow: -15rem 15rem 20rem 5rem var(--primary-color);
   }
   .booble_2 {
     bottom: 0;
     right: 0;
-    box-shadow: 15rem -15rem 20rem 5rem $blue;
+    box-shadow: 15rem -15rem 20rem 5rem var(--primary-color);
   }
 
   main {
@@ -34,7 +34,7 @@
     width: 25rem;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba($blue, 0.3);
+    box-shadow: 0 4px 24px rgba(var(--primary-color), 0.3);
 
     img {
       width: 100%;
@@ -74,7 +74,7 @@
         gap: 0.5rem;
 
         .icon {
-          color: $blue;
+          color: var(--primary-color);
         }
 
         span:last-child {
@@ -96,7 +96,7 @@
 
       &:hover {
         background-color: var(--bg-color);
-        color: $blue;
+        color: var(--primary-color);
       }
     }
   }

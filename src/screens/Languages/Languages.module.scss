@@ -50,7 +50,7 @@ main {
     .slideTrack {
       display: flex;
       animation: scroll $animationSpeed linear infinite;
-      width: calc(#{$slideSize} * 24); // 24 ícones (12 duplicados)
+      width: calc(#{$slideSize} * 24);
     }
 
     .slide {
@@ -66,7 +66,7 @@ main {
         transition: transform 0.3s ease;
         &:hover {
           transform: scale(1.2);
-          color: $blue; // azul vibrante
+          color: var(--primary-color);
         }
       }
     }

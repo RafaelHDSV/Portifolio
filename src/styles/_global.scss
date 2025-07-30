@@ -24,12 +24,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $gray;
+  background-color: var(--gray);
   border-radius: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $blue;
+  background-color: var(--primary-color);
 }
 
 a {
@@ -43,7 +43,7 @@ a {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-bottom: 1px solid $gray-opacity;
+  border-bottom: 1px solid var(--gray-opacity);
   scroll-margin-top: 5rem;
 }
 
@@ -57,12 +57,12 @@ a {
   padding: 2rem 0;
   &:hover {
     transform: scale(1.1);
-    color: $blue;
+    color: var(--primary-color);
 
     &::after {
       content: '';
       display: block;
-      background-color: $blue;
+      background-color: var(--primary-color);
       width: 100%;
       height: 1px;
     }
@@ -71,7 +71,7 @@ a {
   &::after {
     content: '';
     display: block;
-    background-color: $blue;
+    background-color: var(--primary-color);
     width: 0%;
     height: 1px;
     transition: 700ms ease-in-out;
