@@ -23,6 +23,7 @@
 
   .optionsNav {
     display: flex;
+    align-items: center;
     gap: 3rem;
 
     &:hover a:not(:hover) {
