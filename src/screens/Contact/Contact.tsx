@@ -1,11 +1,7 @@
-import {
-  EnvelopeIcon,
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  WhatsappLogoIcon
-} from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
+import { FaGithub, FaLinkedin, FaWhatsappSquare } from 'react-icons/fa'
+import { MdEmail } from 'react-icons/md'
 import styles from './Contact.module.scss'
 
 export default function Contact() {
@@ -26,28 +22,28 @@ function ContactContent() {
           name='Email'
           focusedName='rafaelvieira1720@gmail.com'
           link='mailto:rafaelvieira1720@gmail.com'
-          Icon={EnvelopeIcon}
+          Icon={MdEmail}
         />
 
         <ContactItem
           name='Whatsapp'
           focusedName='(11) 94710-0007'
           link='https://wa.me/5511947100007'
-          Icon={WhatsappLogoIcon}
+          Icon={FaWhatsappSquare}
         />
 
         <ContactItem
           name='Github'
           focusedName='/RafaelHDSV'
           link='https://github.com/RafaelHDSV'
-          Icon={GithubLogoIcon}
+          Icon={FaGithub}
         />
 
         <ContactItem
           name='LinkedIn'
           focusedName='/in/rafael-vieira1720'
           link='https://www.linkedin.com/in/rafael-vieira1720/'
-          Icon={LinkedinLogoIcon}
+          Icon={FaLinkedin}
         />
       </main>
     </div>
