@@ -9,10 +9,11 @@ import DevelopmentScreen from './screens/DevelopmentScreen/DevelopmentScreen'
 import Footer from './screens/Footer/Footer'
 import Header from './screens/Header/Header'
 import Languages from './screens/Languages/Languages'
+import Projects from './screens/Projects/Projects'
 import './styles/main.scss'
 import { isDevelopment } from './utils/environment'
 
-export default function App() {
+export default function App () {
   const [devClickCount, setDevClickCount] = useState(0)
   const [loading, setLoading] = useState(true)
 
@@ -42,7 +43,7 @@ export default function App() {
       <Header />
       <About />
       <Languages />
-      {/* <Projects /> */}
+      <Projects />
       <Contact />
       <Footer />
 
