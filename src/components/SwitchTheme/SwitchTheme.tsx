@@ -1,5 +1,5 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './SwitchTheme.module.scss'
 
 const getInitialTheme = (): boolean => {
@@ -8,18 +8,18 @@ const getInitialTheme = (): boolean => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
-export default function ThemeSwitcher() {
+export default function ThemeSwitcher () {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(getInitialTheme)
 
-  // useEffect(() => {
-  //   if (isDarkTheme) {
-  //     document.documentElement.classList.add('dark')
-  //     localStorage.setItem('theme', 'dark')
-  //   } else {
-  //     document.documentElement.classList.remove('dark')
-  //     localStorage.setItem('theme', 'light')
-  //   }
-  // }, [isDarkTheme])
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [isDarkTheme])
 
   return (
     <button
