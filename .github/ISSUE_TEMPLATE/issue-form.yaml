@@ -1,0 +1,81 @@
+name: 🧩 Relatar um Problema
+description: Use este formulário para reportar um bug ou comportamento inesperado.
+title: "[BUG] - Descreva brevemente o problema"
+labels: ["bug", "needs triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por abrir um issue 🙌  
+        Preencha as informações abaixo com o máximo de detalhes possível.
+
+  - type: input
+    id: resumo
+    attributes:
+      label: 📝 Resumo do problema
+      description: Dê um título curto e claro para o problema.
+      placeholder: Exemplo: "Erro ao salvar formulário de cadastro"
+    validations:
+      required: true
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: 💬 Descrição detalhada
+      description: Explique o que aconteceu e o que você esperava que acontecesse.
+      placeholder: Descreva o comportamento observado e o comportamento esperado.
+    validations:
+      required: true
+
+  - type: textarea
+    id: passos
+    attributes:
+      label: 🔍 Passos para reproduzir
+      description: Liste os passos para reproduzir o problema.
+      placeholder: |
+        1. Vá para '...'
+        2. Clique em '...'
+        3. Veja o erro
+    validations:
+      required: false
+
+  - type: input
+    id: ambiente
+    attributes:
+      label: 🧠 Ambiente
+      description: Em qual ambiente o erro ocorreu?
+      placeholder: Exemplo: "Produção", "Homologação", "Local"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: ⚡ Prioridade
+      description: Qual a urgência deste problema?
+      options:
+        - Alta
+        - Média
+        - Baixa
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Confirmações
+      description: Marque o que se aplica.
+      options:
+        - label: Eu verifiquei se já existe uma issue aberta para este problema.
+          required: true
+        - label: Incluí informações suficientes para reproduzir o erro.
+          required: true
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: 📎 Informações adicionais
+      description: Adicione logs, prints de tela ou outros detalhes relevantes.
+      placeholder: Arraste imagens aqui ou cole o conteúdo relevante.
