@@ -1,0 +1,8 @@
+name: Teste simples
+description: Apenas para verificar se o formulário aparece.
+body:
+  - type: input
+    id: test
+    attributes:
+      label: Teste
+      description: Digite algo.
