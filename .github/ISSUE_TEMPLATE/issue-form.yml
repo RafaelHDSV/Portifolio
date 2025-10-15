@@ -1,7 +1,7 @@
 name: Relatar um Problema
 description: Use este formulário para reportar um bug ou comportamento inesperado.
 title: "[BUG] - Descreva brevemente o problema"
-labels: ["bug", "needs triage"]
+# labels: ["bug", "needs triage"]
 assignees: []
 
 body:
