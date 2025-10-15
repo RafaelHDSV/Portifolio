@@ -9,14 +9,14 @@ body:
         Obrigado por abrir uma issue!  
         Preencha as informações abaixo com o máximo de detalhes possível.
 
-  - type: input
-    id: resumo
-    attributes:
-      label: Resumo do problema
-      description: Dê um título curto e claro para o problema.
-      placeholder: Exemplo: "Erro ao salvar formulário de cadastro"
-    validations:
-      required: true
+  # - type: input
+  #   id: resumo
+  #   attributes:
+  #     label: Resumo do problema
+  #     description: Dê um título curto e claro para o problema.
+  #     placeholder: Exemplo: "Erro ao salvar formulário de cadastro"
+  #   validations:
+  #     required: true
 
   - type: textarea
     id: descricao
