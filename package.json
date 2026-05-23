@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "git pull && yarn && vite",
-    "build": "tsc -b && vite build",
+    "build": "yarn --cwd vieira-analytics install && yarn --cwd vieira-analytics/packages/sdk build && tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "fix": "yarn lint && tsc -b",
     "preview": "vite preview",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@phosphor-icons/react": "^2.1.10",
-    "@vieira/analytics": "file:../vieira-analytics/packages/sdk",
+    "@vieira/analytics": "file:./vieira-analytics/packages/sdk",
     "axios": "^1.12.0",
     "dayjs": "^1.11.13",
     "npm": "^11.4.2",

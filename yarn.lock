@@ -1127,7 +1127,7 @@
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.1.tgz"
   integrity sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA==
 
-"@vieira/analytics@file:../vieira-analytics/packages/sdk":
+"@vieira/analytics@file:./vieira-analytics/packages/sdk":
   version "0.1.0"
 
 "@vitejs/plugin-react@^4.3.1":

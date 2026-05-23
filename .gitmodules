@@ -1,0 +1,3 @@
+[submodule "vieira-analytics"]
+	path = vieira-analytics
+	url = https://github.com/RafaelHDSV/PERSONAL-Vieira-Analytics.git
