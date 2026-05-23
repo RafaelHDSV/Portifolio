@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
     <VieiraAnalytics
       projectKey='portifolio'
-      endpoint='http://localhost:3693/v1'
+      endpoint='https://rafaelhdsv.vercel.app/'
     />
   </React.StrictMode>
 )
