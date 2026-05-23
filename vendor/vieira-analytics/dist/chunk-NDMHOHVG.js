@@ -163,7 +163,7 @@ function extractUtm(url) {
 }
 
 // src/constants.ts
-var ANALYTICS_API_BASE = "https://vieira-analytics-api.onrender.com/v1";
+var ANALYTICS_API_BASE = "https://personal-vieira-analytics.onrender.com/v1";
 
 // src/transport.ts
 function isCrossOrigin(url) {
