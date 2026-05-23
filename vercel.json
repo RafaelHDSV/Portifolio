@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "rm -rf node_modules/@vieira && yarn install --frozen-lockfile",
+  "installCommand": "yarn install --frozen-lockfile --force",
   "buildCommand": "yarn build"
 }
