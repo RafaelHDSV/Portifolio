@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "git submodule update --init --recursive && yarn install",
+  "installCommand": "yarn install",
   "buildCommand": "yarn build"
 }

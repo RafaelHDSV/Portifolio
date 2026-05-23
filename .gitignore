@@ -13,6 +13,7 @@ bower_components/
 
 # Build output
 dist/
+!vendor/vieira-analytics/dist/
 dist-ssr/
 .out/
 .next/
