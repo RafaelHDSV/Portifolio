@@ -1,5 +1,3 @@
-Seguindo a 
-
 - Pode alterar a logo 
 - Altere o switch de theme para de adequar mais ao design system do projeto, mais parecido com componente de alteração de linguagem.
 - Não necessariamente precisa utilizar o background quadriculado que tinha pensado anteriormente, mas quero algo visualmente mais atrativo e que seja mais moderno.
