@@ -162,6 +162,13 @@ function extractUtm(url) {
   return { source, medium, campaign };
 }
 
+// src/isLocalhost.ts
+function isLocalhost() {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location.hostname;
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+}
+
 // src/constants.ts
 var ANALYTICS_API_BASE = "https://personal-vieira-analytics.onrender.com/v1";
 
@@ -202,6 +209,7 @@ function send(config, payload) {
 // src/track.ts
 function trackPageview(config) {
   if (typeof window === "undefined") return;
+  if (isLocalhost()) return;
   if (config.respectDnt !== false && typeof navigator !== "undefined" && navigator.doNotTrack === "1") {
     return;
   }
