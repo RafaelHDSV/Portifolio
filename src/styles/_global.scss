@@ -1,12 +1,11 @@
 @use './variables.scss' as *;
 
-* {
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
-  transition: 300ms all ease;
-  font-family: $font-open-sans;
 }
 
 html {
@@ -14,26 +13,55 @@ html {
 }
 
 body {
-  font-family: $font-cinzel;
-}
-
-::-webkit-scrollbar {
-  background-color: var(--navbar-color);
-  width: 0.4rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--gray);
-  border-radius: 0.5rem;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--primary-color);
+  font-family: $font-outfit;
+  font-size: var(--text-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  transition: color 300ms ease, background-color 300ms ease;
 }
 
 a {
   text-decoration: none;
-  color: var(--text-color);
+  color: inherit;
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  background-color: var(--color-surface);
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-muted);
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .mainContainer {
@@ -42,37 +70,7 @@ a {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-bottom: 1px solid var(--gray-opacity);
+  padding: var(--space-section-y) 0;
+  border-bottom: 1px solid var(--color-border);
   scroll-margin-top: 5rem;
-}
-
-.titleContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: $font-roboto;
-  font-size: 32px;
-  padding: 2rem 0;
-  &:hover {
-    transform: scale(1.1);
-    color: var(--primary-color);
-
-    &::after {
-      content: '';
-      display: block;
-      background-color: var(--primary-color);
-      width: 100%;
-      height: 1px;
-    }
-  }
-
-  &::after {
-    content: '';
-    display: block;
-    background-color: var(--primary-color);
-    width: 0%;
-    height: 1px;
-    transition: 700ms ease-in-out;
-  }
 }

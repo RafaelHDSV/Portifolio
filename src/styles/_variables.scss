@@ -1,33 +1,93 @@
 $font-cinzel: 'Cinzel Decorative', serif;
-$font-roboto: 'Roboto Condensed', sans-serif;
-$font-open-sans: 'Open Sans', sans-serif;
 $font-outfit: 'Outfit', sans-serif;
-$font-schoolbell: 'Schoolbell', cursive;
 
 :root {
-  --primary-color: #349bd3;
-  --gray: #827f7f;
-  --gray-opacity: #242424cc;
-  --border-color: #80808033;
+  // Superficies
+  --color-bg: #f4f4f5;
+  --color-surface: #e4e4e7;
+  --color-surface-elevated: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.08);
 
-  --bg-color: #d4d4d4;
-  --text-color: #0f0f0f;
-  --navbar-color: #9f9f9f;
-  --card-color: #aaaaaacc;
+  // Texto
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #71717a;
 
+  // Marca
+  --color-accent: #0ea5e9;
+  --color-accent-hover: #0284c7;
+
+  // Estados
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+
+  // Legado (compatibilidade)
+  --primary-color: var(--color-accent);
+  --bg-color: var(--color-bg);
+  --text-color: var(--color-text-primary);
+  --navbar-color: rgba(255, 255, 255, 0.85);
+  --card-color: var(--color-surface-elevated);
+  --gray: #71717a;
+  --gray-opacity: rgba(0, 0, 0, 0.06);
+  --border-color: var(--color-border);
+
+  // Tech colors
   --React: #61dbfb;
   --Typescript: #358ef1;
   --Javascript: #f0db4f;
   --CSS: #264de4;
   --HTML: #e34c26;
-  --API: #c7c7c7;
+  --API: #71717a;
   --Bibliotecas: #8b8b8b;
+
+  // Tipografia
+  --text-display: clamp(2.5rem, 5vw, 4rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.25rem);
+  --text-body: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  --text-small: 0.875rem;
+
+  // Espacamento
+  --space-section-y: clamp(4rem, 10vh, 8rem);
+  --space-container-x: clamp(1rem, 5vw, 6rem);
+  --max-width-content: 1200px;
+  --radius-card: 12px;
+  --radius-button: 9999px;
+
+  // Hero mesh
+  --hero-mesh-1: rgba(14, 165, 233, 0.15);
+  --hero-mesh-2: rgba(56, 189, 248, 0.1);
+  --fade-edge: var(--color-bg);
 }
 
 html.dark,
 .dark {
-  --bg-color: #0f0f0f;
-  --text-color: #d4d4d4;
-  --navbar-color: #161616;
-  --card-color: #242424cc;
+  --color-bg: #0a0a0b;
+  --color-surface: #141416;
+  --color-surface-elevated: #1c1c1f;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+
+  --primary-color: var(--color-accent);
+  --bg-color: var(--color-bg);
+  --text-color: var(--color-text-primary);
+  --navbar-color: rgba(10, 10, 11, 0.85);
+  --card-color: var(--color-surface-elevated);
+  --gray-opacity: rgba(255, 255, 255, 0.06);
+  --fade-edge: var(--color-bg);
+
+  --hero-mesh-1: rgba(56, 189, 248, 0.12);
+  --hero-mesh-2: rgba(14, 165, 233, 0.08);
+}
+
+html.dark.easter-egg-accent,
+.dark.easter-egg-accent {
+  --color-accent: #a78bfa;
+  --color-accent-hover: #c4b5fd;
+  --primary-color: var(--color-accent);
 }

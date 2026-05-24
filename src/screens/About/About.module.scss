@@ -1,103 +1,143 @@
 .about {
-  position: relative;
-  padding-bottom: 3rem;
+  width: 100%;
+}
 
-  .booble,
-  .booble_2 {
-    position: absolute;
-    width: 15rem;
-  }
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  width: 100%;
 
-  .booble {
-    top: 0;
-    left: 0;
-    box-shadow: -15rem 15rem 20rem 5rem var(--primary-color);
+  @media (min-width: 768px) {
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
   }
-  .booble_2 {
-    bottom: 0;
-    right: 0;
-    box-shadow: 15rem -15rem 20rem 5rem var(--primary-color);
-  }
+}
 
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10rem;
-    gap: 5rem;
-  }
+.avatar {
+  display: flex;
+  justify-content: center;
 
-  .avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25rem;
+  img {
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(var(--primary-color), 0.3);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 50%;
-      transition:
-        transform 0.3s ease,
-        border-radius 0.3s ease;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
+}
 
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 2rem;
-    width: fit-content;
-    background: var(--card-color);
-    border-radius: 1rem;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
+.bio {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
 
-      .item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 
-        .icon {
-          color: var(--primary-color);
-        }
+  span {
+    padding: 0.375rem 0.875rem;
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: var(--color-accent);
+    background-color: rgba(56, 189, 248, 0.1);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-button);
+  }
+}
 
-        span:last-child {
-          font-weight: bold;
-        }
-      }
-    }
+.info {
+  display: grid;
+  gap: 0.75rem;
+}
 
-    .btnCv {
-      padding: 0.7rem 1.5rem;
-      border-radius: 2rem;
-      font-family: $font-roboto;
-      font-size: 1rem;
-      background-color: var(--text-color);
-      color: var(--bg-color);
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
 
-      &:hover {
-        background-color: var(--bg-color);
-        color: var(--primary-color);
-      }
-    }
+.skeleton {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 180px 1fr;
+  }
+}
+
+.skeletonAvatar,
+.skeletonLine {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-surface-elevated) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-card);
+}
+
+.skeletonAvatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-inline: auto;
+
+  @media (min-width: 768px) {
+    margin-inline: 0;
+  }
+}
+
+.skeletonLines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeletonLine {
+  height: 1rem;
+
+  &:nth-child(1) {
+    width: 60%;
+  }
+  &:nth-child(2) {
+    width: 90%;
+  }
+  &:nth-child(3) {
+    width: 75%;
+  }
+  &:nth-child(4) {
+    width: 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonAvatar,
+  .skeletonLine {
+    animation: none;
   }
 }

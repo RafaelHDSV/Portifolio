@@ -5,59 +5,129 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  background: url('../../assets/background.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 70%;
+  min-height: 100vh;
+  padding: 6rem var(--space-container-x) 4rem;
+  overflow: hidden;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 40%, var(--hero-mesh-1), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, var(--hero-mesh-2), transparent),
+      var(--color-bg);
+    z-index: 0;
+    animation: meshShift 12s ease-in-out infinite alternate;
+  }
 
   &::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 50rem 10rem var(--primary-color);
-    animation: bubbleAnimation 3s infinite alternate-reverse;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
   }
+}
 
-  h1 {
-    font-family: $font-cinzel;
-    font-size: 52px;
+.spaceMode::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, var(--hero-mesh-1), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 60%, var(--hero-mesh-2), transparent),
+    radial-gradient(1px 1px at 10% 20%, white, transparent),
+    radial-gradient(1px 1px at 30% 70%, white, transparent),
+    radial-gradient(1px 1px at 70% 30%, white, transparent),
+    radial-gradient(1px 1px at 90% 80%, white, transparent),
+    var(--color-bg);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 42rem;
+}
+
+.name {
+  font-family: $font-cinzel;
+  font-size: var(--text-display);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+
+.role {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.typewriter {
+  font-size: var(--text-body);
+  color: var(--color-accent);
+  min-height: 1.5em;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.arrowDown {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text-muted);
+  animation: arrowBounce 1.5s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+.portfolioTrigger {
+  cursor: default;
+  border-bottom: 1px dashed transparent;
+
+  &:hover {
+    border-bottom-color: var(--color-accent);
   }
+}
 
-  .typewriter {
-    font-family: $font-outfit;
-    font-size: 22px;
-    color: var(--text-color);
-    font-weight: 100;
+@keyframes meshShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(15deg);
+  }
+}
+
+@keyframes arrowBounce {
+  from {
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header::before {
+    animation: none;
   }
 
   .arrowDown {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translate(-50%);
-    animation: arrowDown 500ms ease-in-out alternate infinite;
-  }
-}
-
-@keyframes bubbleAnimation {
-  0% {
-    box-shadow: 0 0 2rem 1rem var(--primary-color);
-  }
-
-  100% {
-    box-shadow: 0 0 50rem 5rem var(--primary-color);
-  }
-}
-
-@keyframes arrowDown {
-  0% {
-    bottom: 7rem;
-  }
-
-  100% {
-    bottom: 3rem;
+    animation: none;
   }
 }

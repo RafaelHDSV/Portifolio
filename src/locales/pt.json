@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "about": "Sobre",
+    "stack": "Stack",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "cv": "CV",
+    "menu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "hero": {
+    "role": "Desenvolvedor Front-End · React · TypeScript",
+    "typewriter": [
+      "Desenvolvedor Front-End",
+      "React · TypeScript · Sass",
+      "Interfaces acessiveis e performaticas"
+    ],
+    "ctaProjects": "Ver projetos",
+    "ctaCv": "Baixar CV",
+    "ctaGithub": "GitHub",
+    "portfolioWord": "portfólio"
+  },
+  "about": {
+    "title": "Sobre mim",
+    "subtitle": "Quem sou e o que busco entregar",
+    "bio": "Desenvolvedor Front-End com foco em React e TypeScript. Atuo na construcao de interfaces modernas, acessiveis e performaticas, com experiencia em lideranca tecnica e entrega em equipe. Busco oportunidades onde qualidade de codigo e impacto no produto caminham juntos.",
+    "workingAt": "Trabalhando em",
+    "location": "Localizacao",
+    "followers": "Seguidores",
+    "following": "Seguindo",
+    "publicRepos": "Repositorios publicos",
+    "since": "Programando desde",
+    "downloadCv": "Baixar CV",
+    "viewGithub": "Ver no GitHub",
+    "highlights": {
+      "role": "Front-End Developer",
+      "focus": "React · TypeScript · UI",
+      "open": "Aberto a oportunidades"
+    }
+  },
+  "stack": {
+    "title": "Stack",
+    "subtitle": "Tecnologias que uso no dia a dia"
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Destaques e trabalhos recentes",
+    "viewDemo": "Ver demo",
+    "viewMore": "Ver mais no GitHub",
+    "showMore": "Mostrar mais",
+    "showLess": "Mostrar menos",
+    "loading": "Carregando projetos...",
+    "error": "Nao foi possivel carregar os repositorios.",
+    "retry": "Tentar novamente",
+    "filters": {
+      "all": "Todos",
+      "React": "React",
+      "Javascript": "JavaScript",
+      "API": "API"
+    },
+    "featured": "Destaques"
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Vamos conversar sobre oportunidades ou projetos",
+    "closing": "Aberto a oportunidades e projetos freelance.",
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "message": "Mensagem",
+      "send": "Enviar mensagem",
+      "sending": "Enviando...",
+      "success": "Mensagem enviada com sucesso!",
+      "successRocket": "Decolagem confirmada! Mensagem enviada.",
+      "error": "Erro ao enviar. Tente novamente ou use outro canal.",
+      "required": "Campo obrigatorio",
+      "invalidEmail": "E-mail invalido"
+    }
+  },
+  "footer": {
+    "role": "Desenvolvedor Front-End",
+    "backToTop": "Voltar ao topo"
+  },
+  "theme": {
+    "switchToLight": "Mudar para tema claro",
+    "switchToDark": "Mudar para tema escuro"
+  },
+  "easterEgg": {
+    "unlocked": "Voce desbloqueou o modo espacial!",
+    "devMessage": "Este easter egg e so diversao — o portifolio ja esta aberto.",
+    "explorer": "Explorador",
+    "counter": "{{count}}/6 descobertos"
+  },
+  "common": {
+    "loading": "Carregando..."
+  }
+}

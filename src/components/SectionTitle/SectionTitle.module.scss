@@ -1,0 +1,35 @@
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+
+  h2 {
+    font-family: $font-cinzel;
+    font-size: var(--text-h2);
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  p {
+    font-size: var(--text-body);
+    color: var(--color-text-secondary);
+    max-width: 36rem;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-accent),
+      transparent
+    );
+  }
+}

@@ -2,98 +2,134 @@ import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
   FilesIcon,
+  GithubLogoIcon,
   MapPinIcon,
   TrayArrowDownIcon,
   TrayArrowUpIcon
 } from '@phosphor-icons/react'
 import dayjs from 'dayjs'
-import { Bounce, Fade } from 'react-awesome-reveal'
+import { Fade } from 'react-awesome-reveal'
+import { useTranslation } from 'react-i18next'
+import Button from '../../components/Button/Button'
+import Container from '../../components/Container/Container'
+import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import useGetMe from '../../hooks/useGetMe'
 import styles from './About.module.scss'
 import UserInfoItem from './components/UserInfoItem'
 
-export default function About() {
+function AboutSkeleton () {
   return (
-    <Fade>
-      <AboutContent />
-    </Fade>
+    <Container className={styles.skeleton}>
+      <div className={styles.skeletonAvatar} aria-hidden='true' />
+      <div className={styles.skeletonLines}>
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+      </div>
+    </Container>
   )
 }
 
-function AboutContent() {
+function AboutContent () {
+  const { t } = useTranslation()
   const { user, loading } = useGetMe()
-  if (!user || loading) return
+
+  if (loading) return <AboutSkeleton />
+  if (!user) return null
 
   return (
-    <div id='about' className={`mainContainer ${styles.about}`}>
-      <h2 className='titleContainer'>Sobre mim</h2>
+    <Container className={styles.layout}>
+      <div className={styles.avatar}>
+        <img
+          src={user.avatar_url}
+          alt={`Avatar de ${user.name}`}
+          loading='lazy'
+          width={180}
+          height={180}
+        />
+      </div>
 
-      <div className={styles.booble}></div>
-      <div className={styles.booble_2}></div>
-
-      <main>
-        <Bounce>
-          <div className={styles.avatar}>
-            <img
-              src={user.avatar_url}
-              alt={`Avatar de ${user.name}`}
-              loading='lazy'
-            />
-          </div>
-        </Bounce>
-
-        <section>
-          <h2>
+      <div className={styles.content}>
+        <div>
+          <h3>
             {user.name} ({user.login})
-          </h2>
+          </h3>
+          <p className={styles.bio}>{t('about.bio')}</p>
+        </div>
 
-          <div className={styles.info}>
+        <div className={styles.highlights}>
+          <span>{t('about.highlights.role')}</span>
+          <span>{t('about.highlights.focus')}</span>
+          <span>{t('about.highlights.open')}</span>
+        </div>
+
+        <div className={styles.info}>
+          <UserInfoItem
+            icon={BuildingOfficeIcon}
+            label={t('about.workingAt')}
+            value={user.company}
+          />
+          <UserInfoItem
+            icon={MapPinIcon}
+            label={t('about.location')}
+            value={user.location}
+          />
+          <div className='flex space-between'>
             <UserInfoItem
-              icon={BuildingOfficeIcon}
-              label='Trabalhando em'
-              value={user.company}
+              icon={TrayArrowDownIcon}
+              label={t('about.followers')}
+              value={user.followers}
             />
             <UserInfoItem
-              icon={MapPinIcon}
-              label='Localização'
-              value={user.location}
-            />
-            <div className='flex space-between'>
-              <UserInfoItem
-                icon={TrayArrowDownIcon}
-                label='Seguidores'
-                value={user.followers}
-              />
-              <UserInfoItem
-                icon={TrayArrowUpIcon}
-                label='Seguindo'
-                value={user.following}
-              />
-            </div>
-            <UserInfoItem
-              icon={FilesIcon}
-              label='Repositórios Públicos'
-              value={user.public_repos}
-            />
-            <UserInfoItem
-              icon={CalendarDotsIcon}
-              label='Programando desde'
-              value={dayjs(user.created_at).format('DD/MM/YYYY')}
+              icon={TrayArrowUpIcon}
+              label={t('about.following')}
+              value={user.following}
             />
           </div>
+          <UserInfoItem
+            icon={FilesIcon}
+            label={t('about.publicRepos')}
+            value={user.public_repos}
+          />
+          <UserInfoItem
+            icon={CalendarDotsIcon}
+            label={t('about.since')}
+            value={dayjs(user.created_at).format('DD/MM/YYYY')}
+          />
+        </div>
 
-          <Bounce>
-            <a
-              className={styles.btnCv}
-              href='cv.pdf'
-              download='Rafael Vieira - Currículo'
-              rel='noopener noreferrer'
-            >
-              Baixar CV
-            </a>
-          </Bounce>
-        </section>
-      </main>
-    </div>
+        <div className={styles.actions}>
+          <Button href='cv.pdf' variant='primary'>
+            {t('about.downloadCv')}
+          </Button>
+          <Button
+            href={`https://github.com/${user.login}`}
+            variant='secondary'
+          >
+            <GithubLogoIcon size={18} weight='bold' />
+            {t('about.viewGithub')}
+          </Button>
+        </div>
+      </div>
+    </Container>
+  )
+}
+
+export default function About () {
+  const { t } = useTranslation()
+
+  return (
+    <Fade triggerOnce>
+      <section id='about' className={`mainContainer ${styles.about}`}>
+        <Container>
+          <SectionTitle
+            title={t('about.title')}
+            subtitle={t('about.subtitle')}
+          />
+          <AboutContent />
+        </Container>
+      </section>
+    </Fade>
   )
 }

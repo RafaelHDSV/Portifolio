@@ -3,18 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="preconnect" href="https://api.github.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+      name="description"
+      content="Portfolio de Rafael Vieira, desenvolvedor Front-End especializado em React e TypeScript."
     />
-    <link rel="icon" type="image/svg+xml" href="/icon.png" />
-    <meta name="description" content="Portfólio do Rafael Vieira, desenvolvedor Frontend." />
-    <meta property="og:title" content="Rafael Vieira | Portfólio" />
-    <meta property="og:description" content="Portfólio do Rafael Vieira, desenvolvedor Frontend." />
+    <meta property="og:title" content="Rafael Vieira | Portfolio" />
+    <meta
+      property="og:description"
+      content="Portfolio de Rafael Vieira, desenvolvedor Front-End especializado em React e TypeScript."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rafaelhdsv.vercel.app/" />
-    <meta property="og:image" content="/icon.png" />
-    <title>Rafael Vieira | Portfólio</title>
+    <meta property="og:image" content="https://rafaelhdsv.vercel.app/main.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Rafael Vieira | Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Portfolio de Rafael Vieira, desenvolvedor Front-End especializado em React e TypeScript."
+    />
+    <meta name="twitter:image" content="https://rafaelhdsv.vercel.app/main.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rafael Vieira",
+        "url": "https://rafaelhdsv.vercel.app/",
+        "jobTitle": "Front-End Developer",
+        "sameAs": [
+          "https://github.com/RafaelHDSV",
+          "https://www.linkedin.com/in/rafael-vieira1720/"
+        ]
+      }
+    </script>
+    <title>Rafael Vieira | Portfolio</title>
+    <script>
+      (function () {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root" role="main"></div>

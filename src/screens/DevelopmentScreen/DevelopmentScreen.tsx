@@ -1,57 +1,53 @@
+import { XIcon } from '@phosphor-icons/react'
+import { useTranslation } from 'react-i18next'
 import styles from './DevelopmentScreen.module.scss'
 
-interface IDevelopmentScreenProps {
-  devClickCount: number
-  setDevClickCount: (count: number | ((prev: number) => number)) => void
+interface DevelopmentScreenProps {
+  onClose: () => void
 }
 
-export default function DevelopmentScreen({
-  devClickCount,
-  setDevClickCount
-}: IDevelopmentScreenProps) {
-  const isUnlocked = devClickCount >= 29
-
-  const handleClick = () => setDevClickCount((prev) => prev + 1)
-
-  const headlineText = isUnlocked ? '' : 'Obrigado por visitar meu '
-  const clickedText = isUnlocked ? 'Parabéns!' : 'portfólio'
+export default function DevelopmentScreen ({ onClose }: DevelopmentScreenProps) {
+  const { t } = useTranslation()
 
   return (
-    <main className={styles.main}>
-      <div className={styles.errorPage}>
-        <img
-          className={styles.leftAstronaut}
-          src='./astronaut.png'
-          alt='astronaut.png'
-        />
-        <img
-          className={styles.rightAstronaut}
-          src='./astronaut2.svg'
-          alt='astronaut2.svg'
-        />
+    <div className={styles.overlay} role='dialog' aria-modal='true'>
+      <button
+        type='button'
+        className={styles.close}
+        onClick={onClose}
+        aria-label='Fechar'
+      >
+        <XIcon size={24} weight='bold' />
+      </button>
 
-        <div className={styles.errorText}>
-          <h1>
-            {headlineText}
-            <b className={styles.devClickButton} onClick={handleClick}>
-              {clickedText}
-            </b>
-          </h1>
+      <div className={styles.backdrop} onClick={onClose} aria-hidden='true' />
 
-          <p>
-            {isUnlocked
-              ? 'Você desbloqueou o modo de desenvolvimento!'
-              : 'Este projeto ainda está em desenvolvimento. Fique atento para novidades em breve!'}
-          </p>
+      <main className={styles.panel}>
+        <div className={styles.errorPage}>
+          <img
+            className={styles.leftAstronaut}
+            src='/astronaut.png'
+            alt=''
+            aria-hidden='true'
+          />
+          <img
+            className={styles.rightAstronaut}
+            src='/astronaut2.svg'
+            alt=''
+            aria-hidden='true'
+          />
+
+          <div className={styles.errorText}>
+            <h1>{t('easterEgg.unlocked')}</h1>
+            <p>{t('easterEgg.devMessage')}</p>
+          </div>
         </div>
-      </div>
 
-      <div className={styles.bg}></div>
-      <div className={styles.starField}>
-        <div className={styles.layer}></div>
-        <div className={styles.layer}></div>
-        <div className={styles.layer}></div>
-      </div>
-    </main>
+        <div className={styles.bg} />
+        <div className={styles.starField}>
+          <div className={styles.layer} />
+        </div>
+      </main>
+    </div>
   )
 }

@@ -120,7 +120,7 @@ export interface IGithubResponseRepo {
   ssh_url?: string
   clone_url?: string
   svn_url?: string
-  homepage?: null
+  homepage?: string | null
   size?: number
   stargazers_count?: number
   watchers_count?: number
@@ -140,7 +140,7 @@ export interface IGithubResponseRepo {
   allow_forking?: boolean
   is_template?: boolean
   web_commit_signoff_required?: boolean
-  topics?: []
+  topics?: string[]
   visibility?: string
   forks?: number
   open_issues?: number

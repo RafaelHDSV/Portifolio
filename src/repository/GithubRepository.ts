@@ -72,9 +72,14 @@ class GithubRepositoryClass {
       const filteredRepos = response.data.map((repo: IGithubResponseRepo) => ({
         id: repo.id,
         name: repo.name,
+        full_name: repo.full_name,
         description: repo.description,
         language: repo.language,
-        stargazers_count: repo.stargazers_count
+        stargazers_count: repo.stargazers_count,
+        homepage: repo.homepage,
+        html_url: repo.html_url,
+        updated_at: repo.updated_at,
+        topics: repo.topics
       }))
 
       return filteredRepos

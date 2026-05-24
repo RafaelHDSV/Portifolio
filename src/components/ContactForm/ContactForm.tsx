@@ -1,0 +1,105 @@
+import emailjs from '@emailjs/browser'
+import { FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import Button from '../Button/Button'
+import { unlockRocketEmail } from '../../hooks/useEasterEgg.helpers'
+import { useEasterEgg } from '../../hooks/useEasterEgg'
+import {
+  emailJsPublicKey,
+  emailJsServiceId,
+  emailJsTemplateId
+} from '../../utils/environment'
+import styles from './ContactForm.module.scss'
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+
+export default function ContactForm () {
+  const { t } = useTranslation()
+  const { unlock, isUnlocked } = useEasterEgg()
+  const [status, setStatus] = useState<FormStatus>('idle')
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const email = String(formData.get('email') ?? '')
+
+    if (email.toLowerCase().includes('rocket')) {
+      unlockRocketEmail(unlock)
+    }
+
+    if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
+      setStatus('error')
+      return
+    }
+
+    setStatus('sending')
+
+    try {
+      await emailjs.sendForm(
+        emailJsServiceId,
+        emailJsTemplateId,
+        form,
+        { publicKey: emailJsPublicKey }
+      )
+      setStatus('success')
+      form.reset()
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  const successMessage =
+    isUnlocked('rocket-email')
+      ? t('contact.form.successRocket')
+      : t('contact.form.success')
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <div className={styles.field}>
+        <label htmlFor='contact-name'>{t('contact.form.name')}</label>
+        <input
+          id='contact-name'
+          name='from_name'
+          type='text'
+          required
+          autoComplete='name'
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor='contact-email'>{t('contact.form.email')}</label>
+        <input
+          id='contact-email'
+          name='email'
+          type='email'
+          required
+          autoComplete='email'
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor='contact-message'>{t('contact.form.message')}</label>
+        <textarea id='contact-message' name='message' required rows={5} />
+      </div>
+
+      {status === 'success' && (
+        <p className={`${styles.feedback} ${styles.success}`} role='status'>
+          {successMessage}
+        </p>
+      )}
+
+      {status === 'error' && (
+        <p className={`${styles.feedback} ${styles.error}`} role='alert'>
+          {t('contact.form.error')}
+        </p>
+      )}
+
+      <Button type='submit' variant='primary' disabled={status === 'sending'}>
+        {status === 'sending'
+          ? t('contact.form.sending')
+          : t('contact.form.send')}
+      </Button>
+    </form>
+  )
+}

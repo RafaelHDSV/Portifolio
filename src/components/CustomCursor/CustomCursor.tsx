@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import AnimatedCursor from 'react-animated-cursor'
 import { getRGBFromCSSVariable } from '../../hooks/useCssVariableRGB'
 
-export default function CustomCursor() {
+export default function CustomCursor () {
   const [rgbColor, setRgbColor] = useState<string>()
+  const [enabled, setEnabled] = useState(false)
+
   const clickables = [
     'a',
     'button',
@@ -13,11 +15,17 @@ export default function CustomCursor() {
   ]
 
   useEffect(() => {
-    const rgb = getRGBFromCSSVariable('--primary-color')
+    const finePointer = window.matchMedia('(pointer: fine)').matches
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    setEnabled(finePointer && !reducedMotion)
+
+    const rgb = getRGBFromCSSVariable('--color-accent')
     setRgbColor(rgb)
   }, [])
 
-  if (!rgbColor) return null
+  if (!enabled || !rgbColor) return null
 
   return (
     <AnimatedCursor

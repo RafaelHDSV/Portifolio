@@ -4,7 +4,7 @@ import { IGithubResponseRepo } from '../types/IGithub'
 
 export default function useGetRepos() {
   const [repos, setRepos] = useState<IGithubResponseRepo[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {

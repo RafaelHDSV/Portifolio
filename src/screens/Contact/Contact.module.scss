@@ -1,29 +1,63 @@
 .contact {
-  main {
-    display: flex;
-    gap: 2rem;
-    padding-bottom: 2rem;
+  width: 100%;
+}
 
-    a {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      max-width: 9rem;
-      max-height: 9rem;
-      width: 100vw;
-      height: 100vh;
-      gap: 0.25rem;
-      border: 1px solid var(--text-color);
-      border-radius: 1.5rem;
-      text-wrap: nowrap;
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
-      &:hover {
-        max-width: 20rem;
-        background-color: var(--navbar-color);
-        color: var(--text-color);
-        border-color: var(--bg-color);
-      }
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.socialItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 100px;
+  padding: 1.25rem;
+  background-color: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  transition: border-color 200ms ease, transform 200ms ease;
+
+  svg {
+    color: var(--color-text-secondary);
+    transition: color 200ms ease;
+  }
+
+  span {
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  &:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+
+    svg {
+      color: var(--color-accent);
+    }
+
+    span {
+      color: var(--color-accent);
     }
   }
+}
+
+.closing {
+  margin-top: 2rem;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  text-align: center;
 }

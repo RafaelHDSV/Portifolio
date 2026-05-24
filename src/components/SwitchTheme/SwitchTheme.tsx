@@ -1,14 +1,16 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from './SwitchTheme.module.scss'
 
 const getInitialTheme = (): boolean => {
   const storedTheme = localStorage.getItem('theme')
   if (storedTheme !== null) return storedTheme === 'dark'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
+  return true
 }
 
 export default function ThemeSwitcher () {
+  const { t } = useTranslation()
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(getInitialTheme)
 
   useEffect(() => {
@@ -23,19 +25,21 @@ export default function ThemeSwitcher () {
 
   return (
     <button
-      aria-label={`Mudar para tema ${isDarkTheme ? 'claro' : 'escuro'}`}
+      aria-label={
+        isDarkTheme ? t('theme.switchToLight') : t('theme.switchToDark')
+      }
       aria-pressed={isDarkTheme}
       className={styles.switcher}
       onClick={() => setIsDarkTheme((prev) => !prev)}
-      title='Alternar tema'
+      title={isDarkTheme ? t('theme.switchToLight') : t('theme.switchToDark')}
     >
       <div className={styles.track}>
         <div className={styles.icons}>
           <span className={styles.sun}>
-            <SunIcon size={400} />
+            <SunIcon size={14} weight='bold' />
           </span>
           <span className={styles.moon}>
-            <MoonIcon size={400} />
+            <MoonIcon size={14} weight='bold' />
           </span>
         </div>
         <div
