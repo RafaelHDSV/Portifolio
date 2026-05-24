@@ -1,81 +1,24 @@
-# How to contribute
+# Contribuindo
 
-First off, thank you for considering contributing to this project!  
-This portfolio was built to showcase my skills as a Front-End Developer using modern technologies like React, TypeScript, SASS, and HTML.  
-Any suggestions, improvements or feedback are welcome to help improve code quality and user experience.
+Obrigado pelo interesse em contribuir com **portifolio**.
 
-## ✨ How You Can Contribute
+## Fluxo
 
-- 🔧 Report bugs or issues
-- ✨ Suggest improvements in design, performance or accessibility
-- 🧼 Refactor code for better readability
-- 🌐 Improve responsiveness or cross-browser compatibility
-- 📚 Fix typos or improve documentation
-
-## 🧰 Tech Stack
-
-This portfolio uses:
-
-- React
-- TypeScript
-- SASS
-- HTML
-
-## 🚀 Getting Started
-
-To start contributing:
-
-1. **Fork** this repository
-2. **Clone** your fork to your local machine:
-
+1. Abra uma issue descrevendo o problema ou a melhoria proposta.
+2. Faca um fork do repositorio e crie uma branch:
    ```bash
-   git clone https://github.com/RafaelHDSV/Portifolio.git
+   git checkout -b feat/sua-feature
    ```
+3. Implemente a mudanca seguindo os padroes do projeto.
+4. Garanta que lint, testes e build passam.
+5. Abra um Pull Request descrevendo o problema, a solucao e como testar.
 
-3. **Install dependencies**:
+## Padroes
 
-   ```bash
-   npm install || yarn
-   ```
+- Mensagens de commit objetivas em portugues ou ingles.
+- Codigo claro: prefira legibilidade a astucia.
+- Mantenha PRs pequenos quando possivel.
 
-4. **Start the development server**:
+## Codigo de conduta
 
-   ```bash
-   npm run dev || yarn dev
-   ```
-
-## 🔀 Submitting a Pull Request
-
-- Create a new branch:
-
-  ```bash
-  git checkout -b your-feature-name
-  ```
-
-- Commit your changes with clear messages.
-- Push to your fork:
-
-  ```bash
-  git push origin your-feature-name
-  ```
-
-- Open a Pull Request with a clear description of what you’ve done.
-
-## ✅ Code Guidelines
-
-- Follow the existing project structure and naming conventions.
-- Keep components modular and reusable where possible.
-- Use `TypeScript` types consistently.
-- Style components using the existing SASS structure.
-
-## 💬 Feedback & Issues
-
-If you're unsure about something or want to propose a feature/idea before coding, feel free to [open an issue](https://github.com/RafaelHDSV/Portifolio/issues) and start a discussion!
-
-## 🧾 License
-
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-Thanks again for your interest in contributing! ❤️
+Trate todos com respeito. Sem assedio, sem ataques pessoais.

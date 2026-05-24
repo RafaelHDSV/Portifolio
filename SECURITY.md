@@ -1,30 +1,21 @@
-# 🔐 Security Policy
+# Politica de seguranca
 
-## Supported Versions
+## Como reportar uma vulnerabilidade
 
-This is a personal portfolio project, and only the latest version is actively maintained. Older versions are not supported.
+Se voce encontrou uma vulnerabilidade em **portifolio**, por favor:
 
-| Version | Security Support |
-| ------- | ---------------- |
-| Latest  | ✅ Supported     |
-| Older   | ❌ Not supported |
+- **Nao** abra uma issue publica.
+- Entre em contato direto com o mantenedor via e-mail ou DM privada.
+- Inclua passos para reproduzir, impacto e, se possivel, uma sugestao de correcao.
 
-## 🛡️ Reporting a Vulnerability
+A resposta inicial ocorre em ate 7 dias uteis. Apos a correcao, voce sera creditado se desejar.
 
-If you discover a security vulnerability in this project, please follow these steps:
+## Versoes suportadas
 
-1. **Do not open a public issue.**  
-   Instead, report it via email to rafaelvieira1720@gmail.com with detailed information.
+Apenas a versao mais recente recebe correcoes de seguranca.
 
-2. Include the following:
-   - Steps to reproduce the issue
-   - Potential impact
-   - Any suggestions for a fix (if possible)
+## Boas praticas
 
-3. You can expect a response within **7 business days**.
-
-If the vulnerability is confirmed, it will be addressed promptly and transparently noted in the project changelog.
-
----
-
-> Thank you for helping keep this project secure! 🛡️
+- Nunca commite secrets (`.env`, tokens, chaves privadas).
+- Use o `.gitignore` do projeto como base.
+- Atualize dependencias regularmente.
