@@ -1,15 +1,15 @@
-import emailjs from '@emailjs/browser'
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Button from '../Button/Button'
-import { unlockRocketEmail } from '../../hooks/useEasterEgg.helpers'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import {
   emailJsPublicKey,
   emailJsServiceId,
   emailJsTemplateId
 } from '../../utils/environment'
+import Button from '../Button/Button'
 import styles from './ContactForm.module.scss'
+import emailjs from '@emailjs/browser'
+import { FormEvent } from 'react'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
@@ -17,19 +17,26 @@ interface ContactFormProps {
   onSuccess?: () => void
 }
 
+function containsRocket (value: string): boolean {
+  return value.toLowerCase().includes('rocket')
+}
+
 export default function ContactForm ({ onSuccess }: ContactFormProps) {
   const { t } = useTranslation()
-  const { unlock, isUnlocked } = useEasterEgg()
+  const { unlock } = useEasterEgg()
   const [status, setStatus] = useState<FormStatus>('idle')
+  const [rocketUnlocked, setRocketUnlocked] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
     const formData = new FormData(form)
     const email = String(formData.get('email') ?? '')
+    const message = String(formData.get('message') ?? '')
 
-    if (email.toLowerCase().includes('rocket')) {
-      unlockRocketEmail(unlock)
+    if (containsRocket(email) || containsRocket(message)) {
+      unlock('rocket-email')
+      setRocketUnlocked(true)
     }
 
     if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
@@ -54,10 +61,9 @@ export default function ContactForm ({ onSuccess }: ContactFormProps) {
     }
   }
 
-  const successMessage =
-    isUnlocked('rocket-email')
-      ? t('contact.form.successRocket')
-      : t('contact.form.success')
+  const successMessage = rocketUnlocked
+    ? t('contact.form.successRocket')
+    : t('contact.form.success')
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>

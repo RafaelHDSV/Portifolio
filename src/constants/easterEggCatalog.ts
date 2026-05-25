@@ -21,10 +21,10 @@ export const EASTER_EGG_CATALOG: EasterEggCatalogEntry[] = [
     resultKey: 'easterEgg.catalog.logo.result'
   },
   {
-    id: 'scroll-explorer',
-    nameKey: 'easterEgg.catalog.scroll.name',
-    triggerKey: 'easterEgg.catalog.scroll.trigger',
-    resultKey: 'easterEgg.catalog.scroll.result'
+    id: 'section-tour',
+    nameKey: 'easterEgg.catalog.sectionTour.name',
+    triggerKey: 'easterEgg.catalog.sectionTour.trigger',
+    resultKey: 'easterEgg.catalog.sectionTour.result'
   },
   {
     id: 'rocket-email',

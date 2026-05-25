@@ -94,7 +94,16 @@ class GithubRepositoryClass {
         username
       )
 
-      return filtered.slice(0, limit)
+      const recentSlice = filtered.slice(0, limit)
+      const recentNames = new Set(recentSlice.map((r) => r.name?.toLowerCase()))
+
+      const privateExtras = filtered.filter(
+        (r) =>
+          r.private &&
+          !recentNames.has(r.name?.toLowerCase() ?? '')
+      )
+
+      return [...recentSlice, ...privateExtras]
     } catch (err) {
       console.warn('Authenticated repos failed, falling back to public:', err)
 
@@ -108,7 +117,16 @@ class GithubRepositoryClass {
         username
       )
 
-      return filtered.slice(0, limit)
+      const recentSlice = filtered.slice(0, limit)
+      const recentNames = new Set(recentSlice.map((r) => r.name?.toLowerCase()))
+
+      const privateExtras = filtered.filter(
+        (r) =>
+          r.private &&
+          !recentNames.has(r.name?.toLowerCase() ?? '')
+      )
+
+      return [...recentSlice, ...privateExtras]
     }
   }
 
@@ -205,6 +223,19 @@ class GithubRepositoryClass {
       }
     )
     return response.data
+  }
+
+  async getRepoLanguages (owner: string, repo: string): Promise<string[]> {
+    try {
+      const response = await githubApi.get<Record<string, number>>(
+        `/repos/${owner}/${repo}/languages`
+      )
+      return Object.entries(response.data)
+        .sort(([, a], [, b]) => b - a)
+        .map(([lang]) => lang)
+    } catch {
+      return []
+    }
   }
 }
 

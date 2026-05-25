@@ -107,6 +107,11 @@
   gap: 0.75rem;
 }
 
+.recruiterBtn {
+  @extend .pillToggle;
+  color: var(--color-accent);
+}
+
 .mobileControls {
   display: none;
   align-items: center;

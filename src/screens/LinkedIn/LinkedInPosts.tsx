@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { FaLinkedin } from 'react-icons/fa'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
-import { useLinkedInPosts } from '../../hooks/useLinkedInPosts'
+import { useLinkedInContext } from '../../context/useLinkedInContext'
 import styles from './LinkedInPosts.module.scss'
 
 export default function LinkedInPosts () {
   const { t, i18n } = useTranslation()
-  const { posts, loading } = useLinkedInPosts()
+  const { posts, loading, hasPosts } = useLinkedInContext()
 
-  if (!loading && posts.length === 0) return null
+  if (!loading && !hasPosts) return null
 
   const dateLocale = i18n.language.startsWith('pt') ? 'pt-br' : 'en'
 

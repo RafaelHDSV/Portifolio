@@ -47,6 +47,20 @@
     var(--color-bg);
 }
 
+.fxLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, color-mix(in srgb, var(--color-accent) 40%, transparent) 1px, transparent 1px),
+    radial-gradient(circle, color-mix(in srgb, var(--color-accent) 25%, transparent) 1.5px, transparent 1.5px);
+  background-size: 48px 48px, 96px 96px;
+  background-position: 0 0, 24px 24px;
+  opacity: 0.5;
+  animation: driftDots 20s linear infinite;
+}
+
 .content {
   position: relative;
   z-index: 1;
@@ -113,12 +127,25 @@
   }
 }
 
+@keyframes driftDots {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-48px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .header::before {
     animation: none;
   }
 
   .arrowDown {
+    animation: none;
+  }
+
+  .fxLayer {
     animation: none;
   }
 }

@@ -14,15 +14,31 @@ export default function CustomCursor () {
     '.cursor-hover'
   ]
 
+  const refreshAccent = () => {
+    const rgb = getRGBFromCSSVariable('--color-accent')
+    if (rgb) setRgbColor(rgb)
+  }
+
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine)').matches
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
     setEnabled(finePointer && !reducedMotion)
+    refreshAccent()
 
-    const rgb = getRGBFromCSSVariable('--color-accent')
-    setRgbColor(rgb)
+    window.addEventListener('accent-theme-change', refreshAccent)
+
+    const observer = new MutationObserver(refreshAccent)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => {
+      window.removeEventListener('accent-theme-change', refreshAccent)
+      observer.disconnect()
+    }
   }, [])
 
   if (!enabled || !rgbColor) return null

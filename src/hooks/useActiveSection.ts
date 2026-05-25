@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
+import { useEasterEgg } from './useEasterEgg'
 
-const SECTION_IDS = ['about', 'languages', 'projects', 'linkedin', 'contact']
-
-export default function useActiveSection () {
+export function useActiveSection () {
+  const { registerSectionVisit } = useEasterEgg()
   const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
+    const SECTION_IDS = ['about', 'languages', 'projects', 'linkedin', 'contact']
 
     SECTION_IDS.forEach((id) => {
       const element = document.getElementById(id)
@@ -16,6 +17,7 @@ export default function useActiveSection () {
         ([entry]) => {
           if (entry.isIntersecting) {
             setActiveSection(id)
+            registerSectionVisit(id)
           }
         },
         { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
@@ -26,7 +28,7 @@ export default function useActiveSection () {
     })
 
     return () => observers.forEach((o) => o.disconnect())
-  }, [])
+  }, [registerSectionVisit])
 
   return activeSection
 }

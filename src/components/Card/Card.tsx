@@ -33,17 +33,8 @@ export default function Card ({ project }: CardProps) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   const isVideo = project.media?.type === 'video'
-  const showPlaceholder = project.usesPlaceholder && !isPlaying
 
   const renderMedia = () => {
-    if (showPlaceholder) {
-      return (
-        <div className={styles.imagePlaceholder} aria-hidden='true'>
-          <ImageIcon size={40} weight='duotone' />
-        </div>
-      )
-    }
-
     if (isVideo && isPlaying) {
       return (
         <video
@@ -62,7 +53,10 @@ export default function Card ({ project }: CardProps) {
         <button
           type='button'
           className={styles.videoThumb}
-          onClick={() => setIsPlaying(true)}
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsPlaying(true)
+          }}
           aria-label={t('projects.playVideo', { name: project.name })}
         >
           {project.image ? (
@@ -74,6 +68,14 @@ export default function Card ({ project }: CardProps) {
             <PlayIcon size={32} weight='fill' />
           </span>
         </button>
+      )
+    }
+
+    if (project.usesPlaceholder) {
+      return (
+        <div className={styles.imagePlaceholder} aria-hidden='true'>
+          <ImageIcon size={40} weight='duotone' />
+        </div>
       )
     }
 

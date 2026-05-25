@@ -7,20 +7,32 @@ import { MdEmail } from 'react-icons/md'
 import Container from '../../components/Container/Container'
 import Modal from '../../components/Modal/Modal'
 import { EASTER_EGG_CATALOG } from '../../constants/easterEggCatalog'
+import { useLinkedInContext } from '../../context/useLinkedInContext'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './Footer.module.scss'
 
 export default function Footer () {
   const { t } = useTranslation()
+  const { hasPosts } = useLinkedInContext()
   const {
     totalUnlocked,
     totalEggs,
     showExplorerBadge,
     explorerMessage,
-    isUnlocked
+    isUnlocked,
+    catalogRevealAll,
+    revealAllInCatalog
   } = useEasterEgg()
   const [catalogOpen, setCatalogOpen] = useState(false)
   const isDev = import.meta.env.DEV
+
+  const footerLinks = [
+    { href: '#about', key: 'about' as const },
+    { href: '#languages', key: 'stack' as const },
+    { href: '#projects', key: 'projects' as const },
+    ...(hasPosts ? [{ href: '#linkedin', key: 'linkedin' as const }] : []),
+    { href: '#contact', key: 'contact' as const }
+  ]
 
   return (
     <>
@@ -33,34 +45,25 @@ export default function Footer () {
                   &copy; {new Date().getFullYear()} Rafael Vieira &middot;{' '}
                   {t('footer.role')}
                 </span>
-                {isDev ? (
-                  <button
-                    type='button'
-                    className={styles.eggCounterBtn}
-                    onClick={() => setCatalogOpen(true)}
-                    title={t('easterEgg.catalogDevHint')}
-                  >
-                    {t('footer.eggCounter', {
-                      count: totalUnlocked,
-                      total: totalEggs
-                    })}
-                  </button>
-                ) : (
-                  <span className={styles.eggCounter}>
-                    {t('footer.eggCounter', {
-                      count: totalUnlocked,
-                      total: totalEggs
-                    })}
-                  </span>
-                )}
+                <button
+                  type='button'
+                  className={styles.eggCounterBtn}
+                  onClick={() => setCatalogOpen(true)}
+                  title={t('easterEgg.catalogOpenHint')}
+                >
+                  {t('footer.eggCounter', {
+                    count: totalUnlocked,
+                    total: totalEggs
+                  })}
+                </button>
               </div>
 
               <nav className={styles.footerNav} aria-label='Footer'>
-                <a href='#about'>{t('nav.about')}</a>
-                <a href='#languages'>{t('nav.stack')}</a>
-                <a href='#projects'>{t('nav.projects')}</a>
-                <a href='#linkedin'>{t('nav.linkedin')}</a>
-                <a href='#contact'>{t('nav.contact')}</a>
+                {footerLinks.map(({ href, key }) => (
+                  <a key={key} href={href}>
+                    {t(`nav.${key}`)}
+                  </a>
+                ))}
               </nav>
 
               <div className={styles.social}>
@@ -104,41 +107,51 @@ export default function Footer () {
         </div>
       )}
 
-      {isDev && (
-        <Modal
-          isOpen={catalogOpen}
-          onClose={() => setCatalogOpen(false)}
-          title={t('easterEgg.catalogTitle')}
-        >
-          <div className={styles.catalog}>
-            <p className={styles.catalogHint}>{t('easterEgg.catalogDevHint')}</p>
-            <table className={styles.catalogTable}>
-              <thead>
-                <tr>
-                  <th>{t('easterEgg.catalogColName')}</th>
-                  <th>{t('easterEgg.catalogColTrigger')}</th>
-                  <th>{t('easterEgg.catalogColResult')}</th>
-                  <th>{t('easterEgg.catalogColStatus')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {EASTER_EGG_CATALOG.map((egg) => (
-                  <tr key={egg.id}>
-                    <td>{t(egg.nameKey)}</td>
-                    <td>{t(egg.triggerKey)}</td>
-                    <td>{t(egg.resultKey)}</td>
-                    <td>
-                      {isUnlocked(egg.id)
-                        ? t('easterEgg.catalogUnlocked')
-                        : t('easterEgg.catalogLocked')}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <Modal
+        isOpen={catalogOpen}
+        onClose={() => setCatalogOpen(false)}
+        title={t('easterEgg.catalogTitle')}
+      >
+        <div className={styles.catalog}>
+          {isDev && (
+            <button
+              type='button'
+              className={styles.revealAllBtn}
+              onClick={revealAllInCatalog}
+            >
+              {t('easterEgg.catalogRevealAll')}
+            </button>
+          )}
+          <div className={styles.catalogGrid}>
+            {EASTER_EGG_CATALOG.map((egg) => {
+              const unlocked = isUnlocked(egg.id)
+              const visible = unlocked || catalogRevealAll
+
+              return (
+                <article
+                  key={egg.id}
+                  className={`${styles.catalogCard} ${!visible ? styles.catalogLocked : ''}`}
+                >
+                  <h3>{t(egg.nameKey)}</h3>
+                  <p className={styles.catalogTrigger}>
+                    <strong>{t('easterEgg.catalogColTrigger')}:</strong>{' '}
+                    {visible ? t(egg.triggerKey) : '???'}
+                  </p>
+                  <p>
+                    <strong>{t('easterEgg.catalogColResult')}:</strong>{' '}
+                    {visible ? t(egg.resultKey) : '???'}
+                  </p>
+                  <span className={styles.catalogStatus}>
+                    {unlocked
+                      ? t('easterEgg.catalogUnlocked')
+                      : t('easterEgg.catalogLocked')}
+                  </span>
+                </article>
+              )
+            })}
           </div>
-        </Modal>
-      )}
+        </div>
+      </Modal>
     </>
   )
 }

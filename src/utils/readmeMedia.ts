@@ -25,6 +25,11 @@ function resolveUrl (raw: string, owner: string, repo: string): string {
 }
 
 function classifyUrl (url: string): ReadmeMediaType {
+  if (url.includes('user-attachments/assets')) {
+    if (GIF_EXT.test(url)) return 'gif'
+    if (VIDEO_EXT.test(url)) return 'video'
+    return 'video'
+  }
   if (GIF_EXT.test(url)) return 'gif'
   if (VIDEO_EXT.test(url)) return 'video'
   return 'image'
@@ -39,12 +44,26 @@ function pushMedia (
 ) {
   if (!url || url.includes('shields.io') || url.includes('badge')) return
 
-  const resolved = resolveUrl(url, owner, repo)
+  let resolved = url.trim().replace(/^["']|["']$/g, '')
+
+  if (resolved.startsWith('//')) resolved = `https:${resolved}`
+
+  if (
+    !resolved.startsWith('http') &&
+    !resolved.includes('user-attachments/assets')
+  ) {
+    resolved = resolveUrl(resolved, owner, repo)
+  }
+
   const type = classifyUrl(resolved)
 
   if (list.some((m) => m.url === resolved)) return
 
-  list.push({ type, url: resolved, poster: poster ? resolveUrl(poster, owner, repo) : undefined })
+  list.push({
+    type,
+    url: resolved,
+    poster: poster ? resolveUrl(poster, owner, repo) : undefined
+  })
 }
 
 export function parseReadmeMedia (
@@ -78,6 +97,16 @@ export function parseReadmeMedia (
   const mdLinkMedia = /\[[^\]]*]\(([^)]+\.(?:mp4|webm|gif|png|jpe?g|webp)[^)]*)\)/gi
   while ((match = mdLinkMedia.exec(content)) !== null) {
     pushMedia(found, match[1], owner, repo)
+  }
+
+  const mdVideoLink = /\[[^\]]*]\((https:\/\/github\.com\/user-attachments\/assets\/[^)]+)\)/gi
+  while ((match = mdVideoLink.exec(content)) !== null) {
+    pushMedia(found, match[1], owner, repo)
+  }
+
+  const assetsUrl = /https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9-]+/gi
+  while ((match = assetsUrl.exec(content)) !== null) {
+    pushMedia(found, match[0], owner, repo)
   }
 
   if (found.length === 0) return null

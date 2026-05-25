@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EasterEggContext } from './EasterEggContext'
-import { EasterEggId, TOTAL_EGGS } from './useEasterEgg.types'
+import { EasterEggId, SECTION_TOUR_IDS, TOTAL_EGGS } from './useEasterEgg.types'
 
 const STORAGE_KEY = 'eggs-unlocked'
 
@@ -9,16 +9,19 @@ function loadUnlocked (): Set<EasterEggId> {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return new Set()
     const parsed = JSON.parse(raw) as string[]
+    const migrated = parsed.map((id) =>
+      id === 'scroll-explorer' ? 'section-tour' : id
+    )
     const valid: EasterEggId[] = [
       'konami',
       'logo-clicks',
-      'scroll-explorer',
+      'section-tour',
       'rocket-email',
       'space-mode',
       'theme-hunter',
       'arrow-hint'
     ]
-    return new Set(parsed.filter((id): id is EasterEggId => valid.includes(id as EasterEggId)))
+    return new Set(migrated.filter((id): id is EasterEggId => valid.includes(id as EasterEggId)))
   } catch {
     return new Set()
   }
@@ -45,14 +48,14 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState<Set<EasterEggId>>(loadUnlocked)
   const [showExplorerBadge, setShowExplorerBadge] = useState(false)
   const [explorerMessage, setExplorerMessage] = useState<string | null>(null)
-  const [logoClickTimer, setLogoClickTimer] = useState<number | null>(null)
-  const [wasAtBottom, setWasAtBottom] = useState(false)
+  const [catalogRevealAll, setCatalogRevealAll] = useState(false)
   const logoClicksRef = useRef(0)
+  const logoTimerRef = useRef<number | null>(null)
   const arrowClicksRef = useRef(0)
   const arrowTimerRef = useRef<number | null>(null)
-  const scrollCyclesRef = useRef(0)
   const themeTogglesRef = useRef(0)
   const themeTimerRef = useRef<number | null>(null)
+  const visitedSectionsRef = useRef<Set<string>>(new Set())
 
   const showToast = useCallback((messageKey: string, duration = 5000) => {
     setExplorerMessage(messageKey)
@@ -79,7 +82,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   )
 
   const incrementLogoClick = useCallback(() => {
-    if (logoClickTimer) window.clearTimeout(logoClickTimer)
+    if (logoTimerRef.current) window.clearTimeout(logoTimerRef.current)
     logoClicksRef.current += 1
     if (logoClicksRef.current >= 5) {
       unlock('logo-clicks')
@@ -90,11 +93,10 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       )
       logoClicksRef.current = 0
     }
-    const timer = window.setTimeout(() => {
+    logoTimerRef.current = window.setTimeout(() => {
       logoClicksRef.current = 0
     }, 2000)
-    setLogoClickTimer(timer)
-  }, [logoClickTimer, unlock])
+  }, [unlock])
 
   const incrementArrowClick = useCallback(() => {
     if (arrowTimerRef.current) window.clearTimeout(arrowTimerRef.current)
@@ -122,21 +124,23 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     }, 3000)
   }, [unlock, showToast])
 
-  const trackScrollCycle = useCallback(() => {
-    const atBottom =
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 50
-    const atTop = window.scrollY < 50
-
-    if (atBottom) setWasAtBottom(true)
-    if (atTop && wasAtBottom) {
-      scrollCyclesRef.current += 1
-      if (scrollCyclesRef.current >= 3) {
-        unlock('scroll-explorer')
-        showToast('easterEgg.explorerDesc', 6000)
-      }
-      setWasAtBottom(false)
+  const registerSectionVisit = useCallback((sectionId: string) => {
+    if (unlocked.has('section-tour')) return
+    if (!SECTION_TOUR_IDS.includes(sectionId as (typeof SECTION_TOUR_IDS)[number])) {
+      return
     }
-  }, [wasAtBottom, unlock, showToast])
+
+    visitedSectionsRef.current.add(sectionId)
+
+    if (visitedSectionsRef.current.size >= SECTION_TOUR_IDS.length) {
+      unlock('section-tour')
+      showToast('easterEgg.sectionTourDesc', 5000)
+    }
+  }, [unlock, unlocked, showToast])
+
+  const revealAllInCatalog = useCallback(() => {
+    setCatalogRevealAll(true)
+  }, [])
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('mode') === 'space') {
@@ -158,8 +162,10 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
           unlock('konami')
           if (!reducedMotion) {
             document.documentElement.classList.add('easter-egg-accent')
+            window.dispatchEvent(new CustomEvent('accent-theme-change'))
             window.setTimeout(() => {
               document.documentElement.classList.remove('easter-egg-accent')
+              window.dispatchEvent(new CustomEvent('accent-theme-change'))
             }, 30000)
           }
           konamiIndex = 0
@@ -173,11 +179,6 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [unlock])
 
-  useEffect(() => {
-    window.addEventListener('scroll', trackScrollCycle, { passive: true })
-    return () => window.removeEventListener('scroll', trackScrollCycle)
-  }, [trackScrollCycle])
-
   const value = useMemo(
     () => ({
       unlocked,
@@ -187,9 +188,12 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       totalEggs: TOTAL_EGGS,
       showExplorerBadge,
       explorerMessage,
+      catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
-      registerThemeToggle
+      registerThemeToggle,
+      registerSectionVisit,
+      revealAllInCatalog
     }),
     [
       unlocked,
@@ -197,9 +201,12 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       isUnlocked,
       showExplorerBadge,
       explorerMessage,
+      catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
-      registerThemeToggle
+      registerThemeToggle,
+      registerSectionVisit,
+      revealAllInCatalog
     ]
   )
 

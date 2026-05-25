@@ -1,7 +1,7 @@
 {
   "nav": {
     "about": "Sobre",
-    "stack": "Pilha tecnica",
+    "stack": "Stack",
     "projects": "Projetos",
     "linkedin": "LinkedIn",
     "contact": "Contato",
@@ -21,12 +21,12 @@
   "about": {
     "title": "Sobre mim",
     "subtitle": "Quem sou e o que entrego",
-    "bio": "Desenvolvedor Full-Stack com foco em React, TypeScript e Node.js. Construo produtos completos — da interface ao back-end — com atencao a qualidade, acessibilidade e entrega em equipe.",
+    "bio": "Desenvolvedor Full-Stack com foco em React, TypeScript e Node.js. Construo produtos completos — da interface ao back-end — com atenção a qualidade, acessibilidade e entrega em equipe.",
     "workingAt": "Trabalhando em",
-    "location": "Localizacao",
+    "location": "Localização",
     "followers": "Seguidores",
     "following": "Seguindo",
-    "publicRepos": "Repositorios publicos",
+    "publicRepos": "Repositórios públicos",
     "since": "Programando desde",
     "downloadCv": "Baixar CV",
     "viewGithub": "Ver no GitHub",
@@ -36,7 +36,7 @@
     }
   },
   "stack": {
-    "title": "Pilha tecnica",
+    "title": "Stack",
     "subtitle": "Tecnologias que uso no dia a dia"
   },
   "projects": {
@@ -45,11 +45,11 @@
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
-    "error": "Nao foi possivel carregar os repositorios.",
+    "error": "Não foi possível carregar os repositórios.",
     "retry": "Tentar novamente",
     "pinned": "Pin",
     "private": "Privado",
-    "playVideo": "Reproduzir video de {{name}}",
+    "playVideo": "Reproduzir vídeo de {{name}}",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
     "filters": {
@@ -64,13 +64,13 @@
   },
   "linkedin": {
     "title": "LinkedIn",
-    "subtitle": "Publicacoes recentes",
+    "subtitle": "Publicações recentes",
     "readMore": "Ler no LinkedIn",
     "viewProfile": "Ver perfil completo"
   },
   "contact": {
     "title": "Contato",
-    "subtitle": "Canais diretos ou mensagem pelo formulario",
+    "subtitle": "Canais diretos ou mensagem pelo formulário",
     "openForm": "Enviar mensagem",
     "form": {
       "title": "Enviar mensagem",
@@ -82,13 +82,24 @@
       "success": "Mensagem enviada com sucesso!",
       "successRocket": "Decolagem confirmada! Mensagem enviada.",
       "error": "Erro ao enviar. Tente novamente ou use outro canal.",
-      "required": "Campo obrigatorio",
-      "invalidEmail": "E-mail invalido"
+      "required": "Campo obrigatório",
+      "invalidEmail": "E-mail inválido"
     }
   },
   "footer": {
     "role": "Desenvolvedor Full-Stack",
     "eggCounter": "Easter egg: {{count}}/{{total}} descobertos"
+  },
+  "recruiter": {
+    "enable": "Modo recrutador",
+    "enableShort": "Recrutador",
+    "back": "Voltar à exibição normal",
+    "role": "Desenvolvedor Full-Stack",
+    "bio": "Resumo profissional para triagem rápida: React, TypeScript, Node.js e entrega full stack com foco em produto.",
+    "stackTitle": "Stack principal",
+    "projectsTitle": "Projetos em destaque",
+    "contactTitle": "Contato",
+    "downloadCv": "Baixar CV"
   },
   "theme": {
     "labelDark": "Escuro",
@@ -98,12 +109,14 @@
   },
   "easterEgg": {
     "explorer": "Explorador",
-    "explorerDesc": "Voce mapeou o portifolio de ponta a ponta!",
-    "themeHunter": "Cacador de temas",
-    "arrowHint": "Curioso, ne?",
+    "explorerDesc": "Você visitou todas as seções principais!",
+    "sectionTourDesc": "Tour completo: você passou por Sobre, Stack, Projetos e Contato!",
+    "themeHunter": "Caçador de temas",
+    "arrowHint": "Curioso, né?",
     "counter": "{{count}}/{{total}} descobertos",
-    "catalogTitle": "Catalogo de Easter eggs (dev)",
-    "catalogDevHint": "Visivel apenas em yarn dev. Clique no contador no footer para abrir.",
+    "catalogTitle": "Catálogo de Easter eggs",
+    "catalogOpenHint": "Abrir catálogo de Easter eggs",
+    "catalogRevealAll": "Revelar todos (dev)",
     "catalogColName": "Nome",
     "catalogColTrigger": "Como desbloquear",
     "catalogColResult": "Resultado",
@@ -113,22 +126,22 @@
     "catalog": {
       "konami": {
         "name": "Konami",
-        "trigger": "Sequencia setas + B + A no teclado",
-        "result": "Accent roxo por 30 segundos"
+        "trigger": "Sequência ↑↑↓↓←→←→BA no teclado",
+        "result": "Accent roxo por 30 segundos (cursor incluso)"
       },
       "logo": {
         "name": "Logo RV",
-        "trigger": "5 cliques rapidos no logo",
+        "trigger": "5 cliques rápidos no logo (sem recarregar a página)",
         "result": "Arte no console com link do Plann.er"
       },
-      "scroll": {
-        "name": "Explorador",
-        "trigger": "Ir ao fim da pagina e voltar ao topo 3 vezes",
-        "result": "Badge Explorador flutuante"
+      "sectionTour": {
+        "name": "Tour das seções",
+        "trigger": "Visitar Sobre, Stack, Projetos e Contato",
+        "result": "Toast de tour completo"
       },
       "rocket": {
         "name": "Foguete",
-        "trigger": "Enviar e-mail contendo a palavra rocket",
+        "trigger": "Enviar e-mail ou mensagem contendo a palavra rocket",
         "result": "Mensagem de sucesso especial"
       },
       "space": {
@@ -137,14 +150,14 @@
         "result": "Estrelas extras no hero"
       },
       "theme": {
-        "name": "Cacador de temas",
+        "name": "Caçador de temas",
         "trigger": "Alternar tema claro/escuro 5 vezes em 3 segundos",
-        "result": "Toast Cacador de temas"
+        "result": "Toast Caçador de temas"
       },
       "arrow": {
         "name": "Seta curiosa",
         "trigger": "Clicar 3 vezes na seta do hero",
-        "result": "Toast Curioso, ne?"
+        "result": "Toast Curioso, né?"
       }
     }
   },

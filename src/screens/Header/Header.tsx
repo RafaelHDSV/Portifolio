@@ -22,6 +22,8 @@ export default function Header () {
         id='home'
         className={`${styles.header} ${spaceMode ? styles.spaceMode : ''}`}
       >
+        <div className={styles.fxLayer} aria-hidden='true' />
+
         <div className={styles.content}>
           <h1 className={styles.name}>Rafael Vieira</h1>
 

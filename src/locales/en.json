@@ -1,7 +1,7 @@
 {
   "nav": {
     "about": "About",
-    "stack": "Tech stack",
+    "stack": "Stack",
     "projects": "Projects",
     "linkedin": "LinkedIn",
     "contact": "Contact",
@@ -36,7 +36,7 @@
     }
   },
   "stack": {
-    "title": "Tech stack",
+    "title": "Stack",
     "subtitle": "Technologies I use day to day"
   },
   "projects": {
@@ -90,6 +90,17 @@
     "role": "Full-Stack Developer",
     "eggCounter": "Easter egg: {{count}}/{{total}} discovered"
   },
+  "recruiter": {
+    "enable": "Recruiter mode",
+    "enableShort": "Recruiter",
+    "back": "Back to full view",
+    "role": "Full-Stack Developer",
+    "bio": "Professional summary for quick screening: React, TypeScript, Node.js and full stack delivery with product focus.",
+    "stackTitle": "Core stack",
+    "projectsTitle": "Featured projects",
+    "contactTitle": "Contact",
+    "downloadCv": "Download CV"
+  },
   "theme": {
     "labelDark": "Dark",
     "labelLight": "Light",
@@ -98,12 +109,14 @@
   },
   "easterEgg": {
     "explorer": "Explorer",
-    "explorerDesc": "You mapped the portfolio end to end!",
+    "explorerDesc": "You visited all main sections!",
+    "sectionTourDesc": "Full tour: About, Stack, Projects and Contact!",
     "themeHunter": "Theme hunter",
     "arrowHint": "Curious, huh?",
     "counter": "{{count}}/{{total}} discovered",
-    "catalogTitle": "Easter egg catalog (dev)",
-    "catalogDevHint": "Visible only in yarn dev. Click the footer counter to open.",
+    "catalogTitle": "Easter egg catalog",
+    "catalogOpenHint": "Open Easter egg catalog",
+    "catalogRevealAll": "Reveal all (dev)",
     "catalogColName": "Name",
     "catalogColTrigger": "How to unlock",
     "catalogColResult": "Result",
@@ -114,21 +127,21 @@
       "konami": {
         "name": "Konami",
         "trigger": "Arrow sequence + B + A on keyboard",
-        "result": "Purple accent for 30 seconds"
+        "result": "Purple accent for 30 seconds (cursor included)"
       },
       "logo": {
         "name": "RV logo",
-        "trigger": "5 quick clicks on the logo",
+        "trigger": "5 quick clicks on the logo (no page reload)",
         "result": "Console art with Plann.er link"
       },
-      "scroll": {
-        "name": "Explorer",
-        "trigger": "Scroll to bottom and back to top 3 times",
-        "result": "Floating Explorer badge"
+      "sectionTour": {
+        "name": "Section tour",
+        "trigger": "Visit About, Stack, Projects and Contact",
+        "result": "Full tour toast"
       },
       "rocket": {
         "name": "Rocket",
-        "trigger": "Send an email containing the word rocket",
+        "trigger": "Send an email or message containing the word rocket",
         "result": "Special success message"
       },
       "space": {

@@ -1,14 +1,9 @@
-- Easter egg de rocket não está funcionando
-- 5 cliques na logo também não, já que quando clico na logo ele reinicia a página
-- No easter-egg Konami, o cursor continua azul
-- Pilha técnica é ruim. Mantenha somente stacks, caso essa for a única tradução para pt-brs
-- O linkedin-setup.md não está funcionando. A tab linkedin está aparecendo na topbar. Caso não funcione a implementação, quero que mantenha oculta.
-- Pode desenvolver a analise-evolucao-v3.md. No modo recrutador deve ser um botão que o usuário poderá ativar ou não. Assim que ativado o usuário verá um botão voltar a exibição normal, etc.
-- Tem várias palavras no portifolio, sem acentuação ou incorretas. Verifique, valide e corrija as palavras do portifolio.
-- Quero que remova o easter egg explorador, ele está aparecendo muitas vezes. Adicione um easter egg em troca.
-- Quero evoluir o catálogo de Easter eggs. Quando eu clicar no contador no footer, quero que sempre abra o modal de catalogo. EU quero que quando um easter egg for desbloqueado apareça normalmente no catelogo, enquanto ainda tiver bloqueado, adicione um blur no easter egg. Em ambiente de desenvolvimento adicione um botão para liberar a visibilidade de todos os easter eggs.
-- Quero adicionar mais efeitos visuais, principalmente na primeira seção. LInhas, bolinhas, estrelas, essas coisas.
-- Dev Shortcuts usa TypeScript, PowerShell, JavaScript, porém no portifolio só existe Typescript. E isso aconteceu com outros repositórios, parece que os repositórios do github estão pegando somente a primeira linguagem do github.
-- O player do vídeo no Deprecated Finder não está funcionando. Eu clico no play e não acontece nada
-- Repo workspace possui um vídeo, mas não está aparecendo no portifolio
-- Parece que minha token do github já possui acesso a repositórios privado, porém não existem nenhum repo privado no portifolio
+- Easter egg Tour das seções não funciona. Modo espacial, não adicionada nada. Quero que tenham 7 easter eggs. E os easter eggs que são só toasts são muito simples.
+- A primeira seções está muita quadrada, quero mais animação.
+- Como destaque de projetos pro recrutador, adicione MedIT, Deprecated Finder e Dev Shortcuts
+- Nas estatisticas do sobre mim, eu adicionei somente essas 6, que achei relevante, mas pode adicionar mais, caso exista.
+- O DevShortcuts tem a linguagem Powershell no github, mas no portifolio não aparece. O TestNote é 100% C# no github, mas no portifolio mostra somente API. E a logo do sass nos projetos não está exibindo
+- O vídeo do projeto Repo Workspace está sem thumb, mas funciona. O repo deprecated finder tem thumb, mas não funciona. E o testnote não tem thumb, nem funciona.
+- Os projetos ainda não chegaram ao 6 pin + 10 mais recentes, ainda está incorreto.
+- Achei a versão do recrutador simples de mais. Incremente adicionando ao menos uma texto sobre mim curto.
+- E relacionado a seção do linekdin, eu não consegui efetuar a configuração necessária para buscar os posts do linkedin. Preciso que você revise e reformule o arquivo linkedin-setup.md para me ajudar a fazer a configuração corretamente
