@@ -1,4 +1,4 @@
-- Você decidiu exibir 73 projetos, não era isso que eu queria. Vou querer 18 projetos ao máximo. Pode remover os projetos que começam com "ESTUDO". E acho que na verdade uma ordenação melhor seria: qtd estrelas >>> qtd de código >>> última att
+- Você decidiu exibir 73 projetos, não era isso que eu queria. Vou querer 18 projetos ao máximo. Pode remover os projetos que começam com "ESTUDO". E acho que na verdade uma ordenação melhor seria: qtd estrelas >>> qtd de código (commits, alterações, linhas de código, etc) >>> última att
 - A animação da seta ficou ruim. Quero a memsa seta, simulando um foguete, percorrendo pela seção. E não altere o background enquanto a seta estiver rodando.
 - O botão de ver projetos está ficando sem background em alguns momentos
 - Deixe o botão do github mais parecido visualmente com o botão de ver demo.
