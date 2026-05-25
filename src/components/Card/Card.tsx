@@ -1,5 +1,5 @@
 import { ArrowSquareOutIcon, GithubLogoIcon, ImageIcon, PlayIcon, PushPinIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
@@ -31,18 +31,26 @@ interface CardProps {
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
   const [isPlaying, setIsPlaying] = useState(false)
+  const [videoError, setVideoError] = useState(false)
 
-  const isVideo = project.media?.type === 'video'
+  const isVideo = project.media?.type === 'video' && !videoError
+  const videoUrl = project.media?.url ?? ''
+
+  const handleVideoError = useCallback(() => {
+    setVideoError(true)
+    setIsPlaying(false)
+  }, [])
 
   const renderMedia = () => {
     if (isVideo && isPlaying) {
       return (
         <video
           className={styles.video}
-          src={project.media!.url}
+          src={videoUrl}
           controls
           autoPlay
           playsInline
+          onError={handleVideoError}
           aria-label={project.name}
         />
       )
@@ -64,10 +72,11 @@ export default function Card ({ project }: CardProps) {
           ) : (
             <video
               className={styles.videoPreview}
-              src={`${project.media!.url}#t=0.5`}
+              src={videoUrl}
               preload='metadata'
               muted
               playsInline
+              onError={handleVideoError}
               aria-hidden='true'
             />
           )}
@@ -75,6 +84,20 @@ export default function Card ({ project }: CardProps) {
             <PlayIcon size={32} weight='fill' />
           </span>
         </button>
+      )
+    }
+
+    if (videoError && videoUrl) {
+      return (
+        <a
+          className={styles.videoFallbackLink}
+          href={videoUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <PlayIcon size={32} weight='fill' />
+          <span>{t('projects.openVideo')}</span>
+        </a>
       )
     }
 

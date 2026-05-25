@@ -23,7 +23,7 @@ function containsRocket (value: string): boolean {
 
 export default function ContactForm ({ onSuccess }: ContactFormProps) {
   const { t } = useTranslation()
-  const { unlock } = useEasterEgg()
+  const { triggerRocketLaunch } = useEasterEgg()
   const [status, setStatus] = useState<FormStatus>('idle')
   const [rocketUnlocked, setRocketUnlocked] = useState(false)
 
@@ -35,7 +35,7 @@ export default function ContactForm ({ onSuccess }: ContactFormProps) {
     const message = String(formData.get('message') ?? '')
 
     if (containsRocket(email) || containsRocket(message)) {
-      unlock('rocket-email')
+      triggerRocketLaunch()
       setRocketUnlocked(true)
     }
 

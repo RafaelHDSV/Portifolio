@@ -12,6 +12,7 @@ import {
   filterProjectsMulti,
   mergeGitHubProjects
 } from '../../utils/mergeProjects'
+import { getProjectFilterLabel } from '../../utils/filterLabels'
 import styles from './Project.module.scss'
 
 function ProjectsSkeleton () {
@@ -67,7 +68,7 @@ function ProjectsContent () {
             className={`${styles.filterChip} ${selectedFilters.includes(f) ? styles.active : ''}`}
             onClick={() => toggleFilter(f)}
           >
-            {t(`projects.filters.${f}` as 'projects.filters.React')}
+            {getProjectFilterLabel(f, t)}
           </button>
         ))}
         {selectedFilters.length > 0 && (

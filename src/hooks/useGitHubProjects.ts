@@ -16,7 +16,7 @@ export default function useGitHubProjects () {
 
       const [pinnedRepos, recentRepos] = await Promise.all([
         GithubRepository.getPinnedRepos(GITHUB_USERNAME),
-        GithubRepository.getRecentRepos(GITHUB_USERNAME, 10)
+        GithubRepository.getRecentRepos(GITHUB_USERNAME, 30)
       ])
 
       setPinned(pinnedRepos)

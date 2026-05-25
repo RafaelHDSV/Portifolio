@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
 import { githubApi } from '../services/gitHub'
+import { gitHubToken } from '../utils/environment'
 import {
   IGithubResponseRepo,
   IGithubResponseUser,
@@ -21,6 +22,54 @@ function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
     topics: repo.topics,
     fork: repo.fork,
     private: repo.private
+  }
+}
+
+const PINNED_REPO_FIELDS = `
+  databaseId
+  name
+  description
+  homepageUrl
+  url
+  updatedAt
+  stargazersCount
+  isFork
+  isPrivate
+  primaryLanguage { name }
+  repositoryTopics(first: 10) {
+    nodes { topic { name } }
+  }
+`
+
+type PinnedNode = {
+  databaseId: number
+  name: string
+  description: string | null
+  homepageUrl: string | null
+  url: string
+  updatedAt: string
+  stargazersCount: number
+  isFork: boolean
+  isPrivate: boolean
+  primaryLanguage?: { name: string } | null
+  repositoryTopics?: {
+    nodes?: Array<{ topic: { name: string } }>
+  }
+}
+
+function mapPinnedNode (node: PinnedNode): IGithubResponseRepo {
+  return {
+    id: node.databaseId,
+    name: node.name,
+    description: node.description ?? undefined,
+    homepage: node.homepageUrl,
+    html_url: node.url,
+    updated_at: node.updatedAt,
+    stargazers_count: node.stargazersCount,
+    language: node.primaryLanguage?.name,
+    topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),
+    fork: node.isFork,
+    private: node.isPrivate
   }
 }
 
@@ -115,25 +164,29 @@ class GithubRepositoryClass {
   }
 
   async getPinnedRepos (username: string): Promise<IGithubResponseRepo[]> {
-    const query = `
+    const authenticated = Boolean(gitHubToken)
+
+    const viewerQuery = `
+      query {
+        viewer {
+          pinnedItems(first: 6, types: REPOSITORY) {
+            nodes {
+              ... on Repository {
+                ${PINNED_REPO_FIELDS}
+              }
+            }
+          }
+        }
+      }
+    `
+
+    const publicQuery = `
       query($login: String!) {
         user(login: $login) {
           pinnedItems(first: 6, types: REPOSITORY) {
             nodes {
               ... on Repository {
-                databaseId
-                name
-                description
-                homepageUrl
-                url
-                updatedAt
-                stargazersCount
-                isFork
-                isPrivate
-                primaryLanguage { name }
-                repositoryTopics(first: 10) {
-                  nodes { topic { name } }
-                }
+                ${PINNED_REPO_FIELDS}
               }
             }
           }
@@ -144,53 +197,30 @@ class GithubRepositoryClass {
     try {
       const response = await githubApi.post<{
         data?: {
+          viewer?: {
+            pinnedItems?: { nodes?: PinnedNode[] }
+          }
           user?: {
-            pinnedItems?: {
-              nodes?: Array<{
-                databaseId: number
-                name: string
-                description: string | null
-                homepageUrl: string | null
-                url: string
-                updatedAt: string
-                stargazersCount: number
-                isFork: boolean
-                isPrivate: boolean
-                primaryLanguage?: { name: string } | null
-                repositoryTopics?: {
-                  nodes?: Array<{ topic: { name: string } }>
-                }
-              }>
-            }
+            pinnedItems?: { nodes?: PinnedNode[] }
           }
         }
         errors?: Array<{ message: string }>
       }>('/graphql', {
-        query,
-        variables: { login: username }
+        query: authenticated ? viewerQuery : publicQuery,
+        variables: authenticated ? undefined : { login: username }
       })
 
       if (response.data?.errors?.length) {
         console.error('GraphQL pinned repos:', response.data.errors)
       }
 
-      const nodes = response.data?.data?.user?.pinnedItems?.nodes ?? []
+      const nodes = authenticated
+        ? response.data?.data?.viewer?.pinnedItems?.nodes ?? []
+        : response.data?.data?.user?.pinnedItems?.nodes ?? []
 
       const repos = nodes
         .filter((node) => !node.isFork)
-        .map((node) => ({
-          id: node.databaseId,
-          name: node.name,
-          description: node.description ?? undefined,
-          homepage: node.homepageUrl,
-          html_url: node.url,
-          updated_at: node.updatedAt,
-          stargazers_count: node.stargazersCount,
-          language: node.primaryLanguage?.name,
-          topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),
-          fork: false,
-          private: node.isPrivate
-        }))
+        .map(mapPinnedNode)
 
       return filterReposForPortfolio(repos, username)
     } catch (err) {

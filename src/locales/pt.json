@@ -51,6 +51,7 @@
     "pinned": "Pin",
     "private": "Privado",
     "playVideo": "Reproduzir vídeo de {{name}}",
+    "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
     "filters": {
@@ -60,7 +61,10 @@
       "Node": "Node.js",
       "API": "API",
       "CSS": "CSS",
-      "HTML": "HTML"
+      "HTML": "HTML",
+      "Sass": "Sass",
+      "cSharp": "C#",
+      "PowerShell": "PowerShell"
     }
   },
   "linkedin": {
@@ -138,32 +142,32 @@
       "logo": {
         "name": "Logo RV",
         "trigger": "5 cliques rápidos no logo (sem recarregar a página)",
-        "result": "Arte no console com link do Plann.er"
+        "result": "Logo brilha e chip Plann.er aparece na navbar"
       },
       "sectionTour": {
         "name": "Tour das seções",
         "trigger": "Visitar Sobre, Stack, Projetos e Contato",
-        "result": "Toast de tour completo"
+        "result": "Cada seção pulsa ao visitar; ao completar, brilho em todas"
       },
       "rocket": {
         "name": "Foguete",
         "trigger": "Enviar e-mail ou mensagem contendo a palavra rocket",
-        "result": "Mensagem de sucesso especial"
+        "result": "Animação de decolagem na seção Contato + mensagem especial"
       },
       "space": {
         "name": "Modo espacial",
         "trigger": "Abrir o site com ?mode=space na URL",
-        "result": "Nebulosa, estrelas e toast especial no hero"
+        "result": "Nebulosa e estrelas no hero (somente enquanto o parametro estiver na URL)"
       },
       "theme": {
         "name": "Caçador de temas",
         "trigger": "Alternar tema claro/escuro 5 vezes em 3 segundos",
-        "result": "Toast Caçador de temas"
+        "result": "Espectro de cores percorre a página por 5 segundos"
       },
       "arrow": {
         "name": "Seta curiosa",
         "trigger": "Clicar 3 vezes na seta do hero",
-        "result": "Toast Curioso, né?"
+        "result": "Seta gira e muda de cor"
       }
     }
   },

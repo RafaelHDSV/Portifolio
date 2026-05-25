@@ -1,12 +1,5 @@
 import { createContext } from 'react'
-import type { EasterEggToastData } from '../components/EasterEggToast/EasterEggToast'
 import { EasterEggId } from './useEasterEgg.types'
-
-export interface EasterEggToastOptions {
-  duration?: number
-  eggId?: EasterEggId
-  progress?: number
-}
 
 export interface EasterEggContextValue {
   unlocked: Set<EasterEggId>
@@ -14,14 +7,16 @@ export interface EasterEggContextValue {
   isUnlocked: (id: EasterEggId) => boolean
   totalUnlocked: number
   totalEggs: number
-  activeToast: EasterEggToastData | null
+  logoRevealActive: boolean
+  rocketLaunchActive: boolean
+  sectionTourProgress: number
   catalogRevealAll: boolean
   incrementLogoClick: () => void
   incrementArrowClick: () => void
   registerThemeToggle: () => void
   registerSectionVisit: (sectionId: string) => void
   revealAllInCatalog: () => void
-  showToast: (messageKey: string, options?: EasterEggToastOptions) => void
+  triggerRocketLaunch: () => void
 }
 
 export const EasterEggContext = createContext<EasterEggContextValue | null>(

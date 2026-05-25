@@ -44,9 +44,24 @@
   cursor: pointer;
   text-decoration: underline dotted;
   text-underline-offset: 3px;
+  position: relative;
 
   &:hover {
     color: var(--color-accent-hover);
+  }
+}
+
+.eggCounterTour {
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 3px;
+    width: var(--tour-progress, 0%);
+    background: linear-gradient(90deg, var(--color-accent), #818cf8);
+    border-radius: 999px;
+    transition: width 400ms ease;
   }
 }
 

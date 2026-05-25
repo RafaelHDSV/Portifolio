@@ -1,7 +1,10 @@
-- O mode space só precisa ativar quando tiver na url. Se eu adicionar na url, dps tirar, quero que volte ao padrão
-- Está aparecendo esses textos sem tradução: projects.filters.Sass; projects.filters.C#; projects.filters.PowerShell
-- Alguns vídeos ainda não estão funcionando nos projetos
-- Ainda não está aparecendo no portifolio, o https://github.com/RafaelHDSV/TechMoto que está pin no github
-- E temos 5 pin (faltando 1), e 5 repositórios públicos. Na verdade eu queria os 6 pins + 10 repositórios mais recentes, incluíndo privado e público.
-- Os easter eggs estão ruins. Nâo quero easters eggs que sejam somente um toast ou somente um console. Quero easter eggs mais parecidos com o konami, onde existe uma alteração visual no portifolio ou algo do tipo.
-- Devido a complexididade de adicionar uma seção de Linkedin com os posts mais recentes. Vamos desconsiderar esse desenvolvimento, pode remover/deletar todo arquivo e/ou código relacionado a isso, incluindo o linkedin-setup.md
+# Tarefa atual — v2.4 (concluida)
+
+- [x] Space mode so via URL; remover param restaura padrao
+- [x] Filtros Sass, C#, PowerShell traduzidos
+- [x] Videos com fallback e enrich via README
+- [x] Pins via GraphQL viewer (privados) + pool 30 recentes -> 10 apos dedupe
+- [x] LinkedIn removido (secao, API, docs)
+- [x] Easter eggs com efeitos visuais (nao so toast/console)
+
+**Nota:** 6 pins + 10 recentes incluindo privados exige `VITE_GITHUB_ACCESS_TOKEN` com escopo `repo` na Vercel.

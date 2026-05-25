@@ -5,12 +5,13 @@ import Typewriter from 'typewriter-effect'
 import Button from '../../components/Button/Button'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
+import { useSpaceModeFromUrl } from '../../hooks/useSpaceModeFromUrl'
 import styles from './Header.module.scss'
 
 export default function Header () {
   const { t } = useTranslation()
-  const { isUnlocked, incrementArrowClick } = useEasterEgg()
-  const spaceMode = isUnlocked('space-mode')
+  const { incrementArrowClick } = useEasterEgg()
+  const spaceMode = useSpaceModeFromUrl()
 
   const typewriterStrings = t('hero.typewriter', {
     returnObjects: true

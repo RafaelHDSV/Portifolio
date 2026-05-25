@@ -1,11 +1,11 @@
 import { BriefcaseIcon, GlobeIcon, ListIcon, XIcon } from '@phosphor-icons/react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
-import { useLinkedInContext } from '../../context/useLinkedInContext'
 import { useRecruiterMode } from '../../context/useRecruiterMode'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
+import { useSpaceModeFromUrl } from '../../hooks/useSpaceModeFromUrl'
 import { setLocale } from '../../i18n'
 import Logo from '../Logo/Logo'
 import ThemeSwitcher from '../SwitchTheme/SwitchTheme'
@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { href: '#about', key: 'about' as const, section: 'about' },
   { href: '#languages', key: 'stack' as const, section: 'languages' },
   { href: '#projects', key: 'projects' as const, section: 'projects' },
-  { href: '#linkedin', key: 'linkedin' as const, section: 'linkedin' },
   { href: '#contact', key: 'contact' as const, section: 'contact' }
 ]
 
@@ -26,18 +25,13 @@ interface NavbarProps {
 export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
   const { t, i18n } = useTranslation()
   const activeSection = useActiveSection()
-  const { incrementLogoClick } = useEasterEgg()
-  const { hasPosts } = useLinkedInContext()
+  const { incrementLogoClick, logoRevealActive } = useEasterEgg()
   const { enableRecruiterMode } = useRecruiterMode()
+  const spaceMode = useSpaceModeFromUrl()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   const locale = i18n.language.startsWith('pt') ? 'pt' : 'en'
-
-  const navLinks = useMemo(
-    () => NAV_LINKS.filter((link) => link.key !== 'linkedin' || hasPosts),
-    [hasPosts]
-  )
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -60,22 +54,33 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
 
   return (
     <nav
-      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
+      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${spaceMode ? styles.spaceNav : ''}`}
       aria-label='Navegação principal'
     >
       <a
         href='#home'
-        className={styles.logoLink}
+        className={`${styles.logoLink} ${logoRevealActive ? styles.logoSecret : ''}`}
         aria-label='Rafael Vieira - início'
         onClick={handleLogoClick}
       >
         <Logo />
       </a>
 
+      {logoRevealActive && (
+        <a
+          className={styles.secretChip}
+          href='https://github.com/RafaelHDSV/Plann.er'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Plann.er
+        </a>
+      )}
+
       <div className={styles.desktopActions}>
         {!recruiterOnly && (
           <div className={styles.links}>
-            {navLinks.map(({ href, key, section }) => (
+            {NAV_LINKS.map(({ href, key, section }) => (
               <a
                 key={key}
                 href={href}
@@ -161,7 +166,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
 
       {menuOpen && !recruiterOnly && (
         <div className={styles.mobileMenu}>
-          {navLinks.map(({ href, key, section }) => (
+          {NAV_LINKS.map(({ href, key, section }) => (
             <a
               key={key}
               href={href}

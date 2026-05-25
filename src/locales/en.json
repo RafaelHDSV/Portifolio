@@ -51,6 +51,7 @@
     "pinned": "Pin",
     "private": "Private",
     "playVideo": "Play video for {{name}}",
+    "openVideo": "Open video on GitHub",
     "noPreview": "No preview",
     "clearFilters": "Clear filters",
     "filters": {
@@ -60,7 +61,10 @@
       "Node": "Node.js",
       "API": "API",
       "CSS": "CSS",
-      "HTML": "HTML"
+      "HTML": "HTML",
+      "Sass": "Sass",
+      "cSharp": "C#",
+      "PowerShell": "PowerShell"
     }
   },
   "linkedin": {
@@ -138,32 +142,32 @@
       "logo": {
         "name": "RV logo",
         "trigger": "5 quick clicks on the logo (no page reload)",
-        "result": "Console art with Plann.er link"
+        "result": "Logo glows and Plann.er chip appears in the navbar"
       },
       "sectionTour": {
         "name": "Section tour",
         "trigger": "Visit About, Stack, Projects and Contact",
-        "result": "Full tour toast"
+        "result": "Each section pulses on visit; all glow when complete"
       },
       "rocket": {
         "name": "Rocket",
         "trigger": "Send an email or message containing the word rocket",
-        "result": "Special success message"
+        "result": "Launch animation on Contact section + special success message"
       },
       "space": {
         "name": "Space mode",
         "trigger": "Open the site with ?mode=space in the URL",
-        "result": "Nebula, stars and special toast on the hero"
+        "result": "Nebula and stars on the hero (only while the URL param is present)"
       },
       "theme": {
         "name": "Theme hunter",
         "trigger": "Toggle light/dark theme 5 times in 3 seconds",
-        "result": "Theme hunter toast"
+        "result": "Color spectrum sweeps the page for 5 seconds"
       },
       "arrow": {
         "name": "Curious arrow",
         "trigger": "Click the hero arrow 3 times",
-        "result": "Curious, huh? toast"
+        "result": "Arrow spins and changes color"
       }
     }
   },

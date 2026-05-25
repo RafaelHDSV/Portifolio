@@ -1,10 +1,18 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { EasterEggToastData } from '../components/EasterEggToast/EasterEggToast'
-import { EasterEggContext, EasterEggToastOptions } from './EasterEggContext'
+import { EasterEggContext } from './EasterEggContext'
 import { EasterEggId, SECTION_TOUR_IDS, TOTAL_EGGS } from './useEasterEgg.types'
 
 const STORAGE_KEY = 'eggs-unlocked'
 const SECTIONS_KEY = 'egg-sections-visited'
+
+const EGG_EFFECT_CLASSES: Partial<Record<EasterEggId, string>> = {
+  'logo-clicks': 'egg-logo-reveal',
+  'section-tour': 'egg-section-tour-done',
+  'theme-hunter': 'egg-theme-spectrum',
+  'arrow-hint': 'egg-arrow-curious',
+  'rocket-email': 'egg-rocket-launch',
+  konami: 'easter-egg-accent'
+}
 
 function loadUnlocked (): Set<EasterEggId> {
   try {
@@ -48,6 +56,23 @@ function saveVisitedSections (set: Set<string>) {
   sessionStorage.setItem(SECTIONS_KEY, JSON.stringify([...set]))
 }
 
+function flashSection (sectionId: string) {
+  const el = document.getElementById(sectionId)
+  if (!el) return
+  el.classList.add('egg-section-flash')
+  window.setTimeout(() => el.classList.remove('egg-section-flash'), 1800)
+}
+
+function playEggEffect (id: EasterEggId, durationMs: number) {
+  const className = EGG_EFFECT_CLASSES[id]
+  if (!className) return
+
+  document.documentElement.classList.add(className)
+  window.setTimeout(() => {
+    document.documentElement.classList.remove(className)
+  }, durationMs)
+}
+
 const KONAMI = [
   'ArrowUp',
   'ArrowUp',
@@ -63,7 +88,9 @@ const KONAMI = [
 
 export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState<Set<EasterEggId>>(loadUnlocked)
-  const [activeToast, setActiveToast] = useState<EasterEggToastData | null>(null)
+  const [logoRevealActive, setLogoRevealActive] = useState(false)
+  const [rocketLaunchActive, setRocketLaunchActive] = useState(false)
+  const [sectionTourProgress, setSectionTourProgress] = useState(0)
   const [catalogRevealAll, setCatalogRevealAll] = useState(false)
   const unlockedRef = useRef(unlocked)
   const logoClicksRef = useRef(0)
@@ -73,28 +100,15 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const themeTogglesRef = useRef(0)
   const themeTimerRef = useRef<number | null>(null)
   const visitedSectionsRef = useRef<Set<string>>(loadVisitedSections())
-  const toastTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
     unlockedRef.current = unlocked
   }, [unlocked])
 
-  const showToast = useCallback((
-    messageKey: string,
-    options: EasterEggToastOptions = {}
-  ) => {
-    const { duration = 5000, eggId, progress } = options
-
-    if (toastTimerRef.current) {
-      window.clearTimeout(toastTimerRef.current)
-    }
-
-    setActiveToast({ messageKey, eggId, progress })
-
-    toastTimerRef.current = window.setTimeout(() => {
-      setActiveToast(null)
-      toastTimerRef.current = null
-    }, duration)
+  useEffect(() => {
+    setSectionTourProgress(
+      visitedSectionsRef.current.size / SECTION_TOUR_IDS.length
+    )
   }, [])
 
   const unlock = useCallback((id: EasterEggId) => {
@@ -107,10 +121,6 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     })
   }, [])
 
-  const applySpaceMode = useCallback(() => {
-    document.documentElement.classList.add('space-mode')
-  }, [])
-
   const isUnlocked = useCallback(
     (id: EasterEggId) => unlocked.has(id),
     [unlocked]
@@ -121,11 +131,9 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     logoClicksRef.current += 1
     if (logoClicksRef.current >= 5) {
       unlock('logo-clicks')
-      console.log(
-        '%c RV Secret %c https://github.com/RafaelHDSV/Plann.er ',
-        'background:var(--color-accent);color:#0a0a0b;padding:4px 8px;border-radius:4px;font-weight:bold',
-        'color:#a1a1aa'
-      )
+      setLogoRevealActive(true)
+      playEggEffect('logo-clicks', 14000)
+      window.setTimeout(() => setLogoRevealActive(false), 14000)
       logoClicksRef.current = 0
     }
     logoTimerRef.current = window.setTimeout(() => {
@@ -138,26 +146,26 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     arrowClicksRef.current += 1
     if (arrowClicksRef.current >= 3) {
       unlock('arrow-hint')
-      showToast('easterEgg.arrowHint', { eggId: 'arrow-hint', duration: 4500 })
+      playEggEffect('arrow-hint', 4000)
       arrowClicksRef.current = 0
     }
     arrowTimerRef.current = window.setTimeout(() => {
       arrowClicksRef.current = 0
     }, 1500)
-  }, [unlock, showToast])
+  }, [unlock])
 
   const registerThemeToggle = useCallback(() => {
     if (themeTimerRef.current) window.clearTimeout(themeTimerRef.current)
     themeTogglesRef.current += 1
     if (themeTogglesRef.current >= 5) {
       unlock('theme-hunter')
-      showToast('easterEgg.themeHunter', { eggId: 'theme-hunter', duration: 4500 })
+      playEggEffect('theme-hunter', 5000)
       themeTogglesRef.current = 0
     }
     themeTimerRef.current = window.setTimeout(() => {
       themeTogglesRef.current = 0
     }, 3000)
-  }, [unlock, showToast])
+  }, [unlock])
 
   const registerSectionVisit = useCallback((sectionId: string) => {
     if (unlockedRef.current.has('section-tour')) return
@@ -169,26 +177,24 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
 
     visitedSectionsRef.current.add(sectionId)
     saveVisitedSections(visitedSectionsRef.current)
+    flashSection(sectionId)
 
     const count = visitedSectionsRef.current.size
     const progress = count / SECTION_TOUR_IDS.length
+    setSectionTourProgress(progress)
 
     if (count >= SECTION_TOUR_IDS.length) {
       unlock('section-tour')
-      showToast('easterEgg.sectionTourDesc', {
-        eggId: 'section-tour',
-        progress: 1,
-        duration: 6000
-      })
-      return
+      playEggEffect('section-tour', 6000)
     }
+  }, [unlock])
 
-    showToast('easterEgg.sectionTourProgress', {
-      eggId: 'section-tour',
-      progress,
-      duration: 2800
-    })
-  }, [unlock, showToast])
+  const triggerRocketLaunch = useCallback(() => {
+    unlock('rocket-email')
+    setRocketLaunchActive(true)
+    playEggEffect('rocket-email', 4500)
+    window.setTimeout(() => setRocketLaunchActive(false), 4500)
+  }, [unlock])
 
   const revealAllInCatalog = useCallback(() => {
     setCatalogRevealAll(true)
@@ -196,20 +202,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('mode') === 'space') {
-      unlock('space-mode')
-      applySpaceMode()
-      showToast('easterEgg.spaceModeActive', {
-        eggId: 'space-mode',
-        duration: 5500
-      })
+      if (!unlockedRef.current.has('space-mode')) {
+        unlock('space-mode')
+      }
     }
-  }, [unlock, applySpaceMode, showToast])
-
-  useEffect(() => {
-    if (unlocked.has('space-mode')) {
-      applySpaceMode()
-    }
-  }, [unlocked, applySpaceMode])
+  }, [unlock])
 
   useEffect(() => {
     let konamiIndex = 0
@@ -230,7 +227,6 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
               window.dispatchEvent(new CustomEvent('accent-theme-change'))
             }, 30000)
           }
-          showToast('easterEgg.konamiActive', { eggId: 'konami', duration: 5000 })
           konamiIndex = 0
         }
       } else {
@@ -240,13 +236,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [unlock, showToast])
-
-  useEffect(() => {
-    return () => {
-      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current)
-    }
-  }, [])
+  }, [unlock])
 
   const value = useMemo(
     () => ({
@@ -255,27 +245,31 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       isUnlocked,
       totalUnlocked: unlocked.size,
       totalEggs: TOTAL_EGGS,
-      activeToast,
+      logoRevealActive,
+      rocketLaunchActive,
+      sectionTourProgress,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
       registerSectionVisit,
       revealAllInCatalog,
-      showToast
+      triggerRocketLaunch
     }),
     [
       unlocked,
       unlock,
       isUnlocked,
-      activeToast,
+      logoRevealActive,
+      rocketLaunchActive,
+      sectionTourProgress,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
       registerSectionVisit,
       revealAllInCatalog,
-      showToast
+      triggerRocketLaunch
     ]
   )
 

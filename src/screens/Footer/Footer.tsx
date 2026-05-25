@@ -4,34 +4,30 @@ import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import Container from '../../components/Container/Container'
-import EasterEggToast from '../../components/EasterEggToast/EasterEggToast'
 import Modal from '../../components/Modal/Modal'
 import { EASTER_EGG_CATALOG } from '../../constants/easterEggCatalog'
-import { useLinkedInContext } from '../../context/useLinkedInContext'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './Footer.module.scss'
 
+const FOOTER_LINKS = [
+  { href: '#about', key: 'about' as const },
+  { href: '#languages', key: 'stack' as const },
+  { href: '#projects', key: 'projects' as const },
+  { href: '#contact', key: 'contact' as const }
+] as const
+
 export default function Footer () {
   const { t } = useTranslation()
-  const { hasPosts } = useLinkedInContext()
   const {
     totalUnlocked,
     totalEggs,
-    activeToast,
+    sectionTourProgress,
     isUnlocked,
     catalogRevealAll,
     revealAllInCatalog
   } = useEasterEgg()
   const [catalogOpen, setCatalogOpen] = useState(false)
   const isDev = import.meta.env.DEV
-
-  const footerLinks = [
-    { href: '#about', key: 'about' as const },
-    { href: '#languages', key: 'stack' as const },
-    { href: '#projects', key: 'projects' as const },
-    ...(hasPosts ? [{ href: '#linkedin', key: 'linkedin' as const }] : []),
-    { href: '#contact', key: 'contact' as const }
-  ]
 
   return (
     <>
@@ -46,9 +42,14 @@ export default function Footer () {
                 </span>
                 <button
                   type='button'
-                  className={styles.eggCounterBtn}
+                  className={`${styles.eggCounterBtn} ${sectionTourProgress > 0 && !isUnlocked('section-tour') ? styles.eggCounterTour : ''}`}
                   onClick={() => setCatalogOpen(true)}
                   title={t('easterEgg.catalogOpenHint')}
+                  style={
+                    sectionTourProgress > 0 && !isUnlocked('section-tour')
+                      ? ({ '--tour-progress': `${sectionTourProgress * 100}%` } as React.CSSProperties)
+                      : undefined
+                  }
                 >
                   {t('footer.eggCounter', {
                     count: totalUnlocked,
@@ -58,7 +59,7 @@ export default function Footer () {
               </div>
 
               <nav className={styles.footerNav} aria-label='Footer'>
-                {footerLinks.map(({ href, key }) => (
+                {FOOTER_LINKS.map(({ href, key }) => (
                   <a key={key} href={href}>
                     {t(`nav.${key}`)}
                   </a>
@@ -95,8 +96,6 @@ export default function Footer () {
           </Container>
         </footer>
       </Fade>
-
-      <EasterEggToast toast={activeToast} />
 
       <Modal
         isOpen={catalogOpen}
