@@ -6,7 +6,6 @@ import { ReadmeMedia } from './readmeMedia'
 import { filterReposForPortfolio } from './repoFilters'
 
 export const PINNED_PROJECT_LIMIT = 6
-export const RECENT_PROJECT_LIMIT = 10
 
 function githubOgImage (repoName: string): string {
   return `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${encodeURIComponent(repoName)}`
@@ -19,6 +18,18 @@ function repoGithubStats (repo: IGithubResponseRepo, repoName: string) {
     openIssues: repo.open_issues_count ?? 0,
     ogImage: githubOgImage(repoName)
   }
+}
+
+export function sortReposByStarsThenRecent (
+  a: IGithubResponseRepo,
+  b: IGithubResponseRepo
+): number {
+  const starDiff = (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
+  if (starDiff !== 0) return starDiff
+
+  const dateA = new Date(a.updated_at ?? 0).getTime()
+  const dateB = new Date(b.updated_at ?? 0).getTime()
+  return dateB - dateA
 }
 
 function mapLanguageToFilter (language?: string | null): string[] {
@@ -122,24 +133,26 @@ export function mergeGitHubProjects (
     pinnedFiltered.map((r) => r.name?.toLowerCase()).filter(Boolean)
   )
 
-  const recentFiltered = filterReposForPortfolio(recent, GITHUB_USERNAME)
-    .filter((r) => !pinnedNames.has(r.name?.toLowerCase() ?? ''))
-    .slice(0, RECENT_PROJECT_LIMIT)
+  const repoByName = new Map<string, IGithubResponseRepo>()
 
-  const ordered: IGithubResponseRepo[] = [
-    ...pinnedFiltered,
-    ...recentFiltered
-  ]
-
-  const seen = new Set<string>()
-  const cards: ProjectCardData[] = []
-
-  for (const repo of ordered) {
+  for (const repo of filterReposForPortfolio(recent, GITHUB_USERNAME)) {
     const key = repo.name?.toLowerCase() ?? ''
-    if (!key || seen.has(key)) continue
-    seen.add(key)
-    cards.push(repoToCard(repo, locale, pinnedNames.has(key)))
+    if (!key) continue
+    repoByName.set(key, repo)
   }
+
+  for (const repo of pinnedFiltered) {
+    const key = repo.name?.toLowerCase() ?? ''
+    if (!key) continue
+    repoByName.set(key, { ...repoByName.get(key), ...repo })
+  }
+
+  const sorted = [...repoByName.values()].sort(sortReposByStarsThenRecent)
+
+  const cards = sorted.map((repo) => {
+    const key = repo.name?.toLowerCase() ?? ''
+    return repoToCard(repo, locale, pinnedNames.has(key))
+  })
 
   if (cards.length === 0) {
     return projectsConfig

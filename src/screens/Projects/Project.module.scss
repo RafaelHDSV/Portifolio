@@ -22,6 +22,14 @@
   border-radius: var(--radius-card);
 }
 
+.projectCount {
+  margin: 0 0 1rem;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 .filterChip {
   min-height: 44px;
   padding: 0.5rem 1rem;

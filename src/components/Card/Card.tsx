@@ -3,7 +3,6 @@ import {
   GitForkIcon,
   GithubLogoIcon,
   ImageIcon,
-  PlayIcon,
   PushPinIcon,
   StarIcon,
   WarningCircleIcon
@@ -47,13 +46,8 @@ interface CardProps {
   project: ProjectCardData
 }
 
-function isInlineVideoBlocked (url: string): boolean {
-  return url.includes('user-attachments/assets') || url.includes('githubusercontent.com')
-}
-
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
-  const [isPlaying, setIsPlaying] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
@@ -63,19 +57,9 @@ export default function Card ({ project }: CardProps) {
   const thumbImage = project.image || project.media?.poster || ''
 
   const handleVideoError = useCallback(() => {
-    setIsPlaying(false)
     if (thumbImage) return
     setVideoError(true)
   }, [thumbImage])
-
-  const handlePlayClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (isInlineVideoBlocked(videoUrl)) {
-      window.open(videoUrl, '_blank', 'noopener,noreferrer')
-      return
-    }
-    setIsPlaying(true)
-  }
 
   const loadContributors = useCallback(async () => {
     if (contributors.length > 0 || loadingContributors || !project.repoName) return
@@ -92,38 +76,19 @@ export default function Card ({ project }: CardProps) {
   }, [contributors.length, loadingContributors, project.repoName])
 
   const renderMedia = () => {
-    if (isVideo && isPlaying && !isInlineVideoBlocked(videoUrl)) {
+    if (isVideo) {
       return (
         <video
           className={styles.video}
           src={videoUrl}
           poster={thumbImage || undefined}
-          controls
           autoPlay
+          muted
+          loop
           playsInline
           onError={handleVideoError}
           aria-label={project.name}
         />
-      )
-    }
-
-    if (isVideo) {
-      return (
-        <button
-          type='button'
-          className={styles.videoThumb}
-          onClick={handlePlayClick}
-          aria-label={t('projects.playVideo', { name: project.name })}
-        >
-          {thumbImage ? (
-            <img src={thumbImage} alt='' loading='lazy' />
-          ) : (
-            <div className={styles.videoFallback} aria-hidden='true' />
-          )}
-          <span className={styles.playOverlay}>
-            <PlayIcon size={32} weight='fill' />
-          </span>
-        </button>
       )
     }
 
@@ -135,8 +100,7 @@ export default function Card ({ project }: CardProps) {
           target='_blank'
           rel='noopener noreferrer'
         >
-          <PlayIcon size={32} weight='fill' />
-          <span>{t('projects.openVideo')}</span>
+          {t('projects.openVideo')}
         </a>
       )
     }
@@ -146,6 +110,16 @@ export default function Card ({ project }: CardProps) {
         <div className={styles.imagePlaceholder} aria-hidden='true'>
           <ImageIcon size={40} weight='duotone' />
         </div>
+      )
+    }
+
+    if (project.media?.type === 'gif') {
+      return (
+        <img
+          src={project.media.url}
+          alt={project.name}
+          loading='lazy'
+        />
       )
     }
 

@@ -5,7 +5,7 @@ import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useRecruiterMode } from '../../context/useRecruiterMode'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
-import { useSpaceModeFromUrl } from '../../hooks/useSpaceModeFromUrl'
+import { useVieiraModeFromUrl } from '../../hooks/useSpaceModeFromUrl'
 import { setLocale } from '../../i18n'
 import Logo from '../Logo/Logo'
 import ThemeSwitcher from '../SwitchTheme/SwitchTheme'
@@ -27,7 +27,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
   const activeSection = useActiveSection()
   const { incrementLogoClick, logoRevealActive } = useEasterEgg()
   const { enableRecruiterMode } = useRecruiterMode()
-  const spaceMode = useSpaceModeFromUrl()
+  const vieiraMode = useVieiraModeFromUrl()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -54,7 +54,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
 
   return (
     <nav
-      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${spaceMode ? styles.spaceNav : ''}`}
+      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${vieiraMode ? styles.vieiraNav : ''}`}
       aria-label='Navegação principal'
     >
       <a

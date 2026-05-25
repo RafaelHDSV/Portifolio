@@ -17,15 +17,15 @@ interface ContactFormProps {
   onSuccess?: () => void
 }
 
-function containsRocket (value: string): boolean {
-  return value.toLowerCase().includes('rocket')
+function containsVieira (value: string): boolean {
+  return value.toLowerCase().includes('vieira')
 }
 
 export default function ContactForm ({ onSuccess }: ContactFormProps) {
   const { t } = useTranslation()
-  const { triggerRocketLaunch } = useEasterEgg()
+  const { triggerVieiraLaunch } = useEasterEgg()
   const [status, setStatus] = useState<FormStatus>('idle')
-  const [rocketUnlocked, setRocketUnlocked] = useState(false)
+  const [vieiraUnlocked, setVieiraUnlocked] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,9 +34,9 @@ export default function ContactForm ({ onSuccess }: ContactFormProps) {
     const email = String(formData.get('email') ?? '')
     const message = String(formData.get('message') ?? '')
 
-    if (containsRocket(email) || containsRocket(message)) {
-      triggerRocketLaunch()
-      setRocketUnlocked(true)
+    if (containsVieira(email) || containsVieira(message)) {
+      triggerVieiraLaunch()
+      setVieiraUnlocked(true)
     }
 
     if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
@@ -61,8 +61,8 @@ export default function ContactForm ({ onSuccess }: ContactFormProps) {
     }
   }
 
-  const successMessage = rocketUnlocked
-    ? t('contact.form.successRocket')
+  const successMessage = vieiraUnlocked
+    ? t('contact.form.successVieira')
     : t('contact.form.success')
 
   return (

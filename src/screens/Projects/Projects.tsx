@@ -10,9 +10,7 @@ import useGitHubProjects from '../../hooks/useGitHubProjects'
 import {
   collectAvailableFilters,
   filterProjectsMulti,
-  mergeGitHubProjects,
-  PINNED_PROJECT_LIMIT,
-  RECENT_PROJECT_LIMIT
+  mergeGitHubProjects
 } from '../../utils/mergeProjects'
 import { getProjectFilterLabel } from '../../utils/filterLabels'
 import { gitHubToken } from '../../utils/environment'
@@ -64,9 +62,13 @@ function ProjectsContent () {
     <>
       {!gitHubToken && !loading && (
         <p className={styles.tokenNotice} role='note'>
-          {t('projects.tokenHint', {
-            expected: PINNED_PROJECT_LIMIT + RECENT_PROJECT_LIMIT
-          })}
+          {t('projects.tokenHintPrivate')}
+        </p>
+      )}
+
+      {!loading && filtered.length > 0 && (
+        <p className={styles.projectCount} role='status'>
+          {t('projects.count', { count: filtered.length })}
         </p>
       )}
 

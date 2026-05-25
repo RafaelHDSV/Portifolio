@@ -35,61 +35,27 @@
     "highlights": {
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
-    },
-    "profile": {
-      "experienceTitle": "Experiencia",
-      "experience": [
-        "Full-Stack Developer — AGX Software",
-        "Lideranca tecnica e code review em equipe",
-        "Entrega de produtos web ponta a ponta"
-      ],
-      "educationTitle": "Formacao e cursos",
-      "education": [
-        "Anhembi Morumbi — Analise e Desenvolvimento de Sistemas",
-        "Udemy — React, Node.js e automacao",
-        "Estudo continuo em arquitetura e boas praticas"
-      ],
-      "hardSkillsTitle": "Hard skills",
-      "hardSkills": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "MongoDB",
-        "REST APIs",
-        "SASS",
-        "Git"
-      ],
-      "softSkillsTitle": "Soft skills",
-      "softSkills": [
-        "Lideranca tecnica",
-        "Comunicacao clara",
-        "Trabalho em equipe",
-        "Mentoria e code review"
-      ],
-      "aiTitle": "IA e automacao",
-      "aiSkills": [
-        "Cursor / Copilot",
-        "Integracao com LLMs",
-        "Fluxos com n8n",
-        "Pair programming assistido por IA"
-      ],
-      "toolsTitle": "Ferramentas",
-      "tools": [
-        "VS Code",
-        "GitHub",
-        "Figma",
-        "Postman",
-        "Vercel"
-      ]
     }
   },
   "stack": {
-    "title": "Stack",
-    "subtitle": "Tecnologias que uso no dia a dia"
+    "title": "Stack e ferramentas",
+    "subtitle": "Tecnologias, IA, ferramentas e competencias do dia a dia",
+    "categories": {
+      "core": "Core stack",
+      "ai": "IA e automacao",
+      "tools": "Ferramentas",
+      "softSkills": "Soft skills"
+    },
+    "softSkills": [
+      "Lideranca tecnica",
+      "Comunicacao clara",
+      "Trabalho em equipe",
+      "Mentoria e code review"
+    ]
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Trabalhos recentes",
+    "subtitle": "Repositorios ordenados por estrelas e atualizacao",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
@@ -101,7 +67,8 @@
     "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
-    "tokenHint": "Sem token GitHub no deploy, pins privados e a lista completa (ate {{expected}} projetos) podem nao aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
+    "count": "{{count}} projetos exibidos",
+    "tokenHintPrivate": "Sem token GitHub no deploy, repositorios privados e pins privados podem nao aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
     "statsStars": "Estrelas",
     "statsForks": "Forks",
     "statsIssues": "Issues abertas",
@@ -136,7 +103,7 @@
       "send": "Enviar",
       "sending": "Enviando...",
       "success": "Mensagem enviada com sucesso!",
-      "successRocket": "Decolagem confirmada! Mensagem enviada.",
+      "successVieira": "Modo Vieira ativado! Mensagem enviada com estilo.",
       "error": "Erro ao enviar. Tente novamente ou use outro canal.",
       "required": "Campo obrigatório",
       "invalidEmail": "E-mail inválido"
@@ -166,12 +133,8 @@
     "switchToDark": "Mudar para tema escuro"
   },
   "easterEgg": {
-    "explorer": "Explorador",
-    "explorerDesc": "Você visitou todas as seções principais!",
-    "sectionTourDesc": "Tour completo: você passou por Sobre, Stack, Projetos e Contato!",
-    "sectionTourProgress": "Progresso do tour — continue explorando as seções!",
-    "sectionTourHint": "Tour {{visited}}/{{total}} — visite Sobre, Stack, Projetos e Contato",
-    "spaceModeActive": "Modo espacial ativado — estrelas e nebulosa no hero!",
+    "scrollVoyageHint": "Desça até o fim e volte ao topo para desbloquear",
+    "vieiraModeActive": "Modo Vieira ativado — visual personalizado no hero!",
     "konamiActive": "Código Konami detectado — accent roxo por 30 segundos!",
     "themeHunter": "Caçador de temas desbloqueado!",
     "arrowHint": "Curioso, né?",
@@ -196,20 +159,20 @@
         "trigger": "5 cliques rapidos no logo (sem recarregar a pagina)",
         "result": "Modo blueprint: grid cyan na pagina e logo brilhando por 14 segundos"
       },
-      "sectionTour": {
-        "name": "Tour das seções",
-        "trigger": "Visitar Sobre, Stack, Projetos e Contato",
-        "result": "Cada seção pulsa ao visitar; ao completar, brilho em todas"
+      "scrollVoyage": {
+        "name": "Viagem completa",
+        "trigger": "Rolar ate o fim da pagina e voltar ao topo",
+        "result": "Barra de progresso no topo pulsa e brilho celebratorio na pagina"
       },
-      "rocket": {
-        "name": "Foguete",
-        "trigger": "Enviar e-mail ou mensagem contendo a palavra rocket",
-        "result": "Animação de decolagem na seção Contato + mensagem especial"
+      "vieiraMessage": {
+        "name": "Mensagem Vieira",
+        "trigger": "Enviar e-mail ou mensagem contendo a palavra vieira",
+        "result": "Animacao de decolagem na secao Contato + mensagem Modo Vieira"
       },
-      "space": {
-        "name": "Modo espacial",
-        "trigger": "Abrir o site com ?mode=space na URL",
-        "result": "Nebulosa e estrelas no hero (somente enquanto o parametro estiver na URL)"
+      "vieiraMode": {
+        "name": "Modo Vieira",
+        "trigger": "Abrir o site com ?mode=vieira na URL (space ainda funciona)",
+        "result": "Visual personalizado Vieira no hero enquanto o parametro estiver na URL"
       },
       "theme": {
         "name": "Caçador de temas",
@@ -217,9 +180,9 @@
         "result": "Espectro de cores percorre a página por 5 segundos"
       },
       "arrow": {
-        "name": "Seta curiosa",
+        "name": "Orbita Vieira",
         "trigger": "5 cliques rapidos na seta do hero (sem rolar a pagina)",
-        "result": "Seta animada percorre o hero por 5 segundos"
+        "result": "Seta percorre o hero em orbita de foguete e volta a origem"
       }
     }
   },

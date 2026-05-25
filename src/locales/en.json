@@ -35,61 +35,27 @@
     "highlights": {
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
-    },
-    "profile": {
-      "experienceTitle": "Experience",
-      "experience": [
-        "Full-Stack Developer — AGX Software",
-        "Technical leadership and code review",
-        "End-to-end web product delivery"
-      ],
-      "educationTitle": "Education and courses",
-      "education": [
-        "Anhembi Morumbi — Systems Analysis and Development",
-        "Udemy — React, Node.js and automation",
-        "Continuous learning in architecture and best practices"
-      ],
-      "hardSkillsTitle": "Hard skills",
-      "hardSkills": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "MongoDB",
-        "REST APIs",
-        "SASS",
-        "Git"
-      ],
-      "softSkillsTitle": "Soft skills",
-      "softSkills": [
-        "Technical leadership",
-        "Clear communication",
-        "Teamwork",
-        "Mentoring and code review"
-      ],
-      "aiTitle": "AI and automation",
-      "aiSkills": [
-        "Cursor / Copilot",
-        "LLM integration",
-        "n8n workflows",
-        "AI-assisted pair programming"
-      ],
-      "toolsTitle": "Tools",
-      "tools": [
-        "VS Code",
-        "GitHub",
-        "Figma",
-        "Postman",
-        "Vercel"
-      ]
     }
   },
   "stack": {
-    "title": "Stack",
-    "subtitle": "Technologies I use day to day"
+    "title": "Stack and tools",
+    "subtitle": "Technologies, AI, tools and day-to-day skills",
+    "categories": {
+      "core": "Core stack",
+      "ai": "AI and automation",
+      "tools": "Tools",
+      "softSkills": "Soft skills"
+    },
+    "softSkills": [
+      "Technical leadership",
+      "Clear communication",
+      "Teamwork",
+      "Mentoring and code review"
+    ]
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Recent work",
+    "subtitle": "Repositories sorted by stars and last update",
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
@@ -101,7 +67,8 @@
     "openVideo": "Open video on GitHub",
     "noPreview": "No preview",
     "clearFilters": "Clear filters",
-    "tokenHint": "Without a GitHub token in production, private pins and the full list (up to {{expected}} projects) may not appear. Set VITE_GITHUB_ACCESS_TOKEN on Vercel with repo scope.",
+    "count": "{{count}} projects shown",
+    "tokenHintPrivate": "Without a GitHub token in production, private repositories and private pins may not appear. Set VITE_GITHUB_ACCESS_TOKEN on Vercel with repo scope.",
     "statsStars": "Stars",
     "statsForks": "Forks",
     "statsIssues": "Open issues",
@@ -136,7 +103,7 @@
       "send": "Send",
       "sending": "Sending...",
       "success": "Message sent successfully!",
-      "successRocket": "Liftoff confirmed! Message sent.",
+      "successVieira": "Vieira mode activated! Message sent with style.",
       "error": "Failed to send. Try again or use another channel.",
       "required": "Required field",
       "invalidEmail": "Invalid email"
@@ -166,12 +133,8 @@
     "switchToDark": "Switch to dark theme"
   },
   "easterEgg": {
-    "explorer": "Explorer",
-    "explorerDesc": "You visited all main sections!",
-    "sectionTourDesc": "Full tour: About, Stack, Projects and Contact!",
-    "sectionTourProgress": "Tour progress — keep exploring the sections!",
-    "sectionTourHint": "Tour {{visited}}/{{total}} — visit About, Stack, Projects and Contact",
-    "spaceModeActive": "Space mode enabled — stars and nebula on the hero!",
+    "scrollVoyageHint": "Scroll to the bottom and back to the top to unlock",
+    "vieiraModeActive": "Vieira mode enabled — personalized hero visuals!",
     "konamiActive": "Konami code detected — purple accent for 30 seconds!",
     "themeHunter": "Theme hunter unlocked!",
     "arrowHint": "Curious, huh?",
@@ -196,20 +159,20 @@
         "trigger": "5 quick clicks on the logo (no page reload)",
         "result": "Blueprint mode: cyan grid overlay and glowing logo for 14 seconds"
       },
-      "sectionTour": {
-        "name": "Section tour",
-        "trigger": "Visit About, Stack, Projects and Contact",
-        "result": "Each section pulses on visit; all glow when complete"
+      "scrollVoyage": {
+        "name": "Full voyage",
+        "trigger": "Scroll to the bottom of the page and return to the top",
+        "result": "Top progress bar pulses and a celebratory glow covers the page"
       },
-      "rocket": {
-        "name": "Rocket",
-        "trigger": "Send an email or message containing the word rocket",
-        "result": "Launch animation on Contact section + special success message"
+      "vieiraMessage": {
+        "name": "Vieira message",
+        "trigger": "Send an email or message containing the word vieira",
+        "result": "Launch animation on Contact + Vieira mode success message"
       },
-      "space": {
-        "name": "Space mode",
-        "trigger": "Open the site with ?mode=space in the URL",
-        "result": "Nebula and stars on the hero (only while the URL param is present)"
+      "vieiraMode": {
+        "name": "Vieira mode",
+        "trigger": "Open the site with ?mode=vieira in the URL (space still works)",
+        "result": "Personalized Vieira hero visuals while the URL param is present"
       },
       "theme": {
         "name": "Theme hunter",
@@ -217,9 +180,9 @@
         "result": "Color spectrum sweeps the page for 5 seconds"
       },
       "arrow": {
-        "name": "Curious arrow",
+        "name": "Vieira orbit",
         "trigger": "5 quick clicks on the hero arrow (does not scroll)",
-        "result": "Animated arrow travels across the hero for 5 seconds"
+        "result": "Arrow orbits the hero like a rocket and returns to origin"
       }
     }
   },

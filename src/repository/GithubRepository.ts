@@ -268,6 +268,19 @@ class GithubRepositoryClass {
       return []
     }
   }
+
+  async repoFileExists (
+    owner: string,
+    repo: string,
+    path: string
+  ): Promise<boolean> {
+    try {
+      await githubApi.get(`/repos/${owner}/${repo}/contents/${path}`)
+      return true
+    } catch {
+      return false
+    }
+  }
 }
 
 export const GithubRepository = new GithubRepositoryClass()

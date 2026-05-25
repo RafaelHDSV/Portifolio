@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { RocketLaunchIcon } from '@phosphor-icons/react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin, FaWhatsappSquare } from 'react-icons/fa'
@@ -8,6 +9,7 @@ import ContactForm from '../../components/ContactForm/ContactForm'
 import Container from '../../components/Container/Container'
 import Modal from '../../components/Modal/Modal'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './Contact.module.scss'
 
 const CHANNELS = [
@@ -63,11 +65,21 @@ function ContactItem ({
 
 export default function Contact () {
   const { t } = useTranslation()
+  const { vieiraLaunchActive } = useEasterEgg()
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <Fade triggerOnce>
-      <section id='contact' className={`mainContainer ${styles.contact}`}>
+      <section
+        id='contact'
+        className={`mainContainer ${styles.contact} ${vieiraLaunchActive ? styles.vieiraLaunch : ''}`}
+      >
+        {vieiraLaunchActive && (
+          <div className={styles.launchFx} aria-hidden='true'>
+            <RocketLaunchIcon className={styles.launchRocket} size={48} weight='fill' />
+            <span className={styles.launchTrail} />
+          </div>
+        )}
         <Container>
           <SectionTitle
             title={t('contact.title')}

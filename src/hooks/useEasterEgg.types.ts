@@ -1,17 +1,16 @@
 export type EasterEggId =
   | 'konami'
   | 'logo-clicks'
-  | 'section-tour'
+  | 'scroll-voyage'
   | 'rocket-email'
-  | 'space-mode'
+  | 'vieira-mode'
   | 'theme-hunter'
   | 'arrow-hint'
 
 export const TOTAL_EGGS = 7
 
-export const SECTION_TOUR_IDS = [
-  'about',
-  'languages',
-  'projects',
-  'contact'
-] as const
+/** @deprecated legacy ids — migrated in EasterEggProvider */
+export const LEGACY_EGG_IDS = {
+  sectionTour: 'scroll-voyage',
+  spaceMode: 'vieira-mode'
+} as const

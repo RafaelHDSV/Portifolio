@@ -5,6 +5,53 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.categoryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.categoryTitle {
+  font-family: $font-outfit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0.45rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-button);
+    transition: border-color 200ms ease, color 200ms ease;
+
+    &:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));

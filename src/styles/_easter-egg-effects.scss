@@ -18,25 +18,21 @@ html.egg-blueprint-mode {
   }
 }
 
-html.egg-section-flash {
-  animation: sectionFlash 1.8s ease;
-}
+html.egg-scroll-voyage-done {
+  --color-accent: color-mix(in srgb, var(--color-accent) 80%, #818cf8);
 
-#about.egg-section-flash,
-#languages.egg-section-flash,
-#projects.egg-section-flash,
-#contact.egg-section-flash {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
-  outline-offset: 4px;
-  box-shadow: 0 0 40px color-mix(in srgb, var(--color-accent) 25%, transparent);
-}
-
-html.egg-section-tour-done {
-  #about,
-  #languages,
-  #projects,
-  #contact {
-    animation: tourPulse 2s ease-in-out 2;
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9997;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 50% 20%,
+      color-mix(in srgb, var(--color-accent) 25%, transparent),
+      transparent 55%
+    );
+    animation: voyageCelebrate 5s ease forwards;
   }
 }
 
@@ -45,24 +41,28 @@ html.egg-theme-spectrum {
 }
 
 html.egg-arrow-travel {
-  --color-accent: #22d3ee;
+  --color-accent: color-mix(in srgb, var(--color-accent) 75%, #f59e0b);
 }
 
-html.egg-rocket-launch {
-  #contact {
-    animation: rocketShake 0.4s ease-in-out 3;
-  }
+html.egg-vieira-launch {
+  --color-accent: color-mix(in srgb, var(--color-accent) 70%, #818cf8);
 
-  &::after {
-    content: '';
+  &::before {
+    content: 'Vieira';
     position: fixed;
-    inset: 0;
-    z-index: 200;
+    top: 18%;
+    left: 50%;
+    z-index: 9999;
     pointer-events: none;
-    background:
-      radial-gradient(circle at 20% 80%, rgba(251, 146, 60, 0.35), transparent 40%),
-      radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.25), transparent 35%);
-    animation: rocketBurst 4.5s ease forwards;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 50%, transparent);
+    transform: translateX(-50%);
+    animation: vieiraMessagePop 5.5s ease forwards;
   }
 }
 
@@ -71,14 +71,10 @@ html.egg-rocket-launch {
   to { transform: translateY(48px); }
 }
 
-@keyframes sectionFlash {
-  0%, 100% { filter: none; }
-  50% { filter: brightness(1.08); }
-}
-
-@keyframes tourPulse {
-  0%, 100% { box-shadow: none; }
-  50% { box-shadow: 0 0 32px color-mix(in srgb, var(--color-accent) 30%, transparent); }
+@keyframes voyageCelebrate {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes themeSpectrum {
@@ -89,30 +85,16 @@ html.egg-rocket-launch {
   100% { filter: hue-rotate(360deg) saturate(1); }
 }
 
-@keyframes rocketShake {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(-6px); }
-  75% { transform: translateY(6px); }
-}
-
-@keyframes rocketBurst {
-  0% { opacity: 0; }
-  15% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes vieiraMessagePop {
+  0%, 100% { opacity: 0; transform: translate(-50%, 12px); }
+  15%, 75% { opacity: 1; transform: translate(-50%, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html.egg-blueprint-mode::before,
+  html.egg-scroll-voyage-done::after,
   html.egg-theme-spectrum,
-  html.egg-section-tour-done #about,
-  html.egg-section-tour-done #languages,
-  html.egg-section-tour-done #projects,
-  html.egg-section-tour-done #contact,
-  html.egg-rocket-launch #contact {
+  html.egg-vieira-launch::before {
     animation: none;
-  }
-
-  html.egg-rocket-launch::after {
-    display: none;
   }
 }

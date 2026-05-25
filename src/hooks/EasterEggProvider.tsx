@@ -1,17 +1,35 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EasterEggContext } from './EasterEggContext'
-import { EasterEggId, SECTION_TOUR_IDS, TOTAL_EGGS } from './useEasterEgg.types'
+import { EasterEggId, LEGACY_EGG_IDS, TOTAL_EGGS } from './useEasterEgg.types'
 
 const STORAGE_KEY = 'eggs-unlocked'
-const SECTIONS_KEY = 'egg-sections-visited'
+const SCROLL_VOYAGE_KEY = 'egg-scroll-voyage-pending'
 
 const EGG_EFFECT_CLASSES: Partial<Record<EasterEggId, string>> = {
   'logo-clicks': 'egg-blueprint-mode',
-  'section-tour': 'egg-section-tour-done',
+  'scroll-voyage': 'egg-scroll-voyage-done',
   'theme-hunter': 'egg-theme-spectrum',
   'arrow-hint': 'egg-arrow-travel',
-  'rocket-email': 'egg-rocket-launch',
+  'rocket-email': 'egg-vieira-launch',
   konami: 'easter-egg-accent'
+}
+
+function migrateEggId (id: string): EasterEggId | null {
+  if (id === 'scroll-explorer' || id === 'section-tour') {
+    return LEGACY_EGG_IDS.sectionTour
+  }
+  if (id === 'space-mode') return LEGACY_EGG_IDS.spaceMode
+
+  const valid: EasterEggId[] = [
+    'konami',
+    'logo-clicks',
+    'scroll-voyage',
+    'rocket-email',
+    'vieira-mode',
+    'theme-hunter',
+    'arrow-hint'
+  ]
+  return valid.includes(id as EasterEggId) ? (id as EasterEggId) : null
 }
 
 function loadUnlocked (): Set<EasterEggId> {
@@ -19,32 +37,20 @@ function loadUnlocked (): Set<EasterEggId> {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return new Set()
     const parsed = JSON.parse(raw) as string[]
-    const migrated = parsed.map((id) =>
-      id === 'scroll-explorer' ? 'section-tour' : id
-    )
-    const valid: EasterEggId[] = [
-      'konami',
-      'logo-clicks',
-      'section-tour',
-      'rocket-email',
-      'space-mode',
-      'theme-hunter',
-      'arrow-hint'
-    ]
-    return new Set(migrated.filter((id): id is EasterEggId => valid.includes(id as EasterEggId)))
+    const migrated = parsed
+      .map(migrateEggId)
+      .filter((id): id is EasterEggId => id !== null)
+    return new Set(migrated)
   } catch {
     return new Set()
   }
 }
 
-function loadVisitedSections (): Set<string> {
+function loadScrollVoyagePending (): boolean {
   try {
-    const raw = sessionStorage.getItem(SECTIONS_KEY)
-    if (!raw) return new Set()
-    const parsed = JSON.parse(raw) as string[]
-    return new Set(parsed.filter((id) => SECTION_TOUR_IDS.includes(id as typeof SECTION_TOUR_IDS[number])))
+    return sessionStorage.getItem(SCROLL_VOYAGE_KEY) === '1'
   } catch {
-    return new Set()
+    return false
   }
 }
 
@@ -52,15 +58,8 @@ function saveUnlocked (set: Set<EasterEggId>) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]))
 }
 
-function saveVisitedSections (set: Set<string>) {
-  sessionStorage.setItem(SECTIONS_KEY, JSON.stringify([...set]))
-}
-
-function flashSection (sectionId: string) {
-  const el = document.getElementById(sectionId)
-  if (!el) return
-  el.classList.add('egg-section-flash')
-  window.setTimeout(() => el.classList.remove('egg-section-flash'), 1800)
+function saveScrollVoyagePending (pending: boolean) {
+  sessionStorage.setItem(SCROLL_VOYAGE_KEY, pending ? '1' : '0')
 }
 
 function playEggEffect (id: EasterEggId, durationMs: number) {
@@ -71,6 +70,17 @@ function playEggEffect (id: EasterEggId, durationMs: number) {
   window.setTimeout(() => {
     document.documentElement.classList.remove(className)
   }, durationMs)
+}
+
+function getScrollProgress (): number {
+  const max = document.documentElement.scrollHeight - window.innerHeight
+  if (max <= 0) return 0
+  return Math.min(1, Math.max(0, window.scrollY / max))
+}
+
+function isVieiraModeUrl (): boolean {
+  const mode = new URLSearchParams(window.location.search).get('mode')
+  return mode === 'vieira' || mode === 'space'
 }
 
 const KONAMI = [
@@ -89,11 +99,11 @@ const KONAMI = [
 export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState<Set<EasterEggId>>(loadUnlocked)
   const [logoRevealActive, setLogoRevealActive] = useState(false)
-  const [rocketLaunchActive, setRocketLaunchActive] = useState(false)
+  const [vieiraLaunchActive, setVieiraLaunchActive] = useState(false)
   const [arrowTravelActive, setArrowTravelActive] = useState(false)
-  const [sectionTourProgress, setSectionTourProgress] = useState(0)
-  const [sectionTourVisitedCount, setSectionTourVisitedCount] = useState(
-    () => loadVisitedSections().size
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrollVoyagePending, setScrollVoyagePending] = useState(
+    loadScrollVoyagePending
   )
   const [catalogRevealAll, setCatalogRevealAll] = useState(false)
   const unlockedRef = useRef(unlocked)
@@ -103,17 +113,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const arrowTimerRef = useRef<number | null>(null)
   const themeTogglesRef = useRef(0)
   const themeTimerRef = useRef<number | null>(null)
-  const visitedSectionsRef = useRef<Set<string>>(loadVisitedSections())
+  const scrollVoyagePendingRef = useRef(loadScrollVoyagePending())
 
   useEffect(() => {
     unlockedRef.current = unlocked
   }, [unlocked])
-
-  useEffect(() => {
-    const count = visitedSectionsRef.current.size
-    setSectionTourVisitedCount(count)
-    setSectionTourProgress(count / SECTION_TOUR_IDS.length)
-  }, [])
 
   const unlock = useCallback((id: EasterEggId) => {
     setUnlocked((prev) => {
@@ -151,8 +155,8 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     if (arrowClicksRef.current >= 5) {
       unlock('arrow-hint')
       setArrowTravelActive(true)
-      playEggEffect('arrow-hint', 5000)
-      window.setTimeout(() => setArrowTravelActive(false), 5000)
+      playEggEffect('arrow-hint', 6000)
+      window.setTimeout(() => setArrowTravelActive(false), 6000)
       arrowClicksRef.current = 0
     }
     arrowTimerRef.current = window.setTimeout(() => {
@@ -173,34 +177,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     }, 3000)
   }, [unlock])
 
-  const registerSectionVisit = useCallback((sectionId: string) => {
-    if (unlockedRef.current.has('section-tour')) return
-    if (!SECTION_TOUR_IDS.includes(sectionId as (typeof SECTION_TOUR_IDS)[number])) {
-      return
-    }
-
-    if (visitedSectionsRef.current.has(sectionId)) return
-
-    visitedSectionsRef.current.add(sectionId)
-    saveVisitedSections(visitedSectionsRef.current)
-    flashSection(sectionId)
-
-    const count = visitedSectionsRef.current.size
-    const progress = count / SECTION_TOUR_IDS.length
-    setSectionTourVisitedCount(count)
-    setSectionTourProgress(progress)
-
-    if (count >= SECTION_TOUR_IDS.length) {
-      unlock('section-tour')
-      playEggEffect('section-tour', 6000)
-    }
-  }, [unlock])
-
-  const triggerRocketLaunch = useCallback(() => {
+  const triggerVieiraLaunch = useCallback(() => {
     unlock('rocket-email')
-    setRocketLaunchActive(true)
-    playEggEffect('rocket-email', 4500)
-    window.setTimeout(() => setRocketLaunchActive(false), 4500)
+    setVieiraLaunchActive(true)
+    playEggEffect('rocket-email', 5500)
+    window.setTimeout(() => setVieiraLaunchActive(false), 5500)
   }, [unlock])
 
   const revealAllInCatalog = useCallback(() => {
@@ -208,10 +189,40 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('mode') === 'space') {
-      if (!unlockedRef.current.has('space-mode')) {
-        unlock('space-mode')
+    if (isVieiraModeUrl() && !unlockedRef.current.has('vieira-mode')) {
+      unlock('vieira-mode')
+    }
+  }, [unlock])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const progress = getScrollProgress()
+      setScrollProgress(progress)
+
+      if (unlockedRef.current.has('scroll-voyage')) return
+
+      if (progress >= 0.98) {
+        scrollVoyagePendingRef.current = true
+        setScrollVoyagePending(true)
+        saveScrollVoyagePending(true)
       }
+
+      if (scrollVoyagePendingRef.current && progress <= 0.03) {
+        unlock('scroll-voyage')
+        scrollVoyagePendingRef.current = false
+        setScrollVoyagePending(false)
+        saveScrollVoyagePending(false)
+        playEggEffect('scroll-voyage', 5000)
+      }
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [unlock])
 
@@ -253,35 +264,32 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       totalUnlocked: unlocked.size,
       totalEggs: TOTAL_EGGS,
       logoRevealActive,
-      rocketLaunchActive,
+      vieiraLaunchActive,
       arrowTravelActive,
-      sectionTourProgress,
-      sectionTourVisitedCount,
-      sectionTourTotal: SECTION_TOUR_IDS.length,
+      scrollProgress,
+      scrollVoyagePending,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
-      registerSectionVisit,
       revealAllInCatalog,
-      triggerRocketLaunch
+      triggerVieiraLaunch
     }),
     [
       unlocked,
       unlock,
       isUnlocked,
       logoRevealActive,
-      rocketLaunchActive,
+      vieiraLaunchActive,
       arrowTravelActive,
-      sectionTourProgress,
-      sectionTourVisitedCount,
+      scrollProgress,
+      scrollVoyagePending,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
-      registerSectionVisit,
       revealAllInCatalog,
-      triggerRocketLaunch
+      triggerVieiraLaunch
     ]
   )
 

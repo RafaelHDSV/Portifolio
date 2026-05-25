@@ -8,18 +8,16 @@ export interface EasterEggContextValue {
   totalUnlocked: number
   totalEggs: number
   logoRevealActive: boolean
-  rocketLaunchActive: boolean
+  vieiraLaunchActive: boolean
   arrowTravelActive: boolean
-  sectionTourProgress: number
-  sectionTourVisitedCount: number
-  sectionTourTotal: number
+  scrollProgress: number
+  scrollVoyagePending: boolean
   catalogRevealAll: boolean
   incrementLogoClick: () => void
   incrementArrowClick: () => void
   registerThemeToggle: () => void
-  registerSectionVisit: (sectionId: string) => void
   revealAllInCatalog: () => void
-  triggerRocketLaunch: () => void
+  triggerVieiraLaunch: () => void
 }
 
 export const EasterEggContext = createContext<EasterEggContextValue | null>(

@@ -37,7 +37,7 @@
   }
 }
 
-.spaceMode::before {
+.vieiraMode::before {
   background:
     radial-gradient(ellipse 90% 70% at 15% 35%, rgba(129, 140, 248, 0.35), transparent),
     radial-gradient(ellipse 70% 55% at 85% 65%, rgba(167, 139, 250, 0.25), transparent),
@@ -164,10 +164,10 @@
 .flyingArrow {
   position: absolute;
   z-index: 2;
-  color: #22d3ee;
-  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.65));
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--color-accent) 70%, transparent));
   pointer-events: none;
-  animation: arrowTravel 5s ease-in-out forwards;
+  animation: rocketOrbit 6s linear forwards;
 }
 
 @keyframes meshShift {
@@ -224,38 +224,46 @@
   }
 }
 
-@keyframes arrowTravel {
+@keyframes rocketOrbit {
   0% {
     top: 78%;
     left: 50%;
-    transform: translate(-50%, 0) rotate(0deg);
-    opacity: 1;
+    transform: translate(-50%, 0) rotate(90deg);
   }
-  20% {
-    top: 35%;
+  15% {
+    top: 55%;
+    left: 22%;
+    transform: translate(-50%, 0) rotate(135deg);
+  }
+  30% {
+    top: 28%;
     left: 18%;
-    transform: translate(-50%, 0) rotate(-25deg);
+    transform: translate(-50%, 0) rotate(180deg);
   }
-  40% {
-    top: 22%;
-    left: 72%;
-    transform: translate(-50%, 0) rotate(35deg);
+  45% {
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(225deg);
   }
   60% {
-    top: 48%;
+    top: 28%;
     left: 82%;
-    transform: translate(-50%, 0) rotate(160deg);
+    transform: translate(-50%, 0) rotate(270deg);
   }
-  80% {
-    top: 62%;
-    left: 28%;
-    transform: translate(-50%, 0) rotate(220deg);
+  75% {
+    top: 55%;
+    left: 78%;
+    transform: translate(-50%, 0) rotate(315deg);
+  }
+  90% {
+    top: 72%;
+    left: 62%;
+    transform: translate(-50%, 0) rotate(360deg);
   }
   100% {
     top: 78%;
     left: 50%;
-    transform: translate(-50%, 0) rotate(360deg);
-    opacity: 0;
+    transform: translate(-50%, 0) rotate(450deg);
   }
 }
 

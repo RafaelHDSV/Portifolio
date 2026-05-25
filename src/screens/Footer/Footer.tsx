@@ -21,7 +21,7 @@ export default function Footer () {
   const {
     totalUnlocked,
     totalEggs,
-    sectionTourProgress,
+    scrollVoyagePending,
     isUnlocked,
     catalogRevealAll,
     revealAllInCatalog
@@ -42,12 +42,12 @@ export default function Footer () {
                 </span>
                 <button
                   type='button'
-                  className={`${styles.eggCounterBtn} ${sectionTourProgress > 0 && !isUnlocked('section-tour') ? styles.eggCounterTour : ''}`}
+                  className={`${styles.eggCounterBtn} ${scrollVoyagePending && !isUnlocked('scroll-voyage') ? styles.eggCounterTour : ''}`}
                   onClick={() => setCatalogOpen(true)}
                   title={t('easterEgg.catalogOpenHint')}
                   style={
-                    sectionTourProgress > 0 && !isUnlocked('section-tour')
-                      ? ({ '--tour-progress': `${sectionTourProgress * 100}%` } as React.CSSProperties)
+                    scrollVoyagePending && !isUnlocked('scroll-voyage')
+                      ? ({ '--tour-progress': '100%' } as React.CSSProperties)
                       : undefined
                   }
                 >

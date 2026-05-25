@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 
-function isSpaceModeActive (): boolean {
-  return new URLSearchParams(window.location.search).get('mode') === 'space'
+function isVieiraModeActive (): boolean {
+  const mode = new URLSearchParams(window.location.search).get('mode')
+  return mode === 'vieira' || mode === 'space'
 }
 
-export function useSpaceModeFromUrl (): boolean {
-  const [active, setActive] = useState(isSpaceModeActive)
+export function useVieiraModeFromUrl (): boolean {
+  const [active, setActive] = useState(isVieiraModeActive)
 
   useEffect(() => {
     const sync = () => {
-      const isSpace = isSpaceModeActive()
-      setActive(isSpace)
-      document.documentElement.classList.toggle('space-mode', isSpace)
+      const isVieira = isVieiraModeActive()
+      setActive(isVieira)
+      document.documentElement.classList.toggle('vieira-mode', isVieira)
     }
 
     sync()
@@ -19,9 +20,14 @@ export function useSpaceModeFromUrl (): boolean {
 
     return () => {
       window.removeEventListener('popstate', sync)
-      document.documentElement.classList.remove('space-mode')
+      document.documentElement.classList.remove('vieira-mode')
     }
   }, [])
 
   return active
+}
+
+/** @deprecated use useVieiraModeFromUrl */
+export function useSpaceModeFromUrl (): boolean {
+  return useVieiraModeFromUrl()
 }

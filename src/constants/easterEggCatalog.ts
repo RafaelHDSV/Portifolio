@@ -21,22 +21,22 @@ export const EASTER_EGG_CATALOG: EasterEggCatalogEntry[] = [
     resultKey: 'easterEgg.catalog.logo.result'
   },
   {
-    id: 'section-tour',
-    nameKey: 'easterEgg.catalog.sectionTour.name',
-    triggerKey: 'easterEgg.catalog.sectionTour.trigger',
-    resultKey: 'easterEgg.catalog.sectionTour.result'
+    id: 'scroll-voyage',
+    nameKey: 'easterEgg.catalog.scrollVoyage.name',
+    triggerKey: 'easterEgg.catalog.scrollVoyage.trigger',
+    resultKey: 'easterEgg.catalog.scrollVoyage.result'
   },
   {
     id: 'rocket-email',
-    nameKey: 'easterEgg.catalog.rocket.name',
-    triggerKey: 'easterEgg.catalog.rocket.trigger',
-    resultKey: 'easterEgg.catalog.rocket.result'
+    nameKey: 'easterEgg.catalog.vieiraMessage.name',
+    triggerKey: 'easterEgg.catalog.vieiraMessage.trigger',
+    resultKey: 'easterEgg.catalog.vieiraMessage.result'
   },
   {
-    id: 'space-mode',
-    nameKey: 'easterEgg.catalog.space.name',
-    triggerKey: 'easterEgg.catalog.space.trigger',
-    resultKey: 'easterEgg.catalog.space.result'
+    id: 'vieira-mode',
+    nameKey: 'easterEgg.catalog.vieiraMode.name',
+    triggerKey: 'easterEgg.catalog.vieiraMode.trigger',
+    resultKey: 'easterEgg.catalog.vieiraMode.result'
   },
   {
     id: 'theme-hunter',
