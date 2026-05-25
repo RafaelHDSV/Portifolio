@@ -4,3 +4,4 @@
 - Ainda não está aparecendo no portifolio, o https://github.com/RafaelHDSV/TechMoto que está pin no github
 - E temos 5 pin (faltando 1), e 5 repositórios públicos. Na verdade eu queria os 6 pins + 10 repositórios mais recentes, incluíndo privado e público.
 - Os easter eggs estão ruins. Nâo quero easters eggs que sejam somente um toast ou somente um console. Quero easter eggs mais parecidos com o konami, onde existe uma alteração visual no portifolio ou algo do tipo.
+- Devido a complexididade de adicionar uma seção de Linkedin com os posts mais recentes. Vamos desconsiderar esse desenvolvimento, pode remover/deletar todo arquivo e/ou código relacionado a isso, incluindo o linkedin-setup.md

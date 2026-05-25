@@ -1,10 +1,7 @@
-export interface LinkedInPost {
-  id: string
-  title: string
-  excerpt: string
-  url: string
-  publishedAt: string
-}
+import { loadManualPosts } from './manualPosts'
+import type { LinkedInPost } from './types'
+
+export type { LinkedInPost } from './types'
 
 function stripHtml (value: string): string {
   return value
@@ -111,6 +108,9 @@ async function fetchFromLinkedInApi (
 }
 
 export async function fetchLinkedInPosts (): Promise<LinkedInPost[]> {
+  const manual = loadManualPosts()
+  if (manual.length > 0) return manual
+
   const rssUrl = process.env.LINKEDIN_RSS_URL
   const token = process.env.LINKEDIN_ACCESS_TOKEN
   const authorUrn = process.env.LINKEDIN_MEMBER_URN

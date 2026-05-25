@@ -1,129 +1,167 @@
-# LinkedIn — posts automaticos no portfolio
+# LinkedIn — posts no portfolio
 
-Este guia configura a secao **LinkedIn** do portfolio para exibir seus posts recentes sem editar codigo a cada publicacao.
-
-**Como funciona:** a rota serverless `/api/linkedin-posts` busca um feed RSS (recomendado) ou a API oficial do LinkedIn. O front so mostra a secao quando ha posts validos.
+Este guia explica **o que funciona de verdade** em 2026 para exibir posts do LinkedIn no portfolio, e como configurar.
 
 **Site:** https://rafaelhdsv.vercel.app
 
 ---
 
-## Pre-requisitos
+## Por que RSS e API falham (nao e culpa sua)
 
-- Conta no [RSS.app](https://rss.app/) (plano gratuito costuma bastar)
-- Acesso ao projeto na [Vercel](https://vercel.com/) (Environment Variables)
-- Perfil LinkedIn publico: https://www.linkedin.com/in/rafael-vieira1720/
+### RSS.app com perfil pessoal (`/in/seu-nome`)
+
+O erro **"We couldn't find any posts"** e esperado.
+
+O LinkedIn **nao expoe um feed publico** dos posts de perfil pessoal. Servicos como RSS.app tentam "raspar" a pagina, mas o LinkedIn bloqueia isso (login, anti-bot, conteudo carregado via JavaScript). Na pratica:
+
+- URL de **perfil** (`/in/rafael-vieira1720/`) → quase sempre falha
+- URL de **pagina de empresa** (`/company/nome/`) → as vezes funciona, mas **nao sao seus posts pessoais**
+
+**Conclusao:** nao insista no RSS.app com URL de perfil. Nao e configuracao errada — e limitacao da plataforma.
+
+### API oficial do LinkedIn
+
+Dois obstaculos separados:
+
+**1. Campo "LinkedIn Page" ao criar o app**
+
+Voce **nao precisa ter uma empresa real**. O portal exige associar uma *LinkedIn Page* ao app — e regra administrativa deles.
+
+Opcoes:
+
+| Situacao | O que fazer |
+|----------|-------------|
+| Desenvolvedor individual | No campo de busca, digite **`Default Company Page for Individual Developer`** ou clique no link *"click here"* da mensagem de ajuda para ver a pagina padrao do LinkedIn |
+| Nada aparece na busca | Crie uma **LinkedIn Page gratuita** minima (veja secao abaixo) — pode ser "Rafael Vieira Dev", sem CNPJ, sem atividade comercial |
+
+**2. Permissao para ler seus posts**
+
+Mesmo com app criado, a API de **ler posts do membro** (`r_member_social`) **nao e liberada** para a maioria dos devs individuais. E produto restrito / parceiros aprovados.
+
+Ou seja: criar o app resolve o cadastro, mas **nao garante** que `/api/linkedin-posts` va buscar posts automaticamente.
+
+**Conclusao:** para portfolio pessoal, trate API como opcional avancada — nao como caminho principal.
 
 ---
 
-## Passo a passo — RSS.app (recomendado)
+## Opcao recomendada — posts manuais (5 min por publicacao)
 
-### 1. Criar conta no RSS.app
+Funciona sempre, sem RSS, sem API, sem Company Page.
 
-1. Acesse https://rss.app/
-2. Crie uma conta (Google ou e-mail)
-3. Confirme o e-mail se solicitado
+### Como funciona
 
-### 2. Gerar feed a partir do perfil LinkedIn
+Voce edita uma lista de posts no codigo (ou variavel de ambiente). O portfolio exibe ate 5, do mais recente ao mais antigo.
 
-1. No painel, clique em **New Feed** (ou **Create Feed**)
-2. Escolha a opcao de feed a partir de **URL** / **Webpage** / **Social** (o nome varia no painel)
-3. Cole a URL do perfil:
-   ```
-   https://www.linkedin.com/in/rafael-vieira1720/
-   ```
-4. Aguarde o RSS.app processar (pode levar 1–2 minutos na primeira vez)
-5. Se pedir plano pago para LinkedIn, use o trial gratuito ou a alternativa **LinkedIn Profile RSS** no mesmo painel
+### Passo a passo
 
-### 3. Copiar a URL do feed
+1. **Publique no LinkedIn** normalmente.
 
-1. Abra o feed criado
-2. Copie a URL que termina em `.xml`, por exemplo:
-   ```
-   https://rss.app/feeds/xxxxxxxx.xml
-   ```
-3. Teste no navegador ou no terminal — deve retornar XML com tags `<item>`:
+2. **Copie a URL do post**
+   - Clique nos `...` do post → *Copiar link para publicacao*
+   - Ou abra o post e copie da barra de endereco
+   - Formato tipico: `https://www.linkedin.com/feed/update/urn:li:activity:7123456789012345678`
 
-```bash
-curl -s "https://rss.app/feeds/SUA_ID.xml" | head -n 30
+3. **Edite o arquivo** `lib/linkedin/manualPosts.ts`
+
+Descomente o exemplo e adicione seu post (mais recente **no topo** do array):
+
+```typescript
+export const MANUAL_LINKEDIN_POSTS: LinkedInPost[] = [
+  {
+    id: '2026-05-24-meu-post',
+    title: 'Titulo curto (primeira frase do post)',
+    excerpt: 'Resumo em 1-2 frases do que voce escreveu.',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7123456789012345678',
+    publishedAt: '2026-05-24T15:30:00.000Z'  // data ISO (UTC)
+  }
+]
 ```
 
-Voce deve ver linhas como `<title>`, `<link>` e `<description>`.
+4. **Deploy** (commit + push, ou redeploy na Vercel).
 
-### 4. Configurar localmente (desenvolvimento)
+5. **Confirme:** abra `/api/linkedin-posts` no site — deve retornar JSON com `posts`.
 
-1. Na raiz do projeto, copie o exemplo se ainda nao tiver `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-2. Edite `.env` e adicione (sem aspas extras, sem espaco no fim):
-   ```env
-   LINKEDIN_RSS_URL=https://rss.app/feeds/xxxxxxxx.xml
-   ```
-3. Reinicie o servidor de dev (`yarn dev`)
-4. Teste a API local:
-   ```bash
-   curl -s http://localhost:5173/api/linkedin-posts
-   ```
-   Resposta esperada: JSON com array `posts` (pode ser `[]` se o feed ainda estiver vazio)
+### Alternativa sem editar codigo (Vercel)
 
-### 5. Configurar na Vercel (producao)
+Na Vercel, crie a variavel `LINKEDIN_MANUAL_POSTS` com JSON em **uma linha**:
 
-1. Vercel → seu projeto **portifolio** → **Settings** → **Environment Variables**
-2. Adicione:
-   | Name | Value |
-   |------|--------|
-   | `LINKEDIN_RSS_URL` | `https://rss.app/feeds/xxxxxxxx.xml` |
-3. Marque **Production** (e **Preview** se quiser testar em PRs)
-4. Salve
-5. **Deployments** → ultimo deploy → **Redeploy** (obrigatorio apos nova variavel)
+```env
+LINKEDIN_MANUAL_POSTS=[{"id":"1","title":"Meu post","excerpt":"Resumo...","url":"https://www.linkedin.com/feed/update/urn:li:activity:XXX","publishedAt":"2026-05-24T12:00:00.000Z"}]
+```
 
-### 6. Validar no site
-
-1. Abra https://rafaelhdsv.vercel.app
-2. A secao **LinkedIn** aparece na navbar e no rodape **somente** se houver posts
-3. Cache: a API guarda resultado por ~30 min — um post novo pode demorar ate esse tempo para aparecer
+Ela tem **prioridade** sobre o arquivo `manualPosts.ts`.
 
 ---
 
-## Opcao B — API oficial LinkedIn (avancado)
+## (Opcional) Criar LinkedIn Page minima para o Developer Portal
 
-Use apenas se ja tiver app aprovado no [LinkedIn Developer Portal](https://www.linkedin.com/developers/).
+So necessario se quiser tentar a API ou se o portal nao mostrar a pagina padrao de dev individual.
+
+1. LinkedIn → **Paginas** → **Criar pagina**
+2. Tipo: **Pequena empresa** ou **Showcase**
+3. Nome: ex. `Rafael Vieira Dev` (nao precisa ser empresa real)
+4. Preencha o minimo (descricao curta, logo opcional)
+5. Ao criar o app em https://www.linkedin.com/developers/apps/new:
+   - **App name:** ex. `Portfolio Rafael`
+   - **LinkedIn Page:** busque e selecione a pagina que voce criou
+   - Aceite os termos e crie
+
+Isso **nao publica nada** na pagina automaticamente — so destrava o cadastro do app.
+
+Para tentar API depois (sem garantia de leitura de posts):
 
 ```env
-LINKEDIN_ACCESS_TOKEN=seu_token_oauth
+LINKEDIN_ACCESS_TOKEN=...
 LINKEDIN_MEMBER_URN=urn:li:person:XXXXXXXX
 ```
 
-A API e tentada **primeiro**; se falhar ou retornar vazio, o sistema usa `LINKEDIN_RSS_URL`.
+Token via OAuth no Developer Portal → aba *Auth* → gere token de teste com escopos disponiveis.
 
-### Obter o Member URN
+---
 
-```bash
-curl -H "Authorization: Bearer SEU_TOKEN" \
-  "https://api.linkedin.com/v2/me"
+## Opcao RSS — quando usar
+
+Use RSS **somente** se tiver feed de **pagina de empresa** que realmente publica conteudo, nao perfil `/in/`.
+
+```env
+LINKEDIN_RSS_URL=https://rss.app/feeds/xxxxx.xml
 ```
 
-Use o campo `id` no formato `urn:li:person:XXXX`.
+Ordem de prioridade no codigo:
+
+1. `LINKEDIN_MANUAL_POSTS` (env) ou `manualPosts.ts`
+2. LinkedIn API (se token + URN)
+3. RSS (se URL)
+
+---
+
+## Testar localmente
+
+```bash
+# Com posts manuais no arquivo (sem outras variaveis)
+yarn dev
+
+# Testar API
+curl -s http://localhost:5173/api/linkedin-posts
+```
+
+Resposta esperada:
+
+```json
+{ "posts": [ { "id": "...", "title": "...", "excerpt": "...", "url": "...", "publishedAt": "..." } ] }
+```
 
 ---
 
 ## Troubleshooting
 
-| Sintoma | Causa provavel | O que fazer |
-|---------|----------------|-------------|
-| Secao LinkedIn nao aparece | Variavel ausente na Vercel ou feed vazio | Confira env + redeploy; teste URL do RSS no browser |
-| `posts: []` na API | Feed sem itens ou URL errada | Abra o `.xml` no navegador; recrie o feed no RSS.app |
-| Funciona local, nao em prod | Variavel so no `.env` local | Adicione `LINKEDIN_RSS_URL` na Vercel e redeploy |
-| Erro 500 na API | RSS.app bloqueou ou URL invalida | Teste `curl` na URL; gere novo feed |
-| Posts desatualizados | Cache da API (~30 min) | Aguarde ou faca redeploy para limpar cache cold |
-
-### Checklist rapido
-
-- [ ] URL do feed abre XML valido no navegador
-- [ ] `LINKEDIN_RSS_URL` na Vercel (Production)
-- [ ] Redeploy feito apos adicionar a variavel
-- [ ] `/api/linkedin-posts` retorna JSON com posts em producao
+| Sintoma | Causa | Solucao |
+|---------|-------|---------|
+| RSS.app: "couldn't find any posts" | Perfil `/in/` nao tem feed scrapeavel | Use **posts manuais** |
+| Portal pede Company Page | Regra do LinkedIn para apps | Pagina padrao de dev individual **ou** crie Page minima |
+| API retorna 403 / vazio | Sem permissao `r_member_social` | Normal para dev individual — use **posts manuais** |
+| Secao LinkedIn oculta | Array manual vazio + RSS/API falhando | Adicione pelo menos 1 post em `manualPosts.ts` |
+| Funciona local, nao em prod | Deploy desatualizado | Push + redeploy na Vercel |
 
 ---
 
@@ -131,13 +169,24 @@ Use o campo `id` no formato `urn:li:person:XXXX`.
 
 | Arquivo | Funcao |
 |---------|--------|
-| `lib/linkedin/fetchPosts.ts` | Parse RSS + fallback API LinkedIn |
-| `api/linkedin-posts.ts` | Handler serverless (Vercel) |
-| `src/context/LinkedInProvider.tsx` | Carrega posts no client |
+| `lib/linkedin/manualPosts.ts` | **Lista manual (recomendado)** |
+| `lib/linkedin/fetchPosts.ts` | Orquestra manual → API → RSS |
+| `api/linkedin-posts.ts` | Handler serverless |
 | `src/screens/LinkedIn/LinkedInPosts.tsx` | UI da secao |
 
 ---
 
-## Comportamento quando nao configurado
+## Resumo — qual caminho seguir?
 
-Se nenhuma variavel estiver definida ou o feed estiver vazio, a secao LinkedIn **permanece oculta** — o restante do portfolio funciona normalmente.
+```
+Quer posts no portfolio hoje?
+  └─ Sim → lib/linkedin/manualPosts.ts (5 min quando publicar)
+
+Quer automatizar sem editar codigo?
+  └─ Perfil pessoal → nao ha solucao confiavel gratuita em 2026
+  └─ Pagina de empresa ativa → talvez RSS de /company/...
+
+Quer explorar API?
+  └─ Crie Page minima OU selecione "Default Company Page for Individual Developer"
+  └─ Saiba que ler posts provavelmente nao sera aprovado
+```
