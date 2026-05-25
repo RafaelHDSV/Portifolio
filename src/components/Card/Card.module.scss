@@ -38,8 +38,10 @@
   height: 100%;
   transition: opacity 280ms ease;
 
-  .card:hover & {
-    opacity: 0;
+  @media (hover: hover) {
+    .card:hover & {
+      opacity: 0;
+    }
   }
 }
 
@@ -60,8 +62,10 @@
     transparent 100%
   );
 
-  .card:hover & {
-    opacity: 1;
+  @media (hover: hover) {
+    .card:hover & {
+      opacity: 1;
+    }
   }
 }
 

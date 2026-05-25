@@ -1,5 +1,2 @@
-- Por algum motivo, alguns projetos que antes estavam aparecendo a imagem demo, agora não estão aparecendo, está aparecendo somente a imagem do github. Corrija
-- Remova o texto 18 projetos exibidos
-- Verifique, valide e corrija todos os textos do portifolio para garantir que tudo está de acordo com a norma brasileira, incluindo acentuação, etc
-- TSQL está sem icone nos projetos
-- Garanta que o portifolio está 100%, para todos os tamanhos de tela possível. Garanta responsividade
+- As imagens que estavam funcionando anteriormente voltaram, mas agora todos os projetos está considerando que tem imagens, enquanto vários projetos não tem e deve ser mostrado somente a imagem do github mesmo. Corrija isso, para caso não tenha uma imagem da demo, mostre a imagem do github.
+- Após isso, analise o projeto como um todo e sugira novos desenvolvimentos, correções, implementações, etc.

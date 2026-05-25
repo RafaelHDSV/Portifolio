@@ -184,6 +184,11 @@ export function applyMediaToCard (
   card: ProjectCardData,
   media: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
+  if (media === 'placeholder') {
+    if (card.image && !card.usesPlaceholder) return card
+    return { ...card, image: '', usesPlaceholder: true }
+  }
+
   const fields = mediaToCardFields(media)
   return { ...card, ...fields }
 }

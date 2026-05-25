@@ -66,12 +66,6 @@ function ProjectsContent () {
         </p>
       )}
 
-      {!loading && filtered.length > 0 && (
-        <p className={styles.projectCount} role='status'>
-          {t('projects.count', { count: filtered.length })}
-        </p>
-      )}
-
       <div className={styles.filters} role='group' aria-label='Filtros'>
         {availableFilters.map((f) => (
           <button

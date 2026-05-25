@@ -11,7 +11,9 @@ const LANGUAGE_MAP: Record<string, string> = {
   PowerShell: 'PowerShell',
   PHP: 'PHP',
   Shell: 'Shell',
-  Python: 'Python'
+  Python: 'Python',
+  TSQL: 'TSQL',
+  'T-SQL': 'TSQL'
 }
 
 const TOPIC_MAP: Record<string, string> = {

@@ -39,23 +39,23 @@
   },
   "stack": {
     "title": "Stack e ferramentas",
-    "subtitle": "Tecnologias, IA, ferramentas e competencias do dia a dia",
+    "subtitle": "Tecnologias, IA, ferramentas e competências do dia a dia",
     "categories": {
       "core": "Core stack",
-      "ai": "IA e automacao",
+      "ai": "IA e automação",
       "tools": "Ferramentas",
       "softSkills": "Soft skills"
     },
     "softSkills": [
-      "Lideranca tecnica",
-      "Comunicacao clara",
+      "Liderança técnica",
+      "Comunicação clara",
       "Trabalho em equipe",
       "Mentoria e code review"
     ]
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Destaques ordenados por estrelas, tamanho e atualizacao (ate 18)",
+    "subtitle": "Destaques ordenados por estrelas, tamanho e data de atualização",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
@@ -67,8 +67,7 @@
     "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
-    "count": "{{count}} projetos exibidos",
-    "tokenHintPrivate": "Sem token GitHub no deploy, repositorios privados e pins privados podem nao aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
+    "tokenHintPrivate": "Sem token GitHub no deploy, repositórios privados e pins privados podem não aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
     "statsStars": "Estrelas",
     "statsForks": "Forks",
     "statsIssues": "Issues abertas",
@@ -156,8 +155,8 @@
       },
       "logo": {
         "name": "Logo RV",
-        "trigger": "5 cliques rapidos no logo (sem recarregar a pagina)",
-        "result": "Modo blueprint: grid cyan na pagina e logo brilhando por 14 segundos"
+        "trigger": "5 cliques rápidos no logo (sem recarregar a página)",
+        "result": "Modo blueprint: grid cyan na página e logo brilhando por 14 segundos"
       },
       "localeHopper": {
         "name": "Salto de idioma",
@@ -167,12 +166,12 @@
       "vieiraMessage": {
         "name": "Mensagem Vieira",
         "trigger": "Enviar e-mail ou mensagem contendo a palavra vieira",
-        "result": "Animacao de decolagem na secao Contato + mensagem Modo Vieira"
+        "result": "Animação de decolagem na seção Contato + mensagem Modo Vieira"
       },
       "vieiraMode": {
         "name": "Modo Vieira",
         "trigger": "Abrir o site com ?mode=vieira na URL",
-        "result": "Visual personalizado Vieira no hero enquanto o parametro estiver na URL"
+        "result": "Visual personalizado Vieira no hero enquanto o parâmetro estiver na URL"
       },
       "theme": {
         "name": "Caçador de temas",
@@ -180,9 +179,9 @@
         "result": "Espectro de cores percorre a página por 5 segundos"
       },
       "arrow": {
-        "name": "Orbita Vieira",
-        "trigger": "5 cliques rapidos na seta do hero (sem rolar a pagina)",
-        "result": "A mesma seta percorre o hero em orbita e volta a origem, sem alterar o fundo"
+        "name": "Órbita Vieira",
+        "trigger": "5 cliques rápidos na seta do hero (sem rolar a página)",
+        "result": "A mesma seta percorre o hero em órbita e volta à origem, sem alterar o fundo"
       }
     }
   },

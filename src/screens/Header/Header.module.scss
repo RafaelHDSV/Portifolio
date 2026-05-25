@@ -317,6 +317,21 @@
   }
 }
 
+@media (max-width: 480px) {
+  .header {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+  }
+
+  .name {
+    word-break: break-word;
+  }
+
+  .ctas {
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .header::before,
   .header::after {

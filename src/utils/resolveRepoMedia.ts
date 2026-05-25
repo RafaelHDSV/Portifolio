@@ -1,7 +1,6 @@
 import { GithubRepository } from '../repository/GithubRepository'
 import { projectsConfig } from '../constants/projects.config'
 import {
-  githubOpenGraphImage,
   parseReadmeMedia,
   ReadmeMedia
 } from './readmeMedia'
@@ -22,6 +21,27 @@ function configImageToMedia (url: string): ReadmeMedia {
   }
 }
 
+function findConfigMedia (repoName: string): ReadmeMedia | null {
+  const config = projectsConfig.find(
+    (p) => p.repoName?.toLowerCase() === repoName.toLowerCase()
+  )
+
+  if (config?.image && !config.image.endsWith('/icon.png')) {
+    return configImageToMedia(config.image)
+  }
+
+  return null
+}
+
+async function rawFileExists (url: string): Promise<boolean> {
+  try {
+    const response = await fetch(url, { method: 'HEAD' })
+    return response.ok
+  } catch {
+    return false
+  }
+}
+
 async function resolveRootDemoMedia (
   owner: string,
   repo: string
@@ -29,17 +49,25 @@ async function resolveRootDemoMedia (
   let poster: string | undefined
 
   for (const file of ROOT_IMAGE_FILES) {
-    if (await GithubRepository.repoFileExists(owner, repo, file)) {
-      poster = rawFileUrl(owner, repo, file)
+    const url = rawFileUrl(owner, repo, file)
+    if (
+      (await GithubRepository.repoFileExists(owner, repo, file)) ||
+      (await rawFileExists(url))
+    ) {
+      poster = url
       break
     }
   }
 
   for (const file of ROOT_VIDEO_FILES) {
-    if (await GithubRepository.repoFileExists(owner, repo, file)) {
+    const url = rawFileUrl(owner, repo, file)
+    if (
+      (await GithubRepository.repoFileExists(owner, repo, file)) ||
+      (await rawFileExists(url))
+    ) {
       return {
         type: 'video',
-        url: rawFileUrl(owner, repo, file),
+        url,
         poster
       }
     }
@@ -70,6 +98,12 @@ export async function resolveRepoMedia (
     return rootMedia
   }
 
+  const configMedia = findConfigMedia(repoName)
+  if (configMedia) {
+    mediaCache.set(cacheKey, configMedia)
+    return configMedia
+  }
+
   try {
     const readme = await GithubRepository.getReadme(owner, repoName)
     const parsed = parseReadmeMedia(readme, owner, repoName)
@@ -81,18 +115,6 @@ export async function resolveRepoMedia (
     // fallback below
   }
 
-  const config = projectsConfig.find(
-    (p) => p.repoName?.toLowerCase() === repoName.toLowerCase()
-  )
-
-  if (config?.image && !config.image.endsWith('/icon.png')) {
-    const media = configImageToMedia(config.image)
-    mediaCache.set(cacheKey, media)
-    return media
-  }
-
-  const og = githubOpenGraphImage(owner, repoName)
-  const media: ReadmeMedia = { type: 'image', url: og }
-  mediaCache.set(cacheKey, media)
-  return media
+  mediaCache.set(cacheKey, 'placeholder')
+  return 'placeholder'
 }

@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Highlights sorted by stars, size and last update (up to 18)",
+    "subtitle": "Highlights sorted by stars, size and last update",
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
@@ -67,7 +67,6 @@
     "openVideo": "Open video on GitHub",
     "noPreview": "No preview",
     "clearFilters": "Clear filters",
-    "count": "{{count}} projects shown",
     "tokenHintPrivate": "Without a GitHub token in production, private repositories and private pins may not appear. Set VITE_GITHUB_ACCESS_TOKEN on Vercel with repo scope.",
     "statsStars": "Stars",
     "statsForks": "Forks",

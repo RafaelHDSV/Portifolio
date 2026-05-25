@@ -266,3 +266,11 @@
     align-items: flex-start;
   }
 }
+
+@media (max-width: 480px) {
+  .explorerBadge {
+    right: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+  }
+}
