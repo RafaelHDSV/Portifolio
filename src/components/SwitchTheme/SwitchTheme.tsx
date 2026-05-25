@@ -46,7 +46,7 @@ export default function ThemeSwitcher () {
       ) : (
         <SunIcon size={16} weight='bold' />
       )}
-      {isDarkTheme ? 'Dark' : 'Light'}
+      {isDarkTheme ? t('theme.labelDark') : t('theme.labelLight')}
     </button>
   )
 }

@@ -5,15 +5,27 @@ import {
   IGithubResponseUser,
   IUser
 } from '../types/IGithub'
+import { filterReposForPortfolio } from '../utils/repoFilters'
+
+function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
+  return {
+    id: repo.id,
+    name: repo.name,
+    full_name: repo.full_name,
+    description: repo.description,
+    language: repo.language,
+    stargazers_count: repo.stargazers_count,
+    homepage: repo.homepage,
+    html_url: repo.html_url,
+    updated_at: repo.updated_at,
+    topics: repo.topics,
+    fork: repo.fork,
+    private: repo.private
+  }
+}
 
 class GithubRepositoryClass {
-  /**
-   * Obtém todos os repositórios de um usuário
-   * @param username Nome do usuário no GitHub
-   * @param config Configurações opcionais do Axios
-   * @returns Promise com array de repositórios
-   */
-  async getUserDetails(config?: AxiosRequestConfig): Promise<IUser> {
+  async getUserDetails (config?: AxiosRequestConfig): Promise<IUser> {
     try {
       const response = await githubApi.get<IGithubResponseUser>('/user', config)
 
@@ -29,7 +41,7 @@ class GithubRepositoryClass {
         public_repos
       } = response.data
 
-      const filteredUser: IUser = {
+      return {
         avatar_url,
         company,
         created_at,
@@ -40,52 +52,27 @@ class GithubRepositoryClass {
         name,
         public_repos
       }
-
-      return filteredUser
     } catch (err) {
       console.error(err)
-      throw new Error(`Failed to fetch repositories for user: ${err}`)
+      throw new Error(`Failed to fetch user: ${err}`)
     }
   }
 
-  /**
-   * Obtém apenas repositórios públicos de um usuário
-   * @param username Nome do usuário no GitHub
-   * @param config Configurações opcionais do Axios
-   * @returns Promise com array de repositórios públicos
-   */
-  async getRepos(config?: AxiosRequestConfig): Promise<IGithubResponseRepo[]> {
+  async getRepos (config?: AxiosRequestConfig): Promise<IGithubResponseRepo[]> {
     try {
-      const params = {
-        sort: 'updated',
-        per_page: '100'
-      }
+      const response = await githubApi.get<IGithubResponseRepo[]>('/user/repos', {
+        params: {
+          sort: 'updated',
+          per_page: '100',
+          affiliation: 'owner'
+        },
+        ...config
+      })
 
-      const response = await githubApi.get<IGithubResponseRepo[]>(
-        '/user/repos',
-        {
-          params,
-          ...config
-        }
-      )
-
-      const filteredRepos = response.data.map((repo: IGithubResponseRepo) => ({
-        id: repo.id,
-        name: repo.name,
-        full_name: repo.full_name,
-        description: repo.description,
-        language: repo.language,
-        stargazers_count: repo.stargazers_count,
-        homepage: repo.homepage,
-        html_url: repo.html_url,
-        updated_at: repo.updated_at,
-        topics: repo.topics
-      }))
-
-      return filteredRepos
+      return response.data.map(mapRepo)
     } catch (err) {
       console.error(err)
-      throw new Error(`Failed to fetch public repositories for user: ${err}`)
+      throw new Error(`Failed to fetch repositories: ${err}`)
     }
   }
 
@@ -94,28 +81,34 @@ class GithubRepositoryClass {
     limit = 10
   ): Promise<IGithubResponseRepo[]> {
     try {
-      const response = await githubApi.get<IGithubResponseRepo[]>(
-        `/users/${username}/repos`,
-        {
-          params: { sort: 'updated', per_page: String(limit) }
+      const response = await githubApi.get<IGithubResponseRepo[]>('/user/repos', {
+        params: {
+          sort: 'updated',
+          per_page: '100',
+          affiliation: 'owner'
         }
+      })
+
+      const filtered = filterReposForPortfolio(
+        response.data.map(mapRepo),
+        username
       )
 
-      return response.data.map((repo) => ({
-        id: repo.id,
-        name: repo.name,
-        full_name: repo.full_name,
-        description: repo.description,
-        language: repo.language,
-        stargazers_count: repo.stargazers_count,
-        homepage: repo.homepage,
-        html_url: repo.html_url,
-        updated_at: repo.updated_at,
-        topics: repo.topics
-      }))
+      return filtered.slice(0, limit)
     } catch (err) {
-      console.error(err)
-      throw new Error(`Failed to fetch recent repositories: ${err}`)
+      console.warn('Authenticated repos failed, falling back to public:', err)
+
+      const response = await githubApi.get<IGithubResponseRepo[]>(
+        `/users/${username}/repos`,
+        { params: { sort: 'updated', per_page: '100' } }
+      )
+
+      const filtered = filterReposForPortfolio(
+        response.data.map(mapRepo),
+        username
+      )
+
+      return filtered.slice(0, limit)
     }
   }
 
@@ -126,13 +119,15 @@ class GithubRepositoryClass {
           pinnedItems(first: 6, types: REPOSITORY) {
             nodes {
               ... on Repository {
-                id
+                databaseId
                 name
                 description
                 homepageUrl
                 url
                 updatedAt
                 stargazersCount
+                isFork
+                isPrivate
                 primaryLanguage { name }
                 repositoryTopics(first: 10) {
                   nodes { topic { name } }
@@ -150,13 +145,15 @@ class GithubRepositoryClass {
           user?: {
             pinnedItems?: {
               nodes?: Array<{
-                id: string
+                databaseId: number
                 name: string
                 description: string | null
                 homepageUrl: string | null
                 url: string
                 updatedAt: string
                 stargazersCount: number
+                isFork: boolean
+                isPrivate: boolean
                 primaryLanguage?: { name: string } | null
                 repositoryTopics?: {
                   nodes?: Array<{ topic: { name: string } }>
@@ -165,30 +162,49 @@ class GithubRepositoryClass {
             }
           }
         }
+        errors?: Array<{ message: string }>
       }>('/graphql', {
         query,
         variables: { login: username }
       })
 
+      if (response.data?.errors?.length) {
+        console.error('GraphQL pinned repos:', response.data.errors)
+      }
+
       const nodes = response.data?.data?.user?.pinnedItems?.nodes ?? []
 
-      return nodes.map((node) => ({
-        id: Number(node.id.replace(/\D/g, '').slice(0, 9)) || undefined,
-        name: node.name,
-        description: node.description ?? undefined,
-        homepage: node.homepageUrl,
-        html_url: node.url,
-        updated_at: node.updatedAt,
-        stargazers_count: node.stargazersCount,
-        language: node.primaryLanguage?.name,
-        topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name) as
-          | string[]
-          | undefined
-      }))
+      const repos = nodes
+        .filter((node) => !node.isFork)
+        .map((node) => ({
+          id: node.databaseId,
+          name: node.name,
+          description: node.description ?? undefined,
+          homepage: node.homepageUrl,
+          html_url: node.url,
+          updated_at: node.updatedAt,
+          stargazers_count: node.stargazersCount,
+          language: node.primaryLanguage?.name,
+          topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),
+          fork: false,
+          private: node.isPrivate
+        }))
+
+      return filterReposForPortfolio(repos, username)
     } catch (err) {
-      console.error(err)
+      console.error('Failed to fetch pinned repos:', err)
       return []
     }
+  }
+
+  async getReadme (owner: string, repo: string): Promise<string> {
+    const response = await githubApi.get<string>(
+      `/repos/${owner}/${repo}/readme`,
+      {
+        headers: { Accept: 'application/vnd.github.raw' }
+      }
+    )
+    return response.data
   }
 }
 

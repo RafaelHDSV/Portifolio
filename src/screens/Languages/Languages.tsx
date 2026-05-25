@@ -12,7 +12,7 @@ import {
   FaSass
 } from 'react-icons/fa'
 import { IoLogoJavascript } from 'react-icons/io5'
-import { SiCplusplus, SiMongodb, SiMysql, SiTypescript } from 'react-icons/si'
+import { SiCplusplus, SiMongodb, SiMysql, SiPhp, SiSharp, SiTypescript } from 'react-icons/si'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import styles from './Languages.module.scss'
@@ -23,6 +23,8 @@ const TECH_ICONS = [
   { icon: <IoLogoJavascript />, name: 'JavaScript' },
   { icon: <FaNode />, name: 'Node.js' },
   { icon: <SiMongodb />, name: 'MongoDB' },
+  { icon: <SiPhp />, name: 'PHP' },
+  { icon: <SiSharp />, name: 'C#' },
   { icon: <FaSass />, name: 'Sass' },
   { icon: <FaCss3Alt />, name: 'CSS3' },
   { icon: <FaHtml5 />, name: 'HTML5' },

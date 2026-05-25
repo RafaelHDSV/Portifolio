@@ -1,10 +1,11 @@
 {
   "nav": {
     "about": "About",
-    "stack": "Stack",
+    "stack": "Tech stack",
     "projects": "Projects",
+    "linkedin": "LinkedIn",
     "contact": "Contact",
-    "cv": "Resume",
+    "cv": "CV",
     "menu": "Open menu",
     "closeMenu": "Close menu"
   },
@@ -12,10 +13,10 @@
     "typewriter": [
       "Full-Stack Developer",
       "React · TypeScript · Node.js",
-      "End-to-end product delivery"
+      "From UI to back-end with product focus"
     ],
     "ctaProjects": "View projects",
-    "ctaCv": "Download resume"
+    "ctaCv": "Download CV"
   },
   "about": {
     "title": "About me",
@@ -27,7 +28,7 @@
     "following": "Following",
     "publicRepos": "Public repositories",
     "since": "Coding since",
-    "downloadCv": "Download resume",
+    "downloadCv": "Download CV",
     "viewGithub": "View on GitHub",
     "highlights": {
       "role": "Full-Stack Developer",
@@ -35,19 +36,21 @@
     }
   },
   "stack": {
-    "title": "Stack",
-    "subtitle": "Technologies I use daily"
+    "title": "Tech stack",
+    "subtitle": "Technologies I use day to day"
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "GitHub pins and recent work",
+    "subtitle": "Recent work",
     "viewDemo": "View demo",
-    "viewMore": "See more on GitHub",
+    "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
     "error": "Could not load repositories.",
     "retry": "Try again",
     "pinned": "Pin",
-    "imagePending": "Image pending — add a screenshot for this project",
+    "private": "Private",
+    "playVideo": "Play video for {{name}}",
+    "noPreview": "No preview",
     "clearFilters": "Clear filters",
     "filters": {
       "React": "React",
@@ -59,9 +62,15 @@
       "HTML": "HTML"
     }
   },
+  "linkedin": {
+    "title": "LinkedIn",
+    "subtitle": "Recent posts",
+    "readMore": "Read on LinkedIn",
+    "viewProfile": "View full profile"
+  },
   "contact": {
     "title": "Contact",
-    "subtitle": "Direct channels or send a message",
+    "subtitle": "Direct channels or message via form",
     "openForm": "Send message",
     "form": {
       "title": "Send message",
@@ -82,6 +91,8 @@
     "eggCounter": "Easter egg: {{count}}/{{total}} discovered"
   },
   "theme": {
+    "labelDark": "Dark",
+    "labelLight": "Light",
     "switchToLight": "Switch to light theme",
     "switchToDark": "Switch to dark theme"
   },
@@ -90,7 +101,52 @@
     "explorerDesc": "You mapped the portfolio end to end!",
     "themeHunter": "Theme hunter",
     "arrowHint": "Curious, huh?",
-    "counter": "{{count}}/{{total}} discovered"
+    "counter": "{{count}}/{{total}} discovered",
+    "catalogTitle": "Easter egg catalog (dev)",
+    "catalogDevHint": "Visible only in yarn dev. Click the footer counter to open.",
+    "catalogColName": "Name",
+    "catalogColTrigger": "How to unlock",
+    "catalogColResult": "Result",
+    "catalogColStatus": "Status",
+    "catalogUnlocked": "Unlocked",
+    "catalogLocked": "Locked",
+    "catalog": {
+      "konami": {
+        "name": "Konami",
+        "trigger": "Arrow sequence + B + A on keyboard",
+        "result": "Purple accent for 30 seconds"
+      },
+      "logo": {
+        "name": "RV logo",
+        "trigger": "5 quick clicks on the logo",
+        "result": "Console art with Plann.er link"
+      },
+      "scroll": {
+        "name": "Explorer",
+        "trigger": "Scroll to bottom and back to top 3 times",
+        "result": "Floating Explorer badge"
+      },
+      "rocket": {
+        "name": "Rocket",
+        "trigger": "Send an email containing the word rocket",
+        "result": "Special success message"
+      },
+      "space": {
+        "name": "Space mode",
+        "trigger": "Open the site with ?mode=space in the URL",
+        "result": "Extra stars in the hero"
+      },
+      "theme": {
+        "name": "Theme hunter",
+        "trigger": "Toggle light/dark theme 5 times in 3 seconds",
+        "result": "Theme hunter toast"
+      },
+      "arrow": {
+        "name": "Curious arrow",
+        "trigger": "Click the hero arrow 3 times",
+        "result": "Curious, huh? toast"
+      }
+    }
   },
   "common": {
     "loading": "Loading..."

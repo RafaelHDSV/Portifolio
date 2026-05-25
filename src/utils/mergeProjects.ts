@@ -1,7 +1,9 @@
 import { ProjectCardData } from '../components/Card/Card'
 import { projectsConfig } from '../constants/projects.config'
+import { GITHUB_USERNAME } from '../constants/cv'
 import { IGithubResponseRepo } from '../types/IGithub'
-import { resolveProjectImage } from './projectImages'
+import { ReadmeMedia } from './readmeMedia'
+import { filterReposForPortfolio } from './repoFilters'
 
 function mapLanguageToFilter (language?: string | null): string[] {
   if (!language) return []
@@ -9,15 +11,38 @@ function mapLanguageToFilter (language?: string | null): string[] {
     TypeScript: 'Typescript',
     JavaScript: 'Javascript',
     HTML: 'HTML',
-    CSS: 'CSS'
+    CSS: 'CSS',
+    'C#': 'API',
+    PHP: 'API'
   }
   return [map[language] ?? language]
+}
+
+function mediaToCardFields (media: ReadmeMedia | 'placeholder') {
+  if (media === 'placeholder') {
+    return { image: '', usesPlaceholder: true as const }
+  }
+
+  if (media.type === 'video') {
+    return {
+      image: media.poster ?? '',
+      media,
+      usesPlaceholder: !media.poster
+    }
+  }
+
+  return {
+    image: media.url,
+    media,
+    usesPlaceholder: false as const
+  }
 }
 
 function repoToCard (
   repo: IGithubResponseRepo,
   locale: 'pt' | 'en',
-  pinned: boolean
+  pinned: boolean,
+  media?: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
   const repoName = repo.name ?? ''
   const config = projectsConfig.find(
@@ -28,18 +53,50 @@ function repoToCard (
     ? config.description[locale]
     : repo.description ?? ''
 
-  const { src, pending } = resolveProjectImage(repoName, config?.image)
+  if (config?.image && !config.image.includes('icon.png')) {
+    return {
+      id: config?.key ?? repoName,
+      repoName,
+      name: config?.name ?? repoName,
+      image: config.image,
+      usesPlaceholder: false,
+      description,
+      languages: config?.languages ?? mapLanguageToFilter(repo.language),
+      urlProject: repo.homepage ?? config?.urlProject,
+      urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
+      pinned,
+      private: repo.private
+    }
+  }
+
+  if (media) {
+    const fields = mediaToCardFields(media)
+    return {
+      id: config?.key ?? repoName,
+      repoName,
+      name: config?.name ?? repoName,
+      description,
+      languages: config?.languages ?? mapLanguageToFilter(repo.language),
+      urlProject: repo.homepage ?? config?.urlProject,
+      urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
+      pinned,
+      private: repo.private,
+      ...fields
+    }
+  }
 
   return {
     id: config?.key ?? repoName,
+    repoName,
     name: config?.name ?? repoName,
-    image: src,
-    imagePending: pending,
+    image: '',
+    usesPlaceholder: true,
     description,
     languages: config?.languages ?? mapLanguageToFilter(repo.language),
     urlProject: repo.homepage ?? config?.urlProject,
     urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
-    pinned
+    pinned,
+    private: repo.private
   }
 }
 
@@ -48,13 +105,18 @@ export function mergeGitHubProjects (
   recent: IGithubResponseRepo[],
   locale: 'pt' | 'en'
 ): ProjectCardData[] {
+  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME)
   const pinnedNames = new Set(
-    pinned.map((r) => r.name?.toLowerCase()).filter(Boolean)
+    pinnedFiltered.map((r) => r.name?.toLowerCase()).filter(Boolean)
+  )
+
+  const recentFiltered = filterReposForPortfolio(recent, GITHUB_USERNAME).filter(
+    (r) => !pinnedNames.has(r.name?.toLowerCase() ?? '')
   )
 
   const ordered: IGithubResponseRepo[] = [
-    ...pinned,
-    ...recent.filter((r) => !pinnedNames.has(r.name?.toLowerCase() ?? ''))
+    ...pinnedFiltered,
+    ...recentFiltered
   ]
 
   const seen = new Set<string>()
@@ -70,23 +132,29 @@ export function mergeGitHubProjects (
   if (cards.length === 0) {
     return projectsConfig
       .filter((p) => !p.hidden)
-      .map((p) => {
-        const { src, pending } = resolveProjectImage(p.repoName ?? p.key, p.image)
-        return {
-          id: p.key,
-          name: p.name,
-          image: src,
-          imagePending: pending,
-          description: p.description[locale],
-          languages: p.languages,
-          urlProject: p.urlProject,
-          urlGitHub: p.urlGitHub,
-          pinned: p.featured ?? false
-        }
-      })
+      .map((p) => ({
+        id: p.key,
+        repoName: p.repoName ?? p.name,
+        name: p.name,
+        image: p.image,
+        usesPlaceholder: false,
+        description: p.description[locale],
+        languages: p.languages,
+        urlProject: p.urlProject,
+        urlGitHub: p.urlGitHub,
+        pinned: p.featured ?? false
+      }))
   }
 
   return cards
+}
+
+export function applyMediaToCard (
+  card: ProjectCardData,
+  media: ReadmeMedia | 'placeholder'
+): ProjectCardData {
+  const fields = mediaToCardFields(media)
+  return { ...card, ...fields }
 }
 
 export const PROJECT_FILTER_OPTIONS = [

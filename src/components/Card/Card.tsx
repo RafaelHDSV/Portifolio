@@ -1,4 +1,5 @@
-import { ArrowSquareOutIcon, GithubLogoIcon, PushPinIcon } from '@phosphor-icons/react'
+import { ArrowSquareOutIcon, GithubLogoIcon, ImageIcon, PlayIcon, PushPinIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
@@ -6,6 +7,7 @@ import styles from './Card.module.scss'
 
 export interface ProjectCardData {
   id: string
+  repoName: string
   name: string
   image: string
   description: string
@@ -13,7 +15,13 @@ export interface ProjectCardData {
   urlProject?: string
   urlGitHub: string
   pinned?: boolean
-  imagePending?: boolean
+  private?: boolean
+  usesPlaceholder?: boolean
+  media?: {
+    type: 'image' | 'gif' | 'video'
+    url: string
+    poster?: string
+  }
 }
 
 interface CardProps {
@@ -22,22 +30,74 @@ interface CardProps {
 
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const isVideo = project.media?.type === 'video'
+  const showPlaceholder = project.usesPlaceholder && !isPlaying
+
+  const renderMedia = () => {
+    if (showPlaceholder) {
+      return (
+        <div className={styles.imagePlaceholder} aria-hidden='true'>
+          <ImageIcon size={40} weight='duotone' />
+        </div>
+      )
+    }
+
+    if (isVideo && isPlaying) {
+      return (
+        <video
+          className={styles.video}
+          src={project.media!.url}
+          controls
+          autoPlay
+          playsInline
+          aria-label={project.name}
+        />
+      )
+    }
+
+    if (isVideo) {
+      return (
+        <button
+          type='button'
+          className={styles.videoThumb}
+          onClick={() => setIsPlaying(true)}
+          aria-label={t('projects.playVideo', { name: project.name })}
+        >
+          {project.image ? (
+            <img src={project.image} alt='' loading='lazy' />
+          ) : (
+            <div className={styles.videoFallback} />
+          )}
+          <span className={styles.playOverlay}>
+            <PlayIcon size={32} weight='fill' />
+          </span>
+        </button>
+      )
+    }
+
+    return (
+      <img
+        src={project.image}
+        alt={project.name}
+        loading='lazy'
+      />
+    )
+  }
 
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
-        {project.imagePending ? (
-          <div className={styles.imagePlaceholder}>
-            <span>{t('projects.imagePending')}</span>
-          </div>
-        ) : (
-          <img src={project.image} alt={project.name} loading='lazy' />
-        )}
+        {renderMedia()}
         {project.pinned && (
           <span className={styles.pinBadge}>
             <PushPinIcon size={14} weight='fill' />
             {t('projects.pinned')}
           </span>
+        )}
+        {project.private && (
+          <span className={styles.privateBadge}>{t('projects.private')}</span>
         )}
       </div>
 

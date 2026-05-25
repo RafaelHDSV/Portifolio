@@ -1,0 +1,124 @@
+.section {
+  width: 100%;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  height: 100%;
+  padding: 1.25rem;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  transition: transform 200ms ease, border-color 200ms ease;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.35;
+  }
+
+  p {
+    flex: 1;
+    font-size: var(--text-small);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-accent);
+
+  time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+}
+
+.linkHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.profileLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.skeletonList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.skeletonCard {
+  height: 160px;
+  border-radius: var(--radius-card);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-elevated) 25%,
+    var(--color-surface) 50%,
+    var(--color-surface-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonCard {
+    animation: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

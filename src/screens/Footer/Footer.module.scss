@@ -35,6 +35,55 @@
   color: var(--color-accent);
 }
 
+.eggCounterBtn {
+  padding: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+
+  &:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.catalogHint {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+.catalogTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+
+  th,
+  td {
+    padding: 0.625rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  td {
+    color: var(--color-text-secondary);
+  }
+}
+
 .social {
   display: flex;
   gap: 0.5rem;

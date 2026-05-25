@@ -1,8 +1,9 @@
 {
   "nav": {
     "about": "Sobre",
-    "stack": "Stack",
+    "stack": "Pilha tecnica",
     "projects": "Projetos",
+    "linkedin": "LinkedIn",
     "contact": "Contato",
     "cv": "CV",
     "menu": "Abrir menu",
@@ -35,19 +36,21 @@
     }
   },
   "stack": {
-    "title": "Stack",
+    "title": "Pilha tecnica",
     "subtitle": "Tecnologias que uso no dia a dia"
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Pins e trabalhos recentes do GitHub",
+    "subtitle": "Trabalhos recentes",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
     "error": "Nao foi possivel carregar os repositorios.",
     "retry": "Tentar novamente",
     "pinned": "Pin",
-    "imagePending": "Imagem pendente — adicionar screenshot deste projeto",
+    "private": "Privado",
+    "playVideo": "Reproduzir video de {{name}}",
+    "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
     "filters": {
       "React": "React",
@@ -58,6 +61,12 @@
       "CSS": "CSS",
       "HTML": "HTML"
     }
+  },
+  "linkedin": {
+    "title": "LinkedIn",
+    "subtitle": "Publicacoes recentes",
+    "readMore": "Ler no LinkedIn",
+    "viewProfile": "Ver perfil completo"
   },
   "contact": {
     "title": "Contato",
@@ -79,9 +88,11 @@
   },
   "footer": {
     "role": "Desenvolvedor Full-Stack",
-    "eggCounter": "Easteregg a: {{count}}/{{total}} descobertos"
+    "eggCounter": "Easter egg: {{count}}/{{total}} descobertos"
   },
   "theme": {
+    "labelDark": "Escuro",
+    "labelLight": "Claro",
     "switchToLight": "Mudar para tema claro",
     "switchToDark": "Mudar para tema escuro"
   },
@@ -90,7 +101,52 @@
     "explorerDesc": "Voce mapeou o portifolio de ponta a ponta!",
     "themeHunter": "Cacador de temas",
     "arrowHint": "Curioso, ne?",
-    "counter": "{{count}}/{{total}} descobertos"
+    "counter": "{{count}}/{{total}} descobertos",
+    "catalogTitle": "Catalogo de Easter eggs (dev)",
+    "catalogDevHint": "Visivel apenas em yarn dev. Clique no contador no footer para abrir.",
+    "catalogColName": "Nome",
+    "catalogColTrigger": "Como desbloquear",
+    "catalogColResult": "Resultado",
+    "catalogColStatus": "Status",
+    "catalogUnlocked": "Desbloqueado",
+    "catalogLocked": "Bloqueado",
+    "catalog": {
+      "konami": {
+        "name": "Konami",
+        "trigger": "Sequencia setas + B + A no teclado",
+        "result": "Accent roxo por 30 segundos"
+      },
+      "logo": {
+        "name": "Logo RV",
+        "trigger": "5 cliques rapidos no logo",
+        "result": "Arte no console com link do Plann.er"
+      },
+      "scroll": {
+        "name": "Explorador",
+        "trigger": "Ir ao fim da pagina e voltar ao topo 3 vezes",
+        "result": "Badge Explorador flutuante"
+      },
+      "rocket": {
+        "name": "Foguete",
+        "trigger": "Enviar e-mail contendo a palavra rocket",
+        "result": "Mensagem de sucesso especial"
+      },
+      "space": {
+        "name": "Modo espacial",
+        "trigger": "Abrir o site com ?mode=space na URL",
+        "result": "Estrelas extras no hero"
+      },
+      "theme": {
+        "name": "Cacador de temas",
+        "trigger": "Alternar tema claro/escuro 5 vezes em 3 segundos",
+        "result": "Toast Cacador de temas"
+      },
+      "arrow": {
+        "name": "Seta curiosa",
+        "trigger": "Clicar 3 vezes na seta do hero",
+        "result": "Toast Curioso, ne?"
+      }
+    }
   },
   "common": {
     "loading": "Carregando..."

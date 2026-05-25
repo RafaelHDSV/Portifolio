@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: '#about', key: 'about' as const, section: 'about' },
   { href: '#languages', key: 'stack' as const, section: 'languages' },
   { href: '#projects', key: 'projects' as const, section: 'projects' },
+  { href: '#linkedin', key: 'linkedin' as const, section: 'linkedin' },
   { href: '#contact', key: 'contact' as const, section: 'contact' }
 ]
 

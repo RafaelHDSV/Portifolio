@@ -3,10 +3,10 @@ $font-outfit: 'Outfit', sans-serif;
 
 :root {
   // Superficies
-  --color-bg: #f4f4f5;
-  --color-surface: #e4e4e7;
-  --color-surface-elevated: #ffffff;
-  --color-border: rgba(0, 0, 0, 0.08);
+  --color-bg: #e8e8ec;
+  --color-surface: #dfe0e4;
+  --color-surface-elevated: #f0f0f3;
+  --color-border: rgba(0, 0, 0, 0.11);
 
   // Texto
   --color-text-primary: #18181b;
@@ -25,7 +25,7 @@ $font-outfit: 'Outfit', sans-serif;
   --primary-color: var(--color-accent);
   --bg-color: var(--color-bg);
   --text-color: var(--color-text-primary);
-  --navbar-color: rgba(255, 255, 255, 0.85);
+  --navbar-color: rgba(240, 240, 243, 0.92);
   --card-color: var(--color-surface-elevated);
   --gray: #71717a;
   --gray-opacity: rgba(0, 0, 0, 0.06);

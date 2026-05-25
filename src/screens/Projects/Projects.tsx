@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+import { useEnrichedProjects } from '../../hooks/useEnrichedProjects'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
 import {
   collectAvailableFilters,
@@ -35,14 +36,16 @@ function ProjectsContent () {
     [pinned, recent, locale]
   )
 
+  const enrichedProjects = useEnrichedProjects(allProjects)
+
   const availableFilters = useMemo(
-    () => collectAvailableFilters(allProjects),
-    [allProjects]
+    () => collectAvailableFilters(enrichedProjects),
+    [enrichedProjects]
   )
 
   const filtered = useMemo(
-    () => filterProjectsMulti(allProjects, selectedFilters),
-    [allProjects, selectedFilters]
+    () => filterProjectsMulti(enrichedProjects, selectedFilters),
+    [enrichedProjects, selectedFilters]
   )
 
   const toggleFilter = (filter: string) => {
