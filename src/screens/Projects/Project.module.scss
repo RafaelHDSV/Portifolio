@@ -10,6 +10,18 @@
   margin-bottom: 2rem;
 }
 
+.tokenNotice {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  text-align: center;
+  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
+  border-radius: var(--radius-card);
+}
+
 .filterChip {
   min-height: 44px;
   padding: 0.5rem 1rem;

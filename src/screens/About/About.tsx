@@ -33,12 +33,48 @@ function AboutSkeleton () {
   )
 }
 
+function ProfileTagGroup ({
+  title,
+  items
+}: {
+  title: string
+  items: string[]
+}) {
+  if (items.length === 0) return null
+
+  return (
+    <div className={styles.profileGroup}>
+      <h4 className={styles.profileTitle}>{title}</h4>
+      <ul className={styles.profileTags}>
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function AboutContent () {
   const { t } = useTranslation()
   const { user, loading } = useGetMe()
 
   if (loading) return <AboutSkeleton />
   if (!user) return null
+
+  const profile = t('about.profile', { returnObjects: true }) as {
+    experienceTitle: string
+    experience: string[]
+    educationTitle: string
+    education: string[]
+    hardSkillsTitle: string
+    hardSkills: string[]
+    softSkillsTitle: string
+    softSkills: string[]
+    aiTitle: string
+    aiSkills: string[]
+    toolsTitle: string
+    tools: string[]
+  }
 
   return (
     <Container className={styles.layout}>
@@ -103,6 +139,27 @@ function AboutContent () {
             label={t('about.since')}
             value={dayjs(user.created_at).format('DD/MM/YYYY')}
           />
+        </div>
+
+        <div className={styles.profileGrid}>
+          <ProfileTagGroup
+            title={profile.experienceTitle}
+            items={profile.experience}
+          />
+          <ProfileTagGroup
+            title={profile.educationTitle}
+            items={profile.education}
+          />
+          <ProfileTagGroup
+            title={profile.hardSkillsTitle}
+            items={profile.hardSkills}
+          />
+          <ProfileTagGroup
+            title={profile.softSkillsTitle}
+            items={profile.softSkills}
+          />
+          <ProfileTagGroup title={profile.aiTitle} items={profile.aiSkills} />
+          <ProfileTagGroup title={profile.toolsTitle} items={profile.tools} />
         </div>
 
         <div className={styles.actions}>

@@ -1,9 +1,27 @@
-import { ArrowSquareOutIcon, GithubLogoIcon, ImageIcon, PlayIcon, PushPinIcon } from '@phosphor-icons/react'
+import {
+  ArrowSquareOutIcon,
+  GitForkIcon,
+  GithubLogoIcon,
+  ImageIcon,
+  PlayIcon,
+  PushPinIcon,
+  StarIcon,
+  WarningCircleIcon
+} from '@phosphor-icons/react'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GITHUB_USERNAME } from '../../constants/cv'
+import { GithubRepository } from '../../repository/GithubRepository'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
 import styles from './Card.module.scss'
+
+export interface ProjectGithubStats {
+  stars: number
+  forks: number
+  openIssues: number
+  ogImage: string
+}
 
 export interface ProjectCardData {
   id: string
@@ -17,6 +35,7 @@ export interface ProjectCardData {
   pinned?: boolean
   private?: boolean
   usesPlaceholder?: boolean
+  github?: ProjectGithubStats
   media?: {
     type: 'image' | 'gif' | 'video'
     url: string
@@ -28,25 +47,57 @@ interface CardProps {
   project: ProjectCardData
 }
 
+function isInlineVideoBlocked (url: string): boolean {
+  return url.includes('user-attachments/assets') || url.includes('githubusercontent.com')
+}
+
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
   const [isPlaying, setIsPlaying] = useState(false)
   const [videoError, setVideoError] = useState(false)
+  const [contributors, setContributors] = useState<string[]>([])
+  const [loadingContributors, setLoadingContributors] = useState(false)
 
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
+  const thumbImage = project.image || project.media?.poster || ''
 
   const handleVideoError = useCallback(() => {
-    setVideoError(true)
     setIsPlaying(false)
-  }, [])
+    if (thumbImage) return
+    setVideoError(true)
+  }, [thumbImage])
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (isInlineVideoBlocked(videoUrl)) {
+      window.open(videoUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
+    setIsPlaying(true)
+  }
+
+  const loadContributors = useCallback(async () => {
+    if (contributors.length > 0 || loadingContributors || !project.repoName) return
+    setLoadingContributors(true)
+    try {
+      const avatars = await GithubRepository.getContributorAvatars(
+        GITHUB_USERNAME,
+        project.repoName
+      )
+      setContributors(avatars)
+    } finally {
+      setLoadingContributors(false)
+    }
+  }, [contributors.length, loadingContributors, project.repoName])
 
   const renderMedia = () => {
-    if (isVideo && isPlaying) {
+    if (isVideo && isPlaying && !isInlineVideoBlocked(videoUrl)) {
       return (
         <video
           className={styles.video}
           src={videoUrl}
+          poster={thumbImage || undefined}
           controls
           autoPlay
           playsInline
@@ -61,24 +112,13 @@ export default function Card ({ project }: CardProps) {
         <button
           type='button'
           className={styles.videoThumb}
-          onClick={(e) => {
-            e.stopPropagation()
-            setIsPlaying(true)
-          }}
+          onClick={handlePlayClick}
           aria-label={t('projects.playVideo', { name: project.name })}
         >
-          {project.image ? (
-            <img src={project.image} alt='' loading='lazy' />
+          {thumbImage ? (
+            <img src={thumbImage} alt='' loading='lazy' />
           ) : (
-            <video
-              className={styles.videoPreview}
-              src={videoUrl}
-              preload='metadata'
-              muted
-              playsInline
-              onError={handleVideoError}
-              aria-hidden='true'
-            />
+            <div className={styles.videoFallback} aria-hidden='true' />
           )}
           <span className={styles.playOverlay}>
             <PlayIcon size={32} weight='fill' />
@@ -118,10 +158,50 @@ export default function Card ({ project }: CardProps) {
     )
   }
 
+  const renderGithubOverlay = () => {
+    if (!project.github) return null
+
+    return (
+      <div className={styles.githubOverlay} aria-hidden='true'>
+        <img
+          className={styles.githubOgImage}
+          src={project.github.ogImage}
+          alt=''
+          loading='lazy'
+        />
+        <div className={styles.githubStats}>
+          <span>
+            <StarIcon size={16} weight='fill' />
+            {project.github.stars}
+          </span>
+          <span>
+            <GitForkIcon size={16} weight='bold' />
+            {project.github.forks}
+          </span>
+          <span>
+            <WarningCircleIcon size={16} weight='bold' />
+            {project.github.openIssues}
+          </span>
+        </div>
+        {contributors.length > 0 && (
+          <div className={styles.contributors}>
+            {contributors.map((avatar) => (
+              <img key={avatar} src={avatar} alt='' loading='lazy' />
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onMouseEnter={loadContributors}
+    >
       <div className={styles.imageWrapper}>
-        {renderMedia()}
+        <div className={styles.mediaDefault}>{renderMedia()}</div>
+        {renderGithubOverlay()}
         {project.pinned && (
           <span className={styles.pinBadge}>
             <PushPinIcon size={14} weight='fill' />

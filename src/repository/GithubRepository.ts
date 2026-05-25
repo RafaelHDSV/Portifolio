@@ -16,6 +16,8 @@ function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
     description: repo.description,
     language: repo.language,
     stargazers_count: repo.stargazers_count,
+    forks_count: repo.forks_count,
+    open_issues_count: repo.open_issues_count,
     homepage: repo.homepage,
     html_url: repo.html_url,
     updated_at: repo.updated_at,
@@ -33,6 +35,8 @@ const PINNED_REPO_FIELDS = `
   url
   updatedAt
   stargazersCount
+  forkCount
+  issues(states: OPEN) { totalCount }
   isFork
   isPrivate
   primaryLanguage { name }
@@ -49,6 +53,8 @@ type PinnedNode = {
   url: string
   updatedAt: string
   stargazersCount: number
+  forkCount: number
+  issues?: { totalCount: number }
   isFork: boolean
   isPrivate: boolean
   primaryLanguage?: { name: string } | null
@@ -66,6 +72,8 @@ function mapPinnedNode (node: PinnedNode): IGithubResponseRepo {
     html_url: node.url,
     updated_at: node.updatedAt,
     stargazers_count: node.stargazersCount,
+    forks_count: node.forkCount,
+    open_issues_count: node.issues?.totalCount ?? 0,
     language: node.primaryLanguage?.name,
     topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),
     fork: node.isFork,
@@ -127,10 +135,7 @@ class GithubRepositoryClass {
     }
   }
 
-  async getRecentRepos (
-    username: string,
-    limit = 10
-  ): Promise<IGithubResponseRepo[]> {
+  async getRecentRepos (username: string): Promise<IGithubResponseRepo[]> {
     try {
       const response = await githubApi.get<IGithubResponseRepo[]>('/user/repos', {
         params: {
@@ -140,12 +145,10 @@ class GithubRepositoryClass {
         }
       })
 
-      const filtered = filterReposForPortfolio(
+      return filterReposForPortfolio(
         response.data.map(mapRepo),
         username
       )
-
-      return filtered.slice(0, limit)
     } catch (err) {
       console.warn('Authenticated repos failed, falling back to public:', err)
 
@@ -154,12 +157,10 @@ class GithubRepositoryClass {
         { params: { sort: 'updated', per_page: '100' } }
       )
 
-      const filtered = filterReposForPortfolio(
+      return filterReposForPortfolio(
         response.data.map(mapRepo),
         username
       )
-
-      return filtered.slice(0, limit)
     }
   }
 
@@ -247,6 +248,22 @@ class GithubRepositoryClass {
       return Object.entries(response.data)
         .sort(([, a], [, b]) => b - a)
         .map(([lang]) => lang)
+    } catch {
+      return []
+    }
+  }
+
+  async getContributorAvatars (
+    owner: string,
+    repo: string,
+    limit = 5
+  ): Promise<string[]> {
+    try {
+      const response = await githubApi.get<Array<{ avatar_url: string }>>(
+        `/repos/${owner}/${repo}/contributors`,
+        { params: { per_page: limit, anon: 'false' } }
+      )
+      return response.data.map((c) => c.avatar_url)
     } catch {
       return []
     }

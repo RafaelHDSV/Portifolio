@@ -1,7 +1,21 @@
 /* Easter egg visual effects — applied on document.documentElement */
 
-html.egg-logo-reveal {
-  --color-accent: #c084fc;
+html.egg-blueprint-mode {
+  --color-accent: #22d3ee;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image:
+      linear-gradient(rgba(34, 211, 238, 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.35) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: blueprintScan 14s linear;
+  }
 }
 
 html.egg-section-flash {
@@ -30,10 +44,8 @@ html.egg-theme-spectrum {
   animation: themeSpectrum 5s ease;
 }
 
-html.egg-arrow-curious .arrowDown,
-html.egg-arrow-curious [class*='arrowDown'] {
-  animation: arrowSpin 0.6s ease-in-out 4;
-  color: #22d3ee !important;
+html.egg-arrow-travel {
+  --color-accent: #22d3ee;
 }
 
 html.egg-rocket-launch {
@@ -54,6 +66,11 @@ html.egg-rocket-launch {
   }
 }
 
+@keyframes blueprintScan {
+  from { transform: translateY(0); }
+  to { transform: translateY(48px); }
+}
+
 @keyframes sectionFlash {
   0%, 100% { filter: none; }
   50% { filter: brightness(1.08); }
@@ -72,11 +89,6 @@ html.egg-rocket-launch {
   100% { filter: hue-rotate(360deg) saturate(1); }
 }
 
-@keyframes arrowSpin {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  100% { transform: translateX(-50%) rotate(360deg); }
-}
-
 @keyframes rocketShake {
   0%, 100% { transform: translateY(0); }
   25% { transform: translateY(-6px); }
@@ -90,6 +102,7 @@ html.egg-rocket-launch {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.egg-blueprint-mode::before,
   html.egg-theme-spectrum,
   html.egg-section-tour-done #about,
   html.egg-section-tour-done #languages,

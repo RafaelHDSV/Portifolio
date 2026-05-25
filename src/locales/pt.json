@@ -16,7 +16,8 @@
       "Do front ao back-end com foco em produto"
     ],
     "ctaProjects": "Ver projetos",
-    "ctaCv": "Baixar CV"
+    "ctaCv": "Baixar CV",
+    "arrowHint": "Easter egg da seta"
   },
   "about": {
     "title": "Sobre mim",
@@ -34,6 +35,52 @@
     "highlights": {
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
+    },
+    "profile": {
+      "experienceTitle": "Experiencia",
+      "experience": [
+        "Full-Stack Developer — AGX Software",
+        "Lideranca tecnica e code review em equipe",
+        "Entrega de produtos web ponta a ponta"
+      ],
+      "educationTitle": "Formacao e cursos",
+      "education": [
+        "Anhembi Morumbi — Analise e Desenvolvimento de Sistemas",
+        "Udemy — React, Node.js e automacao",
+        "Estudo continuo em arquitetura e boas praticas"
+      ],
+      "hardSkillsTitle": "Hard skills",
+      "hardSkills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "MongoDB",
+        "REST APIs",
+        "SASS",
+        "Git"
+      ],
+      "softSkillsTitle": "Soft skills",
+      "softSkills": [
+        "Lideranca tecnica",
+        "Comunicacao clara",
+        "Trabalho em equipe",
+        "Mentoria e code review"
+      ],
+      "aiTitle": "IA e automacao",
+      "aiSkills": [
+        "Cursor / Copilot",
+        "Integracao com LLMs",
+        "Fluxos com n8n",
+        "Pair programming assistido por IA"
+      ],
+      "toolsTitle": "Ferramentas",
+      "tools": [
+        "VS Code",
+        "GitHub",
+        "Figma",
+        "Postman",
+        "Vercel"
+      ]
     }
   },
   "stack": {
@@ -54,6 +101,10 @@
     "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
+    "tokenHint": "Sem token GitHub no deploy, pins privados e a lista completa (ate {{expected}} projetos) podem nao aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
+    "statsStars": "Estrelas",
+    "statsForks": "Forks",
+    "statsIssues": "Issues abertas",
     "filters": {
       "React": "React",
       "Typescript": "TypeScript",
@@ -119,6 +170,7 @@
     "explorerDesc": "Você visitou todas as seções principais!",
     "sectionTourDesc": "Tour completo: você passou por Sobre, Stack, Projetos e Contato!",
     "sectionTourProgress": "Progresso do tour — continue explorando as seções!",
+    "sectionTourHint": "Tour {{visited}}/{{total}} — visite Sobre, Stack, Projetos e Contato",
     "spaceModeActive": "Modo espacial ativado — estrelas e nebulosa no hero!",
     "konamiActive": "Código Konami detectado — accent roxo por 30 segundos!",
     "themeHunter": "Caçador de temas desbloqueado!",
@@ -141,8 +193,8 @@
       },
       "logo": {
         "name": "Logo RV",
-        "trigger": "5 cliques rápidos no logo (sem recarregar a página)",
-        "result": "Logo brilha e chip Plann.er aparece na navbar"
+        "trigger": "5 cliques rapidos no logo (sem recarregar a pagina)",
+        "result": "Modo blueprint: grid cyan na pagina e logo brilhando por 14 segundos"
       },
       "sectionTour": {
         "name": "Tour das seções",
@@ -166,8 +218,8 @@
       },
       "arrow": {
         "name": "Seta curiosa",
-        "trigger": "Clicar 3 vezes na seta do hero",
-        "result": "Seta gira e muda de cor"
+        "trigger": "5 cliques rapidos na seta do hero (sem rolar a pagina)",
+        "result": "Seta animada percorre o hero por 5 segundos"
       }
     }
   },

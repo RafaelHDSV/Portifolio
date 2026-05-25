@@ -26,27 +26,7 @@
 
   &.logoSecret {
     animation: logoSecretPulse 1.2s ease-in-out infinite alternate;
-    filter: drop-shadow(0 0 12px color-mix(in srgb, #c084fc 60%, transparent));
-  }
-}
-
-.secretChip {
-  position: absolute;
-  left: 5.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0.35rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #0a0a0b;
-  background: linear-gradient(135deg, #c084fc, #818cf8);
-  border-radius: 999px;
-  box-shadow: 0 4px 20px rgba(192, 132, 252, 0.45);
-  animation: secretChipIn 500ms ease, secretChipFloat 2s ease-in-out infinite alternate;
-  z-index: 2;
-
-  &:hover {
-    transform: translateY(calc(-50% - 2px));
+    filter: drop-shadow(0 0 14px color-mix(in srgb, #22d3ee 65%, transparent));
   }
 }
 
@@ -57,16 +37,6 @@
 @keyframes logoSecretPulse {
   from { transform: scale(1); }
   to { transform: scale(1.06); }
-}
-
-@keyframes secretChipIn {
-  from { opacity: 0; transform: translateY(calc(-50% + 8px)); }
-  to { opacity: 1; transform: translateY(-50%); }
-}
-
-@keyframes secretChipFloat {
-  from { margin-top: 0; }
-  to { margin-top: -4px; }
 }
 
 .pillToggle {

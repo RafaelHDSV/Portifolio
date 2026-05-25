@@ -10,9 +10,12 @@ import useGitHubProjects from '../../hooks/useGitHubProjects'
 import {
   collectAvailableFilters,
   filterProjectsMulti,
-  mergeGitHubProjects
+  mergeGitHubProjects,
+  PINNED_PROJECT_LIMIT,
+  RECENT_PROJECT_LIMIT
 } from '../../utils/mergeProjects'
 import { getProjectFilterLabel } from '../../utils/filterLabels'
+import { gitHubToken } from '../../utils/environment'
 import styles from './Project.module.scss'
 
 function ProjectsSkeleton () {
@@ -59,6 +62,14 @@ function ProjectsContent () {
 
   return (
     <>
+      {!gitHubToken && !loading && (
+        <p className={styles.tokenNotice} role='note'>
+          {t('projects.tokenHint', {
+            expected: PINNED_PROJECT_LIMIT + RECENT_PROJECT_LIMIT
+          })}
+        </p>
+      )}
+
       <div className={styles.filters} role='group' aria-label='Filtros'>
         {availableFilters.map((f) => (
           <button

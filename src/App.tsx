@@ -1,6 +1,7 @@
 import CustomCursor from './components/CustomCursor/CustomCursor'
 import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
+import SectionTourHint from './components/SectionTourHint/SectionTourHint'
 import { RecruiterModeProvider } from './context/RecruiterModeProvider'
 import { useRecruiterMode } from './context/useRecruiterMode'
 import { EasterEggProvider } from './hooks/EasterEggProvider'
@@ -30,6 +31,7 @@ function AppContent () {
   return (
     <div className={styles.app}>
       <Navbar />
+      <SectionTourHint />
       <Header />
       <About />
       <Languages />

@@ -8,6 +8,19 @@ import { filterReposForPortfolio } from './repoFilters'
 export const PINNED_PROJECT_LIMIT = 6
 export const RECENT_PROJECT_LIMIT = 10
 
+function githubOgImage (repoName: string): string {
+  return `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${encodeURIComponent(repoName)}`
+}
+
+function repoGithubStats (repo: IGithubResponseRepo, repoName: string) {
+  return {
+    stars: repo.stargazers_count ?? 0,
+    forks: repo.forks_count ?? 0,
+    openIssues: repo.open_issues_count ?? 0,
+    ogImage: githubOgImage(repoName)
+  }
+}
+
 function mapLanguageToFilter (language?: string | null): string[] {
   if (!language) return []
   const map: Record<string, string> = {
@@ -72,6 +85,7 @@ function repoToCard (
       urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
       pinned,
       private: repo.private,
+      github: repoGithubStats(repo, repoName),
       ...fields
     }
   }
@@ -90,7 +104,8 @@ function repoToCard (
     urlProject: repo.homepage ?? config?.urlProject,
     urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
     pinned,
-    private: repo.private
+    private: repo.private,
+    github: repoGithubStats(repo, repoName)
   }
 }
 

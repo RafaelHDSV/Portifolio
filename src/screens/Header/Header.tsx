@@ -10,7 +10,7 @@ import styles from './Header.module.scss'
 
 export default function Header () {
   const { t } = useTranslation()
-  const { incrementArrowClick } = useEasterEgg()
+  const { incrementArrowClick, arrowTravelActive } = useEasterEgg()
   const spaceMode = useSpaceModeFromUrl()
 
   const typewriterStrings = t('hero.typewriter', {
@@ -26,6 +26,15 @@ export default function Header () {
         <div className={styles.fxLayer} aria-hidden='true' />
         <div className={styles.orbA} aria-hidden='true' />
         <div className={styles.orbB} aria-hidden='true' />
+
+        {arrowTravelActive && (
+          <ArrowDownIcon
+            className={styles.flyingArrow}
+            size='1.75rem'
+            weight='bold'
+            aria-hidden='true'
+          />
+        )}
 
         <div className={styles.content}>
           <h1 className={styles.name}>Rafael Vieira</h1>
@@ -56,13 +65,14 @@ export default function Header () {
           </div>
         </div>
 
-        <a
-          href='#about'
-          aria-label='Scroll para sobre'
+        <button
+          type='button'
+          className={styles.arrowBtn}
+          aria-label={t('hero.arrowHint')}
           onClick={incrementArrowClick}
         >
           <ArrowDownIcon className={styles.arrowDown} size='1.5rem' weight='bold' />
-        </a>
+        </button>
       </header>
     </Fade>
   )

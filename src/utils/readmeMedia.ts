@@ -25,13 +25,14 @@ function resolveUrl (raw: string, owner: string, repo: string): string {
 }
 
 function classifyUrl (url: string): ReadmeMediaType {
-  if (url.includes('user-attachments/assets')) {
-    if (GIF_EXT.test(url)) return 'gif'
-    if (VIDEO_EXT.test(url)) return 'video'
-    return 'video'
-  }
   if (GIF_EXT.test(url)) return 'gif'
   if (VIDEO_EXT.test(url)) return 'video'
+  if (/\.(png|jpe?g|webp|svg)(\?|$)/i.test(url)) return 'image'
+
+  if (url.includes('user-attachments/assets')) {
+    return 'image'
+  }
+
   return 'image'
 }
 
@@ -111,13 +112,18 @@ export function parseReadmeMedia (
 
   if (found.length === 0) return null
 
-  const video = found.find((m) => m.type === 'video')
+  const video = found.find(
+    (m) => m.type === 'video' && VIDEO_EXT.test(m.url)
+  )
   if (video) {
     const poster = found.find((m) => m.type === 'image' || m.type === 'gif')
     return { ...video, poster: poster?.url }
   }
 
-  return found[0]
+  const gif = found.find((m) => m.type === 'gif')
+  if (gif) return gif
+
+  return found.find((m) => m.type === 'image') ?? found[0]
 }
 
 export function githubOpenGraphImage (owner: string, repo: string): string {

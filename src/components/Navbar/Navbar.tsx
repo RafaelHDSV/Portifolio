@@ -66,17 +66,6 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
         <Logo />
       </a>
 
-      {logoRevealActive && (
-        <a
-          className={styles.secretChip}
-          href='https://github.com/RafaelHDSV/Plann.er'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Plann.er
-        </a>
-      )}
-
       <div className={styles.desktopActions}>
         {!recruiterOnly && (
           <div className={styles.links}>

@@ -9,7 +9,10 @@ export interface EasterEggContextValue {
   totalEggs: number
   logoRevealActive: boolean
   rocketLaunchActive: boolean
+  arrowTravelActive: boolean
   sectionTourProgress: number
+  sectionTourVisitedCount: number
+  sectionTourTotal: number
   catalogRevealAll: boolean
   incrementLogoClick: () => void
   incrementArrowClick: () => void

@@ -16,7 +16,8 @@
       "From UI to back-end with product focus"
     ],
     "ctaProjects": "View projects",
-    "ctaCv": "Download CV"
+    "ctaCv": "Download CV",
+    "arrowHint": "Arrow easter egg"
   },
   "about": {
     "title": "About me",
@@ -34,6 +35,52 @@
     "highlights": {
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
+    },
+    "profile": {
+      "experienceTitle": "Experience",
+      "experience": [
+        "Full-Stack Developer — AGX Software",
+        "Technical leadership and code review",
+        "End-to-end web product delivery"
+      ],
+      "educationTitle": "Education and courses",
+      "education": [
+        "Anhembi Morumbi — Systems Analysis and Development",
+        "Udemy — React, Node.js and automation",
+        "Continuous learning in architecture and best practices"
+      ],
+      "hardSkillsTitle": "Hard skills",
+      "hardSkills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "MongoDB",
+        "REST APIs",
+        "SASS",
+        "Git"
+      ],
+      "softSkillsTitle": "Soft skills",
+      "softSkills": [
+        "Technical leadership",
+        "Clear communication",
+        "Teamwork",
+        "Mentoring and code review"
+      ],
+      "aiTitle": "AI and automation",
+      "aiSkills": [
+        "Cursor / Copilot",
+        "LLM integration",
+        "n8n workflows",
+        "AI-assisted pair programming"
+      ],
+      "toolsTitle": "Tools",
+      "tools": [
+        "VS Code",
+        "GitHub",
+        "Figma",
+        "Postman",
+        "Vercel"
+      ]
     }
   },
   "stack": {
@@ -54,6 +101,10 @@
     "openVideo": "Open video on GitHub",
     "noPreview": "No preview",
     "clearFilters": "Clear filters",
+    "tokenHint": "Without a GitHub token in production, private pins and the full list (up to {{expected}} projects) may not appear. Set VITE_GITHUB_ACCESS_TOKEN on Vercel with repo scope.",
+    "statsStars": "Stars",
+    "statsForks": "Forks",
+    "statsIssues": "Open issues",
     "filters": {
       "React": "React",
       "Typescript": "TypeScript",
@@ -119,6 +170,7 @@
     "explorerDesc": "You visited all main sections!",
     "sectionTourDesc": "Full tour: About, Stack, Projects and Contact!",
     "sectionTourProgress": "Tour progress — keep exploring the sections!",
+    "sectionTourHint": "Tour {{visited}}/{{total}} — visit About, Stack, Projects and Contact",
     "spaceModeActive": "Space mode enabled — stars and nebula on the hero!",
     "konamiActive": "Konami code detected — purple accent for 30 seconds!",
     "themeHunter": "Theme hunter unlocked!",
@@ -142,7 +194,7 @@
       "logo": {
         "name": "RV logo",
         "trigger": "5 quick clicks on the logo (no page reload)",
-        "result": "Logo glows and Plann.er chip appears in the navbar"
+        "result": "Blueprint mode: cyan grid overlay and glowing logo for 14 seconds"
       },
       "sectionTour": {
         "name": "Section tour",
@@ -166,8 +218,8 @@
       },
       "arrow": {
         "name": "Curious arrow",
-        "trigger": "Click the hero arrow 3 times",
-        "result": "Arrow spins and changes color"
+        "trigger": "5 quick clicks on the hero arrow (does not scroll)",
+        "result": "Animated arrow travels across the hero for 5 seconds"
       }
     }
   },

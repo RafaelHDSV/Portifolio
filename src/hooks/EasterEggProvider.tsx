@@ -6,10 +6,10 @@ const STORAGE_KEY = 'eggs-unlocked'
 const SECTIONS_KEY = 'egg-sections-visited'
 
 const EGG_EFFECT_CLASSES: Partial<Record<EasterEggId, string>> = {
-  'logo-clicks': 'egg-logo-reveal',
+  'logo-clicks': 'egg-blueprint-mode',
   'section-tour': 'egg-section-tour-done',
   'theme-hunter': 'egg-theme-spectrum',
-  'arrow-hint': 'egg-arrow-curious',
+  'arrow-hint': 'egg-arrow-travel',
   'rocket-email': 'egg-rocket-launch',
   konami: 'easter-egg-accent'
 }
@@ -90,7 +90,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState<Set<EasterEggId>>(loadUnlocked)
   const [logoRevealActive, setLogoRevealActive] = useState(false)
   const [rocketLaunchActive, setRocketLaunchActive] = useState(false)
+  const [arrowTravelActive, setArrowTravelActive] = useState(false)
   const [sectionTourProgress, setSectionTourProgress] = useState(0)
+  const [sectionTourVisitedCount, setSectionTourVisitedCount] = useState(
+    () => loadVisitedSections().size
+  )
   const [catalogRevealAll, setCatalogRevealAll] = useState(false)
   const unlockedRef = useRef(unlocked)
   const logoClicksRef = useRef(0)
@@ -106,9 +110,9 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   }, [unlocked])
 
   useEffect(() => {
-    setSectionTourProgress(
-      visitedSectionsRef.current.size / SECTION_TOUR_IDS.length
-    )
+    const count = visitedSectionsRef.current.size
+    setSectionTourVisitedCount(count)
+    setSectionTourProgress(count / SECTION_TOUR_IDS.length)
   }, [])
 
   const unlock = useCallback((id: EasterEggId) => {
@@ -144,14 +148,16 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const incrementArrowClick = useCallback(() => {
     if (arrowTimerRef.current) window.clearTimeout(arrowTimerRef.current)
     arrowClicksRef.current += 1
-    if (arrowClicksRef.current >= 3) {
+    if (arrowClicksRef.current >= 5) {
       unlock('arrow-hint')
-      playEggEffect('arrow-hint', 4000)
+      setArrowTravelActive(true)
+      playEggEffect('arrow-hint', 5000)
+      window.setTimeout(() => setArrowTravelActive(false), 5000)
       arrowClicksRef.current = 0
     }
     arrowTimerRef.current = window.setTimeout(() => {
       arrowClicksRef.current = 0
-    }, 1500)
+    }, 2000)
   }, [unlock])
 
   const registerThemeToggle = useCallback(() => {
@@ -181,6 +187,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
 
     const count = visitedSectionsRef.current.size
     const progress = count / SECTION_TOUR_IDS.length
+    setSectionTourVisitedCount(count)
     setSectionTourProgress(progress)
 
     if (count >= SECTION_TOUR_IDS.length) {
@@ -247,7 +254,10 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       totalEggs: TOTAL_EGGS,
       logoRevealActive,
       rocketLaunchActive,
+      arrowTravelActive,
       sectionTourProgress,
+      sectionTourVisitedCount,
+      sectionTourTotal: SECTION_TOUR_IDS.length,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
@@ -262,7 +272,9 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       isUnlocked,
       logoRevealActive,
       rocketLaunchActive,
+      arrowTravelActive,
       sectionTourProgress,
+      sectionTourVisitedCount,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,

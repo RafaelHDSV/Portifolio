@@ -1,8 +1,39 @@
-- Quando eu clicar 5x na logo, pense em uma nova funcionalidade para o easter egg. E não precisa de nenhuma tag do Planner
-- Tour das seções está um pouco oculto
-- O deprecatedFinder está mostrando um vídeo na primeira vez que eu vejo, porém quando eu clico no play o vídeo quebra e fica tudo preto, pode manter o que estava exibindo antes
-- TestNode está exibindo uma foto png em formato de vídeo, por isso quebra. Corrija
-- Quando eu der hover no card, quero que a imagem mude para o github, ou seja, o padrão é a imagem/video do projeto. Quando eu der hover, quero que apareça a imagem do github, os colabores, o issues, estrelas, fork, etc.
-- Ainda está exibindo somente 10 projetos. Eu quero os 6 pins + 10 projetos recentes, ou seja, preciso de 16 projetos ao todo na seção, incluíndo repositórios privado, que ainda não estão aparecendo. Caso haja uma limitação relacionado a token, informe
-- O easter egg da seta. Quero que ao clicar na seta não redirecione para seção seguinte. E ao clicar na seta rápido 5x, quero que a seta viage pela seção inicial, algo bem animado e dinâmico.
-- Acho que seria bom, adicionar informações sobre meu emprego, cursos, hard skills, soft skills, conhecimento de IA, ferramentas, etc. Veja se acha válido e adicione da melhor maneira
+- A requisição retorna os 77 repositórios públicos, mas só exibe 10. Descubra porque só exibe 10, se temos 77. E dentro desses 77 não existem repositórios privados.
+- A ordenação dos projetos deve ser: mais estrelas >>> mais recente
+- Acho que pode remover essa seção que pedi: Experiencia
+Full-Stack Developer — AGX Software
+Lideranca tecnica e code review em equipe
+Entrega de produtos web ponta a ponta
+Formacao e cursos
+Anhembi Morumbi — Analise e Desenvolvimento de Sistemas
+Udemy — React, Node.js e automacao
+Estudo continuo em arquitetura e boas praticas
+Hard skills
+React
+TypeScript
+Node.js
+MongoDB
+REST APIs
+SASS
+Git
+Soft skills
+Lideranca tecnica
+Comunicacao clara
+Trabalho em equipe
+Mentoria e code review
+IA e automacao
+Cursor / Copilot
+Integracao com LLMs
+Fluxos com n8n
+Pair programming assistido por IA
+Ferramentas
+VS Code
+GitHub
+Figma
+Postman
+Vercel
+
+No lugar adicione as ferramentas, IA, etc nas stacks. Caso necessário renomei a seção.
+- Agora com o hover do github, não dá mais pra clicar no play do vídeo, então sempre deixe autoplay, sem botão
+- O vídeo do repo Workspace não está aparecendo. Adicionei demo.mp4 no repositório e tem um vídeo no README.
+- Adicionei um demo.png no root do repo MedIT
