@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Highlights sorted by stars, size and last update",
+    "subtitle": "Highlights sorted by contributors, stars, size and last update",
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",

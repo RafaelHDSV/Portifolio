@@ -36,6 +36,52 @@ export function sortReposByStarsSizeThenRecent (
   return dateB - dateA
 }
 
+function repoContributorCount (
+  repo: IGithubResponseRepo,
+  contributorCounts: Map<string, number>
+): number {
+  return contributorCounts.get(repo.name?.toLowerCase() ?? '') ?? 0
+}
+
+export function sortReposByContributorsThenStarsSizeRecent (
+  a: IGithubResponseRepo,
+  b: IGithubResponseRepo,
+  contributorCounts: Map<string, number>
+): number {
+  const contribDiff =
+    repoContributorCount(b, contributorCounts) -
+    repoContributorCount(a, contributorCounts)
+  if (contribDiff !== 0) return contribDiff
+
+  return sortReposByStarsSizeThenRecent(a, b)
+}
+
+export function collectPortfolioRepoCandidates (
+  pinned: IGithubResponseRepo[],
+  recent: IGithubResponseRepo[]
+): IGithubResponseRepo[] {
+  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
+    0,
+    PINNED_PROJECT_LIMIT
+  )
+
+  const repoByName = new Map<string, IGithubResponseRepo>()
+
+  for (const repo of filterReposForPortfolio(recent, GITHUB_USERNAME)) {
+    const key = repo.name?.toLowerCase() ?? ''
+    if (!key) continue
+    repoByName.set(key, repo)
+  }
+
+  for (const repo of pinnedFiltered) {
+    const key = repo.name?.toLowerCase() ?? ''
+    if (!key) continue
+    repoByName.set(key, { ...repoByName.get(key), ...repo })
+  }
+
+  return [...repoByName.values()]
+}
+
 function mapLanguageToFilter (language?: string | null): string[] {
   if (!language) return []
   const map: Record<string, string> = {
@@ -148,7 +194,8 @@ function repoToCard (
 export function mergeGitHubProjects (
   pinned: IGithubResponseRepo[],
   recent: IGithubResponseRepo[],
-  locale: 'pt' | 'en'
+  locale: 'pt' | 'en',
+  contributorCounts: Map<string, number> = new Map()
 ): ProjectCardData[] {
   const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
     0,
@@ -158,22 +205,10 @@ export function mergeGitHubProjects (
     pinnedFiltered.map((r) => r.name?.toLowerCase()).filter(Boolean)
   )
 
-  const repoByName = new Map<string, IGithubResponseRepo>()
-
-  for (const repo of filterReposForPortfolio(recent, GITHUB_USERNAME)) {
-    const key = repo.name?.toLowerCase() ?? ''
-    if (!key) continue
-    repoByName.set(key, repo)
-  }
-
-  for (const repo of pinnedFiltered) {
-    const key = repo.name?.toLowerCase() ?? ''
-    if (!key) continue
-    repoByName.set(key, { ...repoByName.get(key), ...repo })
-  }
-
-  const sorted = [...repoByName.values()]
-    .sort(sortReposByStarsSizeThenRecent)
+  const sorted = collectPortfolioRepoCandidates(pinned, recent)
+    .sort((a, b) =>
+      sortReposByContributorsThenStarsSizeRecent(a, b, contributorCounts)
+    )
     .slice(0, PROJECT_DISPLAY_LIMIT)
 
   const cards = sorted.map((repo) => {

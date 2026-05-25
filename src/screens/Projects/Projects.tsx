@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+import { useContributorCounts } from '../../hooks/useContributorCounts'
 import { useEnrichedProjects } from '../../hooks/useEnrichedProjects'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
 import {
   collectAvailableFilters,
+  collectPortfolioRepoCandidates,
   filterProjectsMulti,
   mergeGitHubProjects
 } from '../../utils/mergeProjects'
@@ -33,9 +35,24 @@ function ProjectsContent () {
 
   const locale = i18n.language.startsWith('pt') ? 'pt' : 'en'
 
+  const repoCandidates = useMemo(
+    () => collectPortfolioRepoCandidates(pinned, recent),
+    [pinned, recent]
+  )
+
+  const repoNames = useMemo(
+    () =>
+      repoCandidates
+        .map((repo) => repo.name)
+        .filter((name): name is string => Boolean(name)),
+    [repoCandidates]
+  )
+
+  const contributorCounts = useContributorCounts(repoNames)
+
   const allProjects = useMemo(
-    () => mergeGitHubProjects(pinned, recent, locale),
-    [pinned, recent, locale]
+    () => mergeGitHubProjects(pinned, recent, locale, contributorCounts),
+    [pinned, recent, locale, contributorCounts]
   )
 
   const enrichedProjects = useEnrichedProjects(allProjects)

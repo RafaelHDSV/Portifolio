@@ -12,8 +12,12 @@ import {
 } from '../../constants/recruiterFeatured'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useRecruiterMode } from '../../context/useRecruiterMode'
+import { useContributorCounts } from '../../hooks/useContributorCounts'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
-import { mergeGitHubProjects } from '../../utils/mergeProjects'
+import {
+  collectPortfolioRepoCandidates,
+  mergeGitHubProjects
+} from '../../utils/mergeProjects'
 import styles from './RecruiterView.module.scss'
 
 export default function RecruiterView () {
@@ -23,8 +27,23 @@ export default function RecruiterView () {
 
   const locale = i18n.language.startsWith('pt') ? 'pt' : 'en'
 
+  const repoCandidates = useMemo(
+    () => collectPortfolioRepoCandidates(pinned, recent),
+    [pinned, recent]
+  )
+
+  const repoNames = useMemo(
+    () =>
+      repoCandidates
+        .map((repo) => repo.name)
+        .filter((name): name is string => Boolean(name)),
+    [repoCandidates]
+  )
+
+  const contributorCounts = useContributorCounts(repoNames)
+
   const featuredProjects = useMemo(() => {
-    const all = mergeGitHubProjects(pinned, recent, locale)
+    const all = mergeGitHubProjects(pinned, recent, locale, contributorCounts)
     const picked = RECRUITER_FEATURED_REPO_ORDER.map((target) =>
       all.find((p) => matchRepoName(p.repoName, target))
     ).filter((p): p is NonNullable<typeof p> => Boolean(p))
@@ -34,7 +53,7 @@ export default function RecruiterView () {
     return all.filter((p) => p.pinned).slice(0, 3).length
       ? all.filter((p) => p.pinned).slice(0, 3)
       : all.slice(0, 3)
-  }, [pinned, recent, locale])
+  }, [pinned, recent, locale, contributorCounts])
 
   return (
     <Fade triggerOnce>

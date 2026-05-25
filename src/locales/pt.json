@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Destaques ordenados por estrelas, tamanho e data de atualização",
+    "subtitle": "Destaques ordenados por colaboradores, estrelas, tamanho e data de atualização",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",

@@ -273,6 +273,48 @@ class GithubRepositoryClass {
     }
   }
 
+  async getContributorCount (owner: string, repo: string): Promise<number> {
+    try {
+      let total = 0
+      let page = 1
+
+      while (page <= 10) {
+        const response = await githubApi.get<unknown[]>(
+          `/repos/${owner}/${repo}/contributors`,
+          { params: { per_page: 100, page, anon: 'false' } }
+        )
+
+        total += response.data.length
+
+        if (response.data.length < 100) return total
+
+        const hasNext = String(response.headers.link ?? '').includes('rel="next"')
+        if (!hasNext) return total
+
+        page += 1
+      }
+
+      return total
+    } catch {
+      return 0
+    }
+  }
+
+  async getContributorCounts (
+    owner: string,
+    repoNames: string[]
+  ): Promise<Map<string, number>> {
+    const unique = [...new Set(repoNames.map((name) => name.trim()).filter(Boolean))]
+    const entries = await Promise.all(
+      unique.map(async (name) => {
+        const count = await this.getContributorCount(owner, name)
+        return [name.toLowerCase(), count] as const
+      })
+    )
+
+    return new Map(entries)
+  }
+
   async repoFileExists (
     owner: string,
     repo: string,
