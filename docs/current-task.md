@@ -1,10 +1,8 @@
-# Tarefa atual — v2.4 (concluida)
-
-- [x] Space mode so via URL; remover param restaura padrao
-- [x] Filtros Sass, C#, PowerShell traduzidos
-- [x] Videos com fallback e enrich via README
-- [x] Pins via GraphQL viewer (privados) + pool 30 recentes -> 10 apos dedupe
-- [x] LinkedIn removido (secao, API, docs)
-- [x] Easter eggs com efeitos visuais (nao so toast/console)
-
-**Nota:** 6 pins + 10 recentes incluindo privados exige `VITE_GITHUB_ACCESS_TOKEN` com escopo `repo` na Vercel.
+- Quando eu clicar 5x na logo, pense em uma nova funcionalidade para o easter egg. E não precisa de nenhuma tag do Planner
+- Tour das seções está um pouco oculto
+- O deprecatedFinder está mostrando um vídeo na primeira vez que eu vejo, porém quando eu clico no play o vídeo quebra e fica tudo preto, pode manter o que estava exibindo antes
+- TestNode está exibindo uma foto png em formato de vídeo, por isso quebra. Corrija
+- Quando eu der hover no card, quero que a imagem mude para o github, ou seja, o padrão é a imagem/video do projeto. Quando eu der hover, quero que apareça a imagem do github, os colabores, o issues, estrelas, fork, etc.
+- Ainda está exibindo somente 10 projetos. Eu quero os 6 pins + 10 projetos recentes, ou seja, preciso de 16 projetos ao todo na seção, incluíndo repositórios privado, que ainda não estão aparecendo. Caso haja uma limitação relacionado a token, informe
+- O easter egg da seta. Quero que ao clicar na seta não redirecione para seção seguinte. E ao clicar na seta rápido 5x, quero que a seta viage pela seção inicial, algo bem animado e dinâmico.
+- Acho que seria bom, adicionar informações sobre meu emprego, cursos, hard skills, soft skills, conhecimento de IA, ferramentas, etc. Veja se acha válido e adicione da melhor maneira
