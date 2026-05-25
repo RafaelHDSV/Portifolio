@@ -1,9 +1,14 @@
-- Easter egg Tour das seções não funciona. Modo espacial, não adicionada nada. Quero que tenham 7 easter eggs. E os easter eggs que são só toasts são muito simples.
-- A primeira seções está muita quadrada, quero mais animação.
-- Como destaque de projetos pro recrutador, adicione MedIT, Deprecated Finder e Dev Shortcuts
-- Nas estatisticas do sobre mim, eu adicionei somente essas 6, que achei relevante, mas pode adicionar mais, caso exista.
-- O DevShortcuts tem a linguagem Powershell no github, mas no portifolio não aparece. O TestNote é 100% C# no github, mas no portifolio mostra somente API. E a logo do sass nos projetos não está exibindo
-- O vídeo do projeto Repo Workspace está sem thumb, mas funciona. O repo deprecated finder tem thumb, mas não funciona. E o testnote não tem thumb, nem funciona.
-- Os projetos ainda não chegaram ao 6 pin + 10 mais recentes, ainda está incorreto.
-- Achei a versão do recrutador simples de mais. Incremente adicionando ao menos uma texto sobre mim curto.
-- E relacionado a seção do linekdin, eu não consegui efetuar a configuração necessária para buscar os posts do linkedin. Preciso que você revise e reformule o arquivo linkedin-setup.md para me ajudar a fazer a configuração corretamente
+# Tarefa atual — v2.3 (concluida)
+
+Feedback original atendido na implementacao v2.3:
+
+- [x] Easter egg tour das secoes, modo espacial visivel, 7 eggs, toasts enriquecidos
+- [x] Hero com mais animacao (orbs, grid suave, reveal)
+- [x] Modo recrutador: MedIT, Deprecated-Finder, Dev-Shortcuts + texto sobre mim
+- [x] Estatisticas About: repositorios privados (quando token GitHub permite)
+- [x] Badges: PowerShell, C#, Sass com icones
+- [x] Videos: readme priorizado, thumb via metadata quando sem poster
+- [x] Projetos: 6 pins + 10 recentes deduplicados
+- [x] linkedin-setup.md reformulado
+
+Proximo passo sugerido: validar manualmente no deploy e configurar `LINKEDIN_RSS_URL` na Vercel.

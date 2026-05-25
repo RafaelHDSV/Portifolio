@@ -29,22 +29,26 @@
     background-image:
       linear-gradient(var(--color-border) 1px, transparent 1px),
       linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.4;
+    background-size: 72px 72px;
+    opacity: 0.28;
     z-index: 0;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 78%);
+    animation: gridPulse 10s ease-in-out infinite alternate;
   }
 }
 
 .spaceMode::before {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 40%, var(--hero-mesh-1), transparent),
-    radial-gradient(ellipse 60% 50% at 80% 60%, var(--hero-mesh-2), transparent),
-    radial-gradient(1px 1px at 10% 20%, white, transparent),
-    radial-gradient(1px 1px at 30% 70%, white, transparent),
-    radial-gradient(1px 1px at 70% 30%, white, transparent),
-    radial-gradient(1px 1px at 90% 80%, white, transparent),
+    radial-gradient(ellipse 90% 70% at 15% 35%, rgba(129, 140, 248, 0.35), transparent),
+    radial-gradient(ellipse 70% 55% at 85% 65%, rgba(167, 139, 250, 0.25), transparent),
+    radial-gradient(1.5px 1.5px at 8% 18%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 22% 62%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 48% 28%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 68% 74%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(2px 2px at 88% 22%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(1px 1px at 92% 82%, rgba(255, 255, 255, 0.6), transparent),
     var(--color-bg);
+  animation: meshShift 8s ease-in-out infinite alternate, starTwinkle 4s ease-in-out infinite;
 }
 
 .fxLayer {
@@ -61,6 +65,34 @@
   animation: driftDots 20s linear infinite;
 }
 
+.orbA,
+.orbB {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.orbA {
+  width: 280px;
+  height: 280px;
+  top: 18%;
+  left: 12%;
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  animation: floatOrbA 14s ease-in-out infinite alternate;
+}
+
+.orbB {
+  width: 220px;
+  height: 220px;
+  bottom: 22%;
+  right: 10%;
+  background: color-mix(in srgb, #6366f1 30%, transparent);
+  animation: floatOrbB 11s ease-in-out infinite alternate;
+}
+
 .content {
   position: relative;
   z-index: 1;
@@ -69,6 +101,7 @@
   align-items: center;
   gap: 1.25rem;
   max-width: 42rem;
+  animation: heroReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .name {
@@ -77,6 +110,7 @@
   font-weight: 700;
   color: var(--color-text-primary);
   line-height: 1.1;
+  animation: nameGlow 6s ease-in-out infinite alternate;
 }
 
 .role {
@@ -97,6 +131,7 @@
   justify-content: center;
   gap: 0.75rem;
   margin-top: 0.5rem;
+  animation: heroReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
 }
 
 .arrowDown {
@@ -118,6 +153,42 @@
   }
 }
 
+@keyframes gridPulse {
+  from { opacity: 0.22; }
+  to { opacity: 0.34; }
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nameGlow {
+  from { text-shadow: 0 0 0 transparent; }
+  to { text-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 25%, transparent); }
+}
+
+@keyframes floatOrbA {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(24px, -18px) scale(1.08); }
+}
+
+@keyframes floatOrbB {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-20px, 16px) scale(1.05); }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
+}
+
 @keyframes arrowBounce {
   from {
     transform: translateX(-50%) translateY(0);
@@ -137,15 +208,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header::before {
+  .header::before,
+  .header::after {
     animation: none;
   }
 
-  .arrowDown {
-    animation: none;
-  }
-
-  .fxLayer {
+  .arrowDown,
+  .fxLayer,
+  .orbA,
+  .orbB,
+  .content,
+  .ctas,
+  .name {
     animation: none;
   }
 }

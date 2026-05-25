@@ -3,6 +3,7 @@ import {
   CalendarDotsIcon,
   FilesIcon,
   GithubLogoIcon,
+  LockSimpleIcon,
   MapPinIcon,
   TrayArrowDownIcon,
   TrayArrowUpIcon
@@ -90,6 +91,13 @@ function AboutContent () {
             label={t('about.publicRepos')}
             value={user.public_repos}
           />
+          {user.total_private_repos !== undefined && user.total_private_repos > 0 && (
+            <UserInfoItem
+              icon={LockSimpleIcon}
+              label={t('about.privateRepos')}
+              value={user.total_private_repos}
+            />
+          )}
           <UserInfoItem
             icon={CalendarDotsIcon}
             label={t('about.since')}

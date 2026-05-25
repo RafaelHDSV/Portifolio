@@ -1,10 +1,10 @@
-import { CompassIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import Container from '../../components/Container/Container'
+import EasterEggToast from '../../components/EasterEggToast/EasterEggToast'
 import Modal from '../../components/Modal/Modal'
 import { EASTER_EGG_CATALOG } from '../../constants/easterEggCatalog'
 import { useLinkedInContext } from '../../context/useLinkedInContext'
@@ -17,8 +17,7 @@ export default function Footer () {
   const {
     totalUnlocked,
     totalEggs,
-    showExplorerBadge,
-    explorerMessage,
+    activeToast,
     isUnlocked,
     catalogRevealAll,
     revealAllInCatalog
@@ -97,15 +96,7 @@ export default function Footer () {
         </footer>
       </Fade>
 
-      {showExplorerBadge && (
-        <div className={styles.explorerBadge} role='status'>
-          <CompassIcon size={28} weight='duotone' className={styles.explorerIcon} />
-          <div>
-            <strong>{t('easterEgg.explorer')}</strong>
-            <p>{explorerMessage ? t(explorerMessage) : t('easterEgg.explorerDesc')}</p>
-          </div>
-        </div>
-      )}
+      <EasterEggToast toast={activeToast} />
 
       <Modal
         isOpen={catalogOpen}

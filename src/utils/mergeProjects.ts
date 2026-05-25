@@ -5,6 +5,9 @@ import { IGithubResponseRepo } from '../types/IGithub'
 import { ReadmeMedia } from './readmeMedia'
 import { filterReposForPortfolio } from './repoFilters'
 
+export const PINNED_PROJECT_LIMIT = 6
+export const RECENT_PROJECT_LIMIT = 10
+
 function mapLanguageToFilter (language?: string | null): string[] {
   if (!language) return []
   const map: Record<string, string> = {
@@ -12,8 +15,10 @@ function mapLanguageToFilter (language?: string | null): string[] {
     JavaScript: 'Javascript',
     HTML: 'HTML',
     CSS: 'CSS',
-    'C#': 'API',
-    PHP: 'API'
+    SCSS: 'Sass',
+    Sass: 'Sass',
+    'C#': 'C#',
+    PowerShell: 'PowerShell'
   }
   return [map[language] ?? language]
 }
@@ -53,21 +58,7 @@ function repoToCard (
     ? config.description[locale]
     : repo.description ?? ''
 
-  if (config?.image && !config.image.includes('icon.png')) {
-    return {
-      id: config?.key ?? repoName,
-      repoName,
-      name: config?.name ?? repoName,
-      image: config.image,
-      usesPlaceholder: false,
-      description,
-      languages: config?.languages ?? mapLanguageToFilter(repo.language),
-      urlProject: repo.homepage ?? config?.urlProject,
-      urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
-      pinned,
-      private: repo.private
-    }
-  }
+  const languages = config?.languages ?? mapLanguageToFilter(repo.language)
 
   if (media) {
     const fields = mediaToCardFields(media)
@@ -76,7 +67,7 @@ function repoToCard (
       repoName,
       name: config?.name ?? repoName,
       description,
-      languages: config?.languages ?? mapLanguageToFilter(repo.language),
+      languages,
       urlProject: repo.homepage ?? config?.urlProject,
       urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
       pinned,
@@ -85,14 +76,17 @@ function repoToCard (
     }
   }
 
+  const fallbackImage =
+    config?.image && !config.image.includes('icon.png') ? config.image : ''
+
   return {
     id: config?.key ?? repoName,
     repoName,
     name: config?.name ?? repoName,
-    image: '',
-    usesPlaceholder: true,
+    image: fallbackImage,
+    usesPlaceholder: !fallbackImage,
     description,
-    languages: config?.languages ?? mapLanguageToFilter(repo.language),
+    languages,
     urlProject: repo.homepage ?? config?.urlProject,
     urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
     pinned,
@@ -105,14 +99,17 @@ export function mergeGitHubProjects (
   recent: IGithubResponseRepo[],
   locale: 'pt' | 'en'
 ): ProjectCardData[] {
-  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME)
+  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
+    0,
+    PINNED_PROJECT_LIMIT
+  )
   const pinnedNames = new Set(
     pinnedFiltered.map((r) => r.name?.toLowerCase()).filter(Boolean)
   )
 
-  const recentFiltered = filterReposForPortfolio(recent, GITHUB_USERNAME).filter(
-    (r) => !pinnedNames.has(r.name?.toLowerCase() ?? '')
-  )
+  const recentFiltered = filterReposForPortfolio(recent, GITHUB_USERNAME)
+    .filter((r) => !pinnedNames.has(r.name?.toLowerCase() ?? ''))
+    .slice(0, RECENT_PROJECT_LIMIT)
 
   const ordered: IGithubResponseRepo[] = [
     ...pinnedFiltered,
@@ -164,7 +161,10 @@ export const PROJECT_FILTER_OPTIONS = [
   'Node',
   'API',
   'CSS',
-  'HTML'
+  'HTML',
+  'Sass',
+  'C#',
+  'PowerShell'
 ] as const
 
 export type ProjectFilterOption = (typeof PROJECT_FILTER_OPTIONS)[number]
@@ -190,11 +190,21 @@ export function collectAvailableFilters (
   const set = new Set<string>()
   for (const p of projects) {
     for (const lang of p.languages) {
-      const normalized = PROJECT_FILTER_OPTIONS.find(
-        (f) => f.toLowerCase() === lang.toLowerCase()
-      )
-      if (normalized) set.add(normalized)
+      set.add(lang)
     }
   }
-  return PROJECT_FILTER_OPTIONS.filter((f) => set.has(f))
+
+  const known = PROJECT_FILTER_OPTIONS.filter((f) =>
+    [...set].some((lang) => lang.toLowerCase() === f.toLowerCase())
+  )
+  const extra = [...set]
+    .filter(
+      (lang) =>
+        !PROJECT_FILTER_OPTIONS.some(
+          (f) => f.toLowerCase() === lang.toLowerCase()
+        )
+    )
+    .sort((a, b) => a.localeCompare(b))
+
+  return [...known, ...extra]
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ProjectCardData } from '../components/Card/Card'
 import { GITHUB_USERNAME } from '../constants/cv'
-import { projectsConfig } from '../constants/projects.config'
 import { GithubRepository } from '../repository/GithubRepository'
 import { applyMediaToCard } from '../utils/mergeProjects'
 import { mapGithubLanguagesToBadges } from '../utils/mapGithubLanguages'
@@ -20,21 +19,12 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
         projects.map(async (project) => {
           let card = project
 
-          if (!project.media && (!project.image || project.usesPlaceholder)) {
+          if (!project.media) {
             const media = await resolveRepoMedia(
               GITHUB_USERNAME,
-              project.repoName,
-              project.image || undefined
+              project.repoName
             )
             if (!cancelled) card = applyMediaToCard(card, media)
-          }
-
-          const config = projectsConfig.find(
-            (p) => p.repoName?.toLowerCase() === project.repoName.toLowerCase()
-          )
-
-          if (config?.languages?.length && config.languages.length > 1) {
-            return card
           }
 
           const apiLangs = await GithubRepository.getRepoLanguages(

@@ -28,6 +28,7 @@ export interface IGithubResponseUser {
   twitter_username: null
   public_repos: number
   public_gists: number
+  total_private_repos?: number
   followers: number
   following: number
   created_at: string
@@ -44,6 +45,7 @@ export interface IUser {
   login: string
   name: string
   public_repos: number
+  total_private_repos?: number
 }
 
 export interface IGithubResponseRepo {

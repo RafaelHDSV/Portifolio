@@ -79,3 +79,10 @@ button {
   border-bottom: 1px solid var(--color-border);
   scroll-margin-top: 5rem;
 }
+
+html.space-mode body {
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.15), transparent),
+    radial-gradient(1px 1px at 80% 40%, rgba(255, 255, 255, 0.12), transparent),
+    radial-gradient(1.5px 1.5px at 50% 80%, rgba(255, 255, 255, 0.1), transparent);
+}

@@ -62,7 +62,14 @@ export default function Card ({ project }: CardProps) {
           {project.image ? (
             <img src={project.image} alt='' loading='lazy' />
           ) : (
-            <div className={styles.videoFallback} />
+            <video
+              className={styles.videoPreview}
+              src={`${project.media!.url}#t=0.5`}
+              preload='metadata'
+              muted
+              playsInline
+              aria-hidden='true'
+            />
           )}
           <span className={styles.playOverlay}>
             <PlayIcon size={32} weight='fill' />

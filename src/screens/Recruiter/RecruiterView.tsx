@@ -6,6 +6,10 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
+import {
+  matchRepoName,
+  RECRUITER_FEATURED_REPO_ORDER
+} from '../../constants/recruiterFeatured'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useRecruiterMode } from '../../context/useRecruiterMode'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
@@ -19,8 +23,14 @@ export default function RecruiterView () {
 
   const locale = i18n.language.startsWith('pt') ? 'pt' : 'en'
 
-  const topProjects = useMemo(() => {
+  const featuredProjects = useMemo(() => {
     const all = mergeGitHubProjects(pinned, recent, locale)
+    const picked = RECRUITER_FEATURED_REPO_ORDER.map((target) =>
+      all.find((p) => matchRepoName(p.repoName, target))
+    ).filter((p): p is NonNullable<typeof p> => Boolean(p))
+
+    if (picked.length > 0) return picked
+
     return all.filter((p) => p.pinned).slice(0, 3).length
       ? all.filter((p) => p.pinned).slice(0, 3)
       : all.slice(0, 3)
@@ -35,6 +45,7 @@ export default function RecruiterView () {
               <h1>Rafael Vieira</h1>
               <p className={styles.role}>{t('recruiter.role')}</p>
               <p className={styles.bio}>{t('recruiter.bio')}</p>
+              <p className={styles.aboutExtended}>{t('recruiter.aboutExtended')}</p>
             </div>
             <Button variant='secondary' onClick={disableRecruiterMode}>
               <ArrowLeftIcon size={18} weight='bold' />
@@ -45,15 +56,21 @@ export default function RecruiterView () {
           <section className={styles.block}>
             <h2>{t('recruiter.stackTitle')}</h2>
             <p>{t('about.highlights.focus')}</p>
+            <p className={styles.stackNote}>{t('recruiter.stackNote')}</p>
           </section>
 
           <section className={styles.block}>
             <h2>{t('recruiter.projectsTitle')}</h2>
             <ul className={styles.projectList}>
-              {topProjects.map((p) => (
+              {featuredProjects.map((p) => (
                 <li key={p.id}>
                   <strong>{p.name}</strong>
                   <span>{p.description}</span>
+                  <div className={styles.projectMeta}>
+                    {p.languages.slice(0, 4).map((lang) => (
+                      <span key={lang}>{lang}</span>
+                    ))}
+                  </div>
                   <a href={p.urlGitHub} target='_blank' rel='noopener noreferrer'>
                     GitHub
                   </a>

@@ -8,36 +8,20 @@ import {
 
 const mediaCache = new Map<string, ReadmeMedia | 'placeholder'>()
 
+function configImageToMedia (url: string): ReadmeMedia {
+  return {
+    type: url.toLowerCase().includes('.gif') ? 'gif' : 'image',
+    url
+  }
+}
+
 export async function resolveRepoMedia (
   owner: string,
-  repoName: string,
-  configImage?: string
+  repoName: string
 ): Promise<ReadmeMedia | 'placeholder'> {
   const cacheKey = `${owner}/${repoName}`
   if (mediaCache.has(cacheKey)) {
     return mediaCache.get(cacheKey)!
-  }
-
-  if (configImage && !configImage.endsWith('/icon.png')) {
-    const media: ReadmeMedia = {
-      type: configImage.toLowerCase().includes('.gif') ? 'gif' : 'image',
-      url: configImage
-    }
-    mediaCache.set(cacheKey, media)
-    return media
-  }
-
-  const config = projectsConfig.find(
-    (p) => p.repoName?.toLowerCase() === repoName.toLowerCase()
-  )
-
-  if (config?.image && !config.image.endsWith('/icon.png')) {
-    const media: ReadmeMedia = {
-      type: config.image.toLowerCase().includes('.gif') ? 'gif' : 'image',
-      url: config.image
-    }
-    mediaCache.set(cacheKey, media)
-    return media
   }
 
   try {
@@ -49,6 +33,16 @@ export async function resolveRepoMedia (
     }
   } catch {
     // fallback below
+  }
+
+  const config = projectsConfig.find(
+    (p) => p.repoName?.toLowerCase() === repoName.toLowerCase()
+  )
+
+  if (config?.image && !config.image.endsWith('/icon.png')) {
+    const media = configImageToMedia(config.image)
+    mediaCache.set(cacheKey, media)
+    return media
   }
 
   const og = githubOpenGraphImage(owner, repoName)

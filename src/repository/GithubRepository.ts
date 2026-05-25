@@ -38,7 +38,8 @@ class GithubRepositoryClass {
         location,
         login,
         name,
-        public_repos
+        public_repos,
+        total_private_repos
       } = response.data
 
       return {
@@ -50,7 +51,8 @@ class GithubRepositoryClass {
         location,
         login,
         name,
-        public_repos
+        public_repos,
+        total_private_repos
       }
     } catch (err) {
       console.error(err)
@@ -94,16 +96,7 @@ class GithubRepositoryClass {
         username
       )
 
-      const recentSlice = filtered.slice(0, limit)
-      const recentNames = new Set(recentSlice.map((r) => r.name?.toLowerCase()))
-
-      const privateExtras = filtered.filter(
-        (r) =>
-          r.private &&
-          !recentNames.has(r.name?.toLowerCase() ?? '')
-      )
-
-      return [...recentSlice, ...privateExtras]
+      return filtered.slice(0, limit)
     } catch (err) {
       console.warn('Authenticated repos failed, falling back to public:', err)
 
@@ -117,16 +110,7 @@ class GithubRepositoryClass {
         username
       )
 
-      const recentSlice = filtered.slice(0, limit)
-      const recentNames = new Set(recentSlice.map((r) => r.name?.toLowerCase()))
-
-      const privateExtras = filtered.filter(
-        (r) =>
-          r.private &&
-          !recentNames.has(r.name?.toLowerCase() ?? '')
-      )
-
-      return [...recentSlice, ...privateExtras]
+      return filtered.slice(0, limit)
     }
   }
 

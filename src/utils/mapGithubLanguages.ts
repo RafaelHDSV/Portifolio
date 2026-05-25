@@ -5,11 +5,13 @@ const LANGUAGE_MAP: Record<string, string> = {
   JavaScript: 'Javascript',
   HTML: 'HTML',
   CSS: 'CSS',
-  PowerShell: 'Javascript',
-  'C#': 'API',
-  PHP: 'API',
-  Shell: 'API',
-  Python: 'API'
+  SCSS: 'Sass',
+  Sass: 'Sass',
+  'C#': 'C#',
+  PowerShell: 'PowerShell',
+  PHP: 'PHP',
+  Shell: 'Shell',
+  Python: 'Python'
 }
 
 const TOPIC_MAP: Record<string, string> = {

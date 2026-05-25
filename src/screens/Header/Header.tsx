@@ -23,6 +23,8 @@ export default function Header () {
         className={`${styles.header} ${spaceMode ? styles.spaceMode : ''}`}
       >
         <div className={styles.fxLayer} aria-hidden='true' />
+        <div className={styles.orbA} aria-hidden='true' />
+        <div className={styles.orbB} aria-hidden='true' />
 
         <div className={styles.content}>
           <h1 className={styles.name}>Rafael Vieira</h1>

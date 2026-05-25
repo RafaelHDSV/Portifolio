@@ -27,6 +27,7 @@
     "followers": "Followers",
     "following": "Following",
     "publicRepos": "Public repositories",
+    "privateRepos": "Private repositories",
     "since": "Coding since",
     "downloadCv": "Download CV",
     "viewGithub": "View on GitHub",
@@ -96,7 +97,9 @@
     "back": "Back to full view",
     "role": "Full-Stack Developer",
     "bio": "Professional summary for quick screening: React, TypeScript, Node.js and full stack delivery with product focus.",
+    "aboutExtended": "I work on end-to-end web products — architecture, APIs, interfaces and integrations. I have experience with technical leadership, code review and iterative delivery in teams. I look for roles where code quality and product impact go together.",
     "stackTitle": "Core stack",
+    "stackNote": "I also work with MongoDB, Sass, C#, PHP and automation when the context calls for it.",
     "projectsTitle": "Featured projects",
     "contactTitle": "Contact",
     "downloadCv": "Download CV"
@@ -111,7 +114,10 @@
     "explorer": "Explorer",
     "explorerDesc": "You visited all main sections!",
     "sectionTourDesc": "Full tour: About, Stack, Projects and Contact!",
-    "themeHunter": "Theme hunter",
+    "sectionTourProgress": "Tour progress — keep exploring the sections!",
+    "spaceModeActive": "Space mode enabled — stars and nebula on the hero!",
+    "konamiActive": "Konami code detected — purple accent for 30 seconds!",
+    "themeHunter": "Theme hunter unlocked!",
     "arrowHint": "Curious, huh?",
     "counter": "{{count}}/{{total}} discovered",
     "catalogTitle": "Easter egg catalog",
@@ -147,7 +153,7 @@
       "space": {
         "name": "Space mode",
         "trigger": "Open the site with ?mode=space in the URL",
-        "result": "Extra stars in the hero"
+        "result": "Nebula, stars and special toast on the hero"
       },
       "theme": {
         "name": "Theme hunter",

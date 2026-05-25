@@ -27,6 +27,7 @@
     "followers": "Seguidores",
     "following": "Seguindo",
     "publicRepos": "Repositórios públicos",
+    "privateRepos": "Repositórios privados",
     "since": "Programando desde",
     "downloadCv": "Baixar CV",
     "viewGithub": "Ver no GitHub",
@@ -96,7 +97,9 @@
     "back": "Voltar à exibição normal",
     "role": "Desenvolvedor Full-Stack",
     "bio": "Resumo profissional para triagem rápida: React, TypeScript, Node.js e entrega full stack com foco em produto.",
+    "aboutExtended": "Atuo em produtos web de ponta a ponta — arquitetura, APIs, interfaces e integrações. Tenho experiência com liderança técnica, code review e entregas iterativas em equipe. Busco oportunidades onde qualidade de código e impacto no produto andem juntos.",
     "stackTitle": "Stack principal",
+    "stackNote": "Também trabalho com MongoDB, Sass, C#, PHP e automações quando o contexto pede.",
     "projectsTitle": "Projetos em destaque",
     "contactTitle": "Contato",
     "downloadCv": "Baixar CV"
@@ -111,7 +114,10 @@
     "explorer": "Explorador",
     "explorerDesc": "Você visitou todas as seções principais!",
     "sectionTourDesc": "Tour completo: você passou por Sobre, Stack, Projetos e Contato!",
-    "themeHunter": "Caçador de temas",
+    "sectionTourProgress": "Progresso do tour — continue explorando as seções!",
+    "spaceModeActive": "Modo espacial ativado — estrelas e nebulosa no hero!",
+    "konamiActive": "Código Konami detectado — accent roxo por 30 segundos!",
+    "themeHunter": "Caçador de temas desbloqueado!",
     "arrowHint": "Curioso, né?",
     "counter": "{{count}}/{{total}} descobertos",
     "catalogTitle": "Catálogo de Easter eggs",
@@ -147,7 +153,7 @@
       "space": {
         "name": "Modo espacial",
         "trigger": "Abrir o site com ?mode=space na URL",
-        "result": "Estrelas extras no hero"
+        "result": "Nebulosa, estrelas e toast especial no hero"
       },
       "theme": {
         "name": "Caçador de temas",
