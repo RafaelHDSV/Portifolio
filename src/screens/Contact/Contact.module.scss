@@ -5,7 +5,9 @@
 }
 
 .vieiraLaunch {
-  animation: contactLift 0.45s ease-in-out 3;
+  .layout {
+    animation: contactLift 0.5s ease-in-out 2;
+  }
 }
 
 .launchFx {
@@ -16,54 +18,162 @@
   overflow: hidden;
 }
 
+.launchBurst {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-accent) 45%, transparent),
+    transparent 70%
+  );
+  animation: vieiraBurst 6s ease-out forwards;
+}
+
+.launchBadge {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-family: $font-outfit;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0a0a0b;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    color-mix(in srgb, var(--color-accent) 70%, #818cf8)
+  );
+  border-radius: 999px;
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-accent) 40%, transparent);
+  transform: translateX(-50%);
+  animation: vieiraBadgeRise 6s ease-in-out forwards;
+}
+
 .launchRocket {
   position: absolute;
   left: 50%;
-  bottom: 12%;
+  bottom: 14%;
+  z-index: 2;
   color: var(--color-accent);
-  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--color-accent) 60%, transparent));
-  animation: vieiraRocketLaunch 5.5s ease-in-out forwards;
+  filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-accent) 70%, transparent));
+  animation: vieiraRocketLaunch 6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .launchTrail {
   position: absolute;
   left: 50%;
-  bottom: 8%;
-  width: 4px;
+  bottom: 10%;
+  z-index: 1;
+  width: 6px;
   height: 0;
-  background: linear-gradient(to top, transparent, var(--color-accent));
+  border-radius: 999px;
+  background: linear-gradient(
+    to top,
+    transparent,
+    var(--color-accent),
+    color-mix(in srgb, var(--color-accent) 60%, #fff)
+  );
   transform: translateX(-50%);
-  animation: vieiraRocketTrail 5.5s ease-in-out forwards;
+  animation: vieiraRocketTrail 6s ease-out forwards;
+}
+
+.launchRing {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  z-index: 0;
+  width: 64px;
+  height: 64px;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: vieiraRingExpand 6s ease-out forwards;
+}
+
+.spark {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+  animation: vieiraSpark 6s ease-out forwards;
+  animation-delay: calc(var(--spark-index) * 0.08s);
+  --angle: calc(var(--spark-index) * 36deg);
 }
 
 @keyframes contactLift {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes vieiraBurst {
+  0%, 100% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+  20%, 70% { opacity: 1; transform: translateX(-50%) scale(1.4); }
+}
+
+@keyframes vieiraBadgeRise {
+  0% { opacity: 0; transform: translate(-50%, 24px) scale(0.85); }
+  15%, 75% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -40px) scale(0.95); }
 }
 
 @keyframes vieiraRocketLaunch {
   0% {
-    transform: translate(-50%, 0) rotate(0deg);
+    transform: translate(-50%, 0) rotate(-6deg);
     opacity: 1;
   }
-  35% {
-    transform: translate(-50%, -220px) rotate(-8deg);
+  40% {
+    transform: translate(-50%, -280px) rotate(4deg);
     opacity: 1;
   }
-  70% {
-    transform: translate(calc(-50% + 80px), -360px) rotate(12deg);
+  75% {
+    transform: translate(calc(-50% + 40px), -420px) rotate(8deg);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -520px) rotate(0deg);
-    opacity: 1;
+    transform: translate(-50%, -560px) rotate(0deg);
+    opacity: 0;
   }
 }
 
 @keyframes vieiraRocketTrail {
-  0%, 15% { height: 0; opacity: 0; }
-  30%, 85% { height: 180px; opacity: 1; }
-  100% { height: 240px; opacity: 1; }
+  0%, 10% { height: 0; opacity: 0; }
+  25%, 80% { height: 220px; opacity: 1; }
+  100% { height: 280px; opacity: 0; }
+}
+
+@keyframes vieiraRingExpand {
+  0%, 100% { opacity: 0; transform: translateX(-50%) scale(0.6); }
+  20%, 60% { opacity: 0.8; transform: translateX(-50%) scale(2.2); }
+}
+
+@keyframes vieiraSpark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) rotate(var(--angle)) translateY(0);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(var(--angle)) translateY(-120px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0) rotate(var(--angle)) translateY(-200px);
+  }
 }
 
 .layout {
@@ -130,5 +240,12 @@
     span {
       color: var(--color-accent);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vieiraLaunch .layout,
+  .launchFx * {
+    animation: none !important;
   }
 }

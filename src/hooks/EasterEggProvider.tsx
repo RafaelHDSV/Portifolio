@@ -3,27 +3,29 @@ import { EasterEggContext } from './EasterEggContext'
 import { EasterEggId, LEGACY_EGG_IDS, TOTAL_EGGS } from './useEasterEgg.types'
 
 const STORAGE_KEY = 'eggs-unlocked'
-const SCROLL_VOYAGE_KEY = 'egg-scroll-voyage-pending'
 
 const EGG_EFFECT_CLASSES: Partial<Record<EasterEggId, string>> = {
   'logo-clicks': 'egg-blueprint-mode',
-  'scroll-voyage': 'egg-scroll-voyage-done',
+  'locale-hopper': 'egg-locale-hopper-done',
   'theme-hunter': 'egg-theme-spectrum',
-  'arrow-hint': 'egg-arrow-travel',
   'rocket-email': 'egg-vieira-launch',
   konami: 'easter-egg-accent'
 }
 
 function migrateEggId (id: string): EasterEggId | null {
-  if (id === 'scroll-explorer' || id === 'section-tour') {
-    return LEGACY_EGG_IDS.sectionTour
+  if (
+    id === 'scroll-explorer' ||
+    id === 'section-tour' ||
+    id === 'scroll-voyage'
+  ) {
+    return LEGACY_EGG_IDS.scrollVoyage
   }
   if (id === 'space-mode') return LEGACY_EGG_IDS.spaceMode
 
   const valid: EasterEggId[] = [
     'konami',
     'logo-clicks',
-    'scroll-voyage',
+    'locale-hopper',
     'rocket-email',
     'vieira-mode',
     'theme-hunter',
@@ -46,20 +48,8 @@ function loadUnlocked (): Set<EasterEggId> {
   }
 }
 
-function loadScrollVoyagePending (): boolean {
-  try {
-    return sessionStorage.getItem(SCROLL_VOYAGE_KEY) === '1'
-  } catch {
-    return false
-  }
-}
-
 function saveUnlocked (set: Set<EasterEggId>) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]))
-}
-
-function saveScrollVoyagePending (pending: boolean) {
-  sessionStorage.setItem(SCROLL_VOYAGE_KEY, pending ? '1' : '0')
 }
 
 function playEggEffect (id: EasterEggId, durationMs: number) {
@@ -102,9 +92,6 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [vieiraLaunchActive, setVieiraLaunchActive] = useState(false)
   const [arrowTravelActive, setArrowTravelActive] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
-  const [scrollVoyagePending, setScrollVoyagePending] = useState(
-    loadScrollVoyagePending
-  )
   const [catalogRevealAll, setCatalogRevealAll] = useState(false)
   const unlockedRef = useRef(unlocked)
   const logoClicksRef = useRef(0)
@@ -113,7 +100,8 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const arrowTimerRef = useRef<number | null>(null)
   const themeTogglesRef = useRef(0)
   const themeTimerRef = useRef<number | null>(null)
-  const scrollVoyagePendingRef = useRef(loadScrollVoyagePending())
+  const localeTogglesRef = useRef(0)
+  const localeTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
     unlockedRef.current = unlocked
@@ -155,8 +143,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     if (arrowClicksRef.current >= 5) {
       unlock('arrow-hint')
       setArrowTravelActive(true)
-      playEggEffect('arrow-hint', 6000)
-      window.setTimeout(() => setArrowTravelActive(false), 6000)
+      window.setTimeout(() => setArrowTravelActive(false), 6500)
       arrowClicksRef.current = 0
     }
     arrowTimerRef.current = window.setTimeout(() => {
@@ -177,11 +164,23 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     }, 3000)
   }, [unlock])
 
+  const registerLocaleToggle = useCallback(() => {
+    if (localeTimerRef.current) window.clearTimeout(localeTimerRef.current)
+    localeTogglesRef.current += 1
+    if (localeTogglesRef.current >= 4) {
+      unlock('locale-hopper')
+      playEggEffect('locale-hopper', 4000)
+      localeTogglesRef.current = 0
+    }
+    localeTimerRef.current = window.setTimeout(() => {
+      localeTogglesRef.current = 0
+    }, 5000)
+  }, [unlock])
+
   const triggerVieiraLaunch = useCallback(() => {
     unlock('rocket-email')
     setVieiraLaunchActive(true)
-    playEggEffect('rocket-email', 5500)
-    window.setTimeout(() => setVieiraLaunchActive(false), 5500)
+    window.setTimeout(() => setVieiraLaunchActive(false), 6000)
   }, [unlock])
 
   const revealAllInCatalog = useCallback(() => {
@@ -195,26 +194,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
   }, [unlock])
 
   useEffect(() => {
-    const onScroll = () => {
-      const progress = getScrollProgress()
-      setScrollProgress(progress)
-
-      if (unlockedRef.current.has('scroll-voyage')) return
-
-      if (progress >= 0.98) {
-        scrollVoyagePendingRef.current = true
-        setScrollVoyagePending(true)
-        saveScrollVoyagePending(true)
-      }
-
-      if (scrollVoyagePendingRef.current && progress <= 0.03) {
-        unlock('scroll-voyage')
-        scrollVoyagePendingRef.current = false
-        setScrollVoyagePending(false)
-        saveScrollVoyagePending(false)
-        playEggEffect('scroll-voyage', 5000)
-      }
-    }
+    const onScroll = () => setScrollProgress(getScrollProgress())
 
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -224,7 +204,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [unlock])
+  }, [])
 
   useEffect(() => {
     let konamiIndex = 0
@@ -267,11 +247,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       vieiraLaunchActive,
       arrowTravelActive,
       scrollProgress,
-      scrollVoyagePending,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
+      registerLocaleToggle,
       revealAllInCatalog,
       triggerVieiraLaunch
     }),
@@ -283,11 +263,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       vieiraLaunchActive,
       arrowTravelActive,
       scrollProgress,
-      scrollVoyagePending,
       catalogRevealAll,
       incrementLogoClick,
       incrementArrowClick,
       registerThemeToggle,
+      registerLocaleToggle,
       revealAllInCatalog,
       triggerVieiraLaunch
     ]

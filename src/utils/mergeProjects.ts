@@ -6,6 +6,7 @@ import { ReadmeMedia } from './readmeMedia'
 import { filterReposForPortfolio } from './repoFilters'
 
 export const PINNED_PROJECT_LIMIT = 6
+export const PROJECT_DISPLAY_LIMIT = 18
 
 function githubOgImage (repoName: string): string {
   return `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${encodeURIComponent(repoName)}`
@@ -20,12 +21,15 @@ function repoGithubStats (repo: IGithubResponseRepo, repoName: string) {
   }
 }
 
-export function sortReposByStarsThenRecent (
+export function sortReposByStarsSizeThenRecent (
   a: IGithubResponseRepo,
   b: IGithubResponseRepo
 ): number {
   const starDiff = (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
   if (starDiff !== 0) return starDiff
+
+  const sizeDiff = (b.size ?? 0) - (a.size ?? 0)
+  if (sizeDiff !== 0) return sizeDiff
 
   const dateA = new Date(a.updated_at ?? 0).getTime()
   const dateB = new Date(b.updated_at ?? 0).getTime()
@@ -147,7 +151,9 @@ export function mergeGitHubProjects (
     repoByName.set(key, { ...repoByName.get(key), ...repo })
   }
 
-  const sorted = [...repoByName.values()].sort(sortReposByStarsThenRecent)
+  const sorted = [...repoByName.values()]
+    .sort(sortReposByStarsSizeThenRecent)
+    .slice(0, PROJECT_DISPLAY_LIMIT)
 
   const cards = sorted.map((repo) => {
     const key = repo.name?.toLowerCase() ?? ''

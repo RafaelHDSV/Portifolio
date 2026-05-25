@@ -18,6 +18,7 @@ function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
     stargazers_count: repo.stargazers_count,
     forks_count: repo.forks_count,
     open_issues_count: repo.open_issues_count,
+    size: repo.size,
     homepage: repo.homepage,
     html_url: repo.html_url,
     updated_at: repo.updated_at,
@@ -36,6 +37,7 @@ const PINNED_REPO_FIELDS = `
   updatedAt
   stargazersCount
   forkCount
+  diskUsage
   issues(states: OPEN) { totalCount }
   isFork
   isPrivate
@@ -54,6 +56,7 @@ type PinnedNode = {
   updatedAt: string
   stargazersCount: number
   forkCount: number
+  diskUsage: number
   issues?: { totalCount: number }
   isFork: boolean
   isPrivate: boolean
@@ -73,6 +76,7 @@ function mapPinnedNode (node: PinnedNode): IGithubResponseRepo {
     updated_at: node.updatedAt,
     stargazers_count: node.stargazersCount,
     forks_count: node.forkCount,
+    size: node.diskUsage,
     open_issues_count: node.issues?.totalCount ?? 0,
     language: node.primaryLanguage?.name,
     topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),

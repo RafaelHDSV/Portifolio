@@ -126,12 +126,57 @@
 }
 
 .ctas {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
   margin-top: 0.5rem;
   animation: heroReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+
+.ctaPrimary {
+  background-color: var(--color-accent) !important;
+  color: #0a0a0b !important;
+
+  &:hover {
+    background-color: var(--color-accent-hover) !important;
+  }
+}
+
+.arrowFlightActive {
+  &::before,
+  &::after,
+  .fxLayer,
+  .orbA,
+  .orbB {
+    animation-play-state: paused !important;
+  }
+}
+
+.flightTrail {
+  position: absolute;
+  z-index: 1;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow:
+    0 0 8px var(--color-accent),
+    0 0 16px color-mix(in srgb, var(--color-accent) 50%, transparent);
+  pointer-events: none;
+  animation: rocketOrbit 6.5s linear forwards;
+  opacity: 0.85;
+}
+
+.flyingArrow {
+  position: absolute;
+  z-index: 3;
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent) 65%, transparent));
+  pointer-events: none;
+  animation: rocketOrbit 6.5s linear forwards;
 }
 
 .arrowBtn {
@@ -161,13 +206,52 @@
   animation: arrowBounce 1.5s ease-in-out infinite alternate;
 }
 
-.flyingArrow {
-  position: absolute;
-  z-index: 2;
-  color: var(--color-accent);
-  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--color-accent) 70%, transparent));
-  pointer-events: none;
-  animation: rocketOrbit 6s linear forwards;
+@keyframes rocketOrbit {
+  0% {
+    top: calc(100% - 4.5rem);
+    left: 50%;
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  12% {
+    top: 72%;
+    left: 28%;
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+  24% {
+    top: 48%;
+    left: 18%;
+    transform: translate(-50%, 0) rotate(90deg);
+  }
+  36% {
+    top: 28%;
+    left: 32%;
+    transform: translate(-50%, 0) rotate(135deg);
+  }
+  48% {
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(180deg);
+  }
+  60% {
+    top: 28%;
+    left: 68%;
+    transform: translate(-50%, 0) rotate(225deg);
+  }
+  72% {
+    top: 48%;
+    left: 82%;
+    transform: translate(-50%, 0) rotate(270deg);
+  }
+  84% {
+    top: 68%;
+    left: 72%;
+    transform: translate(-50%, 0) rotate(315deg);
+  }
+  100% {
+    top: calc(100% - 4.5rem);
+    left: 50%;
+    transform: translate(-50%, 0) rotate(360deg);
+  }
 }
 
 @keyframes meshShift {
@@ -221,49 +305,6 @@
   }
   to {
     transform: translateY(8px);
-  }
-}
-
-@keyframes rocketOrbit {
-  0% {
-    top: 78%;
-    left: 50%;
-    transform: translate(-50%, 0) rotate(90deg);
-  }
-  15% {
-    top: 55%;
-    left: 22%;
-    transform: translate(-50%, 0) rotate(135deg);
-  }
-  30% {
-    top: 28%;
-    left: 18%;
-    transform: translate(-50%, 0) rotate(180deg);
-  }
-  45% {
-    top: 18%;
-    left: 50%;
-    transform: translate(-50%, 0) rotate(225deg);
-  }
-  60% {
-    top: 28%;
-    left: 82%;
-    transform: translate(-50%, 0) rotate(270deg);
-  }
-  75% {
-    top: 55%;
-    left: 78%;
-    transform: translate(-50%, 0) rotate(315deg);
-  }
-  90% {
-    top: 72%;
-    left: 62%;
-    transform: translate(-50%, 0) rotate(360deg);
-  }
-  100% {
-    top: 78%;
-    left: 50%;
-    transform: translate(-50%, 0) rotate(450deg);
   }
 }
 

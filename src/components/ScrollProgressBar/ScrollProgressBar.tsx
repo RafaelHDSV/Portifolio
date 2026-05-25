@@ -2,12 +2,12 @@ import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './ScrollProgressBar.module.scss'
 
 export default function ScrollProgressBar () {
-  const { scrollProgress, scrollVoyagePending } = useEasterEgg()
+  const { scrollProgress } = useEasterEgg()
   const width = `${Math.round(scrollProgress * 100)}%`
 
   return (
     <div
-      className={`${styles.bar} ${scrollVoyagePending ? styles.pending : ''}`}
+      className={styles.bar}
       role='progressbar'
       aria-valuenow={Math.round(scrollProgress * 100)}
       aria-valuemin={0}

@@ -211,7 +211,7 @@ export default function Card ({ project }: CardProps) {
           )}
           <Button
             href={project.urlGitHub}
-            variant='ghost'
+            variant='secondary'
             className={styles.linkBtn}
           >
             <GithubLogoIcon size={16} weight='bold' />

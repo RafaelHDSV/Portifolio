@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { RocketLaunchIcon } from '@phosphor-icons/react'
+import { RocketLaunchIcon, SparkleIcon } from '@phosphor-icons/react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin, FaWhatsappSquare } from 'react-icons/fa'
@@ -39,6 +39,8 @@ const CHANNELS = [
   }
 ]
 
+const SPARK_COUNT = 10
+
 function ContactItem ({
   name,
   focusedName,
@@ -76,8 +78,22 @@ export default function Contact () {
       >
         {vieiraLaunchActive && (
           <div className={styles.launchFx} aria-hidden='true'>
-            <RocketLaunchIcon className={styles.launchRocket} size={48} weight='fill' />
+            <div className={styles.launchBurst} />
+            <span className={styles.launchBadge}>
+              <SparkleIcon size={18} weight='fill' />
+              Vieira
+              <SparkleIcon size={18} weight='fill' />
+            </span>
+            {Array.from({ length: SPARK_COUNT }).map((_, index) => (
+              <span
+                key={index}
+                className={styles.spark}
+                style={{ '--spark-index': index } as React.CSSProperties}
+              />
+            ))}
+            <RocketLaunchIcon className={styles.launchRocket} size={52} weight='fill' />
             <span className={styles.launchTrail} />
+            <span className={styles.launchRing} />
           </div>
         )}
         <Container>

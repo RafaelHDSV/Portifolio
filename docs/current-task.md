@@ -1,7 +1,5 @@
-- Você decidiu exibir 73 projetos, não era isso que eu queria. Vou querer 18 projetos ao máximo. Pode remover os projetos que começam com "ESTUDO". E acho que na verdade uma ordenação melhor seria: qtd estrelas >>> qtd de código (commits, alterações, linhas de código, etc) >>> última att
-- A animação da seta ficou ruim. Quero a memsa seta, simulando um foguete, percorrendo pela seção. E não altere o background enquanto a seta estiver rodando.
-- O botão de ver projetos está ficando sem background em alguns momentos
-- Deixe o botão do github mais parecido visualmente com o botão de ver demo.
-- O easter egg da Viagem completa não está funcionando. Pense em um novo easter egg não relacionado a subir e descer a página completa
-- O easter egg Mensagem Vieira funcionou, mas está um pouco feito. Melhore
-- Remova o texto "(space ainda funciona)"
+- Por algum motivo, alguns projetos que antes estavam aparecendo a imagem demo, agora não estão aparecendo, está aparecendo somente a imagem do github. Corrija
+- Remova o texto 18 projetos exibidos
+- Verifique, valide e corrija todos os textos do portifolio para garantir que tudo está de acordo com a norma brasileira, incluindo acentuação, etc
+- TSQL está sem icone nos projetos
+- Garanta que o portifolio está 100%, para todos os tamanhos de tela possível. Garanta responsividade

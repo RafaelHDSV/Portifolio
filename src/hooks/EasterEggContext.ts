@@ -11,11 +11,11 @@ export interface EasterEggContextValue {
   vieiraLaunchActive: boolean
   arrowTravelActive: boolean
   scrollProgress: number
-  scrollVoyagePending: boolean
   catalogRevealAll: boolean
   incrementLogoClick: () => void
   incrementArrowClick: () => void
   registerThemeToggle: () => void
+  registerLocaleToggle: () => void
   revealAllInCatalog: () => void
   triggerVieiraLaunch: () => void
 }

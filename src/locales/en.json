@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Repositories sorted by stars and last update",
+    "subtitle": "Highlights sorted by stars, size and last update (up to 18)",
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
@@ -133,7 +133,7 @@
     "switchToDark": "Switch to dark theme"
   },
   "easterEgg": {
-    "scrollVoyageHint": "Scroll to the bottom and back to the top to unlock",
+    "localeHopperHint": "Toggle PT/EN 4 times in 5 seconds to unlock",
     "vieiraModeActive": "Vieira mode enabled — personalized hero visuals!",
     "konamiActive": "Konami code detected — purple accent for 30 seconds!",
     "themeHunter": "Theme hunter unlocked!",
@@ -159,10 +159,10 @@
         "trigger": "5 quick clicks on the logo (no page reload)",
         "result": "Blueprint mode: cyan grid overlay and glowing logo for 14 seconds"
       },
-      "scrollVoyage": {
-        "name": "Full voyage",
-        "trigger": "Scroll to the bottom of the page and return to the top",
-        "result": "Top progress bar pulses and a celebratory glow covers the page"
+      "localeHopper": {
+        "name": "Locale hop",
+        "trigger": "Toggle PT/EN 4 times within 5 seconds",
+        "result": "Locale pill pulses with accent glow for 4 seconds"
       },
       "vieiraMessage": {
         "name": "Vieira message",
@@ -171,7 +171,7 @@
       },
       "vieiraMode": {
         "name": "Vieira mode",
-        "trigger": "Open the site with ?mode=vieira in the URL (space still works)",
+        "trigger": "Open the site with ?mode=vieira in the URL",
         "result": "Personalized Vieira hero visuals while the URL param is present"
       },
       "theme": {
@@ -182,7 +182,7 @@
       "arrow": {
         "name": "Vieira orbit",
         "trigger": "5 quick clicks on the hero arrow (does not scroll)",
-        "result": "Arrow orbits the hero like a rocket and returns to origin"
+        "result": "The same arrow orbits the hero and returns to origin without changing the background"
       }
     }
   },

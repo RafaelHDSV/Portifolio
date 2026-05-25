@@ -18,21 +18,13 @@ html.egg-blueprint-mode {
   }
 }
 
-html.egg-scroll-voyage-done {
-  --color-accent: color-mix(in srgb, var(--color-accent) 80%, #818cf8);
-
-  &::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 9997;
-    pointer-events: none;
-    background: radial-gradient(
-      circle at 50% 20%,
-      color-mix(in srgb, var(--color-accent) 25%, transparent),
-      transparent 55%
-    );
-    animation: voyageCelebrate 5s ease forwards;
+html.egg-locale-hopper-done {
+  .localeToggle,
+  [class*='localeToggle'] {
+    animation: localeHopPulse 0.8s ease-in-out 3;
+    color: var(--color-accent) !important;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-button);
   }
 }
 
@@ -40,41 +32,14 @@ html.egg-theme-spectrum {
   animation: themeSpectrum 5s ease;
 }
 
-html.egg-arrow-travel {
-  --color-accent: color-mix(in srgb, var(--color-accent) 75%, #f59e0b);
-}
-
-html.egg-vieira-launch {
-  --color-accent: color-mix(in srgb, var(--color-accent) 70%, #818cf8);
-
-  &::before {
-    content: 'Vieira';
-    position: fixed;
-    top: 18%;
-    left: 50%;
-    z-index: 9999;
-    pointer-events: none;
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    text-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 50%, transparent);
-    transform: translateX(-50%);
-    animation: vieiraMessagePop 5.5s ease forwards;
-  }
-}
-
 @keyframes blueprintScan {
   from { transform: translateY(0); }
   to { transform: translateY(48px); }
 }
 
-@keyframes voyageCelebrate {
-  0% { opacity: 0; }
-  20% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes localeHopPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
 }
 
 @keyframes themeSpectrum {
@@ -85,16 +50,11 @@ html.egg-vieira-launch {
   100% { filter: hue-rotate(360deg) saturate(1); }
 }
 
-@keyframes vieiraMessagePop {
-  0%, 100% { opacity: 0; transform: translate(-50%, 12px); }
-  15%, 75% { opacity: 1; transform: translate(-50%, 0); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html.egg-blueprint-mode::before,
-  html.egg-scroll-voyage-done::after,
   html.egg-theme-spectrum,
-  html.egg-vieira-launch::before {
+  html.egg-locale-hopper-done .localeToggle,
+  html.egg-locale-hopper-done [class*='localeToggle'] {
     animation: none;
   }
 }

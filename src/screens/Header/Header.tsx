@@ -1,4 +1,4 @@
-import { ArrowDownIcon, RocketLaunchIcon } from '@phosphor-icons/react'
+import { ArrowDownIcon } from '@phosphor-icons/react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import Typewriter from 'typewriter-effect'
@@ -21,19 +21,22 @@ export default function Header () {
     <Fade triggerOnce>
       <header
         id='home'
-        className={`${styles.header} ${vieiraMode ? styles.vieiraMode : ''}`}
+        className={`${styles.header} ${vieiraMode ? styles.vieiraMode : ''} ${arrowTravelActive ? styles.arrowFlightActive : ''}`}
       >
         <div className={styles.fxLayer} aria-hidden='true' />
         <div className={styles.orbA} aria-hidden='true' />
         <div className={styles.orbB} aria-hidden='true' />
 
         {arrowTravelActive && (
-          <RocketLaunchIcon
-            className={styles.flyingArrow}
-            size='1.75rem'
-            weight='fill'
-            aria-hidden='true'
-          />
+          <>
+            <span className={styles.flightTrail} aria-hidden='true' />
+            <ArrowDownIcon
+              className={styles.flyingArrow}
+              size='1.5rem'
+              weight='bold'
+              aria-hidden='true'
+            />
+          </>
         )}
 
         <div className={styles.content}>
@@ -52,7 +55,7 @@ export default function Header () {
           />
 
           <div className={styles.ctas}>
-            <Button href='#projects' variant='primary'>
+            <Button href='#projects' variant='primary' className={styles.ctaPrimary}>
               {t('hero.ctaProjects')}
             </Button>
             <Button

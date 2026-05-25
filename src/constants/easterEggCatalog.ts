@@ -21,10 +21,10 @@ export const EASTER_EGG_CATALOG: EasterEggCatalogEntry[] = [
     resultKey: 'easterEgg.catalog.logo.result'
   },
   {
-    id: 'scroll-voyage',
-    nameKey: 'easterEgg.catalog.scrollVoyage.name',
-    triggerKey: 'easterEgg.catalog.scrollVoyage.trigger',
-    resultKey: 'easterEgg.catalog.scrollVoyage.result'
+    id: 'locale-hopper',
+    nameKey: 'easterEgg.catalog.localeHopper.name',
+    triggerKey: 'easterEgg.catalog.localeHopper.trigger',
+    resultKey: 'easterEgg.catalog.localeHopper.result'
   },
   {
     id: 'rocket-email',

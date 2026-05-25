@@ -25,7 +25,7 @@ interface NavbarProps {
 export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
   const { t, i18n } = useTranslation()
   const activeSection = useActiveSection()
-  const { incrementLogoClick, logoRevealActive } = useEasterEgg()
+  const { incrementLogoClick, logoRevealActive, registerLocaleToggle } = useEasterEgg()
   const { enableRecruiterMode } = useRecruiterMode()
   const vieiraMode = useVieiraModeFromUrl()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -41,6 +41,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
   }, [])
 
   const toggleLocale = () => {
+    registerLocaleToggle()
     setLocale(locale === 'pt' ? 'en' : 'pt')
   }
 
@@ -104,7 +105,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
           )}
           <button
             type='button'
-            className={styles.pillToggle}
+            className={`${styles.pillToggle} localeToggle`}
             onClick={toggleLocale}
             aria-label={
               locale === 'pt' ? 'Switch to English' : 'Mudar para português'
@@ -130,7 +131,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
         )}
         <button
           type='button'
-          className={styles.pillToggle}
+          className={`${styles.pillToggle} localeToggle`}
           onClick={toggleLocale}
           aria-label={
             locale === 'pt' ? 'Switch to English' : 'Mudar para português'

@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Repositorios ordenados por estrelas e atualizacao",
+    "subtitle": "Destaques ordenados por estrelas, tamanho e atualizacao (ate 18)",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
@@ -133,7 +133,7 @@
     "switchToDark": "Mudar para tema escuro"
   },
   "easterEgg": {
-    "scrollVoyageHint": "Desça até o fim e volte ao topo para desbloquear",
+    "localeHopperHint": "Alterne PT/EN 4 vezes em 5 segundos para desbloquear",
     "vieiraModeActive": "Modo Vieira ativado — visual personalizado no hero!",
     "konamiActive": "Código Konami detectado — accent roxo por 30 segundos!",
     "themeHunter": "Caçador de temas desbloqueado!",
@@ -159,10 +159,10 @@
         "trigger": "5 cliques rapidos no logo (sem recarregar a pagina)",
         "result": "Modo blueprint: grid cyan na pagina e logo brilhando por 14 segundos"
       },
-      "scrollVoyage": {
-        "name": "Viagem completa",
-        "trigger": "Rolar ate o fim da pagina e voltar ao topo",
-        "result": "Barra de progresso no topo pulsa e brilho celebratorio na pagina"
+      "localeHopper": {
+        "name": "Salto de idioma",
+        "trigger": "Alternar idioma PT/EN 4 vezes em 5 segundos",
+        "result": "Pill de idioma pulsa com brilho accent por 4 segundos"
       },
       "vieiraMessage": {
         "name": "Mensagem Vieira",
@@ -171,7 +171,7 @@
       },
       "vieiraMode": {
         "name": "Modo Vieira",
-        "trigger": "Abrir o site com ?mode=vieira na URL (space ainda funciona)",
+        "trigger": "Abrir o site com ?mode=vieira na URL",
         "result": "Visual personalizado Vieira no hero enquanto o parametro estiver na URL"
       },
       "theme": {
@@ -182,7 +182,7 @@
       "arrow": {
         "name": "Orbita Vieira",
         "trigger": "5 cliques rapidos na seta do hero (sem rolar a pagina)",
-        "result": "Seta percorre o hero em orbita de foguete e volta a origem"
+        "result": "A mesma seta percorre o hero em orbita e volta a origem, sem alterar o fundo"
       }
     }
   },
