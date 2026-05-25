@@ -12,7 +12,7 @@ export function shouldIncludeRepo (
 
   if (name === username.toLowerCase()) return false
 
-  if (name.startsWith('estudo')) return false
+  if (name.startsWith('estudo') || name.startsWith('curso')) return false
 
   const config = projectsConfig.find(
     (p) => p.repoName?.toLowerCase() === name
