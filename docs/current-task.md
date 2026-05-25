@@ -1,32 +1,41 @@
-- Pode alterar a logo 
-- Altere o switch de theme para de adequar mais ao design system do projeto, mais parecido com componente de alteração de linguagem.
-- Não necessariamente precisa utilizar o background quadriculado que tinha pensado anteriormente, mas quero algo visualmente mais atrativo e que seja mais moderno.
-- Sinta-se a vontade para alterar as fontes, cores, espaçamentos, logos, etc.
-- Na primeira seção, tem uma descrição Desenvolvedor Front-End · React · TypeScript e logo a seguir tem o Typewritter que fica com o mesmo texto, mantenha somente o Typewritter
-- Altere para adicionar estilização na seleção da palavra
-- Pode remover a palavra portfolio, usada somente para o easter egg. E remova esse easter egg também.
-- Está com muitas opções na primeira seção (Ver projetos, Baixar CV, GitHub), e ainda o botão do github está diferente dos demais. Deixe somente uma opção ou duas.
-- Atualmente eu sou desenvolver Full-Stack, faça as alterações necessárias para refletir isso.
-- Pode utilizar o meu CV de base para algumas informações e para o botão de download do CV. Existe um repositório no github (https://github.com/RafaelHDSV/PERSONAL-CVs). Sempre pegue o Currículo.pdf (https://github.com/RafaelHDSV/PERSONAL-CVs/blob/main/Curr%C3%ADculo.pdf). Sempre utilize o currículo atualizado desse repositório.
-- Pode remover a tag Aberto a oportunidades
-- Pode alinhar o icone com o texto nos tópicos de tecnologias do aboutMe. E adicione espaçamento entre o icone e o texto.
-- Nos tópicos de tecnologias do aboutMe, faça a estilização para que fique mais parecido com o design system do projeto.
-- Nos tópicos de tecnologias do aboutMe, o seguindo está fora da ordenação vertical padrão, precisa espaçar tudo para 2 colunas ou adicionar tudo somente em uma coluna.
-- A seção de Stacks está com os icones muito pequenos e o slider fica em branco grande parte do tempo, parece que está com problema. Pode corrigir isso ou desenvolver uma nova seção de stacks
-- Na seção de Projetos, não quero uma parte de destaque separadas. Está com 4 destaques, então um espaço estranho e em seguida os demais projetos. Preciso que todos os projetos fiquem juntos e sem espaço estranho.
-- Na seção de Projetos, gostaria de dar destaque para os projetos pin do meu github. E gostaria de adicionar os pins e os 10 mais recentes do meu github.
-- Quando eu filtro por API, aparece somente dois projetos e fica ocupando o width completo um a baixo do outro. QUero que mantenha o padrão de 3 colunas, independente de quantos projetos exista na listagem.
-- Pode adicionar mais filtros para os projetos. E quero que os filtros sejam agregados, ou seja, eu posso selecionar React e API, e aparecerá todos os projetos que possuem as tecnologias React e API.
-- Gostaria de uma estilização melhor para os botões Ver demo e github no projeto
-- Tem muito projeto que está sem imagem. Sempre que possível busque por uma imagem dentro do repositório do projeto. Quando não houver, solicite uma imagem para o projeto.
-- Quero que ao longo do projeto adicione elementos visuais para que o usuário se sinta mais envolvido com o projeto.
-- Eu gostava do desenvolvimento antigo, onde existiam 4 cards alinhandos, como Github, Email, etc. E quando passava o mouse em cima o texto e o estilo do card mudavam para exibir o valor, como o link do github ou o meu email. Isso existia na versão anterior
-- O formulário de contato está com um design muito simples e não está de acordo com o design system do projeto. Pode refatorar para que fique mais parecido com o design system do projeto.
-- E quero que o formulário de contato apareça em um modal, não apareça sempre na tela. Só quando o usuário solicitar 
-- Pode remover o texto: Aberto a oportunidades e projetos freelance.
-- Os easter eggs ficaram bem legais. No footer poder adicionar o texto Easteregg à: 4/6 descobertos. Para deixar claro que existem easter eggs e quantos foram descobertos.
-- Não precisa o botão de voltar ao topo, pois o projeto já possui um botão de voltar ao topo.
-- O footer está muito centralizado. Está com muito espaço em branco nas laterais esquerda e direita.
-- A tag de explorador é simples demais. Tente incrementar
-- No easter-egg de mudar a cor pra roxo, tem várias cores que sem mantém azul. Então verifique e valide para que todas as cores se alterem corretamente.
-- Eu pedi para remover o easter egg da palavra portifolio com o modal do astronauta. E o easter egg do Explorador é muito simples também. Caso queira, pode incrementar o explorador e/ou adicionar mais easter eggs
+# Tarefa atual — Panorama (origem da epic v2)
+
+> Epic completa gerada: [`docs/especificacao-v2-refino-ui-ux.md`](./especificacao-v2-refino-ui-ux.md)  
+> Para implementar, usar `ai-development-workflow.mdc` → proposta em `.issues/` → aprovacao → codigo.
+
+## Panorama
+
+- **Titulo:** Portifolio v2 — Refino UI/UX, Full-Stack e projetos dinamicos
+- **Versao alvo:** v2.0
+- **Problema:** Pos-v1.1 o site funciona, mas ha redundancias no hero, layout quebrado em projetos/stack, contato e footer abaixo do design system, identidade ainda Front-End, e easter eggs inconsistentes.
+- **Solucao:** Polimento visual global; identidade Full-Stack; hero simplificado; about/stack/projects/contact/footer refatorados; pins + 10 recentes GitHub; filtros agregados; contato modal; eggs revisados.
+- **Escopo da epic:** Header, Navbar, About, Languages, Projects (+ API GraphQL pins), Contact (+ Modal), Footer, EasterEggProvider, i18n, tokens SCSS, docs/context.md
+- **Fora do escopo:** dominio custom, backend contato, novos idiomas, migracao de stack
+- **Referencias:** docs/especificacao.md v1.1 · docs/context.md · PERSONAL-CVs · current-task (lista abaixo)
+- **Decisoes ja tomadas:** ver secao 2 da epic v2 + secao 11 (logo RV, par CTAs, 7 eggs, placeholders)
+- **Fases:** identidade/hero → about/stack → projects → contact/footer/eggs → polimento *(concluido)*
+- **Status:** v2 implementada — `yarn build` e `yarn lint` OK
+
+---
+
+## Lista bruta de requisitos (autor)
+
+- Pode alterar a logo
+- Switch theme alinhado ao toggle de idioma
+- Hero visualmente mais moderno (grid opcional)
+- Liberdade para fontes, cores, espacamentos
+- Hero: manter somente Typewriter (remover linha estatica duplicada)
+- Estilizar `::selection`
+- Remover palavra portfolio e easter egg do astronauta
+- Hero: 1–2 CTAs no maximo (GitHub nao como botao diferente)
+- Perfil **Full-Stack** (nao Front-End)
+- CV sempre de PERSONAL-CVs/Curriculo.pdf (raw GitHub)
+- Remover tag "Aberto a oportunidades"
+- About: alinhar icone/texto; estilo DS; layout 1 ou 2 colunas (fix Seguindo)
+- Stack: corrigir slider ou nova secao; icones maiores
+- Projects: sem secao destaques separada; pins + 10 recentes; grid 3 col sempre; filtros multi AND; botoes demo/GitHub melhores; imagens dos repos
+- Micro-interacoes visuais ao longo do site
+- Contact: cards hover (versao antiga); form em modal; DS no form
+- Remover texto freelance no contato
+- Footer: "Easteregg a: X/6 descobertos"; sem voltar ao topo; menos centralizado
+- Egg Explorador incrementado; Konami 100% roxo; remover egg portfolio

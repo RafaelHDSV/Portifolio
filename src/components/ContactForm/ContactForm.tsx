@@ -13,7 +13,11 @@ import styles from './ContactForm.module.scss'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
-export default function ContactForm () {
+interface ContactFormProps {
+  onSuccess?: () => void
+}
+
+export default function ContactForm ({ onSuccess }: ContactFormProps) {
   const { t } = useTranslation()
   const { unlock, isUnlocked } = useEasterEgg()
   const [status, setStatus] = useState<FormStatus>('idle')
@@ -44,6 +48,7 @@ export default function ContactForm () {
       )
       setStatus('success')
       form.reset()
+      onSuccess?.()
     } catch {
       setStatus('error')
     }

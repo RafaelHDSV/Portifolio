@@ -1,14 +1,15 @@
-import { ArrowDownIcon, GithubLogoIcon } from '@phosphor-icons/react'
+import { ArrowDownIcon } from '@phosphor-icons/react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import Typewriter from 'typewriter-effect'
 import Button from '../../components/Button/Button'
+import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './Header.module.scss'
 
 export default function Header () {
   const { t } = useTranslation()
-  const { incrementPortfolioClick, isUnlocked } = useEasterEgg()
+  const { isUnlocked, incrementArrowClick } = useEasterEgg()
   const spaceMode = isUnlocked('space-mode')
 
   const typewriterStrings = t('hero.typewriter', {
@@ -23,7 +24,6 @@ export default function Header () {
       >
         <div className={styles.content}>
           <h1 className={styles.name}>Rafael Vieira</h1>
-          <p className={styles.role}>{t('hero.role')}</p>
 
           <Typewriter
             options={{
@@ -41,30 +41,21 @@ export default function Header () {
             <Button href='#projects' variant='primary'>
               {t('hero.ctaProjects')}
             </Button>
-            <Button href='cv.pdf' variant='secondary'>
+            <Button
+              href={CV_URL}
+              variant='secondary'
+              download={CV_DOWNLOAD_NAME}
+            >
               {t('hero.ctaCv')}
             </Button>
-            <Button
-              href='https://github.com/RafaelHDSV'
-              variant='ghost'
-            >
-              <GithubLogoIcon size={18} weight='bold' />
-              {t('hero.ctaGithub')}
-            </Button>
           </div>
-
-          <p className={styles.role}>
-            <span
-              className={styles.portfolioTrigger}
-              onClick={incrementPortfolioClick}
-              role='presentation'
-            >
-              {t('hero.portfolioWord')}
-            </span>
-          </p>
         </div>
 
-        <a href='#about' aria-label='Scroll para sobre'>
+        <a
+          href='#about'
+          aria-label='Scroll para sobre'
+          onClick={incrementArrowClick}
+        >
           <ArrowDownIcon className={styles.arrowDown} size='1.5rem' weight='bold' />
         </a>
       </header>

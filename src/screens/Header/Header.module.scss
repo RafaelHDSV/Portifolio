@@ -95,15 +95,6 @@
   z-index: 1;
 }
 
-.portfolioTrigger {
-  cursor: default;
-  border-bottom: 1px dashed transparent;
-
-  &:hover {
-    border-bottom-color: var(--color-accent);
-  }
-}
-
 @keyframes meshShift {
   0% {
     filter: hue-rotate(0deg);

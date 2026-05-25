@@ -7,6 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
   children: ReactNode
   href?: string
+  download?: string | boolean
 }
 
 export default function Button ({
@@ -14,18 +15,20 @@ export default function Button ({
   children,
   className = '',
   href,
+  download,
   ...props
 }: ButtonProps) {
   const classes = `${styles.button} ${styles[variant]} ${className}`.trim()
 
   if (href) {
+    const isExternal = href.startsWith('http')
     return (
       <a
         className={classes}
         href={href}
-        target={href.startsWith('http') ? '_blank' : undefined}
-        rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-        download={href.endsWith('.pdf') ? true : undefined}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        download={download}
       >
         {children}
       </a>

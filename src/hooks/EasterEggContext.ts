@@ -7,14 +7,11 @@ export interface EasterEggContextValue {
   isUnlocked: (id: EasterEggId) => boolean
   totalUnlocked: number
   totalEggs: number
-  showDevScreen: boolean
-  setShowDevScreen: (show: boolean) => void
-  accentOverride: boolean
-  setAccentOverride: (active: boolean) => void
   showExplorerBadge: boolean
-  incrementPortfolioClick: () => void
+  explorerMessage: string | null
   incrementLogoClick: () => void
-  trackScrollCycle: () => void
+  incrementArrowClick: () => void
+  registerThemeToggle: () => void
 }
 
 export const EasterEggContext = createContext<EasterEggContextValue | null>(

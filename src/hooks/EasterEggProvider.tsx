@@ -8,7 +8,17 @@ function loadUnlocked (): Set<EasterEggId> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return new Set()
-    return new Set(JSON.parse(raw) as EasterEggId[])
+    const parsed = JSON.parse(raw) as string[]
+    const valid: EasterEggId[] = [
+      'konami',
+      'logo-clicks',
+      'scroll-explorer',
+      'rocket-email',
+      'space-mode',
+      'theme-hunter',
+      'arrow-hint'
+    ]
+    return new Set(parsed.filter((id): id is EasterEggId => valid.includes(id as EasterEggId)))
   } catch {
     return new Set()
   }
@@ -33,14 +43,25 @@ const KONAMI = [
 
 export function EasterEggProvider ({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState<Set<EasterEggId>>(loadUnlocked)
-  const [showDevScreen, setShowDevScreen] = useState(false)
-  const [accentOverride, setAccentOverride] = useState(false)
   const [showExplorerBadge, setShowExplorerBadge] = useState(false)
+  const [explorerMessage, setExplorerMessage] = useState<string | null>(null)
   const [logoClickTimer, setLogoClickTimer] = useState<number | null>(null)
   const [wasAtBottom, setWasAtBottom] = useState(false)
-  const portfolioClicksRef = useRef(0)
   const logoClicksRef = useRef(0)
+  const arrowClicksRef = useRef(0)
+  const arrowTimerRef = useRef<number | null>(null)
   const scrollCyclesRef = useRef(0)
+  const themeTogglesRef = useRef(0)
+  const themeTimerRef = useRef<number | null>(null)
+
+  const showToast = useCallback((messageKey: string, duration = 5000) => {
+    setExplorerMessage(messageKey)
+    setShowExplorerBadge(true)
+    window.setTimeout(() => {
+      setShowExplorerBadge(false)
+      setExplorerMessage(null)
+    }, duration)
+  }, [])
 
   const unlock = useCallback((id: EasterEggId) => {
     setUnlocked((prev) => {
@@ -57,14 +78,6 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     [unlocked]
   )
 
-  const incrementPortfolioClick = useCallback(() => {
-    portfolioClicksRef.current += 1
-    if (portfolioClicksRef.current >= 30) {
-      unlock('portfolio-clicks')
-      setShowDevScreen(true)
-    }
-  }, [unlock])
-
   const incrementLogoClick = useCallback(() => {
     if (logoClickTimer) window.clearTimeout(logoClickTimer)
     logoClicksRef.current += 1
@@ -72,7 +85,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       unlock('logo-clicks')
       console.log(
         '%c RV Secret %c https://github.com/RafaelHDSV/Plann.er ',
-        'background:#38bdf8;color:#0a0a0b;padding:4px 8px;border-radius:4px;font-weight:bold',
+        'background:var(--color-accent);color:#0a0a0b;padding:4px 8px;border-radius:4px;font-weight:bold',
         'color:#a1a1aa'
       )
       logoClicksRef.current = 0
@@ -82,6 +95,32 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     }, 2000)
     setLogoClickTimer(timer)
   }, [logoClickTimer, unlock])
+
+  const incrementArrowClick = useCallback(() => {
+    if (arrowTimerRef.current) window.clearTimeout(arrowTimerRef.current)
+    arrowClicksRef.current += 1
+    if (arrowClicksRef.current >= 3) {
+      unlock('arrow-hint')
+      showToast('easterEgg.arrowHint', 4000)
+      arrowClicksRef.current = 0
+    }
+    arrowTimerRef.current = window.setTimeout(() => {
+      arrowClicksRef.current = 0
+    }, 1500)
+  }, [unlock, showToast])
+
+  const registerThemeToggle = useCallback(() => {
+    if (themeTimerRef.current) window.clearTimeout(themeTimerRef.current)
+    themeTogglesRef.current += 1
+    if (themeTogglesRef.current >= 5) {
+      unlock('theme-hunter')
+      showToast('easterEgg.themeHunter', 4000)
+      themeTogglesRef.current = 0
+    }
+    themeTimerRef.current = window.setTimeout(() => {
+      themeTogglesRef.current = 0
+    }, 3000)
+  }, [unlock, showToast])
 
   const trackScrollCycle = useCallback(() => {
     const atBottom =
@@ -93,12 +132,11 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       scrollCyclesRef.current += 1
       if (scrollCyclesRef.current >= 3) {
         unlock('scroll-explorer')
-        setShowExplorerBadge(true)
-        window.setTimeout(() => setShowExplorerBadge(false), 5000)
+        showToast('easterEgg.explorerDesc', 6000)
       }
       setWasAtBottom(false)
     }
-  }, [wasAtBottom, unlock])
+  }, [wasAtBottom, unlock, showToast])
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('mode') === 'space') {
@@ -119,10 +157,8 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
         if (konamiIndex === KONAMI.length) {
           unlock('konami')
           if (!reducedMotion) {
-            setAccentOverride(true)
             document.documentElement.classList.add('easter-egg-accent')
             window.setTimeout(() => {
-              setAccentOverride(false)
               document.documentElement.classList.remove('easter-egg-accent')
             }, 30000)
           }
@@ -149,25 +185,21 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       isUnlocked,
       totalUnlocked: unlocked.size,
       totalEggs: TOTAL_EGGS,
-      showDevScreen,
-      setShowDevScreen,
-      accentOverride,
-      setAccentOverride,
       showExplorerBadge,
-      incrementPortfolioClick,
+      explorerMessage,
       incrementLogoClick,
-      trackScrollCycle
+      incrementArrowClick,
+      registerThemeToggle
     }),
     [
       unlocked,
       unlock,
       isUnlocked,
-      showDevScreen,
-      accentOverride,
       showExplorerBadge,
-      incrementPortfolioClick,
+      explorerMessage,
       incrementLogoClick,
-      trackScrollCycle
+      incrementArrowClick,
+      registerThemeToggle
     ]
   )
 

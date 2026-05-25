@@ -1,6 +1,7 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useEasterEgg } from '../../hooks/useEasterEgg'
 import styles from './SwitchTheme.module.scss'
 
 const getInitialTheme = (): boolean => {
@@ -11,6 +12,7 @@ const getInitialTheme = (): boolean => {
 
 export default function ThemeSwitcher () {
   const { t } = useTranslation()
+  const { registerThemeToggle } = useEasterEgg()
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(getInitialTheme)
 
   useEffect(() => {
@@ -23,30 +25,28 @@ export default function ThemeSwitcher () {
     }
   }, [isDarkTheme])
 
+  const handleToggle = () => {
+    registerThemeToggle()
+    setIsDarkTheme((prev) => !prev)
+  }
+
   return (
     <button
+      type='button'
       aria-label={
         isDarkTheme ? t('theme.switchToLight') : t('theme.switchToDark')
       }
       aria-pressed={isDarkTheme}
-      className={styles.switcher}
-      onClick={() => setIsDarkTheme((prev) => !prev)}
+      className={styles.pillToggle}
+      onClick={handleToggle}
       title={isDarkTheme ? t('theme.switchToLight') : t('theme.switchToDark')}
     >
-      <div className={styles.track}>
-        <div className={styles.icons}>
-          <span className={styles.sun}>
-            <SunIcon size={14} weight='bold' />
-          </span>
-          <span className={styles.moon}>
-            <MoonIcon size={14} weight='bold' />
-          </span>
-        </div>
-        <div
-          className={`${styles.thumb} ${isDarkTheme ? styles.dark : styles.light}`}
-          aria-hidden='true'
-        />
-      </div>
+      {isDarkTheme ? (
+        <MoonIcon size={16} weight='bold' />
+      ) : (
+        <SunIcon size={16} weight='bold' />
+      )}
+      {isDarkTheme ? 'Dark' : 'Light'}
     </button>
   )
 }

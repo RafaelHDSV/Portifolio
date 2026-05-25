@@ -5,99 +5,60 @@
   border-bottom: 1px solid var(--color-border);
 }
 
-.sliderWrapper {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
   width: 100%;
-  overflow: hidden;
-  position: relative;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  &::before {
-    left: 0;
-    background: linear-gradient(to right, var(--fade-edge), transparent);
-  }
-
-  &::after {
-    right: 0;
-    background: linear-gradient(to left, var(--fade-edge), transparent);
-  }
+  padding-bottom: 0.5rem;
 }
 
-$slideSize: 80px;
-
-.slider {
-  display: flex;
-  width: max-content;
-  animation: scroll 30s linear infinite;
-
-  &:hover {
-    animation-play-state: paused;
-  }
-}
-
-.slide {
-  width: $slideSize;
-  height: $slideSize;
+.techItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  flex-shrink: 0;
-
-  svg {
-    font-size: 2rem;
-    color: var(--color-text-secondary);
-    transition: color 200ms ease, transform 200ms ease;
-  }
+  gap: 0.5rem;
+  min-height: 100px;
+  padding: 1rem 0.5rem;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  transition: transform 200ms ease, border-color 200ms ease;
 
   span {
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
     color: var(--color-text-muted);
-    opacity: 0;
-    transition: opacity 200ms ease;
+    text-align: center;
   }
 
   &:hover {
-    svg {
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+
+    .iconWrap {
       color: var(--color-accent);
-      transform: scale(1.15);
+      transform: scale(1.08);
     }
 
     span {
-      opacity: 1;
+      color: var(--color-accent);
     }
   }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  color: var(--color-text-secondary);
+  transition: color 200ms ease, transform 200ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slider {
-    animation: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .slide span {
-    opacity: 1;
+  .techItem:hover {
+    transform: none;
   }
 }

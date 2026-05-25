@@ -86,8 +86,11 @@ html.dark,
 }
 
 html.dark.easter-egg-accent,
-.dark.easter-egg-accent {
+.dark.easter-egg-accent,
+html.easter-egg-accent {
   --color-accent: #a78bfa;
   --color-accent-hover: #c4b5fd;
   --primary-color: var(--color-accent);
+  --hero-mesh-1: rgba(167, 139, 250, 0.15);
+  --hero-mesh-2: rgba(139, 92, 246, 0.1);
 }

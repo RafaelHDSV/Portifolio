@@ -5,20 +5,18 @@ import { useTranslation } from 'react-i18next'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+import useGitHubProjects from '../../hooks/useGitHubProjects'
 import {
-  PROJECT_FILTERS,
-  ProjectFilter
-} from '../../constants/projects.config'
-import useGetRepos from '../../hooks/useGetRepos'
-import { filterProjects, mergeProjects } from '../../utils/mergeProjects'
+  collectAvailableFilters,
+  filterProjectsMulti,
+  mergeGitHubProjects
+} from '../../utils/mergeProjects'
 import styles from './Project.module.scss'
-
-const INITIAL_VISIBLE = 6
 
 function ProjectsSkeleton () {
   return (
     <div className={styles.skeletonGrid} aria-hidden='true'>
-      {Array.from({ length: 4 }).map((_, i) => (
+      {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className={styles.skeletonCard} />
       ))}
     </div>
@@ -27,41 +25,57 @@ function ProjectsSkeleton () {
 
 function ProjectsContent () {
   const { t, i18n } = useTranslation()
-  const { repos, loading, error } = useGetRepos()
-  const [filter, setFilter] = useState<ProjectFilter>('all')
-  const [showAll, setShowAll] = useState(false)
+  const { pinned, recent, loading, error } = useGitHubProjects()
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([])
 
   const locale = i18n.language.startsWith('pt') ? 'pt' : 'en'
 
   const allProjects = useMemo(
-    () => mergeProjects(repos, locale),
-    [repos, locale]
+    () => mergeGitHubProjects(pinned, recent, locale),
+    [pinned, recent, locale]
+  )
+
+  const availableFilters = useMemo(
+    () => collectAvailableFilters(allProjects),
+    [allProjects]
   )
 
   const filtered = useMemo(
-    () => filterProjects(allProjects, filter),
-    [allProjects, filter]
+    () => filterProjectsMulti(allProjects, selectedFilters),
+    [allProjects, selectedFilters]
   )
 
-  const featured = filtered.filter((p) => p.featured)
-  const others = filtered.filter((p) => !p.featured)
-  const visibleOthers = showAll ? others : others.slice(0, INITIAL_VISIBLE)
+  const toggleFilter = (filter: string) => {
+    setSelectedFilters((prev) =>
+      prev.includes(filter)
+        ? prev.filter((f) => f !== filter)
+        : [...prev, filter]
+    )
+  }
 
   return (
     <>
-      <div className={styles.filters} role='tablist' aria-label='Filtros'>
-        {PROJECT_FILTERS.map((f) => (
+      <div className={styles.filters} role='group' aria-label='Filtros'>
+        {availableFilters.map((f) => (
           <button
             key={f}
             type='button'
-            role='tab'
-            aria-selected={filter === f}
-            className={`${styles.filterChip} ${filter === f ? styles.active : ''}`}
-            onClick={() => setFilter(f)}
+            aria-pressed={selectedFilters.includes(f)}
+            className={`${styles.filterChip} ${selectedFilters.includes(f) ? styles.active : ''}`}
+            onClick={() => toggleFilter(f)}
           >
-            {t(`projects.filters.${f}`)}
+            {t(`projects.filters.${f}` as 'projects.filters.React')}
           </button>
         ))}
+        {selectedFilters.length > 0 && (
+          <button
+            type='button'
+            className={styles.clearFilters}
+            onClick={() => setSelectedFilters([])}
+          >
+            {t('projects.clearFilters')}
+          </button>
+        )}
       </div>
 
       {loading && <ProjectsSkeleton />}
@@ -73,38 +87,11 @@ function ProjectsContent () {
       )}
 
       {!loading && (
-        <>
-          {featured.length > 0 && (
-            <>
-              <p className={styles.sectionLabel}>{t('projects.featured')}</p>
-              <div className={styles.featuredGrid}>
-                {featured.map((project) => (
-                  <Card key={project.id} project={project} />
-                ))}
-              </div>
-            </>
-          )}
-
-          {visibleOthers.length > 0 && (
-            <div className={styles.grid}>
-              {visibleOthers.map((project) => (
-                <Card key={project.id} project={project} compact />
-              ))}
-            </div>
-          )}
-
-          {others.length > INITIAL_VISIBLE && (
-            <div className={styles.actions}>
-              <button
-                type='button'
-                className={styles.filterChip}
-                onClick={() => setShowAll((s) => !s)}
-              >
-                {showAll ? t('projects.showLess') : t('projects.showMore')}
-              </button>
-            </div>
-          )}
-        </>
+        <div className={styles.grid}>
+          {filtered.map((project) => (
+            <Card key={project.id} project={project} />
+          ))}
+        </div>
       )}
 
       <div className={styles.actions}>

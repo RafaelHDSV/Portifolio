@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin, FaWhatsappSquare } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
+import Button from '../../components/Button/Button'
 import ContactForm from '../../components/ContactForm/ContactForm'
 import Container from '../../components/Container/Container'
+import Modal from '../../components/Modal/Modal'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import styles from './Contact.module.scss'
 
@@ -34,8 +37,33 @@ const CHANNELS = [
   }
 ]
 
+function ContactItem ({
+  name,
+  focusedName,
+  link,
+  Icon
+}: (typeof CHANNELS)[number]) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <a
+      href={link}
+      className={styles.contactCard}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      target='_blank'
+      rel='noopener noreferrer'
+      aria-label={name}
+    >
+      <Icon size={36} aria-hidden='true' />
+      <span>{isHovered ? focusedName : name}</span>
+    </a>
+  )
+}
+
 export default function Contact () {
   const { t } = useTranslation()
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <Fade triggerOnce>
@@ -47,27 +75,25 @@ export default function Contact () {
           />
 
           <div className={styles.layout}>
-            <div className={styles.socialGrid}>
-              {CHANNELS.map(({ name, focusedName, link, Icon }) => (
-                <a
-                  key={name}
-                  href={link}
-                  className={styles.socialItem}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={name}
-                >
-                  <Icon size={32} aria-hidden='true' />
-                  <span>{focusedName}</span>
-                </a>
+            <div className={styles.cardsRow}>
+              {CHANNELS.map((channel) => (
+                <ContactItem key={channel.name} {...channel} />
               ))}
             </div>
 
-            <ContactForm />
-
-            <p className={styles.closing}>{t('contact.closing')}</p>
+            <Button variant='primary' onClick={() => setModalOpen(true)}>
+              {t('contact.openForm')}
+            </Button>
           </div>
         </Container>
+
+        <Modal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          title={t('contact.form.title')}
+        >
+          <ContactForm onSuccess={() => setModalOpen(false)} />
+        </Modal>
       </section>
     </Fade>
   )

@@ -1,6 +1,7 @@
-import { ArrowSquareOutIcon, GithubLogoIcon } from '@phosphor-icons/react'
+import { ArrowSquareOutIcon, GithubLogoIcon, PushPinIcon } from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
 import Badge from '../Badge/Badge'
+import Button from '../Button/Button'
 import styles from './Card.module.scss'
 
 export interface ProjectCardData {
@@ -11,23 +12,33 @@ export interface ProjectCardData {
   languages: string[]
   urlProject?: string
   urlGitHub: string
-  featured?: boolean
+  pinned?: boolean
+  imagePending?: boolean
 }
 
 interface CardProps {
   project: ProjectCardData
-  compact?: boolean
 }
 
-export default function Card ({ project, compact = false }: CardProps) {
+export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
 
   return (
-    <article
-      className={`${styles.card} ${project.featured ? styles.featured : ''} ${compact ? styles.compact : ''}`}
-    >
+    <article className={styles.card}>
       <div className={styles.imageWrapper}>
-        <img src={project.image} alt={project.name} loading='lazy' />
+        {project.imagePending ? (
+          <div className={styles.imagePlaceholder}>
+            <span>{t('projects.imagePending')}</span>
+          </div>
+        ) : (
+          <img src={project.image} alt={project.name} loading='lazy' />
+        )}
+        {project.pinned && (
+          <span className={styles.pinBadge}>
+            <PushPinIcon size={14} weight='fill' />
+            {t('projects.pinned')}
+          </span>
+        )}
       </div>
 
       <div className={styles.body}>
@@ -43,19 +54,23 @@ export default function Card ({ project, compact = false }: CardProps) {
 
         <div className={styles.links}>
           {project.urlProject && (
-            <a
+            <Button
               href={project.urlProject}
-              target='_blank'
-              rel='noopener noreferrer'
+              variant='secondary'
+              className={styles.linkBtn}
             >
               <ArrowSquareOutIcon size={16} weight='bold' />
               {t('projects.viewDemo')}
-            </a>
+            </Button>
           )}
-          <a href={project.urlGitHub} target='_blank' rel='noopener noreferrer'>
+          <Button
+            href={project.urlGitHub}
+            variant='ghost'
+            className={styles.linkBtn}
+          >
             <GithubLogoIcon size={16} weight='bold' />
             GitHub
-          </a>
+          </Button>
         </div>
       </div>
     </article>

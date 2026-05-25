@@ -19,16 +19,32 @@
   }
 }
 
-.logo {
-  font-family: $font-cinzel;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  transition: color 200ms ease;
+.logoLink {
+  display: flex;
+  text-decoration: none;
+}
+
+.pillToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-button);
+  transition: color 200ms ease, background-color 200ms ease;
 
   &:hover {
     color: var(--color-accent);
+    background-color: var(--color-surface);
   }
+}
+
+.localeToggle {
+  @extend .pillToggle;
 }
 
 .desktopActions {
@@ -89,25 +105,6 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-}
-
-.localeToggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  border-radius: var(--radius-button);
-  transition: color 200ms ease, background-color 200ms ease;
-
-  &:hover {
-    color: var(--color-accent);
-    background-color: var(--color-surface);
-  }
 }
 
 .mobileControls {

@@ -1,6 +1,7 @@
 import { ProjectCardData } from '../components/Card/Card'
 import { projectsConfig } from '../constants/projects.config'
 import { IGithubResponseRepo } from '../types/IGithub'
+import { resolveProjectImage } from './projectImages'
 
 function mapLanguageToFilter (language?: string | null): string[] {
   if (!language) return []
@@ -13,90 +14,119 @@ function mapLanguageToFilter (language?: string | null): string[] {
   return [map[language] ?? language]
 }
 
-export function mergeProjects (
-  repos: IGithubResponseRepo[],
-  locale: 'pt' | 'en'
-): ProjectCardData[] {
-  const configByRepo = new Map(
-    projectsConfig
-      .filter((p) => p.repoName)
-      .map((p) => [p.repoName!.toLowerCase(), p])
+function repoToCard (
+  repo: IGithubResponseRepo,
+  locale: 'pt' | 'en',
+  pinned: boolean
+): ProjectCardData {
+  const repoName = repo.name ?? ''
+  const config = projectsConfig.find(
+    (p) => p.repoName?.toLowerCase() === repoName.toLowerCase()
   )
 
-  const apiProjects: ProjectCardData[] = repos
-    .filter((repo) => {
-      const name = repo.name?.toLowerCase() ?? ''
-      const config = configByRepo.get(name)
-      if (config?.hidden) return false
-      return Boolean(repo.homepage) || config?.featured
-    })
-    .map((repo) => {
-      const config = configByRepo.get(repo.name?.toLowerCase() ?? '')
-      const description = config
-        ? config.description[locale]
-        : repo.description ?? ''
+  const description = config
+    ? config.description[locale]
+    : repo.description ?? ''
 
-      return {
-        id: config?.key ?? String(repo.id),
-        name: config?.name ?? repo.name ?? 'Project',
-        image: config?.image ?? '/icon.png',
-        description,
-        languages: config?.languages ?? mapLanguageToFilter(repo.language),
-        urlProject: repo.homepage ?? config?.urlProject,
-        urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
-        featured: config?.featured ?? false
-      }
-    })
+  const { src, pending } = resolveProjectImage(repoName, config?.image)
 
-  const staticProjects: ProjectCardData[] = projectsConfig
-    .filter((p) => !p.hidden)
-    .map((p) => ({
-      id: p.key,
-      name: p.name,
-      image: p.image,
-      description: p.description[locale],
-      languages: p.languages,
-      urlProject: p.urlProject,
-      urlGitHub: p.urlGitHub,
-      featured: p.featured ?? false
-    }))
-
-  const merged = new Map<string, ProjectCardData>()
-
-  for (const project of staticProjects) {
-    merged.set(project.id, project)
+  return {
+    id: config?.key ?? repoName,
+    name: config?.name ?? repoName,
+    image: src,
+    imagePending: pending,
+    description,
+    languages: config?.languages ?? mapLanguageToFilter(repo.language),
+    urlProject: repo.homepage ?? config?.urlProject,
+    urlGitHub: config?.urlGitHub ?? repo.html_url ?? '',
+    pinned
   }
-
-  for (const project of apiProjects) {
-    const existing = merged.get(project.id)
-    if (existing) {
-      merged.set(project.id, {
-        ...existing,
-        urlProject: project.urlProject ?? existing.urlProject,
-        description: existing.description || project.description
-      })
-    } else {
-      merged.set(project.id, project)
-    }
-  }
-
-  const configOrder = new Map(
-    projectsConfig.map((p, i) => [p.key, p.order ?? i])
-  )
-
-  return Array.from(merged.values()).sort((a, b) => {
-    if (a.featured && !b.featured) return -1
-    if (!a.featured && b.featured) return 1
-    return (configOrder.get(a.id) ?? 99) - (configOrder.get(b.id) ?? 99)
-  })
 }
 
-export function filterProjects (
-  projects: ProjectCardData[],
-  filter: string
+export function mergeGitHubProjects (
+  pinned: IGithubResponseRepo[],
+  recent: IGithubResponseRepo[],
+  locale: 'pt' | 'en'
 ): ProjectCardData[] {
-  if (filter === 'all') return projects
-  return projects.filter((p) =>
-    p.languages.some((lang) => lang.toLowerCase().includes(filter.toLowerCase()))
+  const pinnedNames = new Set(
+    pinned.map((r) => r.name?.toLowerCase()).filter(Boolean)
   )
+
+  const ordered: IGithubResponseRepo[] = [
+    ...pinned,
+    ...recent.filter((r) => !pinnedNames.has(r.name?.toLowerCase() ?? ''))
+  ]
+
+  const seen = new Set<string>()
+  const cards: ProjectCardData[] = []
+
+  for (const repo of ordered) {
+    const key = repo.name?.toLowerCase() ?? ''
+    if (!key || seen.has(key)) continue
+    seen.add(key)
+    cards.push(repoToCard(repo, locale, pinnedNames.has(key)))
+  }
+
+  if (cards.length === 0) {
+    return projectsConfig
+      .filter((p) => !p.hidden)
+      .map((p) => {
+        const { src, pending } = resolveProjectImage(p.repoName ?? p.key, p.image)
+        return {
+          id: p.key,
+          name: p.name,
+          image: src,
+          imagePending: pending,
+          description: p.description[locale],
+          languages: p.languages,
+          urlProject: p.urlProject,
+          urlGitHub: p.urlGitHub,
+          pinned: p.featured ?? false
+        }
+      })
+  }
+
+  return cards
+}
+
+export const PROJECT_FILTER_OPTIONS = [
+  'React',
+  'Typescript',
+  'Javascript',
+  'Node',
+  'API',
+  'CSS',
+  'HTML'
+] as const
+
+export type ProjectFilterOption = (typeof PROJECT_FILTER_OPTIONS)[number]
+
+export function filterProjectsMulti (
+  projects: ProjectCardData[],
+  selected: string[]
+): ProjectCardData[] {
+  if (selected.length === 0) return projects
+
+  return projects.filter((p) =>
+    selected.every((filter) =>
+      p.languages.some((lang) =>
+        lang.toLowerCase().includes(filter.toLowerCase())
+      )
+    )
+  )
+}
+
+export function collectAvailableFilters (
+  projects: ProjectCardData[]
+): string[] {
+  const set = new Set<string>()
+  for (const p of projects) {
+    for (const lang of p.languages) {
+      const normalized = PROJECT_FILTER_OPTIONS.find(
+        (f) => f.toLowerCase() === lang.toLowerCase()
+      )
+      if (normalized) set.add(normalized)
+    }
+  }
+  return PROJECT_FILTER_OPTIONS.filter((f) => set.has(f))
 }

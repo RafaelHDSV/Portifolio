@@ -9,21 +9,18 @@
     "closeMenu": "Fechar menu"
   },
   "hero": {
-    "role": "Desenvolvedor Front-End · React · TypeScript",
     "typewriter": [
-      "Desenvolvedor Front-End",
-      "React · TypeScript · Sass",
-      "Interfaces acessiveis e performaticas"
+      "Desenvolvedor Full-Stack",
+      "React · TypeScript · Node.js",
+      "Do front ao back-end com foco em produto"
     ],
     "ctaProjects": "Ver projetos",
-    "ctaCv": "Baixar CV",
-    "ctaGithub": "GitHub",
-    "portfolioWord": "portfólio"
+    "ctaCv": "Baixar CV"
   },
   "about": {
     "title": "Sobre mim",
-    "subtitle": "Quem sou e o que busco entregar",
-    "bio": "Desenvolvedor Front-End com foco em React e TypeScript. Atuo na construcao de interfaces modernas, acessiveis e performaticas, com experiencia em lideranca tecnica e entrega em equipe. Busco oportunidades onde qualidade de codigo e impacto no produto caminham juntos.",
+    "subtitle": "Quem sou e o que entrego",
+    "bio": "Desenvolvedor Full-Stack com foco em React, TypeScript e Node.js. Construo produtos completos — da interface ao back-end — com atencao a qualidade, acessibilidade e entrega em equipe.",
     "workingAt": "Trabalhando em",
     "location": "Localizacao",
     "followers": "Seguidores",
@@ -33,9 +30,8 @@
     "downloadCv": "Baixar CV",
     "viewGithub": "Ver no GitHub",
     "highlights": {
-      "role": "Front-End Developer",
-      "focus": "React · TypeScript · UI",
-      "open": "Aberto a oportunidades"
+      "role": "Full-Stack Developer",
+      "focus": "React · TypeScript · Node.js"
     }
   },
   "stack": {
@@ -44,31 +40,35 @@
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Destaques e trabalhos recentes",
+    "subtitle": "Pins e trabalhos recentes do GitHub",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
-    "showMore": "Mostrar mais",
-    "showLess": "Mostrar menos",
     "loading": "Carregando projetos...",
     "error": "Nao foi possivel carregar os repositorios.",
     "retry": "Tentar novamente",
+    "pinned": "Pin",
+    "imagePending": "Imagem pendente — adicionar screenshot deste projeto",
+    "clearFilters": "Limpar filtros",
     "filters": {
-      "all": "Todos",
       "React": "React",
+      "Typescript": "TypeScript",
       "Javascript": "JavaScript",
-      "API": "API"
-    },
-    "featured": "Destaques"
+      "Node": "Node.js",
+      "API": "API",
+      "CSS": "CSS",
+      "HTML": "HTML"
+    }
   },
   "contact": {
     "title": "Contato",
-    "subtitle": "Vamos conversar sobre oportunidades ou projetos",
-    "closing": "Aberto a oportunidades e projetos freelance.",
+    "subtitle": "Canais diretos ou mensagem pelo formulario",
+    "openForm": "Enviar mensagem",
     "form": {
+      "title": "Enviar mensagem",
       "name": "Nome",
       "email": "E-mail",
       "message": "Mensagem",
-      "send": "Enviar mensagem",
+      "send": "Enviar",
       "sending": "Enviando...",
       "success": "Mensagem enviada com sucesso!",
       "successRocket": "Decolagem confirmada! Mensagem enviada.",
@@ -78,18 +78,19 @@
     }
   },
   "footer": {
-    "role": "Desenvolvedor Front-End",
-    "backToTop": "Voltar ao topo"
+    "role": "Desenvolvedor Full-Stack",
+    "eggCounter": "Easteregg a: {{count}}/{{total}} descobertos"
   },
   "theme": {
     "switchToLight": "Mudar para tema claro",
     "switchToDark": "Mudar para tema escuro"
   },
   "easterEgg": {
-    "unlocked": "Voce desbloqueou o modo espacial!",
-    "devMessage": "Este easter egg e so diversao — o portifolio ja esta aberto.",
     "explorer": "Explorador",
-    "counter": "{{count}}/6 descobertos"
+    "explorerDesc": "Voce mapeou o portifolio de ponta a ponta!",
+    "themeHunter": "Cacador de temas",
+    "arrowHint": "Curioso, ne?",
+    "counter": "{{count}}/{{total}} descobertos"
   },
   "common": {
     "loading": "Carregando..."

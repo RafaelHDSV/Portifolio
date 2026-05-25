@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import useActiveSection from '../../hooks/useActiveSection'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import { setLocale } from '../../i18n'
+import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
+import Logo from '../Logo/Logo'
 import ThemeSwitcher from '../SwitchTheme/SwitchTheme'
 import styles from './Navbar.module.scss'
 
@@ -39,13 +41,8 @@ export default function Navbar () {
       className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
       aria-label='Navegacao principal'
     >
-      <a
-        href='/'
-        className={styles.logo}
-        onClick={incrementLogoClick}
-        aria-label='Rafael Vieira - inicio'
-      >
-        RV
+      <a href='/' className={styles.logoLink} aria-label='Rafael Vieira - inicio'>
+        <Logo onClick={incrementLogoClick} />
       </a>
 
       <div className={styles.desktopActions}>
@@ -60,9 +57,11 @@ export default function Navbar () {
             </a>
           ))}
           <a
-            href='cv.pdf'
-            download='Rafael Vieira - Curriculo'
+            href={CV_URL}
+            download={CV_DOWNLOAD_NAME}
             className={styles.cvLink}
+            target='_blank'
+            rel='noopener noreferrer'
           >
             {t('nav.cv')}
           </a>
@@ -71,13 +70,13 @@ export default function Navbar () {
         <div className={styles.controls}>
           <button
             type='button'
-            className={styles.localeToggle}
+            className={styles.pillToggle}
             onClick={toggleLocale}
             aria-label={
               locale === 'pt' ? 'Switch to English' : 'Mudar para portugues'
             }
           >
-            <GlobeIcon size={18} weight='bold' />
+            <GlobeIcon size={16} weight='bold' />
             {locale.toUpperCase()}
           </button>
           <ThemeSwitcher />
@@ -87,13 +86,13 @@ export default function Navbar () {
       <div className={styles.mobileControls}>
         <button
           type='button'
-          className={styles.localeToggle}
+          className={styles.pillToggle}
           onClick={toggleLocale}
           aria-label={
             locale === 'pt' ? 'Switch to English' : 'Mudar para portugues'
           }
         >
-          <GlobeIcon size={18} weight='bold' />
+          <GlobeIcon size={16} weight='bold' />
           {locale.toUpperCase()}
         </button>
         <ThemeSwitcher />
@@ -121,8 +120,10 @@ export default function Navbar () {
             </a>
           ))}
           <a
-            href='cv.pdf'
-            download='Rafael Vieira - Curriculo'
+            href={CV_URL}
+            download={CV_DOWNLOAD_NAME}
+            target='_blank'
+            rel='noopener noreferrer'
             onClick={() => setMenuOpen(false)}
           >
             {t('nav.cv')}

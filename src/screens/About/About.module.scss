@@ -51,7 +51,7 @@
     font-size: var(--text-small);
     font-weight: 500;
     color: var(--color-accent);
-    background-color: rgba(56, 189, 248, 0.1);
+    background-color: color-mix(in srgb, var(--color-accent) 12%, transparent);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-button);
   }
@@ -59,7 +59,48 @@
 
 .info {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
+
+  @media (min-width: 540px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.25rem;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+  margin-top: 0.125rem;
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.itemLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.itemValue {
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .actions {

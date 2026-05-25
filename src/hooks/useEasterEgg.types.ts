@@ -1,9 +1,10 @@
 export type EasterEggId =
-  | 'portfolio-clicks'
   | 'konami'
   | 'logo-clicks'
   | 'scroll-explorer'
   | 'rocket-email'
   | 'space-mode'
+  | 'theme-hunter'
+  | 'arrow-hint'
 
-export const TOTAL_EGGS = 6
+export const TOTAL_EGGS = 7

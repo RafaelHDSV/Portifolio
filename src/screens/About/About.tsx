@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
+import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import useGetMe from '../../hooks/useGetMe'
 import styles from './About.module.scss'
 import UserInfoItem from './components/UserInfoItem'
@@ -61,7 +62,6 @@ function AboutContent () {
         <div className={styles.highlights}>
           <span>{t('about.highlights.role')}</span>
           <span>{t('about.highlights.focus')}</span>
-          <span>{t('about.highlights.open')}</span>
         </div>
 
         <div className={styles.info}>
@@ -75,18 +75,16 @@ function AboutContent () {
             label={t('about.location')}
             value={user.location}
           />
-          <div className='flex space-between'>
-            <UserInfoItem
-              icon={TrayArrowDownIcon}
-              label={t('about.followers')}
-              value={user.followers}
-            />
-            <UserInfoItem
-              icon={TrayArrowUpIcon}
-              label={t('about.following')}
-              value={user.following}
-            />
-          </div>
+          <UserInfoItem
+            icon={TrayArrowDownIcon}
+            label={t('about.followers')}
+            value={user.followers}
+          />
+          <UserInfoItem
+            icon={TrayArrowUpIcon}
+            label={t('about.following')}
+            value={user.following}
+          />
           <UserInfoItem
             icon={FilesIcon}
             label={t('about.publicRepos')}
@@ -100,7 +98,11 @@ function AboutContent () {
         </div>
 
         <div className={styles.actions}>
-          <Button href='cv.pdf' variant='primary'>
+          <Button
+            href={CV_URL}
+            variant='primary'
+            download={CV_DOWNLOAD_NAME}
+          >
             {t('about.downloadCv')}
           </Button>
           <Button

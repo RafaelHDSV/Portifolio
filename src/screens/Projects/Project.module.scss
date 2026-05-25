@@ -28,33 +28,37 @@
   }
 
   &.active {
-    background-color: rgba(56, 189, 248, 0.1);
+    background-color: color-mix(in srgb, var(--color-accent) 12%, transparent);
   }
 }
 
-.sectionLabel {
+.clearFilters {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
   font-size: var(--text-small);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--color-text-muted);
-  margin-bottom: 1rem;
-  width: 100%;
-}
+  text-decoration: underline;
+  border-radius: var(--radius-button);
 
-.featuredGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-  margin-bottom: 2.5rem;
+  &:hover {
+    color: var(--color-accent);
+  }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   width: 100%;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .status {
@@ -69,9 +73,13 @@
 
 .skeletonGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   width: 100%;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .skeletonCard {
@@ -93,9 +101,7 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  justify-content: center;
   margin-top: 2.5rem;
 }
 

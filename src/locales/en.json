@@ -9,21 +9,18 @@
     "closeMenu": "Close menu"
   },
   "hero": {
-    "role": "Front-End Developer · React · TypeScript",
     "typewriter": [
-      "Front-End Developer",
-      "React · TypeScript · Sass",
-      "Accessible, performant interfaces"
+      "Full-Stack Developer",
+      "React · TypeScript · Node.js",
+      "End-to-end product delivery"
     ],
     "ctaProjects": "View projects",
-    "ctaCv": "Download resume",
-    "ctaGithub": "GitHub",
-    "portfolioWord": "portfolio"
+    "ctaCv": "Download resume"
   },
   "about": {
     "title": "About me",
     "subtitle": "Who I am and what I deliver",
-    "bio": "Front-End Developer focused on React and TypeScript. I build modern, accessible and performant interfaces, with experience in technical leadership and team delivery. I look for opportunities where code quality and product impact go hand in hand.",
+    "bio": "Full-Stack Developer focused on React, TypeScript and Node.js. I build complete products — from UI to back-end — with attention to quality, accessibility and team delivery.",
     "workingAt": "Working at",
     "location": "Location",
     "followers": "Followers",
@@ -33,9 +30,8 @@
     "downloadCv": "Download resume",
     "viewGithub": "View on GitHub",
     "highlights": {
-      "role": "Front-End Developer",
-      "focus": "React · TypeScript · UI",
-      "open": "Open to opportunities"
+      "role": "Full-Stack Developer",
+      "focus": "React · TypeScript · Node.js"
     }
   },
   "stack": {
@@ -44,31 +40,35 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Highlights and recent work",
+    "subtitle": "GitHub pins and recent work",
     "viewDemo": "View demo",
     "viewMore": "See more on GitHub",
-    "showMore": "Show more",
-    "showLess": "Show less",
     "loading": "Loading projects...",
     "error": "Could not load repositories.",
     "retry": "Try again",
+    "pinned": "Pin",
+    "imagePending": "Image pending — add a screenshot for this project",
+    "clearFilters": "Clear filters",
     "filters": {
-      "all": "All",
       "React": "React",
+      "Typescript": "TypeScript",
       "Javascript": "JavaScript",
-      "API": "API"
-    },
-    "featured": "Featured"
+      "Node": "Node.js",
+      "API": "API",
+      "CSS": "CSS",
+      "HTML": "HTML"
+    }
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Let's talk about opportunities or projects",
-    "closing": "Open to opportunities and freelance projects.",
+    "subtitle": "Direct channels or send a message",
+    "openForm": "Send message",
     "form": {
+      "title": "Send message",
       "name": "Name",
       "email": "Email",
       "message": "Message",
-      "send": "Send message",
+      "send": "Send",
       "sending": "Sending...",
       "success": "Message sent successfully!",
       "successRocket": "Liftoff confirmed! Message sent.",
@@ -78,18 +78,19 @@
     }
   },
   "footer": {
-    "role": "Front-End Developer",
-    "backToTop": "Back to top"
+    "role": "Full-Stack Developer",
+    "eggCounter": "Easter egg: {{count}}/{{total}} discovered"
   },
   "theme": {
     "switchToLight": "Switch to light theme",
     "switchToDark": "Switch to dark theme"
   },
   "easterEgg": {
-    "unlocked": "You unlocked space mode!",
-    "devMessage": "This easter egg is just for fun — the portfolio is already open.",
     "explorer": "Explorer",
-    "counter": "{{count}}/6 discovered"
+    "explorerDesc": "You mapped the portfolio end to end!",
+    "themeHunter": "Theme hunter",
+    "arrowHint": "Curious, huh?",
+    "counter": "{{count}}/{{total}} discovered"
   },
   "common": {
     "loading": "Loading..."

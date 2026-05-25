@@ -64,6 +64,11 @@ button {
   }
 }
 
+::selection {
+  background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  color: var(--color-text-primary);
+}
+
 .mainContainer {
   display: flex;
   flex-direction: column;
