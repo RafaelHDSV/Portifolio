@@ -36,6 +36,47 @@ function classifyUrl (url: string): ReadmeMediaType {
   return 'image'
 }
 
+const NON_DEMO_PATTERNS = [
+  /shields\.io/i,
+  /badge/i,
+  /opengraph\.githubassets\.com/i,
+  /img\.shields\.io/i,
+  /contributors/i,
+  /avatar/i,
+  /profile/i,
+  /favicon/i,
+  /github\.com\/[^/]+\/[^/]+\/blob\/main\/README/i
+]
+
+const DEMO_HINT_PATTERNS = [
+  /user-attachments\/assets/i,
+  /demo/i,
+  /preview/i,
+  /screenshot/i,
+  /screen[_-]?shot/i,
+  /showcase/i,
+  /capture/i,
+  /recording/i,
+  /\/assets\//i,
+  /\/docs\//i,
+  /\/public\//i,
+  /\/screens\//i
+]
+
+export function isLikelyDemoMedia (url: string): boolean {
+  const lower = url.toLowerCase()
+
+  if (NON_DEMO_PATTERNS.some((pattern) => pattern.test(lower))) return false
+  if (/\.svg(\?|$)/i.test(lower)) return false
+  if (/(^|[/_-])logo([./-]|$)/i.test(lower)) return false
+  if (/(^|[/_-])icon([./-]|$)/i.test(lower)) return false
+
+  if (GIF_EXT.test(lower) || VIDEO_EXT.test(lower)) return true
+  if (DEMO_HINT_PATTERNS.some((pattern) => pattern.test(lower))) return true
+
+  return false
+}
+
 function pushMedia (
   list: ReadmeMedia[],
   url: string,
@@ -112,18 +153,21 @@ export function parseReadmeMedia (
 
   if (found.length === 0) return null
 
-  const video = found.find(
+  const demoCandidates = found.filter((m) => isLikelyDemoMedia(m.url))
+  if (demoCandidates.length === 0) return null
+
+  const video = demoCandidates.find(
     (m) => m.type === 'video' && VIDEO_EXT.test(m.url)
   )
   if (video) {
-    const poster = found.find((m) => m.type === 'image' || m.type === 'gif')
+    const poster = demoCandidates.find((m) => m.type === 'image' || m.type === 'gif')
     return { ...video, poster: poster?.url }
   }
 
-  const gif = found.find((m) => m.type === 'gif')
+  const gif = demoCandidates.find((m) => m.type === 'gif')
   if (gif) return gif
 
-  return found.find((m) => m.type === 'image') ?? found[0]
+  return demoCandidates.find((m) => m.type === 'image') ?? demoCandidates[0]
 }
 
 export function githubOpenGraphImage (owner: string, repo: string): string {

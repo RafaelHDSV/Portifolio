@@ -1,2 +1,7 @@
-- As imagens que estavam funcionando anteriormente voltaram, mas agora todos os projetos está considerando que tem imagens, enquanto vários projetos não tem e deve ser mostrado somente a imagem do github mesmo. Corrija isso, para caso não tenha uma imagem da demo, mostre a imagem do github.
-- Após isso, analise o projeto como um todo e sugira novos desenvolvimentos, correções, implementações, etc.
+# v2.9 — concluido (maio/2026)
+
+- [x] Sem demo real → preview OG do GitHub (nao placeholder nem imagem aleatoria do README)
+- [x] Filtro isLikelyDemoMedia no README
+- [x] Analise e sugestoes: `docs/analise-sugestoes-v2.9.md`
+
+Proposta: `.issues/2026-05-24-v2-9-github-fallback-media.md`

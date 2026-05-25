@@ -13,7 +13,7 @@ Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica p
 
 A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (7 total).
 
-A **v2.8** (maio/2026) corrige preview de projetos (demo/config vs OG), remove contador de projetos, padroniza pt-BR, adiciona icone TSQL e reforca responsividade.
+A **v2.9** (maio/2026) ajusta fallback de preview: demo real (demo.*, config, README validado) ou OG do GitHub; analise de evolucao em `docs/analise-sugestoes-v2.9.md`.
 
 **Status de build:** `yarn build` e `yarn lint` passam sem erros.
 

@@ -51,23 +51,42 @@ function mapLanguageToFilter (language?: string | null): string[] {
   return [map[language] ?? language]
 }
 
-function mediaToCardFields (media: ReadmeMedia | 'placeholder') {
+function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string) {
   if (media === 'placeholder') {
+    if (ogImage) {
+      return {
+        image: ogImage,
+        usesPlaceholder: false as const,
+        usesGithubPreview: true as const
+      }
+    }
+
     return { image: '', usesPlaceholder: true as const }
   }
 
   if (media.type === 'video') {
+    if (!media.poster && ogImage) {
+      return {
+        image: ogImage,
+        media,
+        usesPlaceholder: false as const,
+        usesGithubPreview: true as const
+      }
+    }
+
     return {
       image: media.poster ?? '',
       media,
-      usesPlaceholder: !media.poster
+      usesPlaceholder: !media.poster,
+      usesGithubPreview: false as const
     }
   }
 
   return {
     image: media.url,
     media,
-    usesPlaceholder: false as const
+    usesPlaceholder: false as const,
+    usesGithubPreview: false as const
   }
 }
 
@@ -89,7 +108,7 @@ function repoToCard (
   const languages = config?.languages ?? mapLanguageToFilter(repo.language)
 
   if (media) {
-    const fields = mediaToCardFields(media)
+    const fields = mediaToCardFields(media, githubOgImage(repoName))
     return {
       id: config?.key ?? repoName,
       repoName,
@@ -105,15 +124,17 @@ function repoToCard (
     }
   }
 
-  const fallbackImage =
+  const ogImage = githubOgImage(repoName)
+  const configImage =
     config?.image && !config.image.includes('icon.png') ? config.image : ''
 
   return {
     id: config?.key ?? repoName,
     repoName,
     name: config?.name ?? repoName,
-    image: fallbackImage,
-    usesPlaceholder: !fallbackImage,
+    image: configImage || ogImage,
+    usesPlaceholder: false,
+    usesGithubPreview: !configImage,
     description,
     languages,
     urlProject: repo.homepage ?? config?.urlProject,
@@ -184,12 +205,15 @@ export function applyMediaToCard (
   card: ProjectCardData,
   media: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
+  const ogImage = card.github?.ogImage
+
   if (media === 'placeholder') {
-    if (card.image && !card.usesPlaceholder) return card
-    return { ...card, image: '', usesPlaceholder: true }
+    if (card.image && !card.usesPlaceholder && !card.usesGithubPreview) return card
+    const fields = mediaToCardFields('placeholder', ogImage)
+    return { ...card, ...fields, media: undefined }
   }
 
-  const fields = mediaToCardFields(media)
+  const fields = mediaToCardFields(media, ogImage)
   return { ...card, ...fields }
 }
 

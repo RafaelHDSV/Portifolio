@@ -34,6 +34,7 @@ export interface ProjectCardData {
   pinned?: boolean
   private?: boolean
   usesPlaceholder?: boolean
+  usesGithubPreview?: boolean
   github?: ProjectGithubStats
   media?: {
     type: 'image' | 'gif' | 'video'
@@ -106,6 +107,16 @@ export default function Card ({ project }: CardProps) {
     }
 
     if (project.usesPlaceholder) {
+      if (project.github?.ogImage) {
+        return (
+          <img
+            src={project.github.ogImage}
+            alt={project.name}
+            loading='lazy'
+          />
+        )
+      }
+
       return (
         <div className={styles.imagePlaceholder} aria-hidden='true'>
           <ImageIcon size={40} weight='duotone' />
@@ -136,13 +147,18 @@ export default function Card ({ project }: CardProps) {
     if (!project.github) return null
 
     return (
-      <div className={styles.githubOverlay} aria-hidden='true'>
-        <img
-          className={styles.githubOgImage}
-          src={project.github.ogImage}
-          alt=''
-          loading='lazy'
-        />
+      <div
+        className={`${styles.githubOverlay} ${project.usesGithubPreview ? styles.githubOverlayStatsOnly : ''}`}
+        aria-hidden='true'
+      >
+        {!project.usesGithubPreview && (
+          <img
+            className={styles.githubOgImage}
+            src={project.github.ogImage}
+            alt=''
+            loading='lazy'
+          />
+        )}
         <div className={styles.githubStats}>
           <span>
             <StarIcon size={16} weight='fill' />
@@ -170,7 +186,7 @@ export default function Card ({ project }: CardProps) {
 
   return (
     <article
-      className={styles.card}
+      className={`${styles.card} ${project.usesGithubPreview ? styles.githubPreviewCard : ''}`}
       onMouseEnter={loadContributors}
     >
       <div className={styles.imageWrapper}>
