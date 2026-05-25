@@ -17,8 +17,13 @@
 
 .githubPreviewCard {
   @media (hover: hover) {
-    &:hover .mediaDefault {
+    &:hover .githubOverlayStatsOnly {
       opacity: 1;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.72) 0%,
+        transparent 55%
+      );
     }
   }
 }
@@ -47,7 +52,7 @@
   transition: opacity 280ms ease;
 
   @media (hover: hover) {
-    .card:hover & {
+    .card:not(.githubPreviewCard):hover & {
       opacity: 0;
     }
   }
@@ -71,7 +76,7 @@
   );
 
   @media (hover: hover) {
-    .card:hover & {
+    .card:not(.githubPreviewCard):hover & {
       opacity: 1;
     }
   }
@@ -87,11 +92,8 @@
 }
 
 .githubOverlayStatsOnly {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
+  background: transparent;
+  pointer-events: none;
 }
 
 .githubStats {
