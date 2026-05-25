@@ -1,14 +1,6 @@
-# Tarefa atual — v2.3 (concluida)
-
-Feedback original atendido na implementacao v2.3:
-
-- [x] Easter egg tour das secoes, modo espacial visivel, 7 eggs, toasts enriquecidos
-- [x] Hero com mais animacao (orbs, grid suave, reveal)
-- [x] Modo recrutador: MedIT, Deprecated-Finder, Dev-Shortcuts + texto sobre mim
-- [x] Estatisticas About: repositorios privados (quando token GitHub permite)
-- [x] Badges: PowerShell, C#, Sass com icones
-- [x] Videos: readme priorizado, thumb via metadata quando sem poster
-- [x] Projetos: 6 pins + 10 recentes deduplicados
-- [x] linkedin-setup.md reformulado
-
-Proximo passo sugerido: validar manualmente no deploy e configurar `LINKEDIN_RSS_URL` na Vercel.
+- O mode space só precisa ativar quando tiver na url. Se eu adicionar na url, dps tirar, quero que volte ao padrão
+- Está aparecendo esses textos sem tradução: projects.filters.Sass; projects.filters.C#; projects.filters.PowerShell
+- Alguns vídeos ainda não estão funcionando nos projetos
+- Ainda não está aparecendo no portifolio, o https://github.com/RafaelHDSV/TechMoto que está pin no github
+- E temos 5 pin (faltando 1), e 5 repositórios públicos. Na verdade eu queria os 6 pins + 10 repositórios mais recentes, incluíndo privado e público.
+- Os easter eggs estão ruins. Nâo quero easters eggs que sejam somente um toast ou somente um console. Quero easter eggs mais parecidos com o konami, onde existe uma alteração visual no portifolio ou algo do tipo.
