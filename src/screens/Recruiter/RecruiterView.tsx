@@ -180,40 +180,72 @@ export default function RecruiterView () {
             </aside>
           </div>
 
-          <div className={styles.middleRow}>
-            <section className={styles.stackCard}>
-              <h2>{t('recruiter.stackTitle')}</h2>
-              <p className={styles.sectionSubtitle}>{t('recruiter.stackSubtitle')}</p>
-              <div className={styles.stackPrimary}>
-                {RECRUITER_STACK_PRIMARY.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-              <p className={styles.stackAlsoLabel}>{t('recruiter.stackAlsoLabel')}</p>
-              <div className={styles.stackSecondary}>
-                {RECRUITER_STACK_SECONDARY.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-            </section>
+          <section className={styles.competencyPanel}>
+            <div className={styles.competencyGrid}>
+              <div className={styles.competencyStack}>
+                <h2>{t('recruiter.stackTitle')}</h2>
+                <p className={styles.sectionSubtitle}>{t('recruiter.stackSubtitle')}</p>
+                <div className={styles.stackPrimary}>
+                  {RECRUITER_STACK_PRIMARY.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+                <p className={styles.stackAlsoLabel}>{t('recruiter.stackAlsoLabel')}</p>
+                <div className={styles.stackSecondary}>
+                  {RECRUITER_STACK_SECONDARY.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
 
-            <section className={styles.experienceCard}>
-              <h2>{t('recruiter.experienceTitle')}</h2>
-              <p className={styles.sectionSubtitle}>
-                {t('recruiter.experienceSubtitle')}
-              </p>
-              <ol className={styles.timeline}>
-                {experienceItems.map((item) => (
-                  <li key={item.period}>
-                    <span className={styles.timelinePeriod}>{item.period}</span>
-                    <strong>{item.title}</strong>
-                    <span className={styles.timelineCompany}>{item.company}</span>
-                    <p>{item.description}</p>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          </div>
+                <h3 className={styles.competencySubheading}>
+                  {t('stack.categories.softSkills')}
+                </h3>
+                <ul className={styles.softSkillList}>
+                  {(t('stack.softSkills', { returnObjects: true }) as string[]).map(
+                    (skill) => (
+                      <li key={skill}>{skill}</li>
+                    )
+                  )}
+                </ul>
+
+                <h3 className={styles.competencySubheading}>
+                  {t('recruiter.educationTitle')}
+                </h3>
+                <ul className={styles.educationList}>
+                  {(
+                    t('recruiter.educationItems', { returnObjects: true }) as Array<{
+                      period: string
+                      title: string
+                      institution: string
+                    }>
+                  ).map((item) => (
+                    <li key={item.period}>
+                      <span className={styles.educationPeriod}>{item.period}</span>
+                      <strong>{item.title}</strong>
+                      <span>{item.institution}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={styles.competencyExperience}>
+                <h2>{t('recruiter.experienceTitle')}</h2>
+                <p className={styles.sectionSubtitle}>
+                  {t('recruiter.experienceSubtitle')}
+                </p>
+                <ol className={styles.timeline}>
+                  {experienceItems.map((item) => (
+                    <li key={`${item.period}-${item.title}`}>
+                      <span className={styles.timelinePeriod}>{item.period}</span>
+                      <strong>{item.title}</strong>
+                      <span className={styles.timelineCompany}>{item.company}</span>
+                      <p>{item.description}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
 
           <section className={styles.projectsSection}>
             <div className={styles.projectsHeader}>

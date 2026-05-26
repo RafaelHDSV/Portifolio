@@ -117,9 +117,9 @@
     "enableShort": "Recrutador",
     "back": "Voltar à exibição normal",
     "modeLabel": "Modo recrutador",
-    "role": "Desenvolvedor Full Stack · Líder de Equipe",
-    "bio": "Full Stack na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB, com foco em sistemas escaláveis e liderança de equipe.",
-    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde 2024 — de estágio front-end a Full Stack e liderança de equipe. Desenvolvo aplicações web com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
+    "role": "Desenvolvedor Full Stack Júnior III · Líder de Equipe",
+    "bio": "Full Stack Júnior III e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web escaláveis.",
+    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Júnior III com liderança de equipe. Desenvolvo com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
     "stackTitle": "Stack principal",
     "stackSubtitle": "Ferramentas que uso no dia a dia",
     "stackAlsoLabel": "Também trabalho com",
@@ -143,7 +143,7 @@
       "scopeLabel": "Atuação ponta a ponta"
     },
     "meta": {
-      "location": "Sorocaba, SP · Remoto",
+      "location": "Sorocaba, SP · Híbrido",
       "response": "E-mail e LinkedIn",
       "contract": "CLT / PJ / Contrato"
     },
@@ -155,19 +155,38 @@
       "APIs REST, MongoDB e integrações alinhadas ao negócio"
     ],
     "experienceTitle": "Experiência recente",
-    "experienceSubtitle": "Resumo cronológico",
+    "experienceSubtitle": "AGX Software · Sorocaba, SP",
+    "educationTitle": "Formação",
+    "educationItems": [
+      {
+        "period": "2024 — 2027",
+        "title": "Análise e Desenvolvimento de Sistemas",
+        "institution": "Anhembi Morumbi · Campus Athon Sorocaba"
+      },
+      {
+        "period": "2021 — 2024",
+        "title": "Técnico em Desenvolvimento de Sistemas",
+        "institution": "ETEC — Escola Técnica Estadual de São Paulo"
+      }
+    ],
     "experienceItems": [
       {
-        "period": "Set 2025 — Presente",
+        "period": "Out 2025 — Presente",
+        "title": "Desenvolvedor Full Stack Júnior III · Líder de Equipe",
+        "company": "AGX Software",
+        "description": "Sistemas web escaláveis com React, TypeScript, Sass, Node.js e MongoDB; liderança do time, análise de requisitos e entregas alinhadas a prazos e qualidade."
+      },
+      {
+        "period": "Set 2025 — Out 2025",
         "title": "Desenvolvedor Full Stack Júnior I · Líder de Equipe",
         "company": "AGX Software",
-        "description": "Desenvolvimento de sistemas web com React, TypeScript, Sass, Node.js e MongoDB; coordenação do time, mentoria e garantia de qualidade nas entregas."
+        "description": "Desenvolvimento full stack e coordenação do time, orientando colegas e garantindo qualidade nas entregas junto a outras áreas."
       },
       {
         "period": "Jan 2025 — Set 2025",
         "title": "Desenvolvedor Front-end Trainee",
         "company": "AGX Software",
-        "description": "Interfaces dinâmicas e responsivas com React, TypeScript e Sass; tarefas complexas com maior autonomia e colaboração entre áreas."
+        "description": "Interfaces dinâmicas e responsivas com React, TypeScript e Sass; maior autonomia em tarefas complexas e colaboração estratégica entre áreas."
       },
       {
         "period": "Jul 2024 — Jan 2025",

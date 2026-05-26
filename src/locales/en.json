@@ -117,9 +117,9 @@
     "enableShort": "Recruiter",
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
-    "role": "Full Stack Web Developer · Team Lead",
-    "bio": "Full Stack at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB, focused on scalable systems and team leadership.",
-    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since 2024 — from front-end internship to Full Stack and team lead. I build web applications with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
+    "role": "Junior Full Stack Developer III · Team Lead",
+    "bio": "Junior Full Stack Developer III and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB for scalable web systems.",
+    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Junior Full Stack III with team leadership. I build with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
@@ -143,7 +143,7 @@
       "scopeLabel": "End-to-end delivery"
     },
     "meta": {
-      "location": "Sorocaba, SP · Remote",
+      "location": "Sorocaba, SP · Hybrid",
       "response": "Email and LinkedIn",
       "contract": "Full-time / Contract"
     },
@@ -155,19 +155,38 @@
       "REST APIs, MongoDB and business-aligned integrations"
     ],
     "experienceTitle": "Recent experience",
-    "experienceSubtitle": "Chronological summary",
+    "experienceSubtitle": "AGX Software · Sorocaba, SP",
+    "educationTitle": "Education",
+    "educationItems": [
+      {
+        "period": "2024 — 2027",
+        "title": "Systems Analysis and Development",
+        "institution": "Anhembi Morumbi · Athon Sorocaba Campus"
+      },
+      {
+        "period": "2021 — 2024",
+        "title": "Systems Development Technician",
+        "institution": "ETEC — São Paulo State Technical School"
+      }
+    ],
     "experienceItems": [
       {
-        "period": "Sep 2025 — Present",
+        "period": "Oct 2025 — Present",
+        "title": "Junior Full Stack Developer III · Team Lead",
+        "company": "AGX Software",
+        "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; team leadership, requirements analysis and on-time, quality-focused delivery."
+      },
+      {
+        "period": "Sep 2025 — Oct 2025",
         "title": "Junior Full Stack Developer I · Team Lead",
         "company": "AGX Software",
-        "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; team coordination, mentorship and delivery quality."
+        "description": "Full stack development and team coordination, mentoring colleagues and ensuring delivery quality across departments."
       },
       {
         "period": "Jan 2025 — Sep 2025",
         "title": "Front-end Developer Trainee",
         "company": "AGX Software",
-        "description": "Dynamic, responsive interfaces with React, TypeScript and Sass; complex tasks with greater autonomy and cross-team collaboration."
+        "description": "Dynamic, responsive interfaces with React, TypeScript and Sass; greater autonomy on complex tasks and strategic cross-team collaboration."
       },
       {
         "period": "Jul 2024 — Jan 2025",
