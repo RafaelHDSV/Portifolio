@@ -25,7 +25,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #27** (maio/2026): fallback `onError` nos cards — imagem invalida cai para OG do GitHub e depois placeholder; UX alinhada a `usesGithubPreview` quando OG e exibido.
 
-**Issue #28** (maio/2026): OG image dinamica via rota serverless `/api/og` (`@vercel/og` + Satori, runtime Node.js). PNG 1200x630 com nome, cargo e stack; variantes PT/EN via `?lang=`. Meta tags em `index.html` apontam para `https://rafaelhdsv.vercel.app/api/og?lang=pt`. Cache publico 24h em `vercel.json`.
+**Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estatico; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
 
 **Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
 
@@ -89,17 +89,20 @@ src/
     └── projectImages.ts       # Resolve imagem; pending se faltar asset
 
 api/
-├── tsconfig.json              # TS/JSX para funcoes Vercel
 └── og/
-    ├── index.ts               # Handler ImageResponse (1200x630, Node.js)
-    ├── template.ts            # Arvore Satori sem JSX
     ├── copy.ts                # Textos PT/EN + buildOgImageUrl
-    ├── copy.test.ts           # Vitest
-    └── template.test.ts       # Vitest
+    ├── template.ts            # Arvore Satori (build + testes)
+    ├── copy.test.ts
+    └── template.test.ts
+
+scripts/
+└── generate-og.ts             # Gera public/og-pt.png e og-en.png no build
 
 public/
 ├── robots.txt
-└── sitemap.xml
+├── sitemap.xml
+├── og-pt.png                  # Gerado no build
+└── og-en.png                  # Gerado no build
 
 docs/
 ├── context.md                 # Este arquivo
@@ -227,7 +230,7 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 ## 8. SEO e acessibilidade
 
-**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/api/og?lang=pt` (PNG dinamico 1200x630, #28). Variante EN: `?lang=en`.
+**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200x630, gerado no build, #28).
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global.
 

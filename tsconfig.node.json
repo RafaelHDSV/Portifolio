@@ -11,5 +11,5 @@
     "jsx": "react-jsx",
     "types": ["node", "vitest/config"]
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "lib/**/*.ts", "api/**/*.ts", "api/**/*.tsx"]
+  "include": ["vite.config.ts", "vitest.config.ts", "lib/**/*.ts", "api/**/*.ts", "scripts/**/*.ts"]
 }

@@ -34,7 +34,7 @@ export function getOgCopy (lang: OgLang): OgCopy {
 }
 
 export function buildOgImageUrl (lang: OgLang = 'pt'): string {
-  return `${OG_SITE_URL}/api/og?lang=${lang}`
+  return `${OG_SITE_URL}/og-${lang}.png`
 }
 
 export function parseLangFromUrl (url: string): OgLang {

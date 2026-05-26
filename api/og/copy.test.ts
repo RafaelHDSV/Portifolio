@@ -23,7 +23,7 @@ describe('getOgCopy', () => {
 describe('buildOgImageUrl', () => {
   it('builds absolute api url with lang', () => {
     expect(buildOgImageUrl('en')).toBe(
-      'https://rafaelhdsv.vercel.app/api/og?lang=en'
+      'https://rafaelhdsv.vercel.app/og-en.png'
     )
   })
 })

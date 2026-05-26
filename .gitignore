@@ -12,6 +12,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+public/og-*.png
 
 # allow vendor SDK dist
 !vendor/vieira-analytics/dist/

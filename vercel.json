@@ -2,14 +2,20 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "yarn install --frozen-lockfile --force",
   "buildCommand": "yarn build",
-  "functions": {
-    "api/og/index.ts": {
-      "maxDuration": 10
-    }
-  },
-  "headers": [
+  "rewrites": [
     {
       "source": "/api/og",
+      "has": [{ "type": "query", "key": "lang", "value": "en" }],
+      "destination": "/og-en.png"
+    },
+    {
+      "source": "/api/og",
+      "destination": "/og-pt.png"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/og-(pt|en).png",
       "headers": [
         {
           "key": "Cache-Control",
