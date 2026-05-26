@@ -8,7 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noEmit": true,
+    "jsx": "react-jsx",
     "types": ["node", "vitest/config"]
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "lib/**/*.ts", "api/**/*.ts"]
+  "include": ["vite.config.ts", "vitest.config.ts", "lib/**/*.ts", "api/**/*.ts", "api/**/*.tsx"]
 }

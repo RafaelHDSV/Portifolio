@@ -1,10 +1,11 @@
-# Issue #27 — fallback onError para imagem quebrada nos cards
+# Issue #28 — OG image automatica para compartilhamento social
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/27
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/28
 
-- [x] Cadeia primary → OG → placeholder em `Card.tsx`
-- [x] Util `cardImageFallback.ts` + testes Vitest
-- [x] UX `githubPreviewCard` quando fallback OG ativo
+- [x] Rota `/api/og` com `@vercel/og` (1200x630, PT/EN via `?lang=`)
+- [x] Meta tags `og:image` e `twitter:image` apontam para a rota
+- [x] Cache-Control em `vercel.json` + testes Vitest em `api/og/copy.test.ts`
 - [x] Build/lint/test + docs
+- [ ] Preview manual WhatsApp/LinkedIn pos-deploy (autor)
 
-Proposta: `.issues/2026-05-26-card-image-onerror-fallback.md`
+Proposta: `.issues/2026-05-26-og-image-automatica.md`

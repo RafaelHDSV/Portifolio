@@ -25,6 +25,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #27** (maio/2026): fallback `onError` nos cards — imagem invalida cai para OG do GitHub e depois placeholder; UX alinhada a `usesGithubPreview` quando OG e exibido.
 
+**Issue #28** (maio/2026): OG image dinamica via rota serverless `/api/og` (`@vercel/og` + Satori, Edge). PNG 1200x630 com nome, cargo e stack; variantes PT/EN via `?lang=`. Meta tags em `index.html` apontam para `https://rafaelhdsv.vercel.app/api/og?lang=pt`. Cache publico 24h em `vercel.json`.
+
 **Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
 
 ---
@@ -86,10 +88,15 @@ src/
     ├── mergeProjects.ts       # mergeGitHubProjects, filterProjectsMulti
     └── projectImages.ts       # Resolve imagem; pending se faltar asset
 
+api/
+├── og.tsx                     # Edge handler ImageResponse (1200x630)
+└── og/
+    ├── copy.ts                # Textos PT/EN + buildOgImageUrl
+    └── copy.test.ts           # Vitest
+
 public/
 ├── robots.txt
-├── sitemap.xml
-└── main.png                   # OG image (atualizar manualmente)
+└── sitemap.xml
 
 docs/
 ├── context.md                 # Este arquivo
@@ -217,7 +224,7 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 ## 8. SEO e acessibilidade
 
-**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts.
+**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/api/og?lang=pt` (PNG dinamico 1200x630, #28). Variante EN: `?lang=en`.
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global.
 
@@ -243,7 +250,7 @@ yarn          # instalar dependências
 yarn dev      # dev server (Vite)
 yarn build    # tsc + vite build
 yarn lint     # ESLint (max-warnings 0)
-yarn test     # Vitest (utils de midia e ordenacao)
+yarn test     # Vitest (utils de midia, ordenacao, cardImageFallback, api/og)
 yarn preview  # preview do build
 ```
 
@@ -271,7 +278,7 @@ yarn preview  # preview do build
 ## 12. Pendências (conteúdo — autor)
 
 - [ ] Screenshots faltantes nos cards (placeholder indica onde adicionar)
-- [ ] `public/main.png` real para OG (1200×630)
+- [ ] Preview OG em WhatsApp e LinkedIn pos-deploy (#28 — autor)
 - [ ] Variáveis de ambiente na Vercel (GitHub + EmailJS)
 - [x] Testes automatizados (Vitest) — `readmeMedia` e `mergeProjects` (#26)
 - [ ] Lighthouse mobile nas metas
@@ -296,4 +303,4 @@ yarn preview  # preview do build
 
 ---
 
-*Última atualização: maio/2026 — pós-implementação da spec v2.*
+*Ultima atualizacao: maio/2026 — pos Issue #28 (OG dinamica).*
