@@ -1,10 +1,10 @@
-# Issue #26 — testes unitarios de midia e ordenacao
+# Issue #27 — fallback onError para imagem quebrada nos cards
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/26
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/27
 
-- [x] Vitest 3.2.4 + `vitest.config.ts` + script `yarn test`
-- [x] `readmeMedia.test.ts` — isLikelyDemoMedia + parseReadmeMedia (README filtrado)
-- [x] `mergeProjects.test.ts` — applyMediaToCard + sorts
+- [x] Cadeia primary → OG → placeholder em `Card.tsx`
+- [x] Util `cardImageFallback.ts` + testes Vitest
+- [x] UX `githubPreviewCard` quando fallback OG ativo
 - [x] Build/lint/test + docs
 
-Proposta: `.issues/2026-05-26-unit-tests-media-sort.md`
+Proposta: `.issues/2026-05-26-card-image-onerror-fallback.md`

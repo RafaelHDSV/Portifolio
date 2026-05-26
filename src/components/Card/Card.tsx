@@ -8,10 +8,17 @@ import {
   StarIcon,
   WarningCircleIcon
 } from '@phosphor-icons/react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USERNAME } from '../../constants/cv'
 import { GithubRepository } from '../../repository/GithubRepository'
+import {
+  getPrimaryImageUrl,
+  ImageFallbackStage,
+  nextFallbackStage,
+  resolveCardImageDisplay,
+  shouldShowGithubPreviewCard
+} from '../../utils/cardImageFallback'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
 import styles from './Card.module.scss'
@@ -52,25 +59,36 @@ interface CardProps {
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
   const [videoError, setVideoError] = useState(false)
-  const [imageError, setImageError] = useState(false)
+  const [imageStage, setImageStage] = useState<ImageFallbackStage>('primary')
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
 
+  const fallbackImage = project.github?.ogImage ?? ''
+  const primaryImage = useMemo(
+    () => getPrimaryImageUrl({ image: project.image, media: project.media }),
+    [project.image, project.media]
+  )
+  const imageDisplay = useMemo(
+    () => resolveCardImageDisplay(imageStage, primaryImage, fallbackImage),
+    [imageStage, primaryImage, fallbackImage]
+  )
+  const showGithubPreviewCard = shouldShowGithubPreviewCard(
+    project.usesGithubPreview,
+    imageStage
+  )
+
   useEffect(() => {
-    setImageError(false)
+    setImageStage('primary')
     setVideoError(false)
-  }, [project.id, project.image, project.media?.url])
+  }, [project.id, primaryImage, project.media?.url])
 
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
   const thumbImage = project.image || project.media?.poster || ''
-  const fallbackImage = project.github?.ogImage ?? ''
 
   const handleImageError = useCallback(() => {
-    if (fallbackImage && project.image !== fallbackImage) {
-      setImageError(true)
-    }
-  }, [fallbackImage, project.image])
+    setImageStage((stage) => nextFallbackStage(stage, primaryImage, fallbackImage))
+  }, [primaryImage, fallbackImage])
 
   const handleVideoError = useCallback(() => {
     if (thumbImage) return
@@ -104,9 +122,6 @@ export default function Card ({ project }: CardProps) {
       )
     }
 
-    const displayImage =
-      imageError && fallbackImage ? fallbackImage : project.image
-
     if (isVideo) {
       return (
         <video
@@ -136,29 +151,10 @@ export default function Card ({ project }: CardProps) {
       )
     }
 
-    if (project.usesPlaceholder) {
-      if (project.github?.ogImage) {
-        return (
-          <img
-            src={displayImage || project.github.ogImage}
-            alt={project.name}
-            loading='lazy'
-            onError={handleImageError}
-          />
-        )
-      }
-
-      return (
-        <div className={styles.imagePlaceholder} aria-hidden='true'>
-          <ImageIcon size={40} weight='duotone' />
-        </div>
-      )
-    }
-
-    if (project.media?.type === 'gif') {
+    if (imageDisplay.src) {
       return (
         <img
-          src={project.media.url}
+          src={imageDisplay.src}
           alt={project.name}
           loading='lazy'
           onError={handleImageError}
@@ -167,24 +163,24 @@ export default function Card ({ project }: CardProps) {
     }
 
     return (
-      <img
-        src={displayImage}
-        alt={project.name}
-        loading='lazy'
-        onError={handleImageError}
-      />
+      <div className={styles.imagePlaceholder} aria-hidden='true'>
+        <ImageIcon size={40} weight='duotone' />
+      </div>
     )
   }
 
   const renderGithubOverlay = () => {
     if (!project.github) return null
 
+    const overlayPreviewOnly =
+      showGithubPreviewCard || imageDisplay.usesGithubPreviewUx
+
     return (
       <div
-        className={`${styles.githubOverlay} ${project.usesGithubPreview ? styles.githubOverlayStatsOnly : ''}`}
+        className={`${styles.githubOverlay} ${overlayPreviewOnly ? styles.githubOverlayStatsOnly : ''}`}
         aria-hidden='true'
       >
-        {!project.usesGithubPreview && (
+        {!overlayPreviewOnly && (
           <img
             className={styles.githubOgImage}
             src={project.github.ogImage}
@@ -221,7 +217,7 @@ export default function Card ({ project }: CardProps) {
 
   return (
     <article
-      className={`${styles.card} ${project.usesGithubPreview ? styles.githubPreviewCard : ''}`}
+      className={`${styles.card} ${showGithubPreviewCard ? styles.githubPreviewCard : ''}`}
       onMouseEnter={loadContributors}
     >
       <div className={styles.imageWrapper}>

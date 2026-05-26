@@ -21,7 +21,9 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #24** (maio/2026): batch GraphQL de languages (`getRepoLanguagesBatch`) com cache em sessionStorage (sessao do browser); midia tambem persiste na sessao alem do cache in-memory. Reduz ~18 REST `/languages` para 1 GraphQL por sessao.
 
-**Issue #26** (maio/2026): Vitest 3.2.4 com 17 testes unitarios em `readmeMedia.test.ts` e `mergeProjects.test.ts` (demo, OG fallback, placeholder, README filtrado, sorts). Comando: `yarn test`.
+**Issue #26** (maio/2026): Vitest 3.2.4 com testes unitarios em `readmeMedia`, `mergeProjects` e `cardImageFallback`. Comando: `yarn test`.
+
+**Issue #27** (maio/2026): fallback `onError` nos cards — imagem invalida cai para OG do GitHub e depois placeholder; UX alinhada a `usesGithubPreview` quando OG e exibido.
 
 **Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
 
