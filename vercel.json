@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "yarn install --frozen-lockfile --force",
   "buildCommand": "yarn build",
+  "functions": {
+    "api/og/index.tsx": {
+      "maxDuration": 10
+    }
+  },
   "headers": [
     {
       "source": "/api/og",

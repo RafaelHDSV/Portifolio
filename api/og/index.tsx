@@ -1,9 +1,5 @@
 import { ImageResponse } from '@vercel/og'
-import { getOgCopy, normalizeOgLang } from './og/copy'
-
-export const config = {
-  runtime: 'edge'
-}
+import { getOgCopy, normalizeOgLang } from './copy.js'
 
 export default async function handler (request: Request) {
   const { searchParams } = new URL(request.url)

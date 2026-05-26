@@ -25,7 +25,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #27** (maio/2026): fallback `onError` nos cards — imagem invalida cai para OG do GitHub e depois placeholder; UX alinhada a `usesGithubPreview` quando OG e exibido.
 
-**Issue #28** (maio/2026): OG image dinamica via rota serverless `/api/og` (`@vercel/og` + Satori, Edge). PNG 1200x630 com nome, cargo e stack; variantes PT/EN via `?lang=`. Meta tags em `index.html` apontam para `https://rafaelhdsv.vercel.app/api/og?lang=pt`. Cache publico 24h em `vercel.json`.
+**Issue #28** (maio/2026): OG image dinamica via rota serverless `/api/og` (`@vercel/og` + Satori, runtime Node.js). PNG 1200x630 com nome, cargo e stack; variantes PT/EN via `?lang=`. Meta tags em `index.html` apontam para `https://rafaelhdsv.vercel.app/api/og?lang=pt`. Cache publico 24h em `vercel.json`.
 
 **Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
 
@@ -89,8 +89,9 @@ src/
     └── projectImages.ts       # Resolve imagem; pending se faltar asset
 
 api/
-├── og.tsx                     # Edge handler ImageResponse (1200x630)
+├── tsconfig.json              # TS/JSX para funcoes Vercel
 └── og/
+    ├── index.tsx              # Handler ImageResponse (1200x630, Node.js)
     ├── copy.ts                # Textos PT/EN + buildOgImageUrl
     └── copy.test.ts           # Vitest
 
