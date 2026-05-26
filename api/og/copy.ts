@@ -36,3 +36,14 @@ export function getOgCopy (lang: OgLang): OgCopy {
 export function buildOgImageUrl (lang: OgLang = 'pt'): string {
   return `${OG_SITE_URL}/api/og?lang=${lang}`
 }
+
+export function parseLangFromUrl (url: string): OgLang {
+  const { searchParams } = url.startsWith('http')
+    ? new URL(url)
+    : new URL(url, OG_SITE_URL)
+  return normalizeOgLang(searchParams.get('lang'))
+}
+
+export function parseRequestLang (request: Request): OgLang {
+  return parseLangFromUrl(request.url)
+}

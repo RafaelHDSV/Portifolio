@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildOgImageUrl, getOgCopy, normalizeOgLang } from './copy'
+import { buildOgImageUrl, getOgCopy, normalizeOgLang, parseLangFromUrl, parseRequestLang } from './copy'
 
 describe('normalizeOgLang', () => {
   it('defaults to pt', () => {
@@ -25,5 +25,22 @@ describe('buildOgImageUrl', () => {
     expect(buildOgImageUrl('en')).toBe(
       'https://rafaelhdsv.vercel.app/api/og?lang=en'
     )
+  })
+})
+
+describe('parseLangFromUrl', () => {
+  it('parses lang from relative url', () => {
+    expect(parseLangFromUrl('/api/og?lang=en')).toBe('en')
+  })
+
+  it('defaults to pt when lang is missing', () => {
+    expect(parseLangFromUrl('/api/og')).toBe('pt')
+  })
+})
+
+describe('parseRequestLang', () => {
+  it('delegates to parseLangFromUrl', () => {
+    const request = { url: '/api/og?lang=en' } as Request
+    expect(parseRequestLang(request)).toBe('en')
   })
 })

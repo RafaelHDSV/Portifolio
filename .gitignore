@@ -46,3 +46,4 @@ cursor
 .cursor/*
 *.cursor
 *.cursor/*
+.vercel

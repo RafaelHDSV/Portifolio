@@ -1,11 +1,10 @@
 import { ImageResponse } from '@vercel/og'
 import type { ReactElement } from 'react'
-import { getOgCopy, normalizeOgLang } from './copy.js'
+import { getOgCopy, parseRequestLang } from './copy.js'
 import { buildOgElement } from './template.js'
 
 export default async function handler (request: Request) {
-  const { searchParams } = new URL(request.url)
-  const copy = getOgCopy(normalizeOgLang(searchParams.get('lang')))
+  const copy = getOgCopy(parseRequestLang(request))
 
   return new ImageResponse(buildOgElement(copy) as ReactElement, {
     width: 1200,
