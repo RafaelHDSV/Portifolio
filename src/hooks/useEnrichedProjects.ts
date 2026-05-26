@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ProjectCardData } from '../components/Card/Card'
 import { GITHUB_USERNAME } from '../constants/cv'
 import { GithubRepository } from '../repository/GithubRepository'
@@ -13,10 +13,20 @@ function withMediaLoading (projects: ProjectCardData[]): ProjectCardData[] {
   }))
 }
 
+function buildRepoNamesKey (projects: ProjectCardData[]): string {
+  return projects
+    .map((project) => project.repoName.toLowerCase())
+    .filter(Boolean)
+    .sort()
+    .join('|')
+}
+
 export function useEnrichedProjects (projects: ProjectCardData[]) {
   const [enriched, setEnriched] = useState<ProjectCardData[]>(() =>
     withMediaLoading(projects)
   )
+
+  const repoNamesKey = useMemo(() => buildRepoNamesKey(projects), [projects])
 
   useEffect(() => {
     setEnriched(withMediaLoading(projects))
@@ -24,6 +34,15 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
     let cancelled = false
 
     const enrich = async () => {
+      const repoNames = projects
+        .map((project) => project.repoName)
+        .filter(Boolean)
+
+      const languagesMap = await GithubRepository.getRepoLanguagesBatch(
+        GITHUB_USERNAME,
+        repoNames
+      )
+
       const updates = await Promise.all(
         projects.map(async (project) => {
           let card: ProjectCardData = {
@@ -43,10 +62,8 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
             card = { ...card, mediaLoading: false }
           }
 
-          const apiLangs = await GithubRepository.getRepoLanguages(
-            GITHUB_USERNAME,
-            project.repoName
-          )
+          const apiLangs =
+            languagesMap.get(project.repoName.toLowerCase()) ?? []
 
           if (cancelled || apiLangs.length === 0) return card
 
@@ -66,7 +83,7 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
     return () => {
       cancelled = true
     }
-  }, [projects])
+  }, [projects, repoNamesKey])
 
   return enriched
 }

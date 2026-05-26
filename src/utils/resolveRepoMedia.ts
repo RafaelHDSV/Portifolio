@@ -1,6 +1,10 @@
 import { projectsConfig } from '../constants/projects.config'
 import { GithubRepository } from '../repository/GithubRepository'
 import { parseReadmeMedia, ReadmeMedia } from './readmeMedia'
+import {
+  getSessionCachedMedia,
+  setSessionCachedMedia
+} from './repoMediaSessionCache'
 
 /** Tempo de vida do cache de midia por repo (5 min). */
 export const MEDIA_CACHE_TTL_MS = 5 * 60 * 1000
@@ -28,12 +32,37 @@ function getCachedMedia(
 
 function setCachedMedia(
   cacheKey: string,
-  value: ReadmeMedia | 'placeholder'
+  value: ReadmeMedia | 'placeholder',
+  owner?: string,
+  repo?: string
 ): void {
   mediaCache.set(cacheKey, {
     value,
     expiresAt: Date.now() + MEDIA_CACHE_TTL_MS
   })
+
+  if (owner && repo) {
+    setSessionCachedMedia(owner, repo, value)
+  }
+}
+
+function getCachedMediaWithSession(
+  cacheKey: string,
+  owner: string,
+  repo: string
+): ReadmeMedia | 'placeholder' | undefined {
+  const memory = getCachedMedia(cacheKey)
+  if (memory !== undefined) return memory
+
+  const session = getSessionCachedMedia(owner, repo)
+  if (session === undefined) return undefined
+
+  mediaCache.set(cacheKey, {
+    value: session,
+    expiresAt: Date.now() + MEDIA_CACHE_TTL_MS
+  })
+
+  return session
 }
 
 const ROOT_VIDEO_FILES = ['demo.mp4', 'demo.webm', 'demo.mov'] as const
@@ -192,35 +221,35 @@ export async function resolveRepoMedia(
   repoName: string
 ): Promise<ReadmeMedia | 'placeholder'> {
   const cacheKey = `${owner}/${repoName}`
-  const cached = getCachedMedia(cacheKey)
+  const cached = getCachedMediaWithSession(cacheKey, owner, repoName)
   if (cached !== undefined) {
     return cached
   }
 
   const configMedia = findConfigMedia(repoName)
   if (configMedia) {
-    setCachedMedia(cacheKey, configMedia)
+    setCachedMedia(cacheKey, configMedia, owner, repoName)
     return configMedia
   }
 
   const readmeMedia = await resolveReadmeMedia(owner, repoName)
   if (readmeMedia) {
-    setCachedMedia(cacheKey, readmeMedia)
+    setCachedMedia(cacheKey, readmeMedia, owner, repoName)
     return readmeMedia
   }
 
   const commonMedia = await resolveCommonPathMedia(owner, repoName)
   if (commonMedia) {
-    setCachedMedia(cacheKey, commonMedia)
+    setCachedMedia(cacheKey, commonMedia, owner, repoName)
     return commonMedia
   }
 
   const rootMedia = await resolveRootDemoMedia(owner, repoName)
   if (rootMedia) {
-    setCachedMedia(cacheKey, rootMedia)
+    setCachedMedia(cacheKey, rootMedia, owner, repoName)
     return rootMedia
   }
 
-  setCachedMedia(cacheKey, 'placeholder')
+  setCachedMedia(cacheKey, 'placeholder', owner, repoName)
   return 'placeholder'
 }

@@ -19,6 +19,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #23** (maio/2026): cache de midia em `resolveRepoMedia.ts` com TTL de 5 minutos — previews revalidam apos mudanca de demo no GitHub.
 
+**Issue #24** (maio/2026): batch GraphQL de languages (`getRepoLanguagesBatch`) com cache em sessionStorage (sessao do browser); midia tambem persiste na sessao alem do cache in-memory. Reduz ~18 REST `/languages` para 1 GraphQL por sessao.
+
 **Status de build:** `yarn build` e `yarn lint` passam sem erros.
 
 ---
@@ -147,7 +149,8 @@ Tokens em `src/styles/_variables.scss`:
 - Grade única **3 colunas**; badge "Pin" nos fixados
 - Filtros **multi AND** (React, TypeScript, Node, etc.)
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
-- Midia enriquecida via `resolveRepoMedia.ts` (demo na raiz > config > README); **cache in-memory com TTL 5 min** (#23)
+- Midia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessao** (#24)
+- Languages dos cards via **batch GraphQL** + cache sessionStorage (#24); fallback REST se GraphQL falhar
 - Fallback para `projects.config.ts` se API falhar
 
 ### Contact

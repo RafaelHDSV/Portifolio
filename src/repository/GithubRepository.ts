@@ -7,6 +7,10 @@ import {
   IUser
 } from '../types/IGithub'
 import { filterReposForPortfolio } from '../utils/repoFilters'
+import {
+  getCachedRepoLanguages,
+  setCachedRepoLanguages
+} from '../utils/githubLanguagesCache'
 
 function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
   return {
@@ -82,6 +86,35 @@ function mapPinnedNode (node: PinnedNode): IGithubResponseRepo {
     topics: node.repositoryTopics?.nodes?.map((n) => n.topic.name),
     fork: node.isFork,
     private: node.isPrivate
+  }
+}
+
+function escapeGraphqlString (value: string): string {
+  return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
+function buildBatchLanguagesQuery (repoNames: string[]): string {
+  const fields = repoNames
+    .map((name, index) => {
+      const safeName = escapeGraphqlString(name)
+      return `
+        r${index}: repository(owner: $owner, name: "${safeName}") {
+          name
+          languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+            edges { node { name } }
+          }
+        }
+      `
+    })
+    .join('\n')
+
+  return `query BatchRepoLanguages($owner: String!) { ${fields} }`
+}
+
+type BatchLanguageNode = {
+  name?: string
+  languages?: {
+    edges?: Array<{ node?: { name?: string } }>
   }
 }
 
@@ -255,6 +288,94 @@ class GithubRepositoryClass {
     } catch {
       return []
     }
+  }
+
+  private async fetchLanguagesGraphQL (
+    owner: string,
+    repoNames: string[]
+  ): Promise<Map<string, string[]>> {
+    const query = buildBatchLanguagesQuery(repoNames)
+    const response = await githubApi.post<{
+      data?: Record<string, BatchLanguageNode | null>
+      errors?: Array<{ message: string }>
+    }>('/graphql', {
+      query,
+      variables: { owner }
+    })
+
+    if (response.data?.errors?.length) {
+      throw new Error(response.data.errors.map((error) => error.message).join('; '))
+    }
+
+    const map = new Map<string, string[]>()
+
+    repoNames.forEach((name, index) => {
+      const node = response.data?.data?.[`r${index}`]
+      const langs =
+        node?.languages?.edges
+          ?.map((edge) => edge.node?.name)
+          .filter((lang): lang is string => Boolean(lang)) ?? []
+
+      if (langs.length > 0) {
+        map.set(name.toLowerCase(), langs)
+      }
+    })
+
+    return map
+  }
+
+  private async fetchLanguagesRestFallback (
+    owner: string,
+    repoNames: string[]
+  ): Promise<Map<string, string[]>> {
+    const entries = await Promise.all(
+      repoNames.map(async (name) => {
+        const langs = await this.getRepoLanguages(owner, name)
+        return [name.toLowerCase(), langs] as const
+      })
+    )
+
+    return new Map(entries)
+  }
+
+  async getRepoLanguagesBatch (
+    owner: string,
+    repoNames: string[]
+  ): Promise<Map<string, string[]>> {
+    const unique = [
+      ...new Set(repoNames.map((name) => name.trim()).filter(Boolean))
+    ]
+
+    if (unique.length === 0) return new Map()
+
+    const cached = getCachedRepoLanguages(owner, unique)
+    if (cached) return cached
+
+    let map = new Map<string, string[]>()
+
+    try {
+      map = await this.fetchLanguagesGraphQL(owner, unique)
+    } catch (err) {
+      console.warn('GraphQL languages batch failed, falling back to REST:', err)
+    }
+
+    const missing = unique.filter(
+      (name) => (map.get(name.toLowerCase()) ?? []).length === 0
+    )
+
+    if (missing.length > 0) {
+      const fallback = await this.fetchLanguagesRestFallback(owner, missing)
+      for (const [name, langs] of fallback.entries()) {
+        if (langs.length > 0) map.set(name, langs)
+      }
+    }
+
+    if (map.size === 0) {
+      map = await this.fetchLanguagesRestFallback(owner, unique)
+    }
+
+    setCachedRepoLanguages(owner, unique, map)
+    return map
   }
 
   async getContributorAvatars (

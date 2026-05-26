@@ -1,8 +1,10 @@
-# Issue #23 — cache de midia com TTL
+# Issue #24 — reduzir rate limit GitHub no enriquecimento
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/23
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/24
 
-- [x] TTL 5 min em `resolveRepoMedia.ts`
+- [x] Batch GraphQL de languages + cache sessionStorage (sessao do browser)
+- [x] sessionStorage para midia de repos (#23 complemento)
+- [x] Refatorar `useEnrichedProjects.ts`
 - [x] Build/lint + docs
 
-Proposta: `.issues/2026-05-26-media-cache-ttl.md`
+Proposta: `.issues/2026-05-26-github-rate-limit-enrichment.md`
