@@ -117,9 +117,9 @@
     "enableShort": "Recrutador",
     "back": "Voltar à exibição normal",
     "modeLabel": "Modo recrutador",
-    "role": "Desenvolvedor Full-Stack",
-    "bio": "Resumo profissional para triagem rápida: React, TypeScript, Node.js e entrega full stack com foco em produto.",
-    "aboutExtended": "Atuo em produtos web de ponta a ponta — arquitetura, APIs, interfaces e integrações. Tenho experiência com liderança técnica, code review e entregas iterativas em equipe. Busco oportunidades onde qualidade de código e impacto no produto andem juntos.",
+    "role": "Desenvolvedor Full Stack · Líder de Equipe",
+    "bio": "Full Stack na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB, com foco em sistemas escaláveis e liderança de equipe.",
+    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde 2024 — de estágio front-end a Full Stack e liderança de equipe. Desenvolvo aplicações web com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
     "stackTitle": "Stack principal",
     "stackSubtitle": "Ferramentas que uso no dia a dia",
     "stackAlsoLabel": "Também trabalho com",
@@ -127,7 +127,7 @@
     "projectsSubtitle": "Seleção curada — código disponível no GitHub",
     "viewAll": "Ver todos",
     "contactHeading": "Vamos conversar",
-    "contactSubtitle": "Respondo a propostas de vagas em até 24h úteis.",
+    "contactSubtitle": "E-mail ou LinkedIn — vamos alinhar expectativas e conversar sobre a oportunidade.",
     "contactTitle": "Contato",
     "contactEmail": "E-mail",
     "contactAction": "Entrar em contato",
@@ -143,31 +143,37 @@
       "scopeLabel": "Atuação ponta a ponta"
     },
     "meta": {
-      "location": "Brasil · Remoto",
-      "response": "Resposta em até 24h",
+      "location": "Sorocaba, SP · Remoto",
+      "response": "E-mail e LinkedIn",
       "contract": "CLT / PJ / Contrato"
     },
     "deliverablesTitle": "O que entrego",
     "deliverables": [
-      "Arquitetura de produtos web do zero ao deploy",
-      "APIs REST e integrações com sistemas externos",
-      "Interfaces performáticas e acessíveis",
-      "Code review, mentoria e padrões de qualidade"
+      "Sistemas web escaláveis com React, TypeScript e Node.js",
+      "Liderança técnica, mentoria e code review em equipe",
+      "Interfaces responsivas com Sass e foco em experiência do usuário",
+      "APIs REST, MongoDB e integrações alinhadas ao negócio"
     ],
     "experienceTitle": "Experiência recente",
     "experienceSubtitle": "Resumo cronológico",
     "experienceItems": [
       {
-        "period": "2023 — Presente",
-        "title": "Desenvolvedor Full-Stack Sênior",
-        "company": "Produto SaaS",
-        "description": "Liderança técnica em features críticas, arquitetura de APIs, code review e mentoria."
+        "period": "Set 2025 — Presente",
+        "title": "Desenvolvedor Full Stack Júnior I · Líder de Equipe",
+        "company": "AGX Software",
+        "description": "Desenvolvimento de sistemas web com React, TypeScript, Sass, Node.js e MongoDB; coordenação do time, mentoria e garantia de qualidade nas entregas."
       },
       {
-        "period": "2020 — 2023",
-        "title": "Desenvolvedor Full-Stack",
-        "company": "Agência / Consultoria",
-        "description": "Entregas iterativas, integração com sistemas legados e foco em performance."
+        "period": "Jan 2025 — Set 2025",
+        "title": "Desenvolvedor Front-end Trainee",
+        "company": "AGX Software",
+        "description": "Interfaces dinâmicas e responsivas com React, TypeScript e Sass; tarefas complexas com maior autonomia e colaboração entre áreas."
+      },
+      {
+        "period": "Jul 2024 — Jan 2025",
+        "title": "Estágio em Desenvolvimento Front-end",
+        "company": "AGX Software",
+        "description": "Implementação de interfaces e suporte a funcionalidades em aplicações web, consolidando base técnica em React e TypeScript."
       }
     ],
     "projectCategories": {

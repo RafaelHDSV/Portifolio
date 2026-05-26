@@ -17,16 +17,20 @@ export const RECRUITER_PROJECT_CATEGORY: Record<string, RecruiterProjectCategory
   'Dev-Shortcuts': 'productivity'
 }
 
-export const RECRUITER_STACK_PRIMARY = ['React', 'TypeScript', 'Node.js'] as const
+export const RECRUITER_STACK_PRIMARY = [
+  'React',
+  'TypeScript',
+  'Node.js',
+  'MongoDB'
+] as const
 
 export const RECRUITER_STACK_SECONDARY = [
-  'Next.js',
-  'MongoDB',
-  'PostgreSQL',
   'Sass',
   'C#',
   'PHP',
-  'Tailwind'
+  'n8n',
+  'Git',
+  'PostgreSQL'
 ] as const
 
 export function normalizeRepoSlug (name: string): string {

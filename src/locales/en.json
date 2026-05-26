@@ -117,9 +117,9 @@
     "enableShort": "Recruiter",
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
-    "role": "Full-Stack Developer",
-    "bio": "Professional summary for quick screening: React, TypeScript, Node.js and full stack delivery with product focus.",
-    "aboutExtended": "I work on end-to-end web products — architecture, APIs, interfaces and integrations. I have experience with technical leadership, code review and iterative delivery in teams. I look for roles where code quality and product impact go together.",
+    "role": "Full Stack Web Developer · Team Lead",
+    "bio": "Full Stack at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB, focused on scalable systems and team leadership.",
+    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since 2024 — from front-end internship to Full Stack and team lead. I build web applications with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
@@ -127,7 +127,7 @@
     "projectsSubtitle": "Curated selection — code on GitHub",
     "viewAll": "View all",
     "contactHeading": "Let's talk",
-    "contactSubtitle": "I reply to job inquiries within 24 business hours.",
+    "contactSubtitle": "Email or LinkedIn — let's align expectations and talk about the opportunity.",
     "contactTitle": "Contact",
     "contactEmail": "Email",
     "contactAction": "Get in touch",
@@ -143,31 +143,37 @@
       "scopeLabel": "End-to-end delivery"
     },
     "meta": {
-      "location": "Brazil · Remote",
-      "response": "Reply within 24h",
+      "location": "Sorocaba, SP · Remote",
+      "response": "Email and LinkedIn",
       "contract": "Full-time / Contract"
     },
     "deliverablesTitle": "What I deliver",
     "deliverables": [
-      "Web product architecture from zero to deploy",
-      "REST APIs and external system integrations",
-      "Performant and accessible interfaces",
-      "Code review, mentorship and quality standards"
+      "Scalable web systems with React, TypeScript and Node.js",
+      "Technical leadership, mentorship and team code review",
+      "Responsive interfaces with Sass and user experience focus",
+      "REST APIs, MongoDB and business-aligned integrations"
     ],
     "experienceTitle": "Recent experience",
     "experienceSubtitle": "Chronological summary",
     "experienceItems": [
       {
-        "period": "2023 — Present",
-        "title": "Senior Full-Stack Developer",
-        "company": "SaaS Product",
-        "description": "Technical leadership on critical features, API architecture, code review and mentorship."
+        "period": "Sep 2025 — Present",
+        "title": "Junior Full Stack Developer I · Team Lead",
+        "company": "AGX Software",
+        "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; team coordination, mentorship and delivery quality."
       },
       {
-        "period": "2020 — 2023",
-        "title": "Full-Stack Developer",
-        "company": "Agency / Consultancy",
-        "description": "Iterative delivery, legacy system integration and performance focus."
+        "period": "Jan 2025 — Sep 2025",
+        "title": "Front-end Developer Trainee",
+        "company": "AGX Software",
+        "description": "Dynamic, responsive interfaces with React, TypeScript and Sass; complex tasks with greater autonomy and cross-team collaboration."
+      },
+      {
+        "period": "Jul 2024 — Jan 2025",
+        "title": "Front-end Development Intern",
+        "company": "AGX Software",
+        "description": "Interface implementation and feature support in web applications, building a solid base in React and TypeScript."
       }
     ],
     "projectCategories": {
