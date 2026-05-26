@@ -60,12 +60,21 @@ const DEMO_HINT_PATTERNS = [
   /\/assets\//i,
   /\/docs\//i,
   /\/public\//i,
+  /\/images\//i,
+  /\/media\//i,
   /\/screens\//i,
   /desktop/i,
   /mobile/i,
+  /main\.png/i,
   /mockup/i,
-  /banner/i
+  /banner/i,
+  /customizer/i,
+  /full-project/i
 ]
+
+/** Headers de secao onde READMEs costumam colocar previews (Screenshots, Images, etc.). */
+const MEDIA_SECTION_HEADER =
+  /#{1,6}\s+[^\n]*(?:screenshots?|(?:📷\s*)?images?|preview|demo|capturas|galeria)[^\n]*/i
 
 export function isLikelyDemoMedia (url: string): boolean {
   const lower = url.toLowerCase()
@@ -114,6 +123,19 @@ function pickBestReadmeMedia (candidates: ReadmeMedia[]): ReadmeMedia | null {
   return candidates.find((m) => m.type === 'image') ?? candidates[0]
 }
 
+function sliceUntilNextSection (content: string): string {
+  const nextHeader = content.search(/\n#{1,6}\s+/)
+  return nextHeader === -1 ? content : content.slice(0, nextHeader)
+}
+
+function extractMediaSection (content: string): string | null {
+  const match = content.match(MEDIA_SECTION_HEADER)
+  if (!match || match.index === undefined) return null
+
+  const afterHeader = content.slice(match.index + match[0].length)
+  return sliceUntilNextSection(afterHeader)
+}
+
 function pushMedia (
   list: ReadmeMedia[],
   url: string,
@@ -151,60 +173,66 @@ export function parseReadmeMedia (
   repo: string
 ): ReadmeMedia | null {
   const found: ReadmeMedia[] = []
-  const screenshotSection = content.split(/#{1,6}\s*[^\n]*screenshots[^\n]*/i)[1]
+  const sectionOnly: ReadmeMedia[] = []
+  const mediaSection = extractMediaSection(content)
 
-  const collectFrom = (section: string) => {
+  const collectFrom = (section: string, target: ReadmeMedia[]) => {
     const mdImg = /!\[[^\]]*]\(([^)]+)\)/g
     let match: RegExpExecArray | null
     while ((match = mdImg.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const htmlImg = /<img[^>]+src=["']([^"']+)["']/gi
     while ((match = htmlImg.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const videoSrc = /<video[^>]*>[\s\S]*?<source[^>]+src=["']([^"']+)["']/gi
     while ((match = videoSrc.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const videoDirect = /<video[^>]+src=["']([^"']+)["']/gi
     while ((match = videoDirect.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const mdLinkMedia = /\[[^\]]*]\(([^)]+\.(?:mp4|webm|gif|png|jpe?g|webp)[^)]*)\)/gi
     while ((match = mdLinkMedia.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const mdVideoLink =
       /\[[^\]]*]\((https:\/\/github\.com\/user-attachments\/assets\/[^)]+)\)/gi
     while ((match = mdVideoLink.exec(section)) !== null) {
-      pushMedia(found, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo)
     }
 
     const assetsUrl = /https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9-]+/gi
     while ((match = assetsUrl.exec(section)) !== null) {
-      pushMedia(found, match[0], owner, repo)
+      pushMedia(target, match[0], owner, repo)
     }
   }
 
-  if (screenshotSection) {
-    collectFrom(screenshotSection)
+  if (mediaSection) {
+    collectFrom(mediaSection, sectionOnly)
   }
-  collectFrom(content)
+  collectFrom(content, found)
 
   if (found.length === 0) return null
 
-  const demoCandidates = found.filter((m) => isLikelyDemoMedia(m.url))
-  const picked = pickBestReadmeMedia(demoCandidates)
-  if (picked) return picked
+  const pickFromList = (list: ReadmeMedia[]): ReadmeMedia | null => {
+    if (list.length === 0) return null
+    const demoCandidates = list.filter((m) => isLikelyDemoMedia(m.url))
+    const picked = pickBestReadmeMedia(demoCandidates)
+    if (picked) return picked
+    return pickBestReadmeMedia(
+      list.filter((m) => isFallbackReadmeImage(m.url))
+    )
+  }
 
-  const fallbackCandidates = found.filter((m) => isFallbackReadmeImage(m.url))
-  return pickBestReadmeMedia(fallbackCandidates)
+  return pickFromList(sectionOnly) ?? pickFromList(found)
 }
 
 export function githubOpenGraphImage (owner: string, repo: string): string {

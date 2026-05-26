@@ -43,6 +43,7 @@ const ROOT_IMAGE_FILES = [
   'demo.jpeg',
   'demo.webp',
   'demo.gif',
+  'main.png',
   'desktop.png',
   'desktop.jpg',
   'desktop.jpeg',
@@ -50,6 +51,19 @@ const ROOT_IMAGE_FILES = [
   'mobile.png',
   'preview.png',
   'screenshot.png'
+] as const
+
+/** Caminhos frequentes em READMEs (public/, images/, media/). */
+const COMMON_MEDIA_PATHS = [
+  'public/main.png',
+  'public/desktop.png',
+  'public/mobile.png',
+  'public/assets/header.png',
+  'public/assets/full-project.png',
+  'images/main.png',
+  'images/desktop.png',
+  'images/mobile.png',
+  'media/demo.gif'
 ] as const
 
 function rawFileUrl(owner: string, repo: string, file: string): string {
@@ -125,6 +139,54 @@ async function resolveRootDemoMedia(
   return null
 }
 
+async function resolveCommonPathMedia(
+  owner: string,
+  repo: string
+): Promise<ReadmeMedia | null> {
+  for (const file of COMMON_MEDIA_PATHS) {
+    const url = rawFileUrl(owner, repo, file)
+    if (
+      (await GithubRepository.repoFileExists(owner, repo, file)) ||
+      (await rawFileExists(url))
+    ) {
+      return {
+        type: file.includes('.gif') ? 'gif' : 'image',
+        url
+      }
+    }
+  }
+
+  return null
+}
+
+async function fetchReadmeContent(
+  owner: string,
+  repo: string
+): Promise<string | null> {
+  try {
+    return await GithubRepository.getReadme(owner, repo)
+  } catch {
+    try {
+      const response = await fetch(
+        `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/README.md`
+      )
+      if (!response.ok) return null
+      return await response.text()
+    } catch {
+      return null
+    }
+  }
+}
+
+async function resolveReadmeMedia(
+  owner: string,
+  repo: string
+): Promise<ReadmeMedia | null> {
+  const readme = await fetchReadmeContent(owner, repo)
+  if (!readme) return null
+  return parseReadmeMedia(readme, owner, repo)
+}
+
 export async function resolveRepoMedia(
   owner: string,
   repoName: string
@@ -135,27 +197,28 @@ export async function resolveRepoMedia(
     return cached
   }
 
-  const rootMedia = await resolveRootDemoMedia(owner, repoName)
-  if (rootMedia) {
-    setCachedMedia(cacheKey, rootMedia)
-    return rootMedia
-  }
-
   const configMedia = findConfigMedia(repoName)
   if (configMedia) {
     setCachedMedia(cacheKey, configMedia)
     return configMedia
   }
 
-  try {
-    const readme = await GithubRepository.getReadme(owner, repoName)
-    const parsed = parseReadmeMedia(readme, owner, repoName)
-    if (parsed) {
-      setCachedMedia(cacheKey, parsed)
-      return parsed
-    }
-  } catch {
-    // fallback below
+  const readmeMedia = await resolveReadmeMedia(owner, repoName)
+  if (readmeMedia) {
+    setCachedMedia(cacheKey, readmeMedia)
+    return readmeMedia
+  }
+
+  const commonMedia = await resolveCommonPathMedia(owner, repoName)
+  if (commonMedia) {
+    setCachedMedia(cacheKey, commonMedia)
+    return commonMedia
+  }
+
+  const rootMedia = await resolveRootDemoMedia(owner, repoName)
+  if (rootMedia) {
+    setCachedMedia(cacheKey, rootMedia)
+    return rootMedia
   }
 
   setCachedMedia(cacheKey, 'placeholder')
