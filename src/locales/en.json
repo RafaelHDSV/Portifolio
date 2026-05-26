@@ -59,6 +59,7 @@
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
+    "mediaLoading": "Loading project preview",
     "error": "Could not load repositories.",
     "retry": "Try again",
     "pinned": "Pin",

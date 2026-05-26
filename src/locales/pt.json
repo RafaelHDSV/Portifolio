@@ -59,6 +59,7 @@
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
+    "mediaLoading": "Carregando preview do projeto",
     "error": "Não foi possível carregar os repositórios.",
     "retry": "Tentar novamente",
     "pinned": "Pin",

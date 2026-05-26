@@ -60,7 +60,11 @@ const DEMO_HINT_PATTERNS = [
   /\/assets\//i,
   /\/docs\//i,
   /\/public\//i,
-  /\/screens\//i
+  /\/screens\//i,
+  /desktop/i,
+  /mobile/i,
+  /mockup/i,
+  /banner/i
 ]
 
 export function isLikelyDemoMedia (url: string): boolean {
@@ -75,6 +79,39 @@ export function isLikelyDemoMedia (url: string): boolean {
   if (DEMO_HINT_PATTERNS.some((pattern) => pattern.test(lower))) return true
 
   return false
+}
+
+function isFallbackReadmeImage (url: string): boolean {
+  const lower = url.toLowerCase()
+
+  if (NON_DEMO_PATTERNS.some((pattern) => pattern.test(lower))) return false
+  if (/\.svg(\?|$)/i.test(lower)) return false
+  if (/(^|[/_-])logo([./-]|$)/i.test(lower)) return false
+  if (/(^|[/_-])icon([./-]|$)/i.test(lower)) return false
+
+  return (
+    GIF_EXT.test(lower) ||
+    VIDEO_EXT.test(lower) ||
+    /\.(png|jpe?g|webp)(\?|$)/i.test(lower) ||
+    lower.includes('user-attachments/assets')
+  )
+}
+
+function pickBestReadmeMedia (candidates: ReadmeMedia[]): ReadmeMedia | null {
+  if (candidates.length === 0) return null
+
+  const video = candidates.find(
+    (m) => m.type === 'video' && VIDEO_EXT.test(m.url)
+  )
+  if (video) {
+    const poster = candidates.find((m) => m.type === 'image' || m.type === 'gif')
+    return { ...video, poster: poster?.url }
+  }
+
+  const gif = candidates.find((m) => m.type === 'gif')
+  if (gif) return gif
+
+  return candidates.find((m) => m.type === 'image') ?? candidates[0]
 }
 
 function pushMedia (
@@ -114,60 +151,60 @@ export function parseReadmeMedia (
   repo: string
 ): ReadmeMedia | null {
   const found: ReadmeMedia[] = []
+  const screenshotSection = content.split(/#{1,6}\s*[^\n]*screenshots[^\n]*/i)[1]
 
-  const mdImg = /!\[[^\]]*]\(([^)]+)\)/g
-  let match: RegExpExecArray | null
-  while ((match = mdImg.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
+  const collectFrom = (section: string) => {
+    const mdImg = /!\[[^\]]*]\(([^)]+)\)/g
+    let match: RegExpExecArray | null
+    while ((match = mdImg.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const htmlImg = /<img[^>]+src=["']([^"']+)["']/gi
+    while ((match = htmlImg.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const videoSrc = /<video[^>]*>[\s\S]*?<source[^>]+src=["']([^"']+)["']/gi
+    while ((match = videoSrc.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const videoDirect = /<video[^>]+src=["']([^"']+)["']/gi
+    while ((match = videoDirect.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const mdLinkMedia = /\[[^\]]*]\(([^)]+\.(?:mp4|webm|gif|png|jpe?g|webp)[^)]*)\)/gi
+    while ((match = mdLinkMedia.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const mdVideoLink =
+      /\[[^\]]*]\((https:\/\/github\.com\/user-attachments\/assets\/[^)]+)\)/gi
+    while ((match = mdVideoLink.exec(section)) !== null) {
+      pushMedia(found, match[1], owner, repo)
+    }
+
+    const assetsUrl = /https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9-]+/gi
+    while ((match = assetsUrl.exec(section)) !== null) {
+      pushMedia(found, match[0], owner, repo)
+    }
   }
 
-  const htmlImg = /<img[^>]+src=["']([^"']+)["']/gi
-  while ((match = htmlImg.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
+  if (screenshotSection) {
+    collectFrom(screenshotSection)
   }
-
-  const videoSrc = /<video[^>]*>[\s\S]*?<source[^>]+src=["']([^"']+)["']/gi
-  while ((match = videoSrc.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
-  }
-
-  const videoDirect = /<video[^>]+src=["']([^"']+)["']/gi
-  while ((match = videoDirect.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
-  }
-
-  const mdLinkMedia = /\[[^\]]*]\(([^)]+\.(?:mp4|webm|gif|png|jpe?g|webp)[^)]*)\)/gi
-  while ((match = mdLinkMedia.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
-  }
-
-  const mdVideoLink = /\[[^\]]*]\((https:\/\/github\.com\/user-attachments\/assets\/[^)]+)\)/gi
-  while ((match = mdVideoLink.exec(content)) !== null) {
-    pushMedia(found, match[1], owner, repo)
-  }
-
-  const assetsUrl = /https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9-]+/gi
-  while ((match = assetsUrl.exec(content)) !== null) {
-    pushMedia(found, match[0], owner, repo)
-  }
+  collectFrom(content)
 
   if (found.length === 0) return null
 
   const demoCandidates = found.filter((m) => isLikelyDemoMedia(m.url))
-  if (demoCandidates.length === 0) return null
+  const picked = pickBestReadmeMedia(demoCandidates)
+  if (picked) return picked
 
-  const video = demoCandidates.find(
-    (m) => m.type === 'video' && VIDEO_EXT.test(m.url)
-  )
-  if (video) {
-    const poster = demoCandidates.find((m) => m.type === 'image' || m.type === 'gif')
-    return { ...video, poster: poster?.url }
-  }
-
-  const gif = demoCandidates.find((m) => m.type === 'gif')
-  if (gif) return gif
-
-  return demoCandidates.find((m) => m.type === 'image') ?? demoCandidates[0]
+  const fallbackCandidates = found.filter((m) => isFallbackReadmeImage(m.url))
+  return pickBestReadmeMedia(fallbackCandidates)
 }
 
 export function githubOpenGraphImage (owner: string, repo: string): string {

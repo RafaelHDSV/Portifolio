@@ -1,5 +1,6 @@
 import {
   ArrowSquareOutIcon,
+  CircleNotchIcon,
   GitForkIcon,
   GithubLogoIcon,
   ImageIcon,
@@ -7,7 +8,7 @@ import {
   StarIcon,
   WarningCircleIcon
 } from '@phosphor-icons/react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USERNAME } from '../../constants/cv'
 import { GithubRepository } from '../../repository/GithubRepository'
@@ -41,6 +42,7 @@ export interface ProjectCardData {
     url: string
     poster?: string
   }
+  mediaLoading?: boolean
 }
 
 interface CardProps {
@@ -50,12 +52,25 @@ interface CardProps {
 export default function Card ({ project }: CardProps) {
   const { t } = useTranslation()
   const [videoError, setVideoError] = useState(false)
+  const [imageError, setImageError] = useState(false)
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
+
+  useEffect(() => {
+    setImageError(false)
+    setVideoError(false)
+  }, [project.id, project.image, project.media?.url])
 
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
   const thumbImage = project.image || project.media?.poster || ''
+  const fallbackImage = project.github?.ogImage ?? ''
+
+  const handleImageError = useCallback(() => {
+    if (fallbackImage && project.image !== fallbackImage) {
+      setImageError(true)
+    }
+  }, [fallbackImage, project.image])
 
   const handleVideoError = useCallback(() => {
     if (thumbImage) return
@@ -77,6 +92,21 @@ export default function Card ({ project }: CardProps) {
   }, [contributors.length, loadingContributors, project.repoName])
 
   const renderMedia = () => {
+    if (project.mediaLoading) {
+      return (
+        <div
+          className={styles.mediaLoading}
+          role='status'
+          aria-label={t('projects.mediaLoading')}
+        >
+          <CircleNotchIcon size={32} weight='bold' aria-hidden />
+        </div>
+      )
+    }
+
+    const displayImage =
+      imageError && fallbackImage ? fallbackImage : project.image
+
     if (isVideo) {
       return (
         <video
@@ -110,9 +140,10 @@ export default function Card ({ project }: CardProps) {
       if (project.github?.ogImage) {
         return (
           <img
-            src={project.github.ogImage}
+            src={displayImage || project.github.ogImage}
             alt={project.name}
             loading='lazy'
+            onError={handleImageError}
           />
         )
       }
@@ -130,15 +161,17 @@ export default function Card ({ project }: CardProps) {
           src={project.media.url}
           alt={project.name}
           loading='lazy'
+          onError={handleImageError}
         />
       )
     }
 
     return (
       <img
-        src={project.image}
+        src={displayImage}
         alt={project.name}
         loading='lazy'
+        onError={handleImageError}
       />
     )
   }
@@ -193,7 +226,7 @@ export default function Card ({ project }: CardProps) {
     >
       <div className={styles.imageWrapper}>
         <div className={styles.mediaDefault}>{renderMedia()}</div>
-        {renderGithubOverlay()}
+        {!project.mediaLoading && renderGithubOverlay()}
         {project.pinned && (
           <span className={styles.pinBadge}>
             <PushPinIcon size={14} weight='fill' />

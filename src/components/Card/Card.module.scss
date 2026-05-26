@@ -58,6 +58,33 @@
   }
 }
 
+.mediaLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-accent);
+  background: linear-gradient(
+    135deg,
+    var(--color-surface),
+    var(--color-surface-elevated)
+  );
+
+  svg {
+    animation: mediaSpin 900ms linear infinite;
+  }
+}
+
+@keyframes mediaSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .githubOverlay {
   position: absolute;
   inset: 0;

@@ -42,7 +42,14 @@ const ROOT_IMAGE_FILES = [
   'demo.jpg',
   'demo.jpeg',
   'demo.webp',
-  'demo.gif'
+  'demo.gif',
+  'desktop.png',
+  'desktop.jpg',
+  'desktop.jpeg',
+  'desktop.webp',
+  'mobile.png',
+  'preview.png',
+  'screenshot.png'
 ] as const
 
 function rawFileUrl(owner: string, repo: string, file: string): string {
