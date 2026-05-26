@@ -16,8 +16,7 @@ import {
   getPrimaryImageUrl,
   ImageFallbackStage,
   nextFallbackStage,
-  resolveCardImageDisplay,
-  shouldShowGithubPreviewCard
+  resolveCardImageDisplay
 } from '../../utils/cardImageFallback'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
@@ -63,18 +62,13 @@ export default function Card ({ project }: CardProps) {
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
 
-  const fallbackImage = project.github?.ogImage ?? ''
   const primaryImage = useMemo(
     () => getPrimaryImageUrl({ image: project.image, media: project.media }),
     [project.image, project.media]
   )
   const imageDisplay = useMemo(
-    () => resolveCardImageDisplay(imageStage, primaryImage, fallbackImage),
-    [imageStage, primaryImage, fallbackImage]
-  )
-  const showGithubPreviewCard = shouldShowGithubPreviewCard(
-    project.usesGithubPreview,
-    imageStage
+    () => resolveCardImageDisplay(imageStage, primaryImage),
+    [imageStage, primaryImage]
   )
 
   useEffect(() => {
@@ -87,13 +81,12 @@ export default function Card ({ project }: CardProps) {
   const thumbImage = project.image || project.media?.poster || ''
 
   const handleImageError = useCallback(() => {
-    setImageStage((stage) => nextFallbackStage(stage, primaryImage, fallbackImage))
-  }, [primaryImage, fallbackImage])
+    setImageStage(() => nextFallbackStage())
+  }, [])
 
   const handleVideoError = useCallback(() => {
-    if (thumbImage) return
     setVideoError(true)
-  }, [thumbImage])
+  }, [])
 
   const loadContributors = useCallback(async () => {
     if (contributors.length > 0 || loadingContributors || !project.repoName) return
@@ -138,16 +131,23 @@ export default function Card ({ project }: CardProps) {
       )
     }
 
-    if (videoError && videoUrl) {
+    if (videoError && project.media?.type === 'video') {
+      const fallbackSrc = imageDisplay.src || project.github?.ogImage
+      if (fallbackSrc) {
+        return (
+          <img
+            src={fallbackSrc}
+            alt={project.name}
+            loading='lazy'
+            onError={handleImageError}
+          />
+        )
+      }
+
       return (
-        <a
-          className={styles.videoFallbackLink}
-          href={videoUrl}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          {t('projects.openVideo')}
-        </a>
+        <div className={styles.imagePlaceholder} aria-hidden='true'>
+          <ImageIcon size={40} weight='duotone' />
+        </div>
       )
     }
 
@@ -172,22 +172,14 @@ export default function Card ({ project }: CardProps) {
   const renderGithubOverlay = () => {
     if (!project.github) return null
 
-    const overlayPreviewOnly =
-      showGithubPreviewCard || imageDisplay.usesGithubPreviewUx
-
     return (
-      <div
-        className={`${styles.githubOverlay} ${overlayPreviewOnly ? styles.githubOverlayStatsOnly : ''}`}
-        aria-hidden='true'
-      >
-        {!overlayPreviewOnly && (
-          <img
-            className={styles.githubOgImage}
-            src={project.github.ogImage}
-            alt=''
-            loading='lazy'
-          />
-        )}
+      <div className={styles.githubOverlay} aria-hidden='true'>
+        <img
+          className={styles.githubOgImage}
+          src={project.github.ogImage}
+          alt=''
+          loading='lazy'
+        />
         <div className={styles.githubOverlayMeta}>
           <div className={styles.githubStats}>
             <span>
@@ -216,10 +208,7 @@ export default function Card ({ project }: CardProps) {
   }
 
   return (
-    <article
-      className={`${styles.card} ${showGithubPreviewCard ? styles.githubPreviewCard : ''}`}
-      onMouseEnter={loadContributors}
-    >
+    <article className={styles.card} onMouseEnter={loadContributors}>
       <div className={styles.imageWrapper}>
         <div className={styles.mediaDefault}>{renderMedia()}</div>
         {!project.mediaLoading && renderGithubOverlay()}

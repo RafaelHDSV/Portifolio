@@ -15,19 +15,6 @@
   }
 }
 
-.githubPreviewCard {
-  @media (hover: hover) {
-    &:hover .githubOverlayStatsOnly {
-      opacity: 1;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.72) 0%,
-        transparent 55%
-      );
-    }
-  }
-}
-
 .imageWrapper {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -52,7 +39,7 @@
   transition: opacity 280ms ease;
 
   @media (hover: hover) {
-    .card:not(.githubPreviewCard):hover & {
+    .card:hover & {
       opacity: 0;
     }
   }
@@ -103,7 +90,7 @@
   );
 
   @media (hover: hover) {
-    .card:not(.githubPreviewCard):hover & {
+    .card:hover & {
       opacity: 1;
     }
   }
@@ -116,11 +103,6 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-}
-
-.githubOverlayStatsOnly {
-  background: transparent;
-  pointer-events: none;
 }
 
 .githubOverlayMeta {

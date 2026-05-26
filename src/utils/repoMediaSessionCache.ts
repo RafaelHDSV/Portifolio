@@ -1,6 +1,6 @@
 import { ReadmeMedia } from './readmeMedia'
 
-const CACHE_PREFIX = 'portifolio:repo-media:v1'
+const CACHE_PREFIX = 'portifolio:repo-media:v3'
 
 type SessionMediaValue = ReadmeMedia | 'placeholder'
 

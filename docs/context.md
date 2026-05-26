@@ -23,7 +23,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #26** (maio/2026): Vitest 3.2.4 com testes unitarios em `readmeMedia`, `mergeProjects` e `cardImageFallback`. Comando: `yarn test`.
 
-**Issue #27** (maio/2026): fallback `onError` nos cards — imagem invalida cai para OG do GitHub e depois placeholder; UX alinhada a `usesGithubPreview` quando OG e exibido.
+**Issue #27** (maio/2026): fallback `onError` nos cards — URL invalida cai para placeholder generico; preview OG do GitHub so no hover (stats + imagem).
 
 **Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estatico; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
 

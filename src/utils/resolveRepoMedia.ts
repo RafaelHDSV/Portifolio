@@ -1,6 +1,6 @@
 import { projectsConfig } from '../constants/projects.config'
 import { GithubRepository } from '../repository/GithubRepository'
-import { parseReadmeMedia, ReadmeMedia } from './readmeMedia'
+import { parseReadmeMedia, pickBestEmbeddableMedia, ReadmeMedia } from './readmeMedia'
 import {
   getSessionCachedMedia,
   setSessionCachedMedia
@@ -8,6 +8,13 @@ import {
 
 /** Tempo de vida do cache de midia por repo (5 min). */
 export const MEDIA_CACHE_TTL_MS = 5 * 60 * 1000
+
+/** Bump ao mudar heuristica de selecao (invalida cache antigo). */
+export const MEDIA_CACHE_VERSION = 3
+
+function buildCacheKey (owner: string, repoName: string): string {
+  return `v${MEDIA_CACHE_VERSION}/${owner}/${repoName}`
+}
 
 interface MediaCacheEntry {
   value: ReadmeMedia | 'placeholder'
@@ -220,7 +227,7 @@ export async function resolveRepoMedia(
   owner: string,
   repoName: string
 ): Promise<ReadmeMedia | 'placeholder'> {
-  const cacheKey = `${owner}/${repoName}`
+  const cacheKey = buildCacheKey(owner, repoName)
   const cached = getCachedMediaWithSession(cacheKey, owner, repoName)
   if (cached !== undefined) {
     return cached
@@ -232,22 +239,16 @@ export async function resolveRepoMedia(
     return configMedia
   }
 
-  const readmeMedia = await resolveReadmeMedia(owner, repoName)
-  if (readmeMedia) {
-    setCachedMedia(cacheKey, readmeMedia, owner, repoName)
-    return readmeMedia
-  }
+  const [readmeMedia, commonMedia, rootMedia] = await Promise.all([
+    resolveReadmeMedia(owner, repoName),
+    resolveCommonPathMedia(owner, repoName),
+    resolveRootDemoMedia(owner, repoName)
+  ])
 
-  const commonMedia = await resolveCommonPathMedia(owner, repoName)
-  if (commonMedia) {
-    setCachedMedia(cacheKey, commonMedia, owner, repoName)
-    return commonMedia
-  }
-
-  const rootMedia = await resolveRootDemoMedia(owner, repoName)
-  if (rootMedia) {
-    setCachedMedia(cacheKey, rootMedia, owner, repoName)
-    return rootMedia
+  const picked = pickBestEmbeddableMedia([rootMedia, commonMedia, readmeMedia])
+  if (picked) {
+    setCachedMedia(cacheKey, picked, owner, repoName)
+    return picked
   }
 
   setCachedMedia(cacheKey, 'placeholder', owner, repoName)

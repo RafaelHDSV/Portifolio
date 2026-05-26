@@ -99,14 +99,14 @@ describe('sortReposByContributorsThenStarsSizeRecent', () => {
 })
 
 describe('applyMediaToCard', () => {
-  const ogImage = 'https://opengraph.githubassets.com/1/RafaelHDSV/repo-a'
-
-  it('uses OG fallback when media is placeholder', () => {
+  it('uses OG when README has no demo media', () => {
     const card = makeCard()
 
     const result = applyMediaToCard(card, 'placeholder')
 
-    expect(result.image).toBe(ogImage)
+    expect(result.image).toBe(
+      'https://opengraph.githubassets.com/1/RafaelHDSV/repo-a'
+    )
     expect(result.usesGithubPreview).toBe(true)
     expect(result.usesPlaceholder).toBe(false)
     expect(result.media).toBeUndefined()
@@ -140,7 +140,7 @@ describe('applyMediaToCard', () => {
     expect(result.usesPlaceholder).toBe(false)
   })
 
-  it('uses OG as poster fallback for video without poster', () => {
+  it('keeps video without poster on placeholder until video loads', () => {
     const card = makeCard()
     const media = {
       type: 'video' as const,
@@ -149,8 +149,9 @@ describe('applyMediaToCard', () => {
 
     const result = applyMediaToCard(card, media)
 
-    expect(result.image).toBe(ogImage)
-    expect(result.usesGithubPreview).toBe(true)
+    expect(result.image).toBe('')
+    expect(result.usesGithubPreview).toBe(false)
+    expect(result.usesPlaceholder).toBe(true)
     expect(result.media).toEqual(media)
   })
 

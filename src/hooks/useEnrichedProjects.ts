@@ -9,8 +9,15 @@ import { resolveRepoMedia } from '../utils/resolveRepoMedia'
 function withMediaLoading (projects: ProjectCardData[]): ProjectCardData[] {
   return projects.map((project) => ({
     ...project,
-    mediaLoading: !project.media && project.usesGithubPreview === true
+    mediaLoading: shouldResolveRepoMedia(project)
   }))
+}
+
+function shouldResolveRepoMedia (project: ProjectCardData): boolean {
+  if (project.media) return false
+  if (!project.repoName) return false
+  if (project.image && !project.usesPlaceholder) return false
+  return true
 }
 
 function buildRepoNamesKey (projects: ProjectCardData[]): string {
@@ -47,7 +54,7 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
         projects.map(async (project) => {
           let card: ProjectCardData = {
             ...project,
-            mediaLoading: !project.media && project.usesGithubPreview === true
+            mediaLoading: shouldResolveRepoMedia(project)
           }
 
           if (!project.media) {

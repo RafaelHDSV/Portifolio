@@ -107,19 +107,10 @@ function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string
       }
     }
 
-    return { image: '', usesPlaceholder: true as const }
+    return { image: '', usesPlaceholder: true as const, usesGithubPreview: false as const }
   }
 
   if (media.type === 'video') {
-    if (!media.poster && ogImage) {
-      return {
-        image: ogImage,
-        media,
-        usesPlaceholder: false as const,
-        usesGithubPreview: true as const
-      }
-    }
-
     return {
       image: media.poster ?? '',
       media,
@@ -170,7 +161,6 @@ function repoToCard (
     }
   }
 
-  const ogImage = githubOgImage(repoName)
   const configImage =
     config?.image && !config.image.includes('icon.png') ? config.image : ''
 
@@ -178,9 +168,9 @@ function repoToCard (
     id: config?.key ?? repoName,
     repoName,
     name: config?.name ?? repoName,
-    image: configImage || ogImage,
-    usesPlaceholder: false,
-    usesGithubPreview: !configImage,
+    image: configImage,
+    usesPlaceholder: !configImage,
+    usesGithubPreview: false,
     description,
     languages,
     urlProject: repo.homepage ?? config?.urlProject,

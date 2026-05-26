@@ -2,12 +2,10 @@ import { describe, expect, it } from 'vitest'
 import {
   getPrimaryImageUrl,
   nextFallbackStage,
-  resolveCardImageDisplay,
-  shouldShowGithubPreviewCard
+  resolveCardImageDisplay
 } from './cardImageFallback'
 
-const og = 'https://opengraph.githubassets.com/1/user/repo'
-const broken = 'https://example.com/broken.png'
+const primary = 'https://example.com/demo.png'
 
 describe('getPrimaryImageUrl', () => {
   it('prefers gif media url over card image', () => {
@@ -21,52 +19,33 @@ describe('getPrimaryImageUrl', () => {
 })
 
 describe('nextFallbackStage', () => {
-  it('moves primary to og when og differs', () => {
-    expect(nextFallbackStage('primary', broken, og)).toBe('og')
-  })
-
-  it('skips og when primary already is og', () => {
-    expect(nextFallbackStage('primary', og, og)).toBe('placeholder')
-  })
-
-  it('moves og to placeholder', () => {
-    expect(nextFallbackStage('og', broken, og)).toBe('placeholder')
+  it('always moves to placeholder', () => {
+    expect(nextFallbackStage()).toBe('placeholder')
   })
 })
 
 describe('resolveCardImageDisplay', () => {
   it('returns primary url on primary stage', () => {
-    expect(resolveCardImageDisplay('primary', broken, og)).toEqual({
-      src: broken,
-      usesGithubPreviewUx: false
-    })
-  })
-
-  it('returns og url with preview ux on og stage', () => {
-    expect(resolveCardImageDisplay('og', broken, og)).toEqual({
-      src: og,
-      usesGithubPreviewUx: true
+    expect(resolveCardImageDisplay('primary', primary)).toEqual({
+      src: primary
     })
   })
 
   it('returns null src on placeholder stage', () => {
-    expect(resolveCardImageDisplay('placeholder', broken, og)).toEqual({
-      src: null,
-      usesGithubPreviewUx: true
+    expect(resolveCardImageDisplay('placeholder', primary)).toEqual({
+      src: null
     })
   })
-})
 
-describe('shouldShowGithubPreviewCard', () => {
-  it('is true when project already uses github preview', () => {
-    expect(shouldShowGithubPreviewCard(true, 'primary')).toBe(true)
-  })
-
-  it('is true when fallback stage is og', () => {
-    expect(shouldShowGithubPreviewCard(false, 'og')).toBe(true)
-  })
-
-  it('is false for primary readme image', () => {
-    expect(shouldShowGithubPreviewCard(false, 'primary')).toBe(false)
+  it('prefers image url for image media type', () => {
+    expect(
+      getPrimaryImageUrl({
+        image: '',
+        media: {
+          type: 'image',
+          url: 'https://github.com/user-attachments/assets/example'
+        }
+      })
+    ).toBe('https://github.com/user-attachments/assets/example')
   })
 })

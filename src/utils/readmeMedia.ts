@@ -109,9 +109,11 @@ function isFallbackReadmeImage (url: string): boolean {
 function pickBestReadmeMedia (candidates: ReadmeMedia[]): ReadmeMedia | null {
   if (candidates.length === 0) return null
 
-  const video = candidates.find(
-    (m) => m.type === 'video' && VIDEO_EXT.test(m.url)
-  )
+  const isVideoCandidate = (m: ReadmeMedia) =>
+    m.type === 'video' &&
+    (VIDEO_EXT.test(m.url) || m.url.includes('user-attachments/assets'))
+
+  const video = candidates.find(isVideoCandidate)
   if (video) {
     const poster = candidates.find((m) => m.type === 'image' || m.type === 'gif')
     return { ...video, poster: poster?.url }
@@ -141,7 +143,7 @@ function pushMedia (
   url: string,
   owner: string,
   repo: string,
-  poster?: string
+  options?: { poster?: string; type?: ReadmeMediaType }
 ) {
   if (!url || url.includes('shields.io') || url.includes('badge')) return
 
@@ -156,15 +158,41 @@ function pushMedia (
     resolved = resolveUrl(resolved, owner, repo)
   }
 
-  const type = classifyUrl(resolved)
+  const type = options?.type ?? classifyUrl(resolved)
 
   if (list.some((m) => m.url === resolved)) return
 
   list.push({
     type,
     url: resolved,
-    poster: poster ? resolveUrl(poster, owner, repo) : undefined
+    poster: options?.poster ? resolveUrl(options.poster, owner, repo) : undefined
   })
+}
+
+export function pickBestMediaFromCandidates (
+  candidates: ReadmeMedia[]
+): ReadmeMedia | null {
+  return pickBestReadmeMedia(candidates)
+}
+
+export function isEmbeddableMediaUrl (
+  url: string,
+  type: ReadmeMediaType = 'image'
+): boolean {
+  if (!url.includes('user-attachments/assets')) return true
+  return type === 'image' || type === 'gif'
+}
+
+export function pickBestEmbeddableMedia (
+  candidates: (ReadmeMedia | null)[]
+): ReadmeMedia | null {
+  const list = candidates.filter((media): media is ReadmeMedia => media !== null)
+  if (list.length === 0) return null
+
+  const embeddable = list.filter((media) =>
+    isEmbeddableMediaUrl(media.url, media.type)
+  )
+  return pickBestReadmeMedia(embeddable.length > 0 ? embeddable : list)
 }
 
 export function parseReadmeMedia (
@@ -180,12 +208,16 @@ export function parseReadmeMedia (
     const mdImg = /!\[[^\]]*]\(([^)]+)\)/g
     let match: RegExpExecArray | null
     while ((match = mdImg.exec(section)) !== null) {
-      pushMedia(target, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo, {
+        type: match[1].includes('user-attachments/assets') ? 'image' : undefined
+      })
     }
 
     const htmlImg = /<img[^>]+src=["']([^"']+)["']/gi
     while ((match = htmlImg.exec(section)) !== null) {
-      pushMedia(target, match[1], owner, repo)
+      pushMedia(target, match[1], owner, repo, {
+        type: match[1].includes('user-attachments/assets') ? 'image' : undefined
+      })
     }
 
     const videoSrc = /<video[^>]*>[\s\S]*?<source[^>]+src=["']([^"']+)["']/gi
@@ -211,7 +243,9 @@ export function parseReadmeMedia (
 
     const assetsUrl = /https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9-]+/gi
     while ((match = assetsUrl.exec(section)) !== null) {
-      pushMedia(target, match[0], owner, repo)
+      pushMedia(target, match[0], owner, repo, {
+        type: match[0].includes('user-attachments/assets') ? 'video' : undefined
+      })
     }
   }
 
