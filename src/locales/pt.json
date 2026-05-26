@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Destaques ordenados por colaboradores, estrelas, tamanho e data de atualização",
+    "subtitle": "Repositórios do GitHub escolhidos por colaboração, impacto e recência",
     "viewDemo": "Ver demo",
     "viewMore": "Ver mais no GitHub",
     "loading": "Carregando projetos...",
@@ -116,14 +116,65 @@
     "enable": "Modo recrutador",
     "enableShort": "Recrutador",
     "back": "Voltar à exibição normal",
+    "modeLabel": "Modo recrutador",
     "role": "Desenvolvedor Full-Stack",
     "bio": "Resumo profissional para triagem rápida: React, TypeScript, Node.js e entrega full stack com foco em produto.",
     "aboutExtended": "Atuo em produtos web de ponta a ponta — arquitetura, APIs, interfaces e integrações. Tenho experiência com liderança técnica, code review e entregas iterativas em equipe. Busco oportunidades onde qualidade de código e impacto no produto andem juntos.",
     "stackTitle": "Stack principal",
-    "stackNote": "Também trabalho com MongoDB, Sass, C#, PHP e automações quando o contexto pede.",
+    "stackSubtitle": "Ferramentas que uso no dia a dia",
+    "stackAlsoLabel": "Também trabalho com",
     "projectsTitle": "Projetos em destaque",
+    "projectsSubtitle": "Seleção curada — código disponível no GitHub",
+    "viewAll": "Ver todos",
+    "contactHeading": "Vamos conversar",
+    "contactSubtitle": "Respondo a propostas de vagas em até 24h úteis.",
     "contactTitle": "Contato",
-    "downloadCv": "Baixar CV"
+    "contactEmail": "E-mail",
+    "contactAction": "Entrar em contato",
+    "downloadCv": "Baixar CV",
+    "downloadCvPdf": "Baixar CV em PDF",
+    "footerCopyright": "© {{year}} Rafael Vieira — Desenvolvedor Full-Stack",
+    "footerNote": "Modo recrutador · informações condensadas para triagem",
+    "stats": {
+      "yearsValue": "2+",
+      "yearsLabel": "Anos de experiência profissional",
+      "reposLabel": "Repositórios públicos no GitHub",
+      "scopeValue": "Full-Stack",
+      "scopeLabel": "Atuação ponta a ponta"
+    },
+    "meta": {
+      "location": "Brasil · Remoto",
+      "response": "Resposta em até 24h",
+      "contract": "CLT / PJ / Contrato"
+    },
+    "deliverablesTitle": "O que entrego",
+    "deliverables": [
+      "Arquitetura de produtos web do zero ao deploy",
+      "APIs REST e integrações com sistemas externos",
+      "Interfaces performáticas e acessíveis",
+      "Code review, mentoria e padrões de qualidade"
+    ],
+    "experienceTitle": "Experiência recente",
+    "experienceSubtitle": "Resumo cronológico",
+    "experienceItems": [
+      {
+        "period": "2023 — Presente",
+        "title": "Desenvolvedor Full-Stack Sênior",
+        "company": "Produto SaaS",
+        "description": "Liderança técnica em features críticas, arquitetura de APIs, code review e mentoria."
+      },
+      {
+        "period": "2020 — 2023",
+        "title": "Desenvolvedor Full-Stack",
+        "company": "Agência / Consultoria",
+        "description": "Entregas iterativas, integração com sistemas legados e foco em performance."
+      }
+    ],
+    "projectCategories": {
+      "healthtech": "Healthtech",
+      "devTool": "Dev Tool",
+      "productivity": "Produtividade"
+    }
   },
   "theme": {
     "labelDark": "Escuro",

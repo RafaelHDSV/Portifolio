@@ -1,7 +1,7 @@
-# v2.9 — concluido (maio/2026)
+# v3.1 — concluido (maio/2026)
 
-- [x] Sem demo real → preview OG do GitHub (nao placeholder nem imagem aleatoria do README)
-- [x] Filtro isLikelyDemoMedia no README
-- [x] Analise e sugestoes: `docs/analise-sugestoes-v2.9.md`
+- [x] Modo recrutador redesenhado conforme mock Lovable
+- [x] Navbar: voltar + logo central + controles
+- [x] Layout: perfil/stats, stack/experiencia, projetos em cards, contato
 
-Proposta: `.issues/2026-05-24-v2-9-github-fallback-media.md`
+Referencia: preview Lovable (modo recrutador)

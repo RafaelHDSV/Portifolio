@@ -159,27 +159,29 @@ export default function Card ({ project }: CardProps) {
             loading='lazy'
           />
         )}
-        <div className={styles.githubStats}>
-          <span>
-            <StarIcon size={16} weight='fill' />
-            {project.github.stars}
-          </span>
-          <span>
-            <GitForkIcon size={16} weight='bold' />
-            {project.github.forks}
-          </span>
-          <span>
-            <WarningCircleIcon size={16} weight='bold' />
-            {project.github.openIssues}
-          </span>
-        </div>
-        {contributors.length > 0 && (
-          <div className={styles.contributors}>
-            {contributors.map((avatar) => (
-              <img key={avatar} src={avatar} alt='' loading='lazy' />
-            ))}
+        <div className={styles.githubOverlayMeta}>
+          <div className={styles.githubStats}>
+            <span>
+              <StarIcon size={16} weight='fill' />
+              {project.github.stars}
+            </span>
+            <span>
+              <GitForkIcon size={16} weight='bold' />
+              {project.github.forks}
+            </span>
+            <span>
+              <WarningCircleIcon size={16} weight='bold' />
+              {project.github.openIssues}
+            </span>
           </div>
-        )}
+          {contributors.length > 0 && (
+            <div className={styles.contributors}>
+              {contributors.map((avatar) => (
+                <img key={avatar} src={avatar} alt='' loading='lazy' />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     )
   }

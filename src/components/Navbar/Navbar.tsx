@@ -1,4 +1,10 @@
-import { BriefcaseIcon, GlobeIcon, ListIcon, XIcon } from '@phosphor-icons/react'
+import {
+  ArrowLeftIcon,
+  BriefcaseIcon,
+  GlobeIcon,
+  ListIcon,
+  XIcon
+} from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
@@ -26,7 +32,7 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
   const { t, i18n } = useTranslation()
   const activeSection = useActiveSection()
   const { incrementLogoClick, logoRevealActive, registerLocaleToggle } = useEasterEgg()
-  const { enableRecruiterMode } = useRecruiterMode()
+  const { enableRecruiterMode, disableRecruiterMode } = useRecruiterMode()
   const vieiraMode = useVieiraModeFromUrl()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -55,17 +61,39 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
 
   return (
     <nav
-      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${vieiraMode ? styles.vieiraNav : ''}`}
+      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${vieiraMode ? styles.vieiraNav : ''} ${recruiterOnly ? styles.recruiterNav : ''}`}
       aria-label='Navegação principal'
     >
-      <a
-        href='#home'
-        className={`${styles.logoLink} ${logoRevealActive ? styles.logoSecret : ''}`}
-        aria-label='Rafael Vieira - início'
-        onClick={handleLogoClick}
-      >
-        <Logo />
-      </a>
+      {recruiterOnly ? (
+        <button
+          type='button'
+          className={styles.backLink}
+          onClick={disableRecruiterMode}
+        >
+          <ArrowLeftIcon size={18} weight='bold' />
+          {t('recruiter.back')}
+        </button>
+      ) : (
+        <a
+          href='#home'
+          className={`${styles.logoLink} ${logoRevealActive ? styles.logoSecret : ''}`}
+          aria-label='Rafael Vieira - início'
+          onClick={handleLogoClick}
+        >
+          <Logo />
+        </a>
+      )}
+
+      {recruiterOnly && (
+        <a
+          href='#home'
+          className={`${styles.logoLink} ${styles.logoCenter} ${logoRevealActive ? styles.logoSecret : ''}`}
+          aria-label='Rafael Vieira - início'
+          onClick={handleLogoClick}
+        >
+          <Logo />
+        </a>
+      )}
 
       <div className={styles.desktopActions}>
         {!recruiterOnly && (
@@ -119,6 +147,16 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
       </div>
 
       <div className={styles.mobileControls}>
+        {recruiterOnly && (
+          <button
+            type='button'
+            className={styles.backLinkMobile}
+            onClick={disableRecruiterMode}
+            aria-label={t('recruiter.back')}
+          >
+            <ArrowLeftIcon size={20} weight='bold' />
+          </button>
+        )}
         {!recruiterOnly && (
           <button
             type='button'

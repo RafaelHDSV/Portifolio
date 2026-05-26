@@ -13,7 +13,9 @@ Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica p
 
 A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (7 total).
 
-A **v2.9** (maio/2026) ajusta fallback de preview: demo real (demo.*, config, README validado) ou OG do GitHub; analise de evolucao em `docs/analise-sugestoes-v2.9.md`.
+A **v3.0** (maio/2026) corrige scroll spy da navbar (Projetos), subtitulo de projetos e distribuicao stats/contribuidores no hover dos cards.
+
+A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, stats, entregas, stack, experiencia, projetos e contato), alinhado ao mock Lovable.
 
 **Status de build:** `yarn build` e `yarn lint` passam sem erros.
 

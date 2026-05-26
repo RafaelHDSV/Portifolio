@@ -96,12 +96,24 @@
   pointer-events: none;
 }
 
+.githubOverlayMeta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+}
+
 .githubStats {
   position: relative;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.75rem;
+  flex: 1;
+  min-width: 0;
 
   span {
     display: inline-flex;
@@ -126,6 +138,9 @@
   z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  margin-left: auto;
 
   img {
     width: 28px;

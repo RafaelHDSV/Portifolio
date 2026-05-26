@@ -17,6 +17,59 @@
   &.scrolled {
     border-bottom-color: var(--color-border);
   }
+
+  &.recruiterNav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.backLink,
+.backLinkMobile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.backLink {
+  justify-self: start;
+}
+
+.backLinkMobile {
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  border-radius: var(--radius-button);
+
+  &:hover {
+    background-color: var(--color-surface);
+  }
+}
+
+.logoCenter {
+  justify-self: center;
+  grid-column: 2;
+}
+
+.recruiterNav .desktopActions {
+  justify-self: end;
+  grid-column: 3;
+}
+
+.recruiterNav .mobileControls {
+  justify-self: end;
+  grid-column: 3;
 }
 
 .logoLink {
@@ -196,6 +249,14 @@
 
   .mobileControls {
     display: flex;
+  }
+
+  .navbar.recruiterNav {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .logoCenter {
+    display: none;
   }
 }
 

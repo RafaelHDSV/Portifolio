@@ -55,7 +55,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Highlights sorted by contributors, stars, size and last update",
+    "subtitle": "GitHub repositories chosen for collaboration, impact and recency",
     "viewDemo": "View demo",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
@@ -116,14 +116,65 @@
     "enable": "Recruiter mode",
     "enableShort": "Recruiter",
     "back": "Back to full view",
+    "modeLabel": "Recruiter mode",
     "role": "Full-Stack Developer",
     "bio": "Professional summary for quick screening: React, TypeScript, Node.js and full stack delivery with product focus.",
     "aboutExtended": "I work on end-to-end web products — architecture, APIs, interfaces and integrations. I have experience with technical leadership, code review and iterative delivery in teams. I look for roles where code quality and product impact go together.",
     "stackTitle": "Core stack",
-    "stackNote": "I also work with MongoDB, Sass, C#, PHP and automation when the context calls for it.",
+    "stackSubtitle": "Tools I use day to day",
+    "stackAlsoLabel": "Also work with",
     "projectsTitle": "Featured projects",
+    "projectsSubtitle": "Curated selection — code on GitHub",
+    "viewAll": "View all",
+    "contactHeading": "Let's talk",
+    "contactSubtitle": "I reply to job inquiries within 24 business hours.",
     "contactTitle": "Contact",
-    "downloadCv": "Download CV"
+    "contactEmail": "Email",
+    "contactAction": "Get in touch",
+    "downloadCv": "Download CV",
+    "downloadCvPdf": "Download CV (PDF)",
+    "footerCopyright": "© {{year}} Rafael Vieira — Full-Stack Developer",
+    "footerNote": "Recruiter mode · condensed info for screening",
+    "stats": {
+      "yearsValue": "2+",
+      "yearsLabel": "Years of professional experience",
+      "reposLabel": "Public GitHub repositories",
+      "scopeValue": "Full-Stack",
+      "scopeLabel": "End-to-end delivery"
+    },
+    "meta": {
+      "location": "Brazil · Remote",
+      "response": "Reply within 24h",
+      "contract": "Full-time / Contract"
+    },
+    "deliverablesTitle": "What I deliver",
+    "deliverables": [
+      "Web product architecture from zero to deploy",
+      "REST APIs and external system integrations",
+      "Performant and accessible interfaces",
+      "Code review, mentorship and quality standards"
+    ],
+    "experienceTitle": "Recent experience",
+    "experienceSubtitle": "Chronological summary",
+    "experienceItems": [
+      {
+        "period": "2023 — Present",
+        "title": "Senior Full-Stack Developer",
+        "company": "SaaS Product",
+        "description": "Technical leadership on critical features, API architecture, code review and mentorship."
+      },
+      {
+        "period": "2020 — 2023",
+        "title": "Full-Stack Developer",
+        "company": "Agency / Consultancy",
+        "description": "Iterative delivery, legacy system integration and performance focus."
+      }
+    ],
+    "projectCategories": {
+      "healthtech": "Healthtech",
+      "devTool": "Dev Tool",
+      "productivity": "Productivity"
+    }
   },
   "theme": {
     "labelDark": "Dark",
