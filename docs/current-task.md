@@ -1,5 +1,8 @@
-# v3.1 — concluido (maio/2026)
+# Issue #23 — cache de midia com TTL
 
-- [x] Modo recrutador redesenhado conforme mock Lovable
-- [x] Conteudo alinhado ao curriculo (AGX Software, timeline, stack)
-- [x] Subtitulo de contato sem promessa de prazo de resposta
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/23
+
+- [x] TTL 5 min em `resolveRepoMedia.ts`
+- [x] Build/lint + docs
+
+Proposta: `.issues/2026-05-26-media-cache-ttl.md`

@@ -17,6 +17,8 @@ A **v3.0** (maio/2026) corrige scroll spy da navbar (Projetos), subtitulo de pro
 
 A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, stats, entregas, stack, experiencia, projetos e contato), alinhado ao mock Lovable.
 
+**Issue #23** (maio/2026): cache de midia em `resolveRepoMedia.ts` com TTL de 5 minutos — previews revalidam apos mudanca de demo no GitHub.
+
 **Status de build:** `yarn build` e `yarn lint` passam sem erros.
 
 ---
@@ -145,6 +147,7 @@ Tokens em `src/styles/_variables.scss`:
 - Grade única **3 colunas**; badge "Pin" nos fixados
 - Filtros **multi AND** (React, TypeScript, Node, etc.)
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
+- Midia enriquecida via `resolveRepoMedia.ts` (demo na raiz > config > README); **cache in-memory com TTL 5 min** (#23)
 - Fallback para `projects.config.ts` se API falhar
 
 ### Contact
