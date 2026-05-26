@@ -117,17 +117,17 @@
     "enableShort": "Recruiter",
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
-    "role": "Junior Full Stack Developer III · Team Lead",
+    "role": "Full Stack Developer",
     "bio": "Junior Full Stack Developer III and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB for scalable web systems.",
     "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Junior Full Stack III with team leadership. I build with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
     "projectsTitle": "Featured projects",
-    "projectsSubtitle": "Curated selection — code on GitHub",
+    "projectsSubtitle": "Selected repositories by collaboration, impact and recency",
     "viewAll": "View all",
     "contactHeading": "Let's talk",
-    "contactSubtitle": "Email or LinkedIn — let's align expectations and talk about the opportunity.",
+    "contactSubtitle": "We will discuss your needs and opportunities.",
     "contactTitle": "Contact",
     "contactEmail": "Email",
     "contactAction": "Get in touch",
@@ -143,8 +143,8 @@
       "scopeLabel": "End-to-end delivery"
     },
     "meta": {
-      "location": "Sorocaba, SP · Hybrid",
-      "response": "Email and LinkedIn",
+      "location": "Sorocaba, SP · Remote",
+      "response": "Fast response",
       "contract": "Full-time / Contract"
     },
     "deliverablesTitle": "What I deliver",
@@ -159,7 +159,7 @@
     "educationTitle": "Education",
     "educationItems": [
       {
-        "period": "2024 — 2027",
+        "period": "2024 — 2026",
         "title": "Systems Analysis and Development",
         "institution": "Anhembi Morumbi · Athon Sorocaba Campus"
       },

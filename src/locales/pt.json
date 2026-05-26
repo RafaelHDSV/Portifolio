@@ -117,17 +117,17 @@
     "enableShort": "Recrutador",
     "back": "Voltar à exibição normal",
     "modeLabel": "Modo recrutador",
-    "role": "Desenvolvedor Full Stack Júnior III · Líder de Equipe",
+    "role": "Desenvolvedor Full Stack",
     "bio": "Full Stack Júnior III e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web escaláveis.",
     "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Júnior III com liderança de equipe. Desenvolvo com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
     "stackTitle": "Stack principal",
     "stackSubtitle": "Ferramentas que uso no dia a dia",
     "stackAlsoLabel": "Também trabalho com",
     "projectsTitle": "Projetos em destaque",
-    "projectsSubtitle": "Seleção curada — código disponível no GitHub",
+    "projectsSubtitle": "Repositórios selecionados por colaboração, impacto e recência",
     "viewAll": "Ver todos",
     "contactHeading": "Vamos conversar",
-    "contactSubtitle": "E-mail ou LinkedIn — vamos alinhar expectativas e conversar sobre a oportunidade.",
+    "contactSubtitle": "Iremos discutir sobre suas necessidades e oportunidades.",
     "contactTitle": "Contato",
     "contactEmail": "E-mail",
     "contactAction": "Entrar em contato",
@@ -143,8 +143,8 @@
       "scopeLabel": "Atuação ponta a ponta"
     },
     "meta": {
-      "location": "Sorocaba, SP · Híbrido",
-      "response": "E-mail e LinkedIn",
+      "location": "Sorocaba, SP · Remoto",
+      "response": "Resposta rápida",
       "contract": "CLT / PJ / Contrato"
     },
     "deliverablesTitle": "O que entrego",
@@ -159,7 +159,7 @@
     "educationTitle": "Formação",
     "educationItems": [
       {
-        "period": "2024 — 2027",
+        "period": "2024 — 2026",
         "title": "Análise e Desenvolvimento de Sistemas",
         "institution": "Anhembi Morumbi · Campus Athon Sorocaba"
       },
@@ -196,8 +196,8 @@
       }
     ],
     "projectCategories": {
-      "healthtech": "Healthtech",
-      "devTool": "Dev Tool",
+      "healthtech": "Saúde e bem-estar",
+      "devTool": "Ferramentas de desenvolvimento",
       "productivity": "Produtividade"
     }
   },

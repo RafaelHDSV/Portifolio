@@ -9,12 +9,14 @@ import {
   MapPinIcon,
   PushPinIcon
 } from '@phosphor-icons/react'
-import { Fade } from 'react-awesome-reveal'
 import { useMemo } from 'react'
+import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import Button from '../../components/Button/Button'
+import { ProjectCardData } from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
+import { CV_DOWNLOAD_NAME, CV_URL, GITHUB_USERNAME } from '../../constants/cv'
 import {
   matchRepoName,
   RECRUITER_FEATURED_REPO_ORDER,
@@ -22,12 +24,9 @@ import {
   RECRUITER_STACK_PRIMARY,
   RECRUITER_STACK_SECONDARY
 } from '../../constants/recruiterFeatured'
-import { CV_DOWNLOAD_NAME, CV_URL, GITHUB_USERNAME } from '../../constants/cv'
-import { useRecruiterMode } from '../../context/useRecruiterMode'
 import { useContributorCounts } from '../../hooks/useContributorCounts'
 import useGetMe from '../../hooks/useGetMe'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
-import { ProjectCardData } from '../../components/Card/Card'
 import {
   collectPortfolioRepoCandidates,
   mergeGitHubProjects
@@ -40,16 +39,15 @@ const CONTACT = {
   linkedin: 'https://www.linkedin.com/in/rafael-vieira1720/'
 } as const
 
-function resolveProjectCategory (repoName: string): string | null {
+function resolveProjectCategory(repoName: string): string | null {
   for (const [key, category] of Object.entries(RECRUITER_PROJECT_CATEGORY)) {
     if (matchRepoName(repoName, key)) return category
   }
   return null
 }
 
-export default function RecruiterView () {
+export default function RecruiterView() {
   const { t, i18n } = useTranslation()
-  const { disableRecruiterMode } = useRecruiterMode()
   const { pinned, recent } = useGitHubProjects()
   const { user } = useGetMe()
 
@@ -95,10 +93,7 @@ export default function RecruiterView () {
   }, [pinned, recent, locale, contributorCounts])
 
   const handleViewAllProjects = () => {
-    disableRecruiterMode()
-    window.setTimeout(() => {
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-    }, 50)
+    window.open('https://github.com/RafaelHDSV?tab=repositories', '_blank')
   }
 
   const publicRepos = user?.public_repos
@@ -119,10 +114,16 @@ export default function RecruiterView () {
               </h1>
               <p className={styles.role}>{t('recruiter.role')}</p>
               <p className={styles.bio}>{t('recruiter.bio')}</p>
-              <p className={styles.aboutExtended}>{t('recruiter.aboutExtended')}</p>
+              <p className={styles.aboutExtended}>
+                {t('recruiter.aboutExtended')}
+              </p>
 
               <div className={styles.profileActions}>
-                <Button href={CV_URL} variant='primary' download={CV_DOWNLOAD_NAME}>
+                <Button
+                  href={CV_URL}
+                  variant='primary'
+                  download={CV_DOWNLOAD_NAME}
+                >
                   <DownloadSimpleIcon size={18} weight='bold' />
                   {t('recruiter.downloadCv')}
                 </Button>
@@ -142,7 +143,11 @@ export default function RecruiterView () {
                   {t('recruiter.meta.response')}
                 </li>
                 <li>
-                  <GlobeHemisphereWestIcon size={16} weight='duotone' aria-hidden />
+                  <GlobeHemisphereWestIcon
+                    size={16}
+                    weight='duotone'
+                    aria-hidden
+                  />
                   {t('recruiter.meta.contract')}
                 </li>
               </ul>
@@ -184,13 +189,17 @@ export default function RecruiterView () {
             <div className={styles.competencyGrid}>
               <div className={styles.competencyStack}>
                 <h2>{t('recruiter.stackTitle')}</h2>
-                <p className={styles.sectionSubtitle}>{t('recruiter.stackSubtitle')}</p>
+                <p className={styles.sectionSubtitle}>
+                  {t('recruiter.stackSubtitle')}
+                </p>
                 <div className={styles.stackPrimary}>
                   {RECRUITER_STACK_PRIMARY.map((tech) => (
                     <span key={tech}>{tech}</span>
                   ))}
                 </div>
-                <p className={styles.stackAlsoLabel}>{t('recruiter.stackAlsoLabel')}</p>
+                <p className={styles.stackAlsoLabel}>
+                  {t('recruiter.stackAlsoLabel')}
+                </p>
                 <div className={styles.stackSecondary}>
                   {RECRUITER_STACK_SECONDARY.map((tech) => (
                     <span key={tech}>{tech}</span>
@@ -201,11 +210,11 @@ export default function RecruiterView () {
                   {t('stack.categories.softSkills')}
                 </h3>
                 <ul className={styles.softSkillList}>
-                  {(t('stack.softSkills', { returnObjects: true }) as string[]).map(
-                    (skill) => (
-                      <li key={skill}>{skill}</li>
-                    )
-                  )}
+                  {(
+                    t('stack.softSkills', { returnObjects: true }) as string[]
+                  ).map((skill) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
                 </ul>
 
                 <h3 className={styles.competencySubheading}>
@@ -213,14 +222,18 @@ export default function RecruiterView () {
                 </h3>
                 <ul className={styles.educationList}>
                   {(
-                    t('recruiter.educationItems', { returnObjects: true }) as Array<{
+                    t('recruiter.educationItems', {
+                      returnObjects: true
+                    }) as Array<{
                       period: string
                       title: string
                       institution: string
                     }>
                   ).map((item) => (
                     <li key={item.period}>
-                      <span className={styles.educationPeriod}>{item.period}</span>
+                      <span className={styles.educationPeriod}>
+                        {item.period}
+                      </span>
                       <strong>{item.title}</strong>
                       <span>{item.institution}</span>
                     </li>
@@ -236,9 +249,13 @@ export default function RecruiterView () {
                 <ol className={styles.timeline}>
                   {experienceItems.map((item) => (
                     <li key={`${item.period}-${item.title}`}>
-                      <span className={styles.timelinePeriod}>{item.period}</span>
+                      <span className={styles.timelinePeriod}>
+                        {item.period}
+                      </span>
                       <strong>{item.title}</strong>
-                      <span className={styles.timelineCompany}>{item.company}</span>
+                      <span className={styles.timelineCompany}>
+                        {item.company}
+                      </span>
                       <p>{item.description}</p>
                     </li>
                   ))}
@@ -280,14 +297,21 @@ export default function RecruiterView () {
                   {t('recruiter.contactSubtitle')}
                 </p>
               </div>
-              <Button href={CV_URL} variant='primary' download={CV_DOWNLOAD_NAME}>
+              <Button
+                href={CV_URL}
+                variant='primary'
+                download={CV_DOWNLOAD_NAME}
+              >
                 <DownloadSimpleIcon size={18} weight='bold' />
                 {t('recruiter.downloadCvPdf')}
               </Button>
             </div>
 
             <div className={styles.contactGrid}>
-              <a href={`mailto:${CONTACT.email}`} className={styles.contactCard}>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className={styles.contactCard}
+              >
                 <EnvelopeSimpleIcon size={22} weight='duotone' aria-hidden />
                 <span>{t('recruiter.contactEmail')}</span>
                 <strong>{CONTACT.email}</strong>
@@ -317,7 +341,9 @@ export default function RecruiterView () {
 
           <footer className={styles.footer}>
             <p>
-              {t('recruiter.footerCopyright', { year: new Date().getFullYear() })}
+              {t('recruiter.footerCopyright', {
+                year: new Date().getFullYear()
+              })}
             </p>
             <p className={styles.footerNote}>{t('recruiter.footerNote')}</p>
           </footer>
@@ -327,7 +353,7 @@ export default function RecruiterView () {
   )
 }
 
-function ProjectCard ({
+function ProjectCard({
   project,
   t
 }: {
