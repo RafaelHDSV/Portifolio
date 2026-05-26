@@ -12,6 +12,6 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "include": ["./**/*.ts"],
   "exclude": ["**/*.test.ts"]
 }

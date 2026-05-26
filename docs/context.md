@@ -91,9 +91,11 @@ src/
 api/
 ├── tsconfig.json              # TS/JSX para funcoes Vercel
 └── og/
-    ├── index.tsx              # Handler ImageResponse (1200x630, Node.js)
+    ├── index.ts               # Handler ImageResponse (1200x630, Node.js)
+    ├── template.ts            # Arvore Satori sem JSX
     ├── copy.ts                # Textos PT/EN + buildOgImageUrl
-    └── copy.test.ts           # Vitest
+    ├── copy.test.ts           # Vitest
+    └── template.test.ts       # Vitest
 
 public/
 ├── robots.txt

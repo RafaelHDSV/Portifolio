@@ -3,7 +3,7 @@
   "installCommand": "yarn install --frozen-lockfile --force",
   "buildCommand": "yarn build",
   "functions": {
-    "api/og/index.tsx": {
+    "api/og/index.ts": {
       "maxDuration": 10
     }
   },
