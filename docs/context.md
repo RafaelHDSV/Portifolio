@@ -21,7 +21,9 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #24** (maio/2026): batch GraphQL de languages (`getRepoLanguagesBatch`) com cache em sessionStorage (sessao do browser); midia tambem persiste na sessao alem do cache in-memory. Reduz ~18 REST `/languages` para 1 GraphQL por sessao.
 
-**Status de build:** `yarn build` e `yarn lint` passam sem erros.
+**Issue #26** (maio/2026): Vitest 3.2.4 com 17 testes unitarios em `readmeMedia.test.ts` e `mergeProjects.test.ts` (demo, OG fallback, placeholder, README filtrado, sorts). Comando: `yarn test`.
+
+**Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
 
 ---
 
@@ -239,6 +241,7 @@ yarn          # instalar dependências
 yarn dev      # dev server (Vite)
 yarn build    # tsc + vite build
 yarn lint     # ESLint (max-warnings 0)
+yarn test     # Vitest (utils de midia e ordenacao)
 yarn preview  # preview do build
 ```
 
@@ -268,7 +271,7 @@ yarn preview  # preview do build
 - [ ] Screenshots faltantes nos cards (placeholder indica onde adicionar)
 - [ ] `public/main.png` real para OG (1200×630)
 - [ ] Variáveis de ambiente na Vercel (GitHub + EmailJS)
-- [ ] Testes automatizados (Vitest) — pendente compatibilidade Node
+- [x] Testes automatizados (Vitest) — `readmeMedia` e `mergeProjects` (#26)
 - [ ] Lighthouse mobile nas metas
 - [ ] Domínio custom — fora do escopo v2
 
