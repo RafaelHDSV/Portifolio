@@ -14,5 +14,12 @@ async function generateOgImage (lang: OgLang): Promise<void> {
   console.log(`generated public/og-${lang}.png (${buffer.byteLength} bytes)`)
 }
 
-await generateOgImage('pt')
-await generateOgImage('en')
+async function main (): Promise<void> {
+  await generateOgImage('pt')
+  await generateOgImage('en')
+}
+
+main().catch((error: unknown) => {
+  console.error('failed to generate og images:', error)
+  process.exit(1)
+})
