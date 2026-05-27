@@ -1,13 +1,13 @@
-# Issue #35 — Acessibilidade nos cards de projeto
+# Issue #36 — Stats do GitHub visiveis em touch nos cards
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/35
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/36
 
-- [x] aria-label Demo/GitHub com nome do projeto
-- [x] Overlay stats acessivel (grupo + label por metrica, focus-within)
-- [x] Button repassa props para `<a>`
-- [x] focus-visible em linkBtn e badges
-- [x] E2E `projects-a11y.spec.ts`
+- [x] Botao "Ver stats" em `hover: none` expande overlay
+- [x] Contributors via IntersectionObserver no touch
+- [x] Overlay desktop inalterado (hover + focus-within)
+- [x] E2E `projects-touch-stats.spec.ts`
+- [x] Docs atualizados
 
-Proposta: `.issues/2026-05-28-a11y-cards-projetos.md`
+Proposta: `.issues/2026-05-28-touch-stats-projetos.md`
 
-Decisoes: todas conforme proposta (secao 14).
+Decisoes: 1=B, 2=B, 3=A, 4=A (secao 14).

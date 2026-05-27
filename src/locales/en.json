@@ -60,6 +60,8 @@
     "openDemo": "Open demo for {{name}}",
     "openGitHub": "Open {{name}} on GitHub",
     "githubStatsLabel": "GitHub stats for {{name}}",
+    "viewStats": "View stats",
+    "hideStats": "Hide stats",
     "viewMore": "View more on GitHub",
     "loading": "Loading projects...",
     "mediaLoading": "Loading project preview",

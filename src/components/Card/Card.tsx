@@ -1,5 +1,6 @@
 import {
   ArrowSquareOutIcon,
+  ChartBarIcon,
   CircleNotchIcon,
   GitForkIcon,
   GithubLogoIcon,
@@ -8,7 +9,7 @@ import {
   StarIcon,
   WarningCircleIcon
 } from '@phosphor-icons/react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USERNAME } from '../../constants/cv'
 import { GithubRepository } from '../../repository/GithubRepository'
@@ -64,10 +65,14 @@ export default function Card ({
   activeLanguageFilters = []
 }: CardProps) {
   const { t } = useTranslation()
+  const cardRef = useRef<HTMLElement>(null)
   const [videoError, setVideoError] = useState(false)
   const [imageStage, setImageStage] = useState<ImageFallbackStage>('primary')
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
+  const [statsExpanded, setStatsExpanded] = useState(false)
+
+  const statsOverlayId = `github-stats-${project.id}`
 
   const primaryImage = useMemo(
     () => getPrimaryImageUrl({ image: project.image, media: project.media }),
@@ -81,6 +86,7 @@ export default function Card ({
   useEffect(() => {
     setImageStage('primary')
     setVideoError(false)
+    setStatsExpanded(false)
   }, [project.id, primaryImage, project.media?.url])
 
   const isVideo = project.media?.type === 'video' && !videoError
@@ -108,6 +114,33 @@ export default function Card ({
       setLoadingContributors(false)
     }
   }, [contributors.length, loadingContributors, project.repoName])
+
+  useEffect(() => {
+    const card = cardRef.current
+    if (!card || !project.repoName) return
+    if (!window.matchMedia('(hover: none)').matches) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          loadContributors()
+        }
+      },
+      { rootMargin: '80px', threshold: 0.1 }
+    )
+
+    observer.observe(card)
+    return () => observer.disconnect()
+  }, [loadContributors, project.repoName, project.id])
+
+  const handleStatsToggle = useCallback(() => {
+    setStatsExpanded((prev) => {
+      if (!prev) {
+        loadContributors()
+      }
+      return !prev
+    })
+  }, [loadContributors])
 
   const renderMedia = () => {
     if (project.mediaLoading) {
@@ -181,6 +214,7 @@ export default function Card ({
 
     return (
       <div
+        id={statsOverlayId}
         className={styles.githubOverlay}
         role='group'
         aria-label={t('projects.githubStatsLabel', { name: project.name })}
@@ -225,8 +259,19 @@ export default function Card ({
     )
   }
 
+  const cardClassName = [
+    styles.card,
+    statsExpanded ? styles.statsExpanded : ''
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <article className={styles.card} onMouseEnter={loadContributors}>
+    <article
+      ref={cardRef}
+      className={cardClassName}
+      onMouseEnter={loadContributors}
+    >
       <div className={styles.imageWrapper}>
         <div className={styles.mediaDefault}>{renderMedia()}</div>
         {!project.mediaLoading && renderGithubOverlay()}
@@ -271,6 +316,20 @@ export default function Card ({
         </div>
 
         <p className={styles.description}>{project.description}</p>
+
+        {project.github && (
+          <Button
+            type='button'
+            variant='ghost'
+            className={styles.statsToggle}
+            aria-expanded={statsExpanded}
+            aria-controls={statsOverlayId}
+            onClick={handleStatsToggle}
+          >
+            <ChartBarIcon size={16} weight='bold' aria-hidden />
+            {statsExpanded ? t('projects.hideStats') : t('projects.viewStats')}
+          </Button>
+        )}
 
         <div className={styles.links}>
           {project.urlProject && (
