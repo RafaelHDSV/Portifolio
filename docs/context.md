@@ -9,47 +9,47 @@ Documento de referência sobre o estado atual do repositório após a implementa
 
 ## 1. Resumo
 
-Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica perfil, stack, projetos e contato em uma única página com navegação por âncoras.
+Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica perfil, stack, projetos e contato em uma única página com navegação por âncoras, além do **modo recrutador** em `/recruiter`.
 
 A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (8 total).
 
-A **v3.0** (maio/2026) corrige scroll spy da navbar (Projetos), subtitulo de projetos e distribuicao stats/contribuidores no hover dos cards.
+A **v3.0** (maio/2026) corrige scroll spy da navbar (Projetos), subtítulo de projetos e distribuição stats/contribuidores no hover dos cards.
 
-A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, stats, entregas, stack, experiencia, projetos e contato), alinhado ao mock Lovable.
+A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, stats, entregas, stack, experiência, projetos e contato), alinhado ao mock Lovable.
 
-**Issue #23** (maio/2026): cache de midia em `resolveRepoMedia.ts` com TTL de 5 minutos — previews revalidam apos mudanca de demo no GitHub.
+**Issue #23** (maio/2026): cache de mídia em `resolveRepoMedia.ts` com TTL de 5 minutos — previews revalidam após mudança de demo no GitHub.
 
-**Issue #24** (maio/2026): batch GraphQL de languages (`getRepoLanguagesBatch`) com cache em sessionStorage (sessao do browser); midia tambem persiste na sessao alem do cache in-memory. Reduz ~18 REST `/languages` para 1 GraphQL por sessao.
+**Issue #24** (maio/2026): batch GraphQL de languages (`getRepoLanguagesBatch`) com cache em sessionStorage (sessão do browser); mídia também persiste na sessão além do cache in-memory. Reduz ~18 REST `/languages` para 1 GraphQL por sessão.
 
-**Issue #26** (maio/2026): Vitest 3.2.4 com testes unitarios em `readmeMedia`, `mergeProjects` e `cardImageFallback`. Comando: `yarn test`.
+**Issue #26** (maio/2026): Vitest 3.2.4 com testes unitários em `readmeMedia`, `mergeProjects`, `cardImageFallback`, curadoria e OG. Comando: `yarn test` (~51 casos).
 
-**Issue #27** (maio/2026): fallback `onError` nos cards — URL invalida cai para placeholder generico; preview OG do GitHub so no hover (stats + imagem).
+**Issue #27** (maio/2026): fallback `onError` nos cards — URL inválida cai para placeholder genérico; preview OG do GitHub só no hover (stats + imagem).
 
-**Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estatico; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
+**Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estático; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
 
-**Issue #29** (maio/2026): Playwright E2E — 13 cenarios em `e2e/` (home PT/EN, tema, filtros multi AND, modal contato, links CV/GitHub, modo recrutador, easter eggs vieira-mode/theme-hunter/locale-hopper). Comando: `yarn test:e2e`. Mocks de rede para GitHub e EmailJS; sem CI.
+**Issue #29** (maio/2026): Playwright E2E — fluxos críticos em `e2e/` (home PT/EN, tema, filtros multi AND, modal contato, links CV/GitHub, modo recrutador, easter eggs). Comando: `yarn test:e2e`. Mocks de rede para GitHub e EmailJS.
 
 **Issue #30** (maio/2026): Modo recrutador — rota `/recruiter` (deep link), `@media print`, meta `noindex`. Projetos destaque mantidos em `RECRUITER_FEATURED_REPO_ORDER`. Rewrite em `vercel.json`.
 
-**Issue #31** (maio/2026): Curadoria hibrida — `forceInclude`, `forceExclude` (alias `hidden`), `demoPriority` (`config` | `root` | `readme`) em `projects.config.ts`. Logica em `repoFilters`, `mergeProjects`, `resolveRepoMedia` (cache midia v4).
+**Issue #31** (maio/2026): Curadoria híbrida — `forceInclude`, `forceExclude` (alias `hidden`), `demoPriority` (`config` | `root` | `readme`) em `projects.config.ts`. Lógica em `repoFilters`, `mergeProjects`, `resolveRepoMedia` (cache mídia v4).
 
 **Issue #32** (maio/2026): Performance — code-split (`React.lazy` em Projects, Contact, RecruiterView), `manualChunks` (phosphor, react-icons, i18n, reveal, emailjs), preconnect OG/raw GitHub, Lighthouse CI (`yarn lhci`, workflow em push `main`). Chunk principal ~284 kB (antes ~558 kB).
 
-**Issue #33** (maio/2026): Empty state de filtros — mensagem i18n + icone + CTA `Limpar filtros` quando AND nao retorna projetos (`Projects.tsx`).
+**Issue #33** (maio/2026): Empty state de filtros — mensagem i18n + ícone + CTA `Limpar filtros` quando AND não retorna projetos (`Projects.tsx`).
 
 **Issue #34** (maio/2026): Skeleton 16:9 — `ProjectCardSkeleton` com silhueta completa do Card + shimmer compartilhado (`src/styles/_shimmer.scss`).
 
-**Issue #35** (maio/2026): A11y cards — `aria-label` Demo/GitHub com nome do projeto; overlay stats com `role="group"`, labels por metrica, visivel em `focus-within`; `Button` repassa props ao `<a>`.
+**Issue #35** (maio/2026): A11y cards — `aria-label` Demo/GitHub com nome do projeto; overlay stats com `role="group"`, labels por métrica, visível em `focus-within`; `Button` repassa props ao `<a>`. E2E: `projects-a11y.spec.ts`.
 
-**Issue #36** (maio/2026): Stats touch — botao "Ver stats" em `@media (hover: none)` expande overlay de stats; contributors carregados via `IntersectionObserver` no viewport touch.
+**Issue #36** (maio/2026): Stats touch — botão "Ver stats" em `@media (hover: none)` expande overlay de stats; contributors carregados via `IntersectionObserver` no viewport touch. E2E: `projects-touch-stats.spec.ts`.
 
 **Issue #37** (maio/2026): OG real — template com foto (avatar GitHub em `public/og/avatar.jpg`), marca RV e cargo Full-Stack; `og-pt.png`/`og-en.png` no build; `main.png` espelha `og-pt.png`.
 
-**Issue #38** (maio/2026): Secao LinkedIn (posts) **removida do escopo** — dead code i18n (`linkedin.*`, `nav.linkedin`) eliminado; link de perfil LinkedIn permanece em Contato, Footer e modo recrutador.
+**Issue #38** (maio/2026): Seção LinkedIn (posts) **removida do escopo** — dead code i18n (`linkedin.*`, `nav.linkedin`) eliminado; link de perfil LinkedIn permanece em Contato, Footer e modo recrutador.
 
-**Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueia com 3+ filtros AND em Projetos; pulse nos chips ativos; catalogo 8/8.
+**Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueio no catálogo na 1ª vez com 3+ filtros AND em Projetos; **efeito visual (pulse nos chips ativos) repete** sempre que um filtro é adicionado com 3+ ativos; `playEggEffect` reinicia animação se já estiver rodando; catálogo 8/8.
 
-**Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42).
+**Status de build:** `yarn build`, `yarn lint`, `yarn test` (~51) e `yarn test:e2e` (~20 em 9 specs) passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42). CI: `.github/workflows/lighthouse.yml` em push `main`.
 
 ---
 
@@ -57,7 +57,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 ```
 src/
-├── App.tsx                    # Shell principal + EasterEggProvider
+├── App.tsx                    # Shell principal + lazy sections
 ├── main.tsx                   # Bootstrap React + I18nextProvider + analytics
 ├── i18n/index.ts              # Configuração i18next (PT padrão, EN fallback)
 ├── locales/
@@ -73,33 +73,42 @@ src/
 │   ├── Logo/                  # Monograma RV tipográfico
 │   ├── Modal/                 # Dialog acessível para formulário de contato
 │   ├── Navbar/                # Mobile menu, locale pill, CV remoto, link ativo
+│   ├── ScrollProgressBar/     # Barra de progresso de scroll
 │   ├── ScrollToTopButton/
+│   ├── SectionFallback/       # Fallback de Suspense para lazy routes
 │   ├── SectionTitle/          # Título + subtítulo + linha decorativa
 │   └── SwitchTheme/           # Toggle pill alinhado ao locale
 ├── constants/
 │   ├── cv.ts                  # CV_URL remoto (PERSONAL-CVs), GITHUB_USERNAME
-│   ├── projects.config.ts     # Curadoria: imagens, descricoes, forceInclude/Exclude, demoPriority
+│   ├── easterEggCatalog.ts    # Catálogo i18n dos 8 eggs
+│   ├── projects.config.ts     # Curadoria: imagens, descrições, forceInclude/Exclude, demoPriority
 │   └── images.tsx             # Imports de screenshots
+├── context/
+│   ├── RecruiterModeProvider.tsx
+│   └── useRecruiterMode.ts
 ├── hooks/
 │   ├── useActiveSection.ts    # Intersection Observer para navbar
 │   ├── useGetMe.ts            # Perfil GitHub (About)
 │   ├── useGitHubProjects.ts   # Pins (GraphQL) + recentes (REST) em paralelo
-│   ├── EasterEggProvider.tsx  # Provider de easter eggs
+│   ├── EasterEggProvider.tsx  # Provider de easter eggs + playEggEffect
 │   ├── EasterEggContext.ts
 │   ├── useEasterEgg.ts
-│   └── useEasterEgg.types.ts
+│   └── useEasterEgg.types.ts  # EasterEggId, TOTAL_EGGS = 8
 ├── screens/
 │   ├── Header/                # Hero mesh, typewriter, 2 CTAs, seta (egg)
 │   ├── About/                 # Bio + skeleton + dados GitHub (sem tag oportunidades)
 │   ├── Languages/             # Grid de stack (substituiu carrossel)
-│   ├── Projects/              # Grade única 3 col, filtros multi AND
+│   ├── Projects/              # Grade única 3 col, filtros multi AND, skeleton, empty state
 │   ├── Contact/               # Cards hover + modal com form
+│   ├── Recruiter/             # Modo recrutador (RecruiterView)
 │   └── Footer/                # Full-width, contador eggs, badge Explorador
 ├── repository/GithubRepository.ts  # REST + GraphQL (pinned repos)
 ├── services/gitHub.ts
 ├── styles/
 │   ├── _variables.scss        # Design tokens + Konami accent roxo
 │   ├── _global.scss           # Reset, ::selection, reduced-motion
+│   ├── _easter-egg-effects.scss  # Classes egg-* no <html>
+│   ├── _shimmer.scss          # Shimmer compartilhado (skeleton)
 │   ├── _fonts.scss            # Cinzel Decorative + Outfit
 │   └── main.scss
 ├── types/
@@ -108,12 +117,14 @@ src/
 └── utils/
     ├── environment.ts         # Env vars tipadas
     ├── mergeProjects.ts       # mergeGitHubProjects, filterProjectsMulti
+    ├── resolveRepoMedia.ts    # Demo/README media + cache TTL + sessionStorage
+    ├── repoFilters.ts         # Curadoria forceInclude/Exclude
     └── projectImages.ts       # Resolve imagem; pending se faltar asset
 
 api/
 └── og/
     ├── copy.ts                # Textos PT/EN + buildOgImageUrl
-    ├── template.ts            # Arvore Satori (build + testes)
+    ├── template.ts            # Árvore Satori (build + testes)
     ├── copy.test.ts
     └── template.test.ts
 
@@ -126,6 +137,8 @@ e2e/
 ├── home.spec.ts
 ├── theme.spec.ts
 ├── projects-filters.spec.ts
+├── projects-a11y.spec.ts
+├── projects-touch-stats.spec.ts
 ├── contact-modal.spec.ts
 ├── links.spec.ts
 ├── recruiter.spec.ts
@@ -134,13 +147,18 @@ e2e/
 public/
 ├── robots.txt
 ├── sitemap.xml
+├── og/
+│   └── avatar.jpg             # Foto circular no template OG (#37)
 ├── og-pt.png                  # Gerado no build
-└── og-en.png                  # Gerado no build
+├── og-en.png                  # Gerado no build
+└── main.png                   # Cópia de og-pt.png no build (#37)
 
 docs/
 ├── context.md                 # Este arquivo
 ├── especificacao.md           # Spec original v1.1
 ├── especificacao-v2-refino-ui-ux.md
+├── google-search-console.md
+├── emailjs-setup.md
 └── current-task.md
 ```
 
@@ -176,13 +194,13 @@ Tokens em `src/styles/_variables.scss`:
 - Logo component `RV` (5 cliques = egg console)
 - Toggle PT | EN e tema em estilo **pill**
 - Link "CV" aponta para PDF remoto (`constants/cv.ts`)
-- Botao **Recrutador** ativa modo e navega para `/recruiter`
+- Botão **Recrutador** ativa modo e navega para `/recruiter`
 - Menu hamburger `< 768px`, link ativo via `useActiveSection`
 
 ### Hero (Header)
 - Apenas typewriter (sem linha estática duplicada)
 - CTAs: **Ver projetos** + **Baixar CV** (sem botão GitHub separado)
-- Seta inferior clicável 3× = egg `arrow-hint`
+- Seta inferior clicável 5× = egg `arrow-hint`
 - Removidos: palavra "portfólio" clicável e `DevelopmentScreen`
 
 ### About
@@ -197,23 +215,32 @@ Tokens em `src/styles/_variables.scss`:
 
 ### Projects
 - **Pins GitHub** (GraphQL) + **10 repos recentes** (REST), deduplicados
-- Grade unica **3 colunas**; badge "Pin" nos fixados
+- Grade única **3 colunas**; badge "Pin" nos fixados
 - Filtros **multi AND** (React, TypeScript, Node, etc.)
-- Curadoria hibrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` oculta; `demoPriority` controla ordem da midia demo
+- **Empty state** (#33) quando filtros não retornam resultados
+- **Skeleton 16:9** (#34) durante loading
+- **A11y** (#35): labels Demo/GitHub, overlay stats acessível por teclado
+- **Touch** (#36): botão "Ver stats" sem hover; contributors lazy no viewport
+- Curadoria híbrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` oculta; `demoPriority` controla ordem da mídia demo
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
-- Midia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessao** (#24)
+- Mídia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessão** (#24)
 - Languages dos cards via **batch GraphQL** + cache sessionStorage (#24); fallback REST se GraphQL falhar
 - Fallback para `projects.config.ts` se API falhar
+- Egg **filter-ninja** (#44): pulse nos chips ativos ao adicionar filtro com 3+ ativos (repetível)
 
 ### Contact
 - Cards com hover (email, WhatsApp, GitHub, LinkedIn)
 - Formulário em **Modal**; `ContactForm` aceita `onSuccess` para fechar
 - Removido texto "Aberto a oportunidades e projetos freelance"
 
+### Modo recrutador (`/recruiter`)
+- Layout em cards: perfil, stats GitHub, entregas, stack, experiência, projetos destaque, contato
+- `@media print`, meta `noindex`, deep link compartilhável
+
 ### Footer
 - Layout full-width, menos centralizado
 - `© {ano} Rafael Vieira · Desenvolvedor Full-Stack`
-- Contador: `X/8 descobertos` (dinamico via `totalEggs`)
+- Contador: `X/8 descobertos` (dinâmico via `totalEggs`)
 - Badge Explorador incrementado (ícone animado, mensagens contextuais)
 - Sem link "Voltar ao topo" (mantido `ScrollToTopButton` flutuante)
 
@@ -238,39 +265,39 @@ Tokens em `src/styles/_variables.scss`:
 
 ### EmailJS
 - Variáveis: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
-- Egg `rocket-email` quando mensagem contém "rocket"
+- Egg `rocket-email` quando mensagem contém "vieira"
 
 ### Vieira Analytics
 - `@vieira/analytics` via `main.tsx` (`projectKey: "portifolio"`)
 
 ---
 
-## 7. Easter eggs (8 — nunca bloqueiam conteudo)
+## 7. Easter eggs (8 — nunca bloqueiam conteúdo)
 
 | ID | Gatilho | Recompensa |
 |----|---------|------------|
-| `konami` | sequencia Konami | Accent roxo 30s |
+| `konami` | sequência Konami | Accent roxo 30s |
 | `logo-clicks` | 5 cliques no logo RV | Modo blueprint 14s |
 | `locale-hopper` | 4 toggles idioma em 5s | Pulse no pill idioma |
-| `rocket-email` | E-mail com "vieira" | Animacao contato |
+| `rocket-email` | E-mail com "vieira" | Animação contato |
 | `vieira-mode` | `?mode=vieira` na URL | Visual Vieira no hero |
 | `theme-hunter` | 5 toggles tema em 3s | Espectro de cores 5s |
-| `arrow-hint` | 5 cliques na seta hero | Orbita da seta |
-| `filter-ninja` | 3+ filtros AND em Projetos | Pulse nos chips ativos 3s |
+| `arrow-hint` | 5 cliques na seta hero | Órbita da seta |
+| `filter-ninja` | 3+ filtros AND ao **adicionar** filtro | Pulse nos chips ativos 3s (**repetível**; catálogo desbloqueia 1×) |
 
 **Removido na v2:** `portfolio-clicks` / `DevelopmentScreen`.
 
-Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProvider` + `useEasterEgg()`.
+Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProvider` + `useEasterEgg()`. Efeitos visuais em `_easter-egg-effects.scss`; `playEggEffect` remove/reaplica classe no `<html>` para reiniciar animação.
 
 ---
 
 ## 8. SEO e acessibilidade
 
-**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200x630, gerado no build, #28). Verificacao Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
+**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200×630, gerado no build, #28/#37). Verificação Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
 
-**Arquivos SEO estaticos:** `public/robots.txt`, `public/sitemap.xml` (hreflang PT/EN).
+**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (hreflang PT/EN).
 
-**A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global.
+**A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global. Cards de projetos (#35): labels contextuais em links Demo/GitHub; overlay stats com `role="group"` e métricas nomeadas; visível em `:focus-within`.
 
 ---
 
@@ -293,11 +320,12 @@ Copiar de `.env.example`. **Nunca commitar** `.env` com valores reais.
 ```bash
 yarn          # instalar dependências
 yarn dev      # dev server (Vite)
-yarn build    # tsc + vite build
+yarn build    # tsc + generate-og + vite build
 yarn lint     # ESLint (max-warnings 0)
-yarn test     # Vitest (utils de midia, ordenacao, cardImageFallback, api/og)
-yarn test:e2e # Playwright E2E (build + preview automatico)
+yarn test     # Vitest (~51 casos)
+yarn test:e2e # Playwright E2E (~20 casos, build + preview automático)
 yarn preview  # preview do build
+yarn lhci     # Lighthouse CI (autorun local)
 ```
 
 **Node recomendado:** 22 LTS. Node 23 pode causar problemas com Vitest.
@@ -315,7 +343,7 @@ yarn preview  # preview do build
 | Destaques + grid projects | Grade única 3 col; pins GitHub |
 | Filtro exclusivo | Multi AND |
 | Form inline | Modal |
-| Footer centralizado, X/6 | Full-width, X/7 dinâmico |
+| Footer centralizado, X/6 | Full-width, X/8 dinâmico |
 | 6 eggs | 8 eggs (+ filter-ninja) |
 | Logo texto navbar | Component Logo RV |
 
@@ -324,16 +352,16 @@ yarn preview  # preview do build
 ## 12. Pendências (conteúdo — autor)
 
 - [ ] Screenshots faltantes nos cards (placeholder indica onde adicionar)
-- [ ] Preview OG em WhatsApp e LinkedIn pos-deploy (#28 — autor)
+- [ ] Preview OG em WhatsApp e LinkedIn pós-deploy (#28/#37 — autor)
 - [ ] Variáveis de ambiente na Vercel (GitHub + EmailJS)
 - [x] Testes automatizados (Vitest) — `readmeMedia` e `mergeProjects` (#26)
-- [x] Testes E2E (Playwright) — fluxos criticos (#29)
+- [x] Testes E2E (Playwright) — fluxos críticos (#29+)
 - [ ] Lighthouse mobile nas metas
 - [ ] Domínio custom — fora do escopo v2
 
 ---
 
-## 13. Decisões v2 (secao 11 da epic)
+## 13. Decisões v2 (seção 11 da epic)
 
 1. **Logo:** monograma RV tipográfico  
 2. **Hero CTAs:** par Ver projetos + Baixar CV  
@@ -346,9 +374,10 @@ yarn preview  # preview do build
 
 - [Epic v2 UI/UX](./especificacao-v2-refino-ui-ux.md)
 - [Especificação v1.1](./especificacao.md)
+- [EmailJS — setup](./emailjs-setup.md)
 - [LinkedIn](https://www.linkedin.com/in/rafael-vieira1720/) · [GitHub](https://github.com/RafaelHDSV)
 - [Google Search Console — setup](./google-search-console.md)
 
 ---
 
-*Ultima atualizacao: maio/2026 — pos Issue #31 (curadoria hibrida).*
+*Última atualização: maio/2026 — pós Issue #44 (filter-ninja repetível) e docs README/context.*
