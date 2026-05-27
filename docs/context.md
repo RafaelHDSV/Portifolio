@@ -230,7 +230,9 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 ## 8. SEO e acessibilidade
 
-**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200x630, gerado no build, #28).
+**index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200x630, gerado no build, #28). Verificacao Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
+
+**Arquivos SEO estaticos:** `public/robots.txt`, `public/sitemap.xml` (hreflang PT/EN).
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global.
 
@@ -243,6 +245,7 @@ VITE_GITHUB_ACCESS_TOKEN=
 VITE_EMAILJS_SERVICE_ID=
 VITE_EMAILJS_TEMPLATE_ID=
 VITE_EMAILJS_PUBLIC_KEY=
+VITE_GOOGLE_SITE_VERIFICATION=
 ```
 
 Copiar de `.env.example`. **Nunca commitar** `.env` com valores reais.
@@ -306,6 +309,7 @@ yarn preview  # preview do build
 - [Epic v2 UI/UX](./especificacao-v2-refino-ui-ux.md)
 - [Especificação v1.1](./especificacao.md)
 - [LinkedIn](https://www.linkedin.com/in/rafael-vieira1720/) · [GitHub](https://github.com/RafaelHDSV)
+- [Google Search Console — setup](./google-search-console.md)
 
 ---
 

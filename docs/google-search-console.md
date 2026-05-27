@@ -1,0 +1,149 @@
+# Google Search Console — Portfolio Rafael Vieira
+
+Guia para registrar o site no [Google Search Console](https://search.google.com/search-console) e enviar o sitemap.
+
+**URL do site:** https://rafaelhdsv.vercel.app  
+**Sitemap:** https://rafaelhdsv.vercel.app/sitemap.xml  
+**Robots:** https://rafaelhdsv.vercel.app/robots.txt
+
+---
+
+## 1. O que ja esta pronto no codigo
+
+| Item | Arquivo | Descricao |
+|------|---------|-----------|
+| Meta description + OG | `index.html` | Titulo, descricao, Open Graph, Twitter Card, JSON-LD (`Person`) |
+| `robots.txt` | `public/robots.txt` | Permite indexacao e aponta para o sitemap |
+| `sitemap.xml` | `public/sitemap.xml` | URL principal + hreflang PT/EN |
+| Verificacao Google | `vite.config.ts` + `.env` | Meta tag injetada no build quando `VITE_GOOGLE_SITE_VERIFICATION` esta definida |
+
+---
+
+## 2. Criar a propriedade no Search Console
+
+1. Acesse https://search.google.com/search-console e entre com a conta Google desejada.
+2. Clique em **Adicionar propriedade**.
+3. Escolha **Prefixo do URL** e informe:
+   ```
+   https://rafaelhdsv.vercel.app/
+   ```
+   (Use exatamente `https` e a barra final, como acima.)
+4. Clique em **Continuar**.
+
+> Se no futuro voce usar dominio proprio (ex.: `rafaelvieira.dev`), crie uma **nova** propriedade para esse dominio ou migre usando redirecionamento 301 da Vercel.
+
+---
+
+## 3. Verificar a propriedade (meta tag — recomendado)
+
+### 3.1. Copiar o token no Google
+
+Na etapa de verificacao, escolha o metodo **Tag HTML** (meta tag).
+
+O Google mostra algo como:
+
+```html
+<meta name="google-site-verification" content="SEU_TOKEN_AQUI" />
+```
+
+Copie **somente** o valor de `content` (o token).
+
+### 3.2. Configurar localmente
+
+No arquivo `.env` (nao commitar):
+
+```env
+VITE_GOOGLE_SITE_VERIFICATION=SEU_TOKEN_AQUI
+```
+
+### 3.3. Configurar na Vercel (producao)
+
+1. Painel Vercel → projeto **portifolio** → **Settings** → **Environment Variables**
+2. Adicione:
+   - **Name:** `VITE_GOOGLE_SITE_VERIFICATION`
+   - **Value:** o token copiado do Google
+   - **Environment:** Production (e Preview, se quiser testar previews)
+3. Salve e faca um **novo deploy** (Redeploy) para o HTML de producao incluir a meta tag.
+
+### 3.4. Confirmar no site
+
+Apos o deploy, abra o codigo-fonte de https://rafaelhdsv.vercel.app/ (Ctrl+U) e confira se existe:
+
+```html
+<meta name="google-site-verification" content="SEU_TOKEN_AQUI" />
+```
+
+### 3.5. Verificar no Google
+
+Volte ao Search Console e clique em **Verificar**. Se falhar, aguarde alguns minutos apos o deploy e tente de novo.
+
+---
+
+## 4. Metodo alternativo: arquivo HTML
+
+Se preferir nao usar variavel de ambiente:
+
+1. No Search Console, escolha **Arquivo HTML** como metodo.
+2. Baixe o arquivo (ex.: `google1234567890abcdef.html`).
+3. Coloque o arquivo em `public/` do repositorio (mesmo nivel de `robots.txt`).
+4. Commit, push e deploy.
+5. Teste no navegador: `https://rafaelhdsv.vercel.app/google1234567890abcdef.html`
+6. Clique em **Verificar** no Search Console.
+
+Remova o arquivo depois da verificacao, se quiser — a propriedade permanece verificada.
+
+---
+
+## 5. Enviar o sitemap
+
+1. No Search Console, menu lateral → **Sitemaps** (Mapas do site).
+2. Em **Adicionar um novo sitemap**, informe:
+   ```
+   sitemap.xml
+   ```
+   (apenas o caminho relativo; o Google completa com a URL da propriedade.)
+3. Clique em **Enviar**.
+
+Status esperado: **Sucesso** (pode levar algumas horas para processar).
+
+URLs uteis para conferir manualmente:
+
+- https://rafaelhdsv.vercel.app/sitemap.xml
+- https://rafaelhdsv.vercel.app/robots.txt
+
+---
+
+## 6. Inspecao de URL e indexacao
+
+1. Menu **Inspecao de URL**.
+2. Cole `https://rafaelhdsv.vercel.app/` e pressione Enter.
+3. Se a pagina nao estiver indexada, use **Solicitar indexacao**.
+
+O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode levar dias na primeira vez. O JSON-LD e as meta tags em `index.html` ajudam o rastreador mesmo antes do JS carregar.
+
+---
+
+## 7. Checklist pos-configuracao
+
+- [ ] Propriedade criada (`https://rafaelhdsv.vercel.app/`)
+- [ ] Verificacao concluida (meta tag ou arquivo HTML)
+- [ ] Sitemap enviado (`sitemap.xml`)
+- [ ] Inspecao de URL solicitada para a home
+- [ ] Variavel `VITE_GOOGLE_SITE_VERIFICATION` na Vercel (se usou meta tag)
+- [ ] `.env` local atualizado (nao commitado)
+
+---
+
+## 8. Manutencao
+
+- **Novo deploy:** nao e necessario reenviar o sitemap a cada deploy; o Google revisita periodicamente.
+- **Mudanca de dominio:** atualize `index.html`, `public/sitemap.xml`, `public/robots.txt` e crie nova propriedade no Search Console.
+- **Token invalido:** gere nova verificacao no Search Console e atualize `VITE_GOOGLE_SITE_VERIFICATION`.
+
+---
+
+## 9. Referencias
+
+- [Documentacao Search Console](https://support.google.com/webmasters/)
+- [Sitemaps — protocolo](https://www.sitemaps.org/protocol.html)
+- Contexto do projeto: [`docs/context.md`](./context.md)
