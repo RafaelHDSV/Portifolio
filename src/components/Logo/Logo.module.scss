@@ -2,28 +2,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  font-family: $font-cinzel;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-text-primary);
-  background: linear-gradient(
-    135deg,
-    var(--color-surface-elevated),
-    var(--color-surface)
-  );
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px transparent;
-  transition: color 200ms ease, border-color 200ms ease, box-shadow 200ms ease,
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-bg) 92%, var(--color-surface-elevated));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent) 12%, transparent),
+    0 0 24px color-mix(in srgb, var(--color-accent) 22%, transparent);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
     transform 200ms ease;
 
   &:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    border-color: color-mix(in srgb, var(--color-accent) 75%, var(--color-border));
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-accent) 25%, transparent),
+      0 0 32px color-mix(in srgb, var(--color-accent) 40%, transparent);
     transform: translateY(-1px);
   }
+}
+
+.mark {
+  display: block;
+  width: 2.125rem;
+  height: 2.125rem;
+  background-color: var(--color-accent);
+  mask-image: url('../../assets/logo-rv-mark.png');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  mask-mode: luminance;
+  -webkit-mask-image: url('../../assets/logo-rv-mark.png');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent) 75%, transparent));
 }

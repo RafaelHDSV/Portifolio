@@ -96,7 +96,7 @@ export default function Contact () {
             <span className={styles.launchRing} />
           </div>
         )}
-        <Container>
+        <Container className={styles.sectionContent}>
           <SectionTitle
             title={t('contact.title')}
             subtitle={t('contact.subtitle')}

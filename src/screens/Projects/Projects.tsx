@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import { FaGithub } from 'react-icons/fa'
+import AmbientOrbs from '../../components/AmbientOrbs/AmbientOrbs'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
@@ -198,7 +199,8 @@ export default function Projects () {
   return (
     <Fade triggerOnce>
       <section id='projects' className={`mainContainer ${styles.projectsContainer}`}>
-        <Container>
+        <AmbientOrbs preset='projects' />
+        <Container className={styles.sectionContent}>
           <SectionTitle
             title={t('projects.title')}
             subtitle={t('projects.subtitle')}

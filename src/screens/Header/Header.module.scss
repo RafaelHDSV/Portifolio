@@ -51,48 +51,6 @@
   animation: meshShift 8s ease-in-out infinite alternate, starTwinkle 4s ease-in-out infinite;
 }
 
-.fxLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle, color-mix(in srgb, var(--color-accent) 40%, transparent) 1px, transparent 1px),
-    radial-gradient(circle, color-mix(in srgb, var(--color-accent) 25%, transparent) 1.5px, transparent 1.5px);
-  background-size: 48px 48px, 96px 96px;
-  background-position: 0 0, 24px 24px;
-  opacity: 0.5;
-  animation: driftDots 20s linear infinite;
-}
-
-.orbA,
-.orbB {
-  position: absolute;
-  z-index: 0;
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-  opacity: 0.55;
-}
-
-.orbA {
-  width: 280px;
-  height: 280px;
-  top: 18%;
-  left: 12%;
-  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  animation: floatOrbA 14s ease-in-out infinite alternate;
-}
-
-.orbB {
-  width: 220px;
-  height: 220px;
-  bottom: 22%;
-  right: 10%;
-  background: color-mix(in srgb, #6366f1 30%, transparent);
-  animation: floatOrbB 11s ease-in-out infinite alternate;
-}
-
 .content {
   position: relative;
   z-index: 1;
@@ -147,10 +105,7 @@
 
 .arrowFlightActive {
   &::before,
-  &::after,
-  .fxLayer,
-  .orbA,
-  .orbB {
+  &::after {
     animation-play-state: paused !important;
   }
 }
@@ -284,16 +239,6 @@
   to { text-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 25%, transparent); }
 }
 
-@keyframes floatOrbA {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(24px, -18px) scale(1.08); }
-}
-
-@keyframes floatOrbB {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(-20px, 16px) scale(1.05); }
-}
-
 @keyframes starTwinkle {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.92; }
@@ -305,15 +250,6 @@
   }
   to {
     transform: translateY(8px);
-  }
-}
-
-@keyframes driftDots {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-48px);
   }
 }
 
@@ -340,9 +276,6 @@
 
   .arrowDown,
   .flyingArrow,
-  .fxLayer,
-  .orbA,
-  .orbB,
   .content,
   .ctas,
   .name {

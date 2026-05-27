@@ -2,6 +2,7 @@ import { ArrowDownIcon } from '@phosphor-icons/react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
 import Typewriter from 'typewriter-effect'
+import AmbientOrbs from '../../components/AmbientOrbs/AmbientOrbs'
 import Button from '../../components/Button/Button'
 import { CV_DOWNLOAD_NAME, CV_URL } from '../../constants/cv'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
@@ -23,9 +24,7 @@ export default function Header () {
         id='home'
         className={`${styles.header} ${vieiraMode ? styles.vieiraMode : ''} ${arrowTravelActive ? styles.arrowFlightActive : ''}`}
       >
-        <div className={styles.fxLayer} aria-hidden='true' />
-        <div className={styles.orbA} aria-hidden='true' />
-        <div className={styles.orbB} aria-hidden='true' />
+        <AmbientOrbs preset='hero' withDots paused={arrowTravelActive} />
 
         {arrowTravelActive && (
           <>

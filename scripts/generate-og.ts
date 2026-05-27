@@ -5,8 +5,20 @@ import { getOgCopy, type OgLang } from '../api/og/copy'
 import { buildOgElement } from '../api/og/template'
 
 const AVATAR_PATH = 'public/og/avatar.jpg'
+const LOGO_PATH = 'public/og/logo-rv.png'
 const OG_WIDTH = 1200
 const OG_HEIGHT = 630
+
+function loadImageDataUrl (filePath: string): string {
+  if (!existsSync(filePath)) {
+    throw new Error(`image not found at ${filePath}`)
+  }
+
+  const buffer = readFileSync(filePath)
+  const mime = filePath.endsWith('.png') ? 'image/png' : 'image/jpeg'
+
+  return `data:${mime};base64,${buffer.toString('base64')}`
+}
 
 function loadAvatarDataUrl (): string {
   if (!existsSync(AVATAR_PATH)) {
@@ -15,18 +27,20 @@ function loadAvatarDataUrl (): string {
     )
   }
 
-  const buffer = readFileSync(AVATAR_PATH)
-  const mime = AVATAR_PATH.endsWith('.png') ? 'image/png' : 'image/jpeg'
+  return loadImageDataUrl(AVATAR_PATH)
+}
 
-  return `data:${mime};base64,${buffer.toString('base64')}`
+function loadLogoDataUrl (): string {
+  return loadImageDataUrl(LOGO_PATH)
 }
 
 async function generateOgImage (
   lang: OgLang,
-  avatarSrc: string
+  avatarSrc: string,
+  logoSrc: string
 ): Promise<void> {
   const response = await new ImageResponse(
-    buildOgElement(getOgCopy(lang), { avatarSrc }) as ReactElement,
+    buildOgElement(getOgCopy(lang), { avatarSrc, logoSrc }) as ReactElement,
     { width: OG_WIDTH, height: OG_HEIGHT }
   )
   const buffer = Buffer.from(await response.arrayBuffer())
@@ -36,9 +50,10 @@ async function generateOgImage (
 
 async function main (): Promise<void> {
   const avatarSrc = loadAvatarDataUrl()
+  const logoSrc = loadLogoDataUrl()
 
-  await generateOgImage('pt', avatarSrc)
-  await generateOgImage('en', avatarSrc)
+  await generateOgImage('pt', avatarSrc, logoSrc)
+  await generateOgImage('en', avatarSrc, logoSrc)
 
   copyFileSync('public/og-pt.png', 'public/main.png')
   console.log('copied public/og-pt.png → public/main.png')

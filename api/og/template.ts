@@ -11,6 +11,7 @@ type OgNode = {
 
 export interface OgTemplateOptions {
   avatarSrc: string
+  logoSrc: string
 }
 
 function el (
@@ -56,13 +57,16 @@ export function buildOgElement (
         justifyContent: 'center',
         width: '56px',
         height: '56px',
-        borderRadius: '12px',
+        borderRadius: '999px',
         border: '2px solid #38bdf8',
-        color: '#38bdf8',
-        fontSize: '22px',
-        fontWeight: 700,
-        letterSpacing: '0.08em'
-      }, 'RV'),
+        overflow: 'hidden',
+        flexShrink: 0,
+        background: '#0a0a0b'
+      }, el('img', {
+        width: '36px',
+        height: '36px',
+        objectFit: 'contain'
+      }, '', { src: options.logoSrc })),
       el('span', {
         fontSize: '22px',
         color: '#a1a1aa',

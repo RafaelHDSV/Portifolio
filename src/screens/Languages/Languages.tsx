@@ -26,6 +26,7 @@ import {
   SiVercel
 } from 'react-icons/si'
 import { VscCode } from 'react-icons/vsc'
+import AmbientOrbs from '../../components/AmbientOrbs/AmbientOrbs'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import styles from './Languages.module.scss'
@@ -108,14 +109,15 @@ export default function Languages () {
         id='languages'
         className={`mainContainer ${styles.stackSection}`}
       >
-        <Container>
+        <AmbientOrbs preset='stack' />
+        <Container className={styles.sectionContent}>
           <SectionTitle
             title={t('stack.title')}
             subtitle={t('stack.subtitle')}
           />
         </Container>
 
-        <Container className={styles.categories}>
+        <Container className={`${styles.sectionContent} ${styles.categories}`}>
           <TechGrid items={CORE_TECH} label={t('stack.categories.core')} />
           <TechGrid items={AI_TECH} label={t('stack.categories.ai')} />
           <TechGrid items={TOOL_TECH} label={t('stack.categories.tools')} />

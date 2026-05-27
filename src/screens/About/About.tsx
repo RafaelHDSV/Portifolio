@@ -11,6 +11,7 @@ import {
 import dayjs from 'dayjs'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
+import AmbientOrbs from '../../components/AmbientOrbs/AmbientOrbs'
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
@@ -132,7 +133,8 @@ export default function About () {
   return (
     <Fade triggerOnce>
       <section id='about' className={`mainContainer ${styles.about}`}>
-        <Container>
+        <AmbientOrbs preset='about' />
+        <Container className={styles.sectionContent}>
           <SectionTitle
             title={t('about.title')}
             subtitle={t('about.subtitle')}

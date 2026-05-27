@@ -1,7 +1,14 @@
 @use '@/styles/shimmer' as *;
 
 .projectsContainer {
+  position: relative;
+  overflow: hidden;
   width: 100%;
+}
+
+.sectionContent {
+  position: relative;
+  z-index: 1;
 }
 
 .filters {
