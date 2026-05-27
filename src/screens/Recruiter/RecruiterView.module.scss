@@ -579,3 +579,73 @@
   font-size: 0.8125rem !important;
   color: var(--color-text-muted) !important;
 }
+
+@media print {
+  .recruiter {
+    min-height: auto;
+    padding: 0;
+    background: #fff !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cardBase,
+  .profileCard,
+  .statsCard,
+  .deliverablesCard,
+  .competencyPanel,
+  .contactSection {
+    background: #fff !important;
+    border-color: #ddd !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .heroRow,
+  .competencyGrid,
+  .projectGrid,
+  .contactGrid {
+    break-inside: avoid;
+  }
+
+  .name,
+  .nameAccent,
+  .role,
+  .modeBadge,
+  .statAccent,
+  .projectCategory {
+    color: #0c4a6e !important;
+  }
+
+  .bio,
+  .aboutExtended,
+  .sectionSubtitle,
+  .footer p,
+  .projectCard p,
+  .timeline p {
+    color: #333 !important;
+  }
+
+  .viewAllBtn {
+    display: none !important;
+  }
+
+  .profileActions {
+    display: none !important;
+  }
+
+  .contactHeader a,
+  .contactHeader button {
+    display: none !important;
+  }
+
+  .projectCard {
+    border: 1px solid #ddd !important;
+  }
+
+  .contactCard {
+    background: #f8f8f8 !important;
+    border-color: #ddd !important;
+  }
+}

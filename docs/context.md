@@ -29,6 +29,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #29** (maio/2026): Playwright E2E — 13 cenarios em `e2e/` (home PT/EN, tema, filtros multi AND, modal contato, links CV/GitHub, modo recrutador, easter eggs vieira-mode/theme-hunter/locale-hopper). Comando: `yarn test:e2e`. Mocks de rede para GitHub e EmailJS; sem CI.
 
+**Issue #30** (maio/2026): Modo recrutador — rota `/recruiter` (deep link), `@media print`, meta `noindex`. Projetos destaque mantidos em `RECRUITER_FEATURED_REPO_ORDER`. Rewrite em `vercel.json`.
+
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam sem erros.
 
 ---
@@ -156,6 +158,7 @@ Tokens em `src/styles/_variables.scss`:
 - Logo component `RV` (5 cliques = egg console)
 - Toggle PT | EN e tema em estilo **pill**
 - Link "CV" aponta para PDF remoto (`constants/cv.ts`)
+- Botao **Recrutador** ativa modo e navega para `/recruiter`
 - Menu hamburger `< 768px`, link ativo via `useActiveSection`
 
 ### Hero (Header)
@@ -328,4 +331,4 @@ yarn preview  # preview do build
 
 ---
 
-*Ultima atualizacao: maio/2026 — pos Issue #29 (Playwright E2E).*
+*Ultima atualizacao: maio/2026 — pos Issue #30 (rota /recruiter + print).*

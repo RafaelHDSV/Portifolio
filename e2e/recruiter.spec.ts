@@ -6,12 +6,22 @@ test.describe('Modo recrutador', () => {
   test.beforeEach(async ({ page }) => {
     await resetAppStorage(page)
     await setupGitHubMocks(page)
-    await page.goto('/?lang=pt')
+  })
+
+  test('deep link /recruiter abre o modo', async ({ page }) => {
+    await page.goto('/recruiter?lang=pt')
+
+    await expect(page).toHaveURL(/\/recruiter/)
+    await expect(page.getByRole('button', { name: 'Voltar à exibição normal' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Rafael Vieira' })).toBeVisible()
   })
 
   test('ativa, persiste apos reload e volta para home', async ({ page }) => {
+    await page.goto('/?lang=pt')
+
     await page.getByRole('button', { name: 'Recrutador' }).click()
 
+    await expect(page).toHaveURL(/\/recruiter/)
     await expect(page.getByRole('heading', { name: 'Rafael Vieira' })).toBeVisible()
     await expect(page.getByRole('button', { name: 'Voltar à exibição normal' })).toBeVisible()
 
@@ -20,9 +30,11 @@ test.describe('Modo recrutador', () => {
     ).toBe('true')
 
     await page.reload()
+    await expect(page).toHaveURL(/\/recruiter/)
     await expect(page.getByRole('button', { name: 'Voltar à exibição normal' })).toBeVisible()
 
     await page.getByRole('button', { name: 'Voltar à exibição normal' }).click()
+    await expect(page).toHaveURL(/\/$/)
     await expect(page.getByRole('navigation', { name: 'Navegação principal' }).getByRole('link', { name: 'Sobre' })).toBeVisible()
     await expect.poll(async () =>
       page.evaluate(() => localStorage.getItem('recruiter-mode'))
