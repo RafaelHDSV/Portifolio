@@ -39,4 +39,32 @@ test.describe('Filtros multi AND', () => {
     await filters.getByRole('button', { name: 'Limpar filtros' }).click()
     await expect(cards).toHaveCount(3)
   })
+
+  test('alterna filtro ao clicar na linguagem do card', async ({ page }) => {
+    test.setTimeout(90_000)
+
+    const cards = await projectCards(page)
+    await expect(cards).toHaveCount(3)
+
+    const filters = page.locator('#projects').getByRole('group', { name: 'Filtros' })
+    const reactFilter = filters.getByRole('button', { name: 'React', exact: true })
+
+    await expect(reactFilter).toBeVisible({ timeout: 45_000 })
+
+    const reactCard = page.getByRole('heading', { level: 3, name: 'repo-react-only' })
+    await reactCard.scrollIntoViewIfNeeded()
+    const reactBadge = reactCard
+      .locator('xpath=ancestor::article')
+      .getByRole('button', { name: 'Filtrar projetos por React' })
+
+    await reactBadge.click()
+
+    await expect(reactFilter).toHaveAttribute('aria-pressed', 'true')
+    await expect(cards).toHaveCount(2)
+
+    await reactBadge.click()
+
+    await expect(reactFilter).toHaveAttribute('aria-pressed', 'false')
+    await expect(cards).toHaveCount(3)
+  })
 })

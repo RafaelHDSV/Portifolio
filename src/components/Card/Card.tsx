@@ -20,6 +20,7 @@ import {
 } from '../../utils/cardImageFallback'
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
+import { getProjectFilterLabel } from '../../utils/filterLabels'
 import styles from './Card.module.scss'
 
 export interface ProjectGithubStats {
@@ -53,9 +54,15 @@ export interface ProjectCardData {
 
 interface CardProps {
   project: ProjectCardData
+  onLanguageClick?: (language: string) => void
+  activeLanguageFilters?: string[]
 }
 
-export default function Card ({ project }: CardProps) {
+export default function Card ({
+  project,
+  onLanguageClick,
+  activeLanguageFilters = []
+}: CardProps) {
   const { t } = useTranslation()
   const [videoError, setVideoError] = useState(false)
   const [imageStage, setImageStage] = useState<ImageFallbackStage>('primary')
@@ -227,9 +234,29 @@ export default function Card ({ project }: CardProps) {
         <h3 className={styles.title}>{project.name}</h3>
 
         <div className={styles.badges}>
-          {project.languages.map((lang) => (
-            <Badge key={lang} name={lang} />
-          ))}
+          {project.languages.map((lang) => {
+            const isActive = activeLanguageFilters.some(
+              (filter) => filter.toLowerCase() === lang.toLowerCase()
+            )
+
+            return (
+              <Badge
+                key={lang}
+                name={lang}
+                onClick={
+                  onLanguageClick ? () => onLanguageClick(lang) : undefined
+                }
+                active={isActive}
+                ariaLabel={
+                  onLanguageClick
+                    ? t('projects.filterByLanguage', {
+                        language: getProjectFilterLabel(lang, t)
+                      })
+                    : undefined
+                }
+              />
+            )
+          })}
         </div>
 
         <p className={styles.description}>{project.description}</p>

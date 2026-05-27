@@ -68,6 +68,7 @@
     "openVideo": "Open video on GitHub",
     "noPreview": "No preview",
     "clearFilters": "Clear filters",
+    "filterByLanguage": "Filter projects by {{language}}",
     "tokenHintPrivate": "Without a GitHub token in production, private repositories and private pins may not appear. Set VITE_GITHUB_ACCESS_TOKEN on Vercel with repo scope.",
     "statsStars": "Stars",
     "statsForks": "Forks",

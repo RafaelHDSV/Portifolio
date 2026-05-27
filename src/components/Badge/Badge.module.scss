@@ -5,13 +5,30 @@
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 500;
+  font-family: inherit;
+  line-height: inherit;
   color: var(--color-text-secondary);
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-button);
-  transition: border-color 200ms ease, color 200ms ease;
+  transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
 
   svg {
     font-size: 0.875rem;
   }
+}
+
+.interactive {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+}
+
+.active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
 }

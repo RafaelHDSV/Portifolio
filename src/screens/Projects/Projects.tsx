@@ -68,11 +68,19 @@ function ProjectsContent () {
   )
 
   const toggleFilter = (filter: string) => {
-    setSelectedFilters((prev) =>
-      prev.includes(filter)
-        ? prev.filter((f) => f !== filter)
-        : [...prev, filter]
-    )
+    setSelectedFilters((prev) => {
+      const exists = prev.some(
+        (f) => f.toLowerCase() === filter.toLowerCase()
+      )
+      if (exists) {
+        return prev.filter((f) => f.toLowerCase() !== filter.toLowerCase())
+      }
+      const canonical =
+        availableFilters.find(
+          (f) => f.toLowerCase() === filter.toLowerCase()
+        ) ?? filter
+      return [...prev, canonical]
+    })
   }
 
   return (
@@ -84,17 +92,23 @@ function ProjectsContent () {
       )}
 
       <div className={styles.filters} role='group' aria-label='Filtros'>
-        {availableFilters.map((f) => (
+        {availableFilters.map((f) => {
+          const isActive = selectedFilters.some(
+            (selected) => selected.toLowerCase() === f.toLowerCase()
+          )
+
+          return (
           <button
             key={f}
             type='button'
-            aria-pressed={selectedFilters.includes(f)}
-            className={`${styles.filterChip} ${selectedFilters.includes(f) ? styles.active : ''}`}
+            aria-pressed={isActive}
+            className={`${styles.filterChip} ${isActive ? styles.active : ''}`}
             onClick={() => toggleFilter(f)}
           >
             {getProjectFilterLabel(f, t)}
           </button>
-        ))}
+          )
+        })}
         {selectedFilters.length > 0 && (
           <button
             type='button'
@@ -117,7 +131,12 @@ function ProjectsContent () {
       {!loading && (
         <div className={styles.grid}>
           {filtered.map((project) => (
-            <Card key={project.id} project={project} />
+            <Card
+              key={project.id}
+              project={project}
+              onLanguageClick={toggleFilter}
+              activeLanguageFilters={selectedFilters}
+            />
           ))}
         </div>
       )}

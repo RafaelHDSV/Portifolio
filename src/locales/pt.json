@@ -68,6 +68,7 @@
     "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
+    "filterByLanguage": "Filtrar projetos por {{language}}",
     "tokenHintPrivate": "Sem token GitHub no deploy, repositórios privados e pins privados podem não aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
     "statsStars": "Estrelas",
     "statsForks": "Forks",
