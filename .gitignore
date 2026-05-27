@@ -15,6 +15,7 @@ dist-ssr
 public/og-*.png
 playwright-report
 test-results
+.lighthouseci
 
 # allow vendor SDK dist
 !vendor/vieira-analytics/dist/
