@@ -62,7 +62,7 @@
   grid-column: 2;
 }
 
-.recruiterNav .desktopActions {
+.recruiterNav .navbarEnd {
   justify-self: end;
   grid-column: 3;
 }
@@ -70,6 +70,18 @@
 .recruiterNav .mobileControls {
   justify-self: end;
   grid-column: 3;
+}
+
+.navbarStart {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.navbarEnd {
+  display: flex;
+  align-items: center;
 }
 
 .logoLink {
@@ -114,12 +126,6 @@
 
 .localeToggle {
   @extend .pillToggle;
-}
-
-.desktopActions {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
 }
 
 .links {
@@ -243,7 +249,11 @@
 }
 
 @media (max-width: 768px) {
-  .desktopActions {
+  .navbarStart .links {
+    display: none;
+  }
+
+  .navbarEnd {
     display: none;
   }
 

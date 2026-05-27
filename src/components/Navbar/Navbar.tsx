@@ -74,29 +74,15 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
           {t('recruiter.back')}
         </button>
       ) : (
-        <a
-          href='#home'
-          className={`${styles.logoLink} ${logoRevealActive ? styles.logoSecret : ''}`}
-          aria-label='Rafael Vieira - início'
-          onClick={handleLogoClick}
-        >
-          <Logo />
-        </a>
-      )}
-
-      {recruiterOnly && (
-        <a
-          href='#home'
-          className={`${styles.logoLink} ${styles.logoCenter} ${logoRevealActive ? styles.logoSecret : ''}`}
-          aria-label='Rafael Vieira - início'
-          onClick={handleLogoClick}
-        >
-          <Logo />
-        </a>
-      )}
-
-      <div className={styles.desktopActions}>
-        {!recruiterOnly && (
+        <div className={styles.navbarStart}>
+          <a
+            href='#home'
+            className={`${styles.logoLink} ${logoRevealActive ? styles.logoSecret : ''}`}
+            aria-label='Rafael Vieira - início'
+            onClick={handleLogoClick}
+          >
+            <Logo />
+          </a>
           <div className={styles.links}>
             {NAV_LINKS.map(({ href, key, section }) => (
               <a
@@ -117,8 +103,21 @@ export default function Navbar ({ recruiterOnly = false }: NavbarProps) {
               {t('nav.cv')}
             </a>
           </div>
-        )}
+        </div>
+      )}
 
+      {recruiterOnly && (
+        <a
+          href='#home'
+          className={`${styles.logoLink} ${styles.logoCenter} ${logoRevealActive ? styles.logoSecret : ''}`}
+          aria-label='Rafael Vieira - início'
+          onClick={handleLogoClick}
+        >
+          <Logo />
+        </a>
+      )}
+
+      <div className={styles.navbarEnd}>
         <div className={styles.controls}>
           {!recruiterOnly && (
             <button
