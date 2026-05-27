@@ -4,26 +4,42 @@ type OgNode = {
   type: string
   props: {
     style?: Record<string, string | number>
+    src?: string
     children?: OgNode | OgNode[] | string
   }
+}
+
+export interface OgTemplateOptions {
+  avatarSrc: string
 }
 
 function el (
   type: string,
   style: Record<string, string | number> | undefined,
-  children: OgNode | OgNode[] | string
+  children: OgNode | OgNode[] | string,
+  extra?: { src?: string }
 ): OgNode {
-  return { type, props: { style, children } }
+  return {
+    type,
+    props: {
+      style,
+      children,
+      ...extra
+    }
+  }
 }
 
-export function buildOgElement (copy: OgCopy): OgNode {
+export function buildOgElement (
+  copy: OgCopy,
+  options: OgTemplateOptions
+): OgNode {
   return el('div', {
     width: '100%',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: '64px 72px',
+    padding: '56px 64px',
     background:
       'linear-gradient(145deg, #0a0a0b 0%, #141416 45%, #0f172a 100%)',
     color: '#f4f4f5',
@@ -56,20 +72,36 @@ export function buildOgElement (copy: OgCopy): OgNode {
     ]),
     el('div', {
       display: 'flex',
-      flexDirection: 'column',
-      gap: '16px'
+      alignItems: 'center',
+      gap: '48px',
+      flex: 1
     }, [
+      el('img', {
+        width: '280px',
+        height: '280px',
+        borderRadius: '50%',
+        objectFit: 'cover',
+        border: '4px solid #38bdf8',
+        flexShrink: 0
+      }, '', { src: options.avatarSrc }),
       el('div', {
-        fontSize: '72px',
-        fontWeight: 700,
-        lineHeight: 1.05,
-        letterSpacing: '-0.02em'
-      }, copy.name),
-      el('div', {
-        fontSize: '36px',
-        fontWeight: 600,
-        color: '#38bdf8'
-      }, copy.role)
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        flex: 1
+      }, [
+        el('div', {
+          fontSize: '68px',
+          fontWeight: 700,
+          lineHeight: 1.05,
+          letterSpacing: '-0.02em'
+        }, copy.name),
+        el('div', {
+          fontSize: '34px',
+          fontWeight: 600,
+          color: '#38bdf8'
+        }, copy.role)
+      ])
     ]),
     el('div', {
       display: 'flex',

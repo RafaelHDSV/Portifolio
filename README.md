@@ -8,7 +8,7 @@
 ![Repo Size](https://img.shields.io/github/repo-size/RafaelHDSV/Portifolio?style=for-the-badge)
 
 <p align="center">
-  <img src="./public/main.png" alt="Portfolio preview"/>
+  <img src="./public/main.png" alt="Rafael Vieira — Desenvolvedor Full-Stack"/>
 </p>
 
 <p align="center">

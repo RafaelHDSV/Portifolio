@@ -1,13 +1,33 @@
-import { writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { ImageResponse } from '@vercel/og'
 import type { ReactElement } from 'react'
 import { getOgCopy, type OgLang } from '../api/og/copy'
 import { buildOgElement } from '../api/og/template'
 
-async function generateOgImage (lang: OgLang): Promise<void> {
+const AVATAR_PATH = 'public/og/avatar.jpg'
+const OG_WIDTH = 1200
+const OG_HEIGHT = 630
+
+function loadAvatarDataUrl (): string {
+  if (!existsSync(AVATAR_PATH)) {
+    throw new Error(
+      `avatar not found at ${AVATAR_PATH} — run: curl -L "https://github.com/RafaelHDSV.png?size=460" -o ${AVATAR_PATH}`
+    )
+  }
+
+  const buffer = readFileSync(AVATAR_PATH)
+  const mime = AVATAR_PATH.endsWith('.png') ? 'image/png' : 'image/jpeg'
+
+  return `data:${mime};base64,${buffer.toString('base64')}`
+}
+
+async function generateOgImage (
+  lang: OgLang,
+  avatarSrc: string
+): Promise<void> {
   const response = await new ImageResponse(
-    buildOgElement(getOgCopy(lang)) as ReactElement,
-    { width: 1200, height: 630 }
+    buildOgElement(getOgCopy(lang), { avatarSrc }) as ReactElement,
+    { width: OG_WIDTH, height: OG_HEIGHT }
   )
   const buffer = Buffer.from(await response.arrayBuffer())
   writeFileSync(`public/og-${lang}.png`, buffer)
@@ -15,8 +35,13 @@ async function generateOgImage (lang: OgLang): Promise<void> {
 }
 
 async function main (): Promise<void> {
-  await generateOgImage('pt')
-  await generateOgImage('en')
+  const avatarSrc = loadAvatarDataUrl()
+
+  await generateOgImage('pt', avatarSrc)
+  await generateOgImage('en', avatarSrc)
+
+  copyFileSync('public/og-pt.png', 'public/main.png')
+  console.log('copied public/og-pt.png → public/main.png')
 }
 
 main().catch((error: unknown) => {
