@@ -3,7 +3,11 @@ import { projectsConfig } from '../constants/projects.config'
 import { GITHUB_USERNAME } from '../constants/cv'
 import { IGithubResponseRepo } from '../types/IGithub'
 import { ReadmeMedia } from './readmeMedia'
-import { filterReposForPortfolio } from './repoFilters'
+import {
+  configToSyntheticRepo,
+  filterReposForPortfolio
+} from './repoFilters'
+import { listForceIncludeConfigs } from './projectConfigLookup'
 
 export const PINNED_PROJECT_LIMIT = 6
 export const PROJECT_DISPLAY_LIMIT = 18
@@ -77,6 +81,12 @@ export function collectPortfolioRepoCandidates (
     const key = repo.name?.toLowerCase() ?? ''
     if (!key) continue
     repoByName.set(key, { ...repoByName.get(key), ...repo })
+  }
+
+  for (const config of listForceIncludeConfigs()) {
+    const key = config.repoName?.toLowerCase() ?? ''
+    if (!key || repoByName.has(key)) continue
+    repoByName.set(key, configToSyntheticRepo(config))
   }
 
   return [...repoByName.values()]
@@ -208,7 +218,7 @@ export function mergeGitHubProjects (
 
   if (cards.length === 0) {
     return projectsConfig
-      .filter((p) => !p.hidden)
+      .filter((p) => !p.hidden && !p.forceExclude)
       .map((p) => ({
         id: p.key,
         repoName: p.repoName ?? p.name,

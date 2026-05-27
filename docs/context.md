@@ -31,6 +31,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #30** (maio/2026): Modo recrutador — rota `/recruiter` (deep link), `@media print`, meta `noindex`. Projetos destaque mantidos em `RECRUITER_FEATURED_REPO_ORDER`. Rewrite em `vercel.json`.
 
+**Issue #31** (maio/2026): Curadoria hibrida — `forceInclude`, `forceExclude` (alias `hidden`), `demoPriority` (`config` | `root` | `readme`) em `projects.config.ts`. Logica em `repoFilters`, `mergeProjects`, `resolveRepoMedia` (cache midia v4).
+
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam sem erros.
 
 ---
@@ -60,7 +62,7 @@ src/
 │   └── SwitchTheme/           # Toggle pill alinhado ao locale
 ├── constants/
 │   ├── cv.ts                  # CV_URL remoto (PERSONAL-CVs), GITHUB_USERNAME
-│   ├── projects.config.ts     # Curadoria: imagens, descrições PT/EN, featured
+│   ├── projects.config.ts     # Curadoria: imagens, descricoes, forceInclude/Exclude, demoPriority
 │   └── images.tsx             # Imports de screenshots
 ├── hooks/
 │   ├── useActiveSection.ts    # Intersection Observer para navbar
@@ -179,8 +181,9 @@ Tokens em `src/styles/_variables.scss`:
 
 ### Projects
 - **Pins GitHub** (GraphQL) + **10 repos recentes** (REST), deduplicados
-- Grade única **3 colunas**; badge "Pin" nos fixados
+- Grade unica **3 colunas**; badge "Pin" nos fixados
 - Filtros **multi AND** (React, TypeScript, Node, etc.)
+- Curadoria hibrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` oculta; `demoPriority` controla ordem da midia demo
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
 - Midia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessao** (#24)
 - Languages dos cards via **batch GraphQL** + cache sessionStorage (#24); fallback REST se GraphQL falhar
@@ -331,4 +334,4 @@ yarn preview  # preview do build
 
 ---
 
-*Ultima atualizacao: maio/2026 — pos Issue #30 (rota /recruiter + print).*
+*Ultima atualizacao: maio/2026 — pos Issue #31 (curadoria hibrida).*

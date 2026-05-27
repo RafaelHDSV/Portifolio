@@ -1,3 +1,5 @@
+export type DemoPriority = 'root' | 'config' | 'readme'
+
 export interface IProjectConfig {
   key: string
   repoName?: string
@@ -8,7 +10,11 @@ export interface IProjectConfig {
   urlProject?: string
   urlGitHub: string
   featured?: boolean
+  /** @deprecated Prefer forceExclude */
   hidden?: boolean
+  forceInclude?: boolean
+  forceExclude?: boolean
+  demoPriority?: DemoPriority
   order?: number
 }
 

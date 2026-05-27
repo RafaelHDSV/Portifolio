@@ -1,13 +1,11 @@
-# Issue #30 — Modo recrutador: rota, print e deep link
+# Issue #31 — Curadoria hibrida de projetos
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/30
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/31
 
-- [x] Rota `/recruiter` (History API + rewrite Vercel)
-- [x] Deep link abre modo recrutador
-- [x] `@media print` para one-pager (Ctrl+P / Salvar PDF do browser)
-- [x] `noindex` em `/recruiter`
-- [x] Projetos destaque mantidos (`RECRUITER_FEATURED_REPO_ORDER`)
-- [x] E2E atualizado (deep link + URL apos toggle)
-- [ ] QR code — fora de escopo (decisao autor)
+- [x] `forceInclude` / `forceExclude` / `demoPriority` em `IProjectConfig`
+- [x] Filtros em `repoFilters.ts` + injecao em `collectPortfolioRepoCandidates`
+- [x] `demoPriority` em `resolveRepoMedia.ts` (cache v4)
+- [x] Testes Vitest (repoFilters, merge curation, resolveRepoMedia)
+- [x] Comentarios de uso em `projects.config.ts`
 
-Proposta: `.issues/2026-05-26-recruiter-route-print.md`
+Proposta: `.issues/2026-05-27-curadoria-hibrida-projetos.md`

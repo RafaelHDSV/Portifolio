@@ -1,6 +1,17 @@
 import { images } from './images'
 import { IProjectConfig } from '../types/IProject'
 
+/**
+ * Curadoria hibrida (Issue #31):
+ * - forceInclude: inclui repo mesmo se filtro API excluiria; sintetiza card se ausente na API
+ * - forceExclude: oculta repo mesmo se pinned/recente (preferir sobre hidden)
+ * - hidden: alias legado de forceExclude
+ * - demoPriority: 'config' | 'root' | 'readme' — ordem de busca da midia demo no card
+ *
+ * Exemplo (nao ativo):
+ * { repoName: 'MedIT', demoPriority: 'root', forceInclude: true, ... }
+ */
+
 export const projectsConfig: IProjectConfig[] = [
   {
     key: '1',
