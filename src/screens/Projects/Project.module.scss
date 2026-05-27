@@ -81,6 +81,57 @@
   }
 }
 
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.emptyIcon {
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.emptyHint {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.emptyCta {
+  min-height: 44px;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-button);
+  transition: color 200ms ease, background-color 200ms ease;
+
+  &:hover {
+    color: var(--color-surface);
+    background-color: var(--color-accent);
+  }
+}
+
 .status {
   text-align: center;
   padding: 2rem;

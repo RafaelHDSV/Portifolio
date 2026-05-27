@@ -67,4 +67,32 @@ test.describe('Filtros multi AND', () => {
     await expect(reactFilter).toHaveAttribute('aria-pressed', 'false')
     await expect(cards).toHaveCount(3)
   })
+
+  test('exibe empty state e limpa filtros pelo CTA', async ({ page }) => {
+    test.setTimeout(90_000)
+
+    const cards = await projectCards(page)
+    await expect(cards).toHaveCount(3)
+
+    const filters = page.locator('#projects').getByRole('group', { name: 'Filtros' })
+    await expect(filters.getByRole('button', { name: 'React', exact: true })).toBeVisible({
+      timeout: 45_000
+    })
+
+    await filters.getByRole('button', { name: 'React', exact: true }).click()
+    await filters.getByRole('button', { name: 'TypeScript', exact: true }).click()
+    await filters.getByRole('button', { name: 'JavaScript', exact: true }).click()
+
+    await expect(cards).toHaveCount(0)
+    await expect(
+      page.getByRole('status').getByText('Nenhum projeto corresponde a esses filtros')
+    ).toBeVisible()
+
+    await page
+      .getByRole('status')
+      .getByRole('button', { name: 'Limpar filtros' })
+      .click()
+
+    await expect(cards).toHaveCount(3)
+  })
 })

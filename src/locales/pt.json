@@ -68,6 +68,8 @@
     "openVideo": "Abrir vídeo no GitHub",
     "noPreview": "Sem preview",
     "clearFilters": "Limpar filtros",
+    "emptyFiltersTitle": "Nenhum projeto corresponde a esses filtros",
+    "emptyFiltersHint": "Tente remover um filtro ou limpar todos para ver a grade completa.",
     "filterByLanguage": "Filtrar projetos por {{language}}",
     "tokenHintPrivate": "Sem token GitHub no deploy, repositórios privados e pins privados podem não aparecer. Configure VITE_GITHUB_ACCESS_TOKEN na Vercel com escopo repo.",
     "statsStars": "Estrelas",

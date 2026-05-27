@@ -1,3 +1,4 @@
+import { FunnelSimpleIcon } from '@phosphor-icons/react'
 import { useMemo, useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { FaGithub } from 'react-icons/fa'
@@ -83,6 +84,14 @@ function ProjectsContent () {
     })
   }
 
+  const clearFilters = () => setSelectedFilters([])
+
+  const showEmptyFilters =
+    !loading &&
+    !error &&
+    selectedFilters.length > 0 &&
+    filtered.length === 0
+
   return (
     <>
       {!gitHubToken && !loading && (
@@ -113,7 +122,7 @@ function ProjectsContent () {
           <button
             type='button'
             className={styles.clearFilters}
-            onClick={() => setSelectedFilters([])}
+            onClick={clearFilters}
           >
             {t('projects.clearFilters')}
           </button>
@@ -128,7 +137,23 @@ function ProjectsContent () {
         </p>
       )}
 
-      {!loading && (
+      {!loading && !error && showEmptyFilters && (
+        <div className={styles.emptyState} role='status'>
+          <FunnelSimpleIcon
+            className={styles.emptyIcon}
+            size={40}
+            weight='duotone'
+            aria-hidden
+          />
+          <p className={styles.emptyTitle}>{t('projects.emptyFiltersTitle')}</p>
+          <p className={styles.emptyHint}>{t('projects.emptyFiltersHint')}</p>
+          <button type='button' className={styles.emptyCta} onClick={clearFilters}>
+            {t('projects.clearFilters')}
+          </button>
+        </div>
+      )}
+
+      {!loading && !error && !showEmptyFilters && (
         <div className={styles.grid}>
           {filtered.map((project) => (
             <Card
