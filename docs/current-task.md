@@ -1,11 +1,10 @@
-# Issue #28 — OG image automatica para compartilhamento social
+# Issue #29 — Testes E2E com Playwright
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/28
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/29
 
-- [x] PNG 1200x630 gerado no build (`scripts/generate-og.ts`)
-- [x] Meta tags `og:image` e `twitter:image` apontam para `/og-pt.png`
-- [x] Rewrite `/api/og` -> PNG estatico (compatibilidade)
-- [x] Testes Vitest em `api/og/`
-- [ ] Preview manual WhatsApp/LinkedIn pos-deploy (autor)
+- [x] Playwright configurado (`playwright.config.ts`, `yarn test:e2e`)
+- [x] 7 specs / 13 cenarios (home, tema, filtros, contato, links, recrutador, eggs)
+- [x] Mocks GitHub + EmailJS para estabilidade local
+- [x] Sem CI (decisao do autor — repo sem PRs)
 
-Proposta: `.issues/2026-05-26-og-image-automatica.md`
+Proposta: `.issues/2026-05-26-playwright-e2e.md`

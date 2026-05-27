@@ -27,7 +27,9 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estatico; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
 
-**Status de build:** `yarn build`, `yarn lint` e `yarn test` passam sem erros.
+**Issue #29** (maio/2026): Playwright E2E — 13 cenarios em `e2e/` (home PT/EN, tema, filtros multi AND, modal contato, links CV/GitHub, modo recrutador, easter eggs vieira-mode/theme-hunter/locale-hopper). Comando: `yarn test:e2e`. Mocks de rede para GitHub e EmailJS; sem CI.
+
+**Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam sem erros.
 
 ---
 
@@ -97,6 +99,17 @@ api/
 
 scripts/
 └── generate-og.ts             # Gera public/og-pt.png e og-en.png no build
+
+e2e/
+├── helpers/                   # storage, githubMocks
+├── fixtures/github/           # repos mockados para filtros
+├── home.spec.ts
+├── theme.spec.ts
+├── projects-filters.spec.ts
+├── contact-modal.spec.ts
+├── links.spec.ts
+├── recruiter.spec.ts
+└── easter-eggs.spec.ts
 
 public/
 ├── robots.txt
@@ -260,6 +273,7 @@ yarn dev      # dev server (Vite)
 yarn build    # tsc + vite build
 yarn lint     # ESLint (max-warnings 0)
 yarn test     # Vitest (utils de midia, ordenacao, cardImageFallback, api/og)
+yarn test:e2e # Playwright E2E (build + preview automatico)
 yarn preview  # preview do build
 ```
 
@@ -290,6 +304,7 @@ yarn preview  # preview do build
 - [ ] Preview OG em WhatsApp e LinkedIn pos-deploy (#28 — autor)
 - [ ] Variáveis de ambiente na Vercel (GitHub + EmailJS)
 - [x] Testes automatizados (Vitest) — `readmeMedia` e `mergeProjects` (#26)
+- [x] Testes E2E (Playwright) — fluxos criticos (#29)
 - [ ] Lighthouse mobile nas metas
 - [ ] Domínio custom — fora do escopo v2
 
@@ -313,4 +328,4 @@ yarn preview  # preview do build
 
 ---
 
-*Ultima atualizacao: maio/2026 — pos Issue #28 (OG dinamica).*
+*Ultima atualizacao: maio/2026 — pos Issue #29 (Playwright E2E).*

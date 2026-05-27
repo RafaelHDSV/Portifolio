@@ -13,6 +13,8 @@ node_modules
 dist
 dist-ssr
 public/og-*.png
+playwright-report
+test-results
 
 # allow vendor SDK dist
 !vendor/vieira-analytics/dist/
