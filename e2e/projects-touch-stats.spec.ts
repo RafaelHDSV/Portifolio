@@ -6,7 +6,6 @@ test.describe('Stats touch nos cards', () => {
   test.beforeEach(async ({ page }) => {
     await resetAppStorage(page)
     await setupGitHubMocks(page)
-    await page.goto('/?lang=pt')
   })
 
   test('botao Ver stats revela metricas em viewport touch', async ({ page }) => {
@@ -16,7 +15,7 @@ test.describe('Stats touch nos cards', () => {
       mediaFeatures: [{ name: 'hover', value: 'none' }]
     })
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.reload()
+    await page.goto('/?lang=pt')
 
     const section = page.locator('#projects')
     await section.scrollIntoViewIfNeeded()
@@ -45,7 +44,7 @@ test.describe('Stats touch nos cards', () => {
       mediaFeatures: [{ name: 'hover', value: 'hover' }]
     })
     await page.setViewportSize({ width: 1280, height: 800 })
-    await page.reload()
+    await page.goto('/?lang=pt')
 
     const section = page.locator('#projects')
     await section.scrollIntoViewIfNeeded()

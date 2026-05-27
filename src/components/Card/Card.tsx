@@ -71,6 +71,7 @@ export default function Card ({
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
   const [statsExpanded, setStatsExpanded] = useState(false)
+  const [canHover, setCanHover] = useState(true)
 
   const statsOverlayId = `github-stats-${project.id}`
 
@@ -88,6 +89,17 @@ export default function Card ({
     setVideoError(false)
     setStatsExpanded(false)
   }, [project.id, primaryImage, project.media?.url])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(hover: hover)')
+    const updateCanHover = () => setCanHover(mediaQuery.matches)
+
+    updateCanHover()
+    mediaQuery.addEventListener('change', updateCanHover)
+    return () => mediaQuery.removeEventListener('change', updateCanHover)
+  }, [])
+
+  const isTouchStatsDevice = !canHover
 
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
@@ -117,8 +129,7 @@ export default function Card ({
 
   useEffect(() => {
     const card = cardRef.current
-    if (!card || !project.repoName) return
-    if (!window.matchMedia('(hover: none)').matches) return
+    if (!card || !project.repoName || canHover) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -131,7 +142,7 @@ export default function Card ({
 
     observer.observe(card)
     return () => observer.disconnect()
-  }, [loadContributors, project.repoName, project.id])
+  }, [canHover, loadContributors, project.repoName, project.id])
 
   const handleStatsToggle = useCallback(() => {
     setStatsExpanded((prev) => {
@@ -317,7 +328,7 @@ export default function Card ({
 
         <p className={styles.description}>{project.description}</p>
 
-        {project.github && (
+        {isTouchStatsDevice && project.github && (
           <Button
             type='button'
             variant='ghost'

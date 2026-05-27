@@ -358,16 +358,11 @@
 }
 
 .statsToggle {
-  display: none;
   align-self: flex-start;
   min-height: 36px !important;
   padding: 0.375rem 0.75rem !important;
   font-size: 0.8125rem !important;
   margin-top: auto;
-
-  @media (hover: none) {
-    display: inline-flex;
-  }
 
   &:focus-visible {
     outline: 2px solid var(--color-accent);
