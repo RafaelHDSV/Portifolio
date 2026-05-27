@@ -5,7 +5,7 @@ import {
   FaSass
 } from 'react-icons/fa'
 import { IoLibrary, IoLogoJavascript, IoSettings } from 'react-icons/io5'
-import { SiSharp, SiTypescript } from 'react-icons/si'
+import { SiPhp, SiSharp, SiTypescript } from 'react-icons/si'
 import { VscTerminalPowershell } from 'react-icons/vsc'
 
 function TsqlIcon () {
@@ -34,6 +34,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Sass: <FaSass />,
   SCSS: <FaSass />,
   'C#': <SiSharp />,
+  PHP: <SiPhp />,
   PowerShell: <VscTerminalPowershell />,
   TSQL: <TsqlIcon />,
   'T-SQL': <TsqlIcon />,
