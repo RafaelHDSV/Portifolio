@@ -1,14 +1,12 @@
-# Issue #37 — Atualizar public/main.png para OG real (1200x630)
+# Issue #38 — Secao LinkedIn: remover dead code
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/37
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/38
 
-- [x] Template OG com foto (avatar GitHub) + marca + cargo Full-Stack
-- [x] main.png sincronizado com og-pt.png no build
-- [x] Meta tags conferidas (sem alteracao de URL)
+- [x] Decisao: remover secao (nao reativar API)
+- [x] Chaves i18n mortas removidas
+- [x] Links perfil LinkedIn em Contato/Footer/Recruiter mantidos
 - [x] Docs atualizados
 
-Proposta: `.issues/2026-05-28-og-main-png-real.md`
+Proposta: `.issues/2026-05-28-linkedin-secao-remover.md`
 
-Decisoes: 1=B, 2=A, 3=A, 4=A (secao 14).
-
-Pendente manual: preview OG em WhatsApp/LinkedIn pos-deploy.
+Decisao autor: remover secao LinkedIn (complexidade API).

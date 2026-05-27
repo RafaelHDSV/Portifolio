@@ -45,6 +45,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #37** (maio/2026): OG real — template com foto (avatar GitHub em `public/og/avatar.jpg`), marca RV e cargo Full-Stack; `og-pt.png`/`og-en.png` no build; `main.png` espelha `og-pt.png`.
 
+**Issue #38** (maio/2026): Secao LinkedIn (posts) **removida do escopo** — dead code i18n (`linkedin.*`, `nav.linkedin`) eliminado; link de perfil LinkedIn permanece em Contato, Footer e modo recrutador.
+
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42).
 
 ---

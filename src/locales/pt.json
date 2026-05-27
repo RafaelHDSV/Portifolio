@@ -3,7 +3,6 @@
     "about": "Sobre",
     "stack": "Stack",
     "projects": "Projetos",
-    "linkedin": "LinkedIn",
     "contact": "Contato",
     "cv": "CV",
     "menu": "Abrir menu",
@@ -92,12 +91,6 @@
       "cSharp": "C#",
       "PowerShell": "PowerShell"
     }
-  },
-  "linkedin": {
-    "title": "LinkedIn",
-    "subtitle": "Publicações recentes",
-    "readMore": "Ler no LinkedIn",
-    "viewProfile": "Ver perfil completo"
   },
   "contact": {
     "title": "Contato",
