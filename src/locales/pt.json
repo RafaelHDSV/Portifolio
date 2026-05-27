@@ -264,6 +264,7 @@
     }
   },
   "common": {
-    "loading": "Carregando..."
+    "loading": "Carregando...",
+    "sectionLoading": "Carregando secao"
   }
 }

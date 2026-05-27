@@ -1,0 +1,18 @@
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--section-fallback-min-height, 12rem);
+  color: var(--color-text-muted);
+
+  svg {
+    animation: spin 0.9s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

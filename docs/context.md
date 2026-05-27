@@ -33,7 +33,9 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #31** (maio/2026): Curadoria hibrida — `forceInclude`, `forceExclude` (alias `hidden`), `demoPriority` (`config` | `root` | `readme`) em `projects.config.ts`. Logica em `repoFilters`, `mergeProjects`, `resolveRepoMedia` (cache midia v4).
 
-**Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam sem erros.
+**Issue #32** (maio/2026): Performance — code-split (`React.lazy` em Projects, Contact, RecruiterView), `manualChunks` (phosphor, react-icons, i18n, reveal, emailjs), preconnect OG/raw GitHub, Lighthouse CI (`yarn lhci`, workflow em push `main`). Chunk principal ~284 kB (antes ~558 kB).
+
+**Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42; meta 90 pendente de otimizacao de imagens).
 
 ---
 

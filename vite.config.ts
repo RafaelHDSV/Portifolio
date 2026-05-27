@@ -31,5 +31,20 @@ export default defineConfig({
         additionalData: `@use "@/styles/variables.scss" as *;`
       }
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks (id) {
+          if (!id.includes('node_modules')) return
+
+          if (id.includes('@emailjs')) return 'emailjs'
+          if (id.includes('@phosphor-icons')) return 'phosphor'
+          if (id.includes('react-icons')) return 'react-icons'
+          if (id.includes('react-awesome-reveal')) return 'reveal'
+          if (id.includes('i18next') || id.includes('react-i18next')) return 'i18n'
+        }
+      }
+    }
   }
 })

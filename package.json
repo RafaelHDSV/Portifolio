@@ -13,6 +13,7 @@
     "test:e2e:headed": "playwright test --headed",
     "fix": "yarn lint && tsc -b",
     "preview": "vite preview",
+    "lhci": "lhci autorun",
     "format": "prettier --write src/"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.60.0",
     "@types/node": "^22.13.10",
     "@types/react": "^18.3.3",
