@@ -8,6 +8,7 @@ import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import { useContributorCounts } from '../../hooks/useContributorCounts'
 import { useEnrichedProjects } from '../../hooks/useEnrichedProjects'
+import { useEasterEgg } from '../../hooks/useEasterEgg'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
 import { gitHubToken } from '../../utils/environment'
 import { getProjectFilterLabel } from '../../utils/filterLabels'
@@ -32,6 +33,7 @@ function ProjectsSkeleton () {
 
 function ProjectsContent () {
   const { t, i18n } = useTranslation()
+  const { registerFilterNinja } = useEasterEgg()
   const { pinned, recent, loading, error } = useGitHubProjects()
   const [selectedFilters, setSelectedFilters] = useState<string[]>([])
 
@@ -70,19 +72,27 @@ function ProjectsContent () {
   )
 
   const toggleFilter = (filter: string) => {
-    setSelectedFilters((prev) => {
-      const exists = prev.some(
-        (f) => f.toLowerCase() === filter.toLowerCase()
+    const exists = selectedFilters.some(
+      (f) => f.toLowerCase() === filter.toLowerCase()
+    )
+
+    if (exists) {
+      setSelectedFilters((prev) =>
+        prev.filter((f) => f.toLowerCase() !== filter.toLowerCase())
       )
-      if (exists) {
-        return prev.filter((f) => f.toLowerCase() !== filter.toLowerCase())
-      }
-      const canonical =
-        availableFilters.find(
-          (f) => f.toLowerCase() === filter.toLowerCase()
-        ) ?? filter
-      return [...prev, canonical]
-    })
+      return
+    }
+
+    const canonical =
+      availableFilters.find(
+        (f) => f.toLowerCase() === filter.toLowerCase()
+      ) ?? filter
+    const next = [...selectedFilters, canonical]
+    setSelectedFilters(next)
+
+    if (next.length >= 3) {
+      registerFilterNinja(next.length)
+    }
   }
 
   const clearFilters = () => setSelectedFilters([])

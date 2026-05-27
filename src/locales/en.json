@@ -260,6 +260,11 @@
         "name": "Vieira orbit",
         "trigger": "5 quick clicks on the hero arrow (does not scroll)",
         "result": "The same arrow orbits the hero and returns to origin without changing the background"
+      },
+      "filterNinja": {
+        "name": "Filter ninja",
+        "trigger": "Activate 3 or more AND filters at once in Projects",
+        "result": "Active chips pulse with accent glow for 3 seconds (every time you activate 3+ filters)"
       }
     }
   },

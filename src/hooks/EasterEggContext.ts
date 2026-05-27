@@ -16,6 +16,7 @@ export interface EasterEggContextValue {
   incrementArrowClick: () => void
   registerThemeToggle: () => void
   registerLocaleToggle: () => void
+  registerFilterNinja: (activeFilterCount: number) => void
   revealAllInCatalog: () => void
   triggerVieiraLaunch: () => void
 }

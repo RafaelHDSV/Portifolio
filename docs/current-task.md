@@ -1,12 +1,12 @@
-# Issue #38 — Secao LinkedIn: remover dead code
+# Issue #44 — Easter egg filtro ninja (3+ filtros AND)
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/38
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/44
 
-- [x] Decisao: remover secao (nao reativar API)
-- [x] Chaves i18n mortas removidas
-- [x] Links perfil LinkedIn em Contato/Footer/Recruiter mantidos
+- [x] Egg `filter-ninja` ao ativar 3+ filtros AND
+- [x] Pulse nos chips + catalogo i18n
+- [x] TOTAL_EGGS 8; E2E
 - [x] Docs atualizados
 
-Proposta: `.issues/2026-05-28-linkedin-secao-remover.md`
+Proposta: `.issues/2026-05-28-easter-egg-filtro-ninja.md`
 
-Decisao autor: remover secao LinkedIn (complexidade API).
+Decisoes: 1=A, 2=A, 3=A (secao 14).

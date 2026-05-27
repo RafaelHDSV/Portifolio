@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { setupGitHubMocks } from './helpers/githubMocks'
 import {
   getEggCounterText,
   parseEggCount,
@@ -52,5 +53,24 @@ test.describe('Easter eggs basicos', () => {
     }
 
     await expect.poll(async () => readUnlockedEggs(page)).toContain('locale-hopper')
+  })
+
+  test('filter-ninja desbloqueia com 3 filtros AND', async ({ page }) => {
+    await setupGitHubMocks(page)
+    await page.goto('/?lang=pt')
+
+    const section = page.locator('#projects')
+    await section.scrollIntoViewIfNeeded()
+
+    const filters = section.getByRole('group', { name: 'Filtros' })
+    await expect(filters.getByRole('button', { name: 'React', exact: true })).toBeVisible({
+      timeout: 45_000
+    })
+
+    await filters.getByRole('button', { name: 'React', exact: true }).click()
+    await filters.getByRole('button', { name: 'TypeScript', exact: true }).click()
+    await filters.getByRole('button', { name: 'JavaScript', exact: true }).click()
+
+    await expect.poll(async () => readUnlockedEggs(page)).toContain('filter-ninja')
   })
 })

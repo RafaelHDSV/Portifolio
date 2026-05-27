@@ -50,11 +50,31 @@ html.egg-theme-spectrum {
   100% { filter: hue-rotate(360deg) saturate(1); }
 }
 
+html.egg-filter-ninja {
+  #projects [class*='filterChip'][class*='active'],
+  #projects .filterChip.active {
+    animation: filterNinjaPulse 0.75s ease-in-out 4;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+}
+
+@keyframes filterNinjaPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--color-accent) 65%, transparent);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.egg-blueprint-mode::before,
   html.egg-theme-spectrum,
   html.egg-locale-hopper-done .localeToggle,
-  html.egg-locale-hopper-done [class*='localeToggle'] {
+  html.egg-locale-hopper-done [class*='localeToggle'],
+  html.egg-filter-ninja #projects [class*='filterChip'] {
     animation: none;
   }
 }

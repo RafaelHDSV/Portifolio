@@ -11,7 +11,7 @@ Documento de referência sobre o estado atual do repositório após a implementa
 
 Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica perfil, stack, projetos e contato em uma única página com navegação por âncoras.
 
-A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (7 total).
+A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (8 total).
 
 A **v3.0** (maio/2026) corrige scroll spy da navbar (Projetos), subtitulo de projetos e distribuicao stats/contribuidores no hover dos cards.
 
@@ -46,6 +46,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 **Issue #37** (maio/2026): OG real — template com foto (avatar GitHub em `public/og/avatar.jpg`), marca RV e cargo Full-Stack; `og-pt.png`/`og-en.png` no build; `main.png` espelha `og-pt.png`.
 
 **Issue #38** (maio/2026): Secao LinkedIn (posts) **removida do escopo** — dead code i18n (`linkedin.*`, `nav.linkedin`) eliminado; link de perfil LinkedIn permanece em Contato, Footer e modo recrutador.
+
+**Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueia com 3+ filtros AND em Projetos; pulse nos chips ativos; catalogo 8/8.
 
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42).
 
@@ -211,7 +213,7 @@ Tokens em `src/styles/_variables.scss`:
 ### Footer
 - Layout full-width, menos centralizado
 - `© {ano} Rafael Vieira · Desenvolvedor Full-Stack`
-- Contador: `Easteregg a: X/7 descobertos` (dinâmico via `totalEggs`)
+- Contador: `X/8 descobertos` (dinamico via `totalEggs`)
 - Badge Explorador incrementado (ícone animado, mensagens contextuais)
 - Sem link "Voltar ao topo" (mantido `ScrollToTopButton` flutuante)
 
@@ -243,17 +245,18 @@ Tokens em `src/styles/_variables.scss`:
 
 ---
 
-## 7. Easter eggs (7 — nunca bloqueiam conteúdo)
+## 7. Easter eggs (8 — nunca bloqueiam conteudo)
 
 | ID | Gatilho | Recompensa |
 |----|---------|------------|
-| `konami` | ↑↑↓↓←→←→BA | Accent + mesh roxo 30s |
-| `logo-clicks` | 5 cliques rápidos no logo RV | Console art + link Plann.er |
-| `scroll-explorer` | Scroll fim → topo 3× | Badge Explorador |
-| `rocket-email` | E-mail contendo "rocket" | Mensagem de sucesso especial |
-| `space-mode` | `?mode=space` na URL | Estrelas extras no hero |
-| `theme-hunter` | 5 toggles de tema em 3s | Toast "Caçador de temas" |
-| `arrow-hint` | 3 cliques na seta do hero | Toast "Curioso, né?" |
+| `konami` | sequencia Konami | Accent roxo 30s |
+| `logo-clicks` | 5 cliques no logo RV | Modo blueprint 14s |
+| `locale-hopper` | 4 toggles idioma em 5s | Pulse no pill idioma |
+| `rocket-email` | E-mail com "vieira" | Animacao contato |
+| `vieira-mode` | `?mode=vieira` na URL | Visual Vieira no hero |
+| `theme-hunter` | 5 toggles tema em 3s | Espectro de cores 5s |
+| `arrow-hint` | 5 cliques na seta hero | Orbita da seta |
+| `filter-ninja` | 3+ filtros AND em Projetos | Pulse nos chips ativos 3s |
 
 **Removido na v2:** `portfolio-clicks` / `DevelopmentScreen`.
 
@@ -313,7 +316,7 @@ yarn preview  # preview do build
 | Filtro exclusivo | Multi AND |
 | Form inline | Modal |
 | Footer centralizado, X/6 | Full-width, X/7 dinâmico |
-| 6 eggs | 7 eggs (+ theme-hunter, arrow-hint) |
+| 6 eggs | 8 eggs (+ filter-ninja) |
 | Logo texto navbar | Component Logo RV |
 
 ---

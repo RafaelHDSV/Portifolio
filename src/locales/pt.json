@@ -260,6 +260,11 @@
         "name": "Órbita Vieira",
         "trigger": "5 cliques rápidos na seta do hero (sem rolar a página)",
         "result": "A mesma seta percorre o hero em órbita e volta à origem, sem alterar o fundo"
+      },
+      "filterNinja": {
+        "name": "Filtro ninja",
+        "trigger": "Ativar 3 ou mais filtros AND ao mesmo tempo em Projetos",
+        "result": "Chips ativos pulsam com brilho accent por 3 segundos (sempre que ativar 3+ filtros)"
       }
     }
   },

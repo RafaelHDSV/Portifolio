@@ -49,5 +49,11 @@ export const EASTER_EGG_CATALOG: EasterEggCatalogEntry[] = [
     nameKey: 'easterEgg.catalog.arrow.name',
     triggerKey: 'easterEgg.catalog.arrow.trigger',
     resultKey: 'easterEgg.catalog.arrow.result'
+  },
+  {
+    id: 'filter-ninja',
+    nameKey: 'easterEgg.catalog.filterNinja.name',
+    triggerKey: 'easterEgg.catalog.filterNinja.trigger',
+    resultKey: 'easterEgg.catalog.filterNinja.result'
   }
 ]

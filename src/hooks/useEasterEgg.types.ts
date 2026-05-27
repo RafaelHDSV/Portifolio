@@ -6,8 +6,9 @@ export type EasterEggId =
   | 'vieira-mode'
   | 'theme-hunter'
   | 'arrow-hint'
+  | 'filter-ninja'
 
-export const TOTAL_EGGS = 7
+export const TOTAL_EGGS = 8
 
 /** @deprecated legacy ids — migrated in EasterEggProvider */
 export const LEGACY_EGG_IDS = {

@@ -9,6 +9,7 @@ const EGG_EFFECT_CLASSES: Partial<Record<EasterEggId, string>> = {
   'locale-hopper': 'egg-locale-hopper-done',
   'theme-hunter': 'egg-theme-spectrum',
   'rocket-email': 'egg-vieira-launch',
+  'filter-ninja': 'egg-filter-ninja',
   konami: 'easter-egg-accent'
 }
 
@@ -29,7 +30,8 @@ function migrateEggId (id: string): EasterEggId | null {
     'rocket-email',
     'vieira-mode',
     'theme-hunter',
-    'arrow-hint'
+    'arrow-hint',
+    'filter-ninja'
   ]
   return valid.includes(id as EasterEggId) ? (id as EasterEggId) : null
 }
@@ -52,13 +54,22 @@ function saveUnlocked (set: Set<EasterEggId>) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]))
 }
 
+const effectClearTimeouts: Partial<Record<EasterEggId, number>> = {}
+
 function playEggEffect (id: EasterEggId, durationMs: number) {
   const className = EGG_EFFECT_CLASSES[id]
   if (!className) return
 
+  const pending = effectClearTimeouts[id]
+  if (pending) window.clearTimeout(pending)
+
+  document.documentElement.classList.remove(className)
+  void document.documentElement.offsetWidth
   document.documentElement.classList.add(className)
-  window.setTimeout(() => {
+
+  effectClearTimeouts[id] = window.setTimeout(() => {
     document.documentElement.classList.remove(className)
+    delete effectClearTimeouts[id]
   }, durationMs)
 }
 
@@ -177,6 +188,15 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
     }, 5000)
   }, [unlock])
 
+  const registerFilterNinja = useCallback(
+    (activeFilterCount: number) => {
+      if (activeFilterCount < 3) return
+      unlock('filter-ninja')
+      playEggEffect('filter-ninja', 3000)
+    },
+    [unlock]
+  )
+
   const triggerVieiraLaunch = useCallback(() => {
     unlock('rocket-email')
     setVieiraLaunchActive(true)
@@ -252,6 +272,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       incrementArrowClick,
       registerThemeToggle,
       registerLocaleToggle,
+      registerFilterNinja,
       revealAllInCatalog,
       triggerVieiraLaunch
     }),
@@ -268,6 +289,7 @@ export function EasterEggProvider ({ children }: { children: ReactNode }) {
       incrementArrowClick,
       registerThemeToggle,
       registerLocaleToggle,
+      registerFilterNinja,
       revealAllInCatalog,
       triggerVieiraLaunch
     ]
