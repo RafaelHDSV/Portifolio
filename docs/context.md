@@ -37,6 +37,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #33** (maio/2026): Empty state de filtros — mensagem i18n + icone + CTA `Limpar filtros` quando AND nao retorna projetos (`Projects.tsx`).
 
+**Issue #34** (maio/2026): Skeleton 16:9 — `ProjectCardSkeleton` com silhueta completa do Card + shimmer compartilhado (`src/styles/_shimmer.scss`); 6 placeholders no loading.
+
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` e `yarn test:e2e` passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42).
 
 ---

@@ -1,29 +1,30 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react'
 import { useMemo, useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { FaGithub } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
+import { FaGithub } from 'react-icons/fa'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import SectionTitle from '../../components/SectionTitle/SectionTitle'
 import { useContributorCounts } from '../../hooks/useContributorCounts'
 import { useEnrichedProjects } from '../../hooks/useEnrichedProjects'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
+import { gitHubToken } from '../../utils/environment'
+import { getProjectFilterLabel } from '../../utils/filterLabels'
 import {
   collectAvailableFilters,
   collectPortfolioRepoCandidates,
   filterProjectsMulti,
   mergeGitHubProjects
 } from '../../utils/mergeProjects'
-import { getProjectFilterLabel } from '../../utils/filterLabels'
-import { gitHubToken } from '../../utils/environment'
 import styles from './Project.module.scss'
+import ProjectCardSkeleton from './ProjectCardSkeleton'
 
 function ProjectsSkeleton () {
   return (
     <div className={styles.skeletonGrid} aria-hidden='true'>
       {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className={styles.skeletonCard} />
+        <ProjectCardSkeleton key={i} />
       ))}
     </div>
   )

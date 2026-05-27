@@ -1,3 +1,5 @@
+@use '@/styles/shimmer' as *;
+
 .projectsContainer {
   width: 100%;
 }
@@ -158,19 +160,94 @@
 }
 
 .skeletonCard {
-  height: 320px;
-  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  animation: pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
+.skeletonMedia {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  @include shimmer-block;
+  @include shimmer-reduced-motion;
+}
+
+.skeletonBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+}
+
+.skeletonTitle {
+  width: 55%;
+  height: 1.125rem;
+  border-radius: var(--radius-button);
+  @include shimmer-block;
+  @include shimmer-reduced-motion;
+}
+
+.skeletonBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.skeletonBadge {
+  width: 4.5rem;
+  height: 1.625rem;
+  border-radius: var(--radius-button);
+  @include shimmer-block;
+  @include shimmer-reduced-motion;
+}
+
+.skeletonLines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeletonLine {
+  height: 0.875rem;
+  border-radius: var(--radius-button);
+  @include shimmer-block;
+  @include shimmer-reduced-motion;
+
+  &:first-child {
+    width: 100%;
   }
-  50% {
-    opacity: 0.5;
+
+  &:last-child {
+    width: 82%;
+  }
+}
+
+.skeletonActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.skeletonAction {
+  width: 5.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-button);
+  @include shimmer-block;
+  @include shimmer-reduced-motion;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonMedia,
+  .skeletonTitle,
+  .skeletonBadge,
+  .skeletonLine,
+  .skeletonAction {
+    animation: none;
   }
 }
 
@@ -197,11 +274,5 @@
     border-color: var(--color-accent);
     color: var(--color-accent);
     transform: translateY(-2px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skeletonCard {
-    animation: none;
   }
 }

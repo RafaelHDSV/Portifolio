@@ -1,11 +1,11 @@
-# Issue #33 — Estado vazio quando filtros nao retornam projetos
+# Issue #34 — Skeleton 16:9 por card na secao Projetos
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/33
+GitHub: https://github.com/RafaelHDSV/Portifolio/issues/34
 
-- [x] Mensagem i18n (`emptyFiltersTitle`, `emptyFiltersHint`) PT/EN
-- [x] Icone `FunnelSimple` + CTA reutilizando `projects.clearFilters`
-- [x] Teste E2E React + Node -> empty -> limpar
+- [x] `ProjectCardSkeleton` — silhueta completa (16:9 + body)
+- [x] Shimmer compartilhado em `src/styles/_shimmer.scss` (About + Projects)
+- [x] 6 placeholders; `prefers-reduced-motion`
 
-Proposta: `.issues/2026-05-28-estado-vazio-filtros-projetos.md`
+Proposta: `.issues/2026-05-28-skeleton-16-9-projetos.md`
 
-Decisoes: titulo generico (A); icone sim; reutilizar clearFilters.
+Decisoes: silhueta completa; extrair shimmer; manter 6.

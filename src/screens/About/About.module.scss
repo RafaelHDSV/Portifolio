@@ -1,3 +1,5 @@
+@use '@/styles/shimmer' as *;
+
 .about {
   width: 100%;
 }
@@ -171,15 +173,9 @@
 
 .skeletonAvatar,
 .skeletonLine {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface) 25%,
-    var(--color-surface-elevated) 50%,
-    var(--color-surface) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  @include shimmer-block;
   border-radius: var(--radius-card);
+  @include shimmer-reduced-motion;
 }
 
 .skeletonAvatar {
@@ -213,15 +209,6 @@
   }
   &:nth-child(4) {
     width: 50%;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
   }
 }
 
