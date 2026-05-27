@@ -71,7 +71,11 @@ export default function Card ({
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
   const [statsExpanded, setStatsExpanded] = useState(false)
-  const [canHover, setCanHover] = useState(true)
+  const [canHover, setCanHover] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.matchMedia('(hover: hover)').matches
+      : true
+  )
 
   const statsOverlayId = `github-stats-${project.id}`
 
