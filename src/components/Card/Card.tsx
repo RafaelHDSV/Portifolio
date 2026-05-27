@@ -180,25 +180,36 @@ export default function Card ({
     if (!project.github) return null
 
     return (
-      <div className={styles.githubOverlay} aria-hidden='true'>
+      <div
+        className={styles.githubOverlay}
+        role='group'
+        aria-label={t('projects.githubStatsLabel', { name: project.name })}
+      >
         <img
           className={styles.githubOgImage}
           src={project.github.ogImage}
           alt=''
           loading='lazy'
+          aria-hidden
         />
         <div className={styles.githubOverlayMeta}>
           <div className={styles.githubStats}>
-            <span>
-              <StarIcon size={16} weight='fill' />
+            <span
+              aria-label={`${t('projects.statsStars')}: ${project.github.stars}`}
+            >
+              <StarIcon size={16} weight='fill' aria-hidden />
               {project.github.stars}
             </span>
-            <span>
-              <GitForkIcon size={16} weight='bold' />
+            <span
+              aria-label={`${t('projects.statsForks')}: ${project.github.forks}`}
+            >
+              <GitForkIcon size={16} weight='bold' aria-hidden />
               {project.github.forks}
             </span>
-            <span>
-              <WarningCircleIcon size={16} weight='bold' />
+            <span
+              aria-label={`${t('projects.statsIssues')}: ${project.github.openIssues}`}
+            >
+              <WarningCircleIcon size={16} weight='bold' aria-hidden />
               {project.github.openIssues}
             </span>
           </div>
@@ -267,8 +278,9 @@ export default function Card ({
               href={project.urlProject}
               variant='secondary'
               className={styles.linkBtn}
+              aria-label={t('projects.openDemo', { name: project.name })}
             >
-              <ArrowSquareOutIcon size={16} weight='bold' />
+              <ArrowSquareOutIcon size={16} weight='bold' aria-hidden />
               {t('projects.viewDemo')}
             </Button>
           )}
@@ -276,8 +288,9 @@ export default function Card ({
             href={project.urlGitHub}
             variant='secondary'
             className={styles.linkBtn}
+            aria-label={t('projects.openGitHub', { name: project.name })}
           >
-            <GithubLogoIcon size={16} weight='bold' />
+            <GithubLogoIcon size={16} weight='bold' aria-hidden />
             GitHub
           </Button>
         </div>

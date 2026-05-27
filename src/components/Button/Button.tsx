@@ -1,4 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode
+} from 'react'
 import styles from './Button.module.scss'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost'
@@ -16,12 +20,16 @@ export default function Button ({
   className = '',
   href,
   download,
+  type = 'button',
+  disabled,
   ...props
 }: ButtonProps) {
   const classes = `${styles.button} ${styles[variant]} ${className}`.trim()
 
   if (href) {
     const isExternal = href.startsWith('http')
+    const anchorProps = props as AnchorHTMLAttributes<HTMLAnchorElement>
+
     return (
       <a
         className={classes}
@@ -29,6 +37,7 @@ export default function Button ({
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
         download={download}
+        {...anchorProps}
       >
         {children}
       </a>
@@ -36,7 +45,7 @@ export default function Button ({
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} type={type} disabled={disabled} {...props}>
       {children}
     </button>
   )
