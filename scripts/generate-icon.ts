@@ -3,41 +3,50 @@ import { dirname } from 'node:path'
 import sharp from 'sharp'
 
 const LOGO_SOURCE = 'src/assets/logo-rv-mark.png'
-const ICON_OUT = 'public/icon.png'
 const OG_LOGO_OUT = 'public/og/logo-rv.png'
 const CANVAS = 512
 const MARK_RATIO = 0.58
 const BG = { r: 10, g: 10, b: 11, alpha: 1 }
 
-async function buildSquareLogo (outputPath: string): Promise<void> {
+const ICON_OUTPUTS = [
+  { path: 'public/icon.png', size: 512 },
+  { path: 'public/icon-192.png', size: 192 },
+  { path: 'public/icon-48.png', size: 48 },
+  { path: 'public/apple-touch-icon.png', size: 180 }
+] as const
+
+async function buildLogoPng (canvasSize: number): Promise<Buffer> {
   if (!existsSync(LOGO_SOURCE)) {
     throw new Error(`logo source not found at ${LOGO_SOURCE}`)
   }
 
-  const markSize = Math.round(CANVAS * MARK_RATIO)
+  const markSize = Math.round(canvasSize * MARK_RATIO)
   const markBuffer = await sharp(LOGO_SOURCE)
     .resize(markSize, markSize, { fit: 'contain' })
     .png()
     .toBuffer()
 
-  mkdirSync(dirname(outputPath), { recursive: true })
-
-  await sharp({
+  return sharp({
     create: {
-      width: CANVAS,
-      height: CANVAS,
+      width: canvasSize,
+      height: canvasSize,
       channels: 4,
       background: BG
     }
   })
     .composite([{ input: markBuffer, gravity: 'center' }])
     .png()
-    .toFile(outputPath)
+    .toBuffer()
 }
 
 async function main (): Promise<void> {
-  await buildSquareLogo(ICON_OUT)
-  console.log(`generated ${ICON_OUT}`)
+  const base = await buildLogoPng(CANVAS)
+
+  for (const { path, size } of ICON_OUTPUTS) {
+    mkdirSync(dirname(path), { recursive: true })
+    await sharp(base).resize(size, size).png().toFile(path)
+    console.log(`generated ${path} (${size}x${size})`)
+  }
 
   copyFileSync(LOGO_SOURCE, OG_LOGO_OUT)
   console.log(`copied ${LOGO_SOURCE} → ${OG_LOGO_OUT}`)

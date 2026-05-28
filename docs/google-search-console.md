@@ -142,7 +142,41 @@ O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode l
 
 ---
 
-## 9. Referencias
+## 10. Favicon e imagem no resultado do Google
+
+O Google **nao atualiza na hora**. Favicon e thumbnail (imagem ao lado do snippet) podem levar **dias ou semanas** apos deploy e reindexacao.
+
+### O que o site expoe
+
+| Recurso | URL | Uso |
+|---------|-----|-----|
+| Favicon 48px | `/icon-48.png`, `/favicon.ico` | Icone ao lado do resultado |
+| Favicon 192/512 | `/icon-192.png`, `/icon.png` | PWA / alta resolucao |
+| OG / thumbnail | `/og-pt.png` (1200x630) | Imagem secundaria no Google |
+| JSON-LD | `index.html` | `WebPage.primaryImageOfPage`, `Person.image` |
+| Sitemap imagem | `sitemap.xml` | `<image:image>` para o crawler |
+
+Gerados no build: `yarn tsx scripts/generate-icon.ts` e `yarn tsx scripts/generate-og.ts`.
+
+### Por que aparece "Vercel" ou globo generico
+
+- Indexacao antiga (antes do favicon/OG corretos).
+- Google ainda nao re-rastreou a home apos o deploy.
+- Falta `og:site_name` (corrigido em `index.html`).
+
+### Acelerar a atualizacao
+
+1. **Deploy** com as alteracoes de SEO (favicon + OG + JSON-LD).
+2. Search Console → **Inspecao de URL** → `https://rafaelhdsv.vercel.app/` → **Solicitar indexacao**.
+3. Confirme que abrem no navegador:
+   - https://rafaelhdsv.vercel.app/icon-48.png
+   - https://rafaelhdsv.vercel.app/og-pt.png
+4. Teste de compartilhamento: [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) ou [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) (valida OG).
+5. **Thumbnail no Google nao e garantida** — o algoritmo decide por relevancia da query. Buscar pelo **dominio** (`rafaelhdsv.vercel.app`) costuma mostrar antes que busca por nome.
+
+---
+
+## 11. Referencias
 
 - [Documentacao Search Console](https://support.google.com/webmasters/)
 - [Sitemaps — protocolo](https://www.sitemaps.org/protocol.html)

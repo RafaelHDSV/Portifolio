@@ -4,6 +4,10 @@
   "buildCommand": "yarn build",
   "rewrites": [
     {
+      "source": "/favicon.ico",
+      "destination": "/icon-48.png"
+    },
+    {
       "source": "/recruiter",
       "destination": "/index.html"
     },
@@ -24,6 +28,33 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/icon.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/icon-:size(48|192).png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, immutable"
         }
       ]
     }
