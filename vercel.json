@@ -4,10 +4,6 @@
   "buildCommand": "yarn build",
   "rewrites": [
     {
-      "source": "/favicon.ico",
-      "destination": "/icon-48.png"
-    },
-    {
       "source": "/recruiter",
       "destination": "/index.html"
     },

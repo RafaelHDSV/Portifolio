@@ -12,7 +12,8 @@ const ICON_OUTPUTS = [
   { path: 'public/icon.png', size: 512 },
   { path: 'public/icon-192.png', size: 192 },
   { path: 'public/icon-48.png', size: 48 },
-  { path: 'public/apple-touch-icon.png', size: 180 }
+  { path: 'public/apple-touch-icon.png', size: 180 },
+  { path: 'public/favicon.ico', size: 48 }
 ] as const
 
 async function buildLogoPng (canvasSize: number): Promise<Buffer> {
