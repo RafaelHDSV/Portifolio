@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
 Sitemap: https://rafaelhdsv.vercel.app/sitemap.xml

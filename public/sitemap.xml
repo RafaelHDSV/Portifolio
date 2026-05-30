@@ -4,7 +4,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://rafaelhdsv.vercel.app/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rafaelhdsv.vercel.app/?lang=pt" />
@@ -14,6 +14,11 @@
       <image:loc>https://rafaelhdsv.vercel.app/og-pt.png</image:loc>
       <image:title>Rafael Vieira — Desenvolvedor Full-Stack</image:title>
       <image:caption>Portfolio de Rafael Vieira, desenvolvedor Full-Stack</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rafaelhdsv.vercel.app/og/avatar.jpg</image:loc>
+      <image:title>Rafael Vieira</image:title>
+      <image:caption>Foto de perfil — Rafael Vieira</image:caption>
     </image:image>
   </url>
 </urlset>

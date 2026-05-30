@@ -151,10 +151,12 @@ O Google **nao atualiza na hora**. Favicon e thumbnail (imagem ao lado do snippe
 | Recurso | URL | Uso |
 |---------|-----|-----|
 | Favicon 48px | `/icon-48.png`, `/favicon.ico` | Icone ao lado do resultado |
+| Logo schema | `/icon-192.png` | `WebSite.logo` no JSON-LD |
+| Foto Person | `/og/avatar.jpg` | `Person.image` (quadrada) |
 | Favicon 192/512 | `/icon-192.png`, `/icon.png` | PWA / alta resolucao |
-| OG / thumbnail | `/og-pt.png` (1200x630) | Imagem secundaria no Google |
-| JSON-LD | `index.html` | `WebPage.primaryImageOfPage`, `Person.image` |
-| Sitemap imagem | `sitemap.xml` | `<image:image>` para o crawler |
+| OG / thumbnail | `/og-pt.png` (1200x630) | `og:image` + `WebPage.primaryImageOfPage` |
+| JSON-LD | `index.html` | WebSite, Person, WebPage |
+| Sitemap imagem | `sitemap.xml` | `og-pt.png` + `avatar.jpg` |
 
 Gerados no build: `yarn tsx scripts/generate-icon.ts` e `yarn tsx scripts/generate-og.ts`.
 
@@ -173,6 +175,31 @@ Gerados no build: `yarn tsx scripts/generate-icon.ts` e `yarn tsx scripts/genera
    - https://rafaelhdsv.vercel.app/og-pt.png
 4. Teste de compartilhamento: [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) ou [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) (valida OG).
 5. **Thumbnail no Google nao e garantida** — o algoritmo decide por relevancia da query. Buscar pelo **dominio** (`rafaelhdsv.vercel.app`) costuma mostrar antes que busca por nome.
+
+### Search Console mostra "Dados em processamento"
+
+Se a Visao geral exibe **"Dados em processamento: volte em mais ou menos um dia"** e **0 cliques**, a propriedade foi criada ha pouco. Isso e normal:
+
+1. O Google ainda nao terminou o primeiro rastreamento completo.
+2. Favicon e thumbnail **so aparecem depois** que a indexacao estabilizar.
+3. Enquanto isso, o snippet pode mostrar **"Vercel"** e globo generico (hostname `*.vercel.app`).
+
+**Acoes enquanto processa:**
+
+1. Menu **Indexacao** → **Paginas** — confira se a URL `/` aparece como "Indexada".
+2. **Inspecao de URL** → teste a URL publicada → compare HTML ao codigo-fonte local.
+3. **Sitemaps** — status "Sucesso" em `sitemap.xml`.
+4. Repita **Solicitar indexacao** apos cada deploy relevante de SEO.
+
+### Painel da direita vs thumbnail ao lado do link
+
+| Elemento | O que e | Como conseguir |
+|----------|---------|----------------|
+| Thumbnail ao lado do resultado | Preview da pagina (OG) | `og-pt.png` + indexacao; nao garantido |
+| Painel da direita (Knowledge Panel) | Card de entidade (pessoa/marca) | Autoridade + `Person` + `sameAs`; raro em portfolio novo |
+| Carrossel (GitHub, LinkedIn) | Outras URLs indexadas suas | Normal ao buscar por dominio; nao e a OG do site |
+
+Dominio proprio (`rafaelvieira.dev`) acelera sair do branding "Vercel" no resultado.
 
 ---
 
