@@ -19,6 +19,24 @@
   ],
   "headers": [
     {
+      "source": "/recruiter",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/recruiter/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/og-(pt|en).png",
       "headers": [
         {

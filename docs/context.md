@@ -295,7 +295,7 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 **index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200×630, gerado no build, #28/#37). Verificação Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
 
-**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (hreflang PT/EN).
+**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home + imagens OG). Canonical único em `/`; i18n client-side sem hreflang com query string.
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global. Cards de projetos (#35): labels contextuais em links Demo/GitHub; overlay stats com `role="group"` e métricas nomeadas; visível em `:focus-within`.
 

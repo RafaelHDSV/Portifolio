@@ -14,7 +14,9 @@ Guia para registrar o site no [Google Search Console](https://search.google.com/
 |------|---------|-----------|
 | Meta description + OG | `index.html` | Titulo, descricao, Open Graph, Twitter Card, JSON-LD (`Person`) |
 | `robots.txt` | `public/robots.txt` | Permite indexacao e aponta para o sitemap |
-| `sitemap.xml` | `public/sitemap.xml` | URL principal + hreflang PT/EN |
+| `sitemap.xml` | `public/sitemap.xml` | URL principal (home) + imagens OG |
+| Canonical unico | `index.html` + `src/i18n/index.ts` | Apenas `/` indexavel; idioma via client-side |
+| `/recruiter` noindex | `vercel.json` | Header `X-Robots-Tag: noindex, nofollow` |
 | Verificacao Google | `vite.config.ts` + `.env` | Meta tag injetada no build quando `VITE_GOOGLE_SITE_VERIFICATION` esta definida |
 
 ---
@@ -139,6 +141,34 @@ O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode l
 - **Novo deploy:** nao e necessario reenviar o sitemap a cada deploy; o Google revisita periodicamente.
 - **Mudanca de dominio:** atualize `index.html`, `public/sitemap.xml`, `public/robots.txt` e crie nova propriedade no Search Console.
 - **Token invalido:** gere nova verificacao no Search Console e atualize `VITE_GOOGLE_SITE_VERIFICATION`.
+
+---
+
+## 9. Problemas comuns de indexacao (GSC)
+
+### "Pagina alternativa com tag canonica adequada"
+
+**Causa tipica neste projeto:** URLs `/?lang=pt` ou `/?lang=en` eram declaradas como alternates (hreflang + sitemap), mas o canonical apontava para `/`. O JavaScript ainda sobrescrevia o canonical para `/?lang=...` apos o boot — sinal conflitante para o Google.
+
+**Correcao aplicada:**
+
+- Canonical fixo em `https://rafaelhdsv.vercel.app/` (HTML estatico; JS nao altera mais).
+- hreflang com query string removido do `index.html` e do `sitemap.xml` (SPA com i18n client-side usa uma unica URL).
+- Parametro `?lang=` continua funcionando para links compartilhados, mas e removido da barra de endereco com `history.replaceState` apos aplicar o idioma.
+
+Esse status para URLs antigas `/?lang=*` deve sumir apos re-rastreamento (dias).
+
+### "Rastreada, mas nao indexada no momento"
+
+**Causa tipica:** `/recruiter` — pagina auxiliar da SPA, sem valor de busca organica. O `noindex` so existia via JavaScript (`useRecruiterNoIndex`), invisivel para parte do crawl.
+
+**Correcao aplicada:** header HTTP `X-Robots-Tag: noindex, nofollow` em `/recruiter` no `vercel.json`.
+
+**Apos deploy:**
+
+1. Search Console → **Sitemaps** → reenviar `sitemap.xml` (opcional, acelera).
+2. **Inspecao de URL** → `https://rafaelhdsv.vercel.app/` → **Solicitar indexacao**.
+3. Em **Indexacao → Paginas**, aguarde 3–14 dias; espere **1 URL indexada** (`/`) e queda das nao indexadas.
 
 ---
 
