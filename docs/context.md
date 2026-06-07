@@ -51,7 +51,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueio no catálogo na 1ª vez com 3+ filtros AND em Projetos; **efeito visual (pulse nos chips ativos) repete** sempre que um filtro é adicionado com 3+ ativos; `playEggEffect` reinicia animação se já estiver rodando; catálogo 8/8.
 
-**Status de build:** `yarn build`, `yarn lint`, `yarn test` (~51) e `yarn test:e2e` (~20 em 9 specs) passam. `yarn lhci` roda com assert Performance em **warn** (baseline mobile local ~0.42). CI: `.github/workflows/lighthouse.yml` em push `main`.
+**Status de build:** `yarn build`, `yarn lint`, `yarn test` (~51) e `yarn test:e2e` passam.
 
 ---
 
