@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noEmit": true,
+    "resolveJsonModule": true,
     "jsx": "react-jsx",
     "types": ["node", "vitest/config"]
   },

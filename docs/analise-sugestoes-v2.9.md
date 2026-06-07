@@ -74,7 +74,7 @@ Hoje: 18 repos da API + `projects.config` como fallback. Sugestao:
 | **A11y nos cards** | `aria-label` nos botoes GitHub/demo; foco visivel no overlay |
 | **Touch: stats no card** | Em mobile, botao "Ver stats" ou stats sempre visiveis no rodape do card |
 | **Screenshots OG reais** | Atualizar `public/main.png` (1200x630) com foto + marca |
-| **Secao LinkedIn** | Codigo existe (`LinkedInPosts`) mas pode estar desativada — revisar se reativa ou remove dead code |
+| **Secao LinkedIn** | Removida (jun/2026) — link de perfil permanece em Contato/Footer |
 
 ---
 

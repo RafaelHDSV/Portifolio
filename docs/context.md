@@ -45,7 +45,9 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #37** (maio/2026): OG real — template com foto (avatar GitHub em `public/og/avatar.jpg`), marca RV e cargo Full-Stack; `og-pt.png`/`og-en.png` no build; `main.png` espelha `og-pt.png`.
 
-**Issue #38** (maio/2026): Seção LinkedIn (posts) **removida do escopo** — dead code i18n (`linkedin.*`, `nav.linkedin`) eliminado; link de perfil LinkedIn permanece em Contato, Footer e modo recrutador.
+**Issue #38** (maio/2026): Seção LinkedIn (posts) **removida do escopo** — dead code i18n eliminado; link de perfil permanece em Contato/Footer/Recrutador.
+
+**Issue LinkedIn posts** (jun/2026): Seção implementada e **removida novamente** (jun/2026) — complexidade de integração (RSS, Apify, API, Voyager) superou o benefício; link de perfil permanece em Contato/Footer/Recrutador.
 
 **Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueio no catálogo na 1ª vez com 3+ filtros AND em Projetos; **efeito visual (pulse nos chips ativos) repete** sempre que um filtro é adicionado com 3+ ativos; `playEggEffect` reinicia animação se já estiver rodando; catálogo 8/8.
 
