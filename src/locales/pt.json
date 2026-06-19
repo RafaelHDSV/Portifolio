@@ -120,8 +120,8 @@
     "back": "Voltar à exibição normal",
     "modeLabel": "Modo recrutador",
     "role": "Desenvolvedor Full Stack",
-    "bio": "Full Stack Júnior III e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web escaláveis.",
-    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Júnior III com liderança de equipe. Desenvolvo com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
+    "bio": "Desenvolvedor Full Stack Pleno I e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web escaláveis.",
+    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Pleno I com liderança de equipe. Desenvolvo com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
     "stackTitle": "Stack principal",
     "stackSubtitle": "Ferramentas que uso no dia a dia",
     "stackAlsoLabel": "Também trabalho com",
@@ -173,7 +173,13 @@
     ],
     "experienceItems": [
       {
-        "period": "Out 2025 — Presente",
+        "period": "Jun 2026 — Presente",
+        "title": "Desenvolvedor Full Stack Pleno I · Líder de Equipe",
+        "company": "AGX Software",
+        "description": "Sistemas web escaláveis com React, TypeScript, Sass, Node.js e MongoDB; maior autonomia na análise de requisitos e definição de soluções; liderança do squad e entregas alinhadas a prazos e qualidade."
+      },
+      {
+        "period": "Out 2025 — Jun 2026",
         "title": "Desenvolvedor Full Stack Júnior III · Líder de Equipe",
         "company": "AGX Software",
         "description": "Sistemas web escaláveis com React, TypeScript, Sass, Node.js e MongoDB; liderança do time, análise de requisitos e entregas alinhadas a prazos e qualidade."

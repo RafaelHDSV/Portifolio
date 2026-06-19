@@ -120,8 +120,8 @@
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
     "role": "Full Stack Developer",
-    "bio": "Junior Full Stack Developer III and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB for scalable web systems.",
-    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Junior Full Stack III with team leadership. I build with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
+    "bio": "Mid-level Full Stack Developer I and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB for scalable web systems.",
+    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Mid-level Full Stack I with team leadership. I build with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
@@ -173,7 +173,13 @@
     ],
     "experienceItems": [
       {
-        "period": "Oct 2025 — Present",
+        "period": "Jun 2026 — Present",
+        "title": "Mid-level Full Stack Developer I · Team Lead",
+        "company": "AGX Software",
+        "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; greater autonomy in requirements analysis and solution design; squad leadership and on-time, quality-focused delivery."
+      },
+      {
+        "period": "Oct 2025 — Jun 2026",
         "title": "Junior Full Stack Developer III · Team Lead",
         "company": "AGX Software",
         "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; team leadership, requirements analysis and on-time, quality-focused delivery."
