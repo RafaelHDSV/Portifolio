@@ -8,14 +8,21 @@ test.describe('Links externos', () => {
     await page.goto('/?lang=pt')
   })
 
-  test('link CV na navbar aponta para PDF remoto', async ({ page }) => {
+  test('link CV na navbar aponta para PDF publico', async ({ page }) => {
     const cvLink = page.getByRole('navigation').getByRole('link', { name: 'CV' })
     await expect(cvLink).toHaveAttribute('href', CV_URL)
   })
 
-  test('link CV no hero aponta para PDF remoto', async ({ page }) => {
+  test('link CV no hero aponta para PDF publico', async ({ page }) => {
     const cvLink = page.getByRole('link', { name: 'Baixar CV' }).first()
     await expect(cvLink).toHaveAttribute('href', CV_URL)
+  })
+
+  test('CV responde 200 no GitHub raw', async ({ request }) => {
+    const response = await request.head(CV_URL)
+    expect(response.status()).toBe(200)
+    const contentType = response.headers()['content-type'] ?? ''
+    expect(contentType).toMatch(/pdf|octet-stream/)
   })
 
   test('card GitHub na secao contato aponta para perfil', async ({ page }) => {

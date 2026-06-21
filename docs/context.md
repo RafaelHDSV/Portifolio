@@ -51,6 +51,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueio no catálogo na 1ª vez com 3+ filtros AND em Projetos; **efeito visual (pulse nos chips ativos) repete** sempre que um filtro é adicionado com 3+ ativos; `playEggEffect` reinicia animação se já estiver rodando; catálogo 8/8.
 
+**Issue #47** (jun/2026): CV publico acessivel — repo [`cvs`](https://github.com/RafaelHDSV/cvs) publico; `CV_URL` aponta para raw `Curriculo.pdf` sem auth; E2E valida href + HTTP 200.
+
 **Status de build:** `yarn build`, `yarn lint`, `yarn test` (~51) e `yarn test:e2e` passam.
 
 ---
@@ -81,7 +83,7 @@ src/
 │   ├── SectionTitle/          # Título + subtítulo + linha decorativa
 │   └── SwitchTheme/           # Toggle pill alinhado ao locale
 ├── constants/
-│   ├── cv.ts                  # CV_URL remoto (PERSONAL-CVs), GITHUB_USERNAME
+│   ├── cv.ts                  # CV_URL raw (repo publico cvs), GITHUB_USERNAME
 │   ├── easterEggCatalog.ts    # Catálogo i18n dos 8 eggs
 │   ├── projects.config.ts     # Curadoria: imagens, descrições, forceInclude/Exclude, demoPriority
 │   └── images.tsx             # Imports de screenshots
@@ -195,7 +197,7 @@ Tokens em `src/styles/_variables.scss`:
 ### Navbar
 - Logo component `RV` (5 cliques = egg console)
 - Toggle PT | EN e tema em estilo **pill**
-- Link "CV" aponta para PDF remoto (`constants/cv.ts`)
+- Link "CV" aponta para PDF publico no GitHub ([`cvs`](https://github.com/RafaelHDSV/cvs), `constants/cv.ts`)
 - Botão **Recrutador** ativa modo e navega para `/recruiter`
 - Menu hamburger `< 768px`, link ativo via `useActiveSection`
 
@@ -209,7 +211,7 @@ Tokens em `src/styles/_variables.scss`:
 - Identidade **Full-Stack** (i18n + meta tags)
 - Grid 2 colunas info; ícones alinhados em `UserInfoItem`
 - Sem tag "Aberto a oportunidades"
-- CV remoto + "Ver no GitHub"
+- CV publico (GitHub raw) + "Ver no GitHub"
 
 ### Stack (Languages)
 - Grid responsivo com ícones grandes (~2.25rem)
@@ -263,7 +265,7 @@ Tokens em `src/styles/_variables.scss`:
 - Token: `VITE_GITHUB_ACCESS_TOKEN`
 - REST: `/user`, `/user/repos` (recentes)
 - GraphQL: pinned repositories (`getPinnedRepos`)
-- CV: raw de `github.com/RafaelHDSV/PERSONAL-CVs/.../Currículo.pdf`
+- CV: raw publico de [`github.com/RafaelHDSV/cvs`](https://github.com/RafaelHDSV/cvs) — `Curriculo.pdf` (atualizado via push no repo cvs)
 
 ### EmailJS
 - Variáveis: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
@@ -348,6 +350,13 @@ yarn lhci     # Lighthouse CI (autorun local)
 | Footer centralizado, X/6 | Full-width, X/8 dinâmico |
 | 6 eggs | 8 eggs (+ filter-ninja) |
 | Logo texto navbar | Component Logo RV |
+
+## 11.1 Mudanca v3.2 (Issue #47)
+
+| v2 (quebrado) | v3.2 |
+|---------------|------|
+| CV raw PERSONAL-CVs (privado → 404 anonimo) | CV raw [`RafaelHDSV/cvs`](https://github.com/RafaelHDSV/cvs) (publico) |
+| Atualizacao via push no repo fonte | Mesmo fluxo; visitantes anonimos acessam PDF |
 
 ---
 
