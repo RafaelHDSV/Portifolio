@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { shouldIncludeRepo } from './repoFilters'
 
 vi.mock('../constants/projects.config', () => ({
+  FORCE_EXCLUDED_REPO_NAMES: ['quick-hide'],
   projectsConfig: [
     {
       key: '1',
@@ -73,6 +74,20 @@ describe('shouldIncludeRepo curation flags', () => {
           name: 'legacy-hidden',
           fork: false,
           html_url: 'https://github.com/RafaelHDSV/legacy-hidden'
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(false)
+  })
+
+  it('exclui repo listado em FORCE_EXCLUDED_REPO_NAMES', () => {
+    expect(
+      shouldIncludeRepo(
+        {
+          id: 4,
+          name: 'quick-hide',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/quick-hide'
         },
         'RafaelHDSV'
       )

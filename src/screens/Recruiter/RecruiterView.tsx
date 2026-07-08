@@ -27,6 +27,7 @@ import {
 import { useContributorCounts } from '../../hooks/useContributorCounts'
 import useGetMe from '../../hooks/useGetMe'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
+import { useRepoLanguages } from '../../hooks/useRepoLanguages'
 import {
   collectPortfolioRepoCandidates,
   mergeGitHubProjects
@@ -78,9 +79,16 @@ export default function RecruiterView() {
   )
 
   const contributorCounts = useContributorCounts(repoNames)
+  const languageCounts = useRepoLanguages(repoNames)
 
   const featuredProjects = useMemo(() => {
-    const all = mergeGitHubProjects(pinned, recent, locale, contributorCounts)
+    const all = mergeGitHubProjects(
+      pinned,
+      recent,
+      locale,
+      contributorCounts,
+      languageCounts
+    )
     const picked = RECRUITER_FEATURED_REPO_ORDER.map((target) =>
       all.find((p) => matchRepoName(p.repoName, target))
     ).filter((p): p is NonNullable<typeof p> => Boolean(p))
@@ -90,7 +98,7 @@ export default function RecruiterView() {
     return all.filter((p) => p.pinned).slice(0, 3).length
       ? all.filter((p) => p.pinned).slice(0, 3)
       : all.slice(0, 3)
-  }, [pinned, recent, locale, contributorCounts])
+  }, [pinned, recent, locale, contributorCounts, languageCounts])
 
   const handleViewAllProjects = () => {
     window.open('https://github.com/RafaelHDSV?tab=repositories', '_blank')

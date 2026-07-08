@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ProjectCardData } from '../components/Card/Card'
 import { GITHUB_USERNAME } from '../constants/cv'
-import { GithubRepository } from '../repository/GithubRepository'
 import { applyMediaToCard } from '../utils/mergeProjects'
-import { mapGithubLanguagesToBadges } from '../utils/mapGithubLanguages'
 import { resolveRepoMedia } from '../utils/resolveRepoMedia'
 
 function withMediaLoading (projects: ProjectCardData[]): ProjectCardData[] {
@@ -41,15 +39,6 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
     let cancelled = false
 
     const enrich = async () => {
-      const repoNames = projects
-        .map((project) => project.repoName)
-        .filter(Boolean)
-
-      const languagesMap = await GithubRepository.getRepoLanguagesBatch(
-        GITHUB_USERNAME,
-        repoNames
-      )
-
       const updates = await Promise.all(
         projects.map(async (project) => {
           let card: ProjectCardData = {
@@ -69,16 +58,7 @@ export function useEnrichedProjects (projects: ProjectCardData[]) {
             card = { ...card, mediaLoading: false }
           }
 
-          const apiLangs =
-            languagesMap.get(project.repoName.toLowerCase()) ?? []
-
-          if (cancelled || apiLangs.length === 0) return card
-
-          const languages = mapGithubLanguagesToBadges(apiLangs, [])
-          return {
-            ...card,
-            languages: languages.length ? languages : card.languages
-          }
+          return card
         })
       )
 

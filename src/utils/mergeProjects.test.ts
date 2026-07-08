@@ -4,6 +4,7 @@ import { IGithubResponseRepo } from '../types/IGithub'
 import {
   applyMediaToCard,
   sortReposByContributorsThenStarsSizeRecent,
+  sortReposByRelevance,
   sortReposByStarsSizeThenRecent
 } from './mergeProjects'
 
@@ -95,6 +96,64 @@ describe('sortReposByContributorsThenStarsSizeRecent', () => {
     )
 
     expect(sorted[0].name).toBe('collab')
+  })
+})
+
+describe('sortReposByRelevance', () => {
+  it('prioritizes language count before size, stars and date', () => {
+    const multiLang = makeRepo({
+      name: 'multi-lang',
+      stargazers_count: 1,
+      size: 50,
+      updated_at: '2026-01-01T00:00:00Z'
+    })
+    const largeSingleLang = makeRepo({
+      name: 'large-single',
+      stargazers_count: 100,
+      size: 5000,
+      updated_at: '2026-06-01T00:00:00Z'
+    })
+
+    const contributorCounts = new Map<string, number>()
+    const languageCounts = new Map([
+      ['multi-lang', ['TypeScript', 'JavaScript', 'CSS']],
+      ['large-single', ['JavaScript']]
+    ])
+
+    const sorted = [largeSingleLang, multiLang].sort((a, b) =>
+      sortReposByRelevance(a, b, contributorCounts, languageCounts)
+    )
+
+    expect(sorted[0].name).toBe('multi-lang')
+  })
+
+  it('uses size, stars and date as tie-breakers after languages', () => {
+    const recentSmall = makeRepo({
+      name: 'recent-small',
+      stargazers_count: 2,
+      size: 100,
+      updated_at: '2026-06-01T00:00:00Z'
+    })
+    const olderLarge = makeRepo({
+      name: 'older-large',
+      stargazers_count: 10,
+      size: 1000,
+      updated_at: '2026-01-01T00:00:00Z'
+    })
+
+    const languageCounts = new Map([
+      ['recent-small', ['TypeScript', 'CSS']],
+      ['older-large', ['TypeScript', 'CSS']]
+    ])
+
+    const sorted = [recentSmall, olderLarge].sort((a, b) =>
+      sortReposByRelevance(a, b, new Map(), languageCounts)
+    )
+
+    expect(sorted.map((repo) => repo.name)).toEqual([
+      'older-large',
+      'recent-small'
+    ])
   })
 })
 

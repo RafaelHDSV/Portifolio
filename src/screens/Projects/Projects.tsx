@@ -11,6 +11,7 @@ import { useContributorCounts } from '../../hooks/useContributorCounts'
 import { useEnrichedProjects } from '../../hooks/useEnrichedProjects'
 import { useEasterEgg } from '../../hooks/useEasterEgg'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
+import { useRepoLanguages } from '../../hooks/useRepoLanguages'
 import { gitHubToken } from '../../utils/environment'
 import { getProjectFilterLabel } from '../../utils/filterLabels'
 import {
@@ -54,10 +55,18 @@ function ProjectsContent () {
   )
 
   const contributorCounts = useContributorCounts(repoNames)
+  const languageCounts = useRepoLanguages(repoNames)
 
   const allProjects = useMemo(
-    () => mergeGitHubProjects(pinned, recent, locale, contributorCounts),
-    [pinned, recent, locale, contributorCounts]
+    () =>
+      mergeGitHubProjects(
+        pinned,
+        recent,
+        locale,
+        contributorCounts,
+        languageCounts
+      ),
+    [pinned, recent, locale, contributorCounts, languageCounts]
   )
 
   const enrichedProjects = useEnrichedProjects(allProjects)

@@ -1,5 +1,5 @@
-import { images } from './images'
 import { IProjectConfig } from '../types/IProject'
+import { images } from './images'
 
 /**
  * Curadoria hibrida (Issue #31):
@@ -11,6 +11,16 @@ import { IProjectConfig } from '../types/IProject'
  * Exemplo (nao ativo):
  * { repoName: 'MedIT', demoPriority: 'root', forceInclude: true, ... }
  */
+
+/**
+ * Lista rapida para ocultar repositorios da listagem sem precisar criar
+ * uma entrada completa em projectsConfig. Nome do repo, case-insensitive.
+ */
+export const FORCE_EXCLUDED_REPO_NAMES: string[] = [
+  'cvs',
+  'serveruler-redirect',
+  'Mario-Game'
+]
 
 export const projectsConfig: IProjectConfig[] = [
   {

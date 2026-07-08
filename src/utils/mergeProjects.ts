@@ -3,6 +3,7 @@ import { projectsConfig } from '../constants/projects.config'
 import { GITHUB_USERNAME } from '../constants/cv'
 import { IGithubResponseRepo } from '../types/IGithub'
 import { ReadmeMedia } from './readmeMedia'
+import { mapGithubLanguagesToBadges } from './mapGithubLanguages'
 import {
   configToSyntheticRepo,
   filterReposForPortfolio
@@ -47,17 +48,53 @@ function repoContributorCount (
   return contributorCounts.get(repo.name?.toLowerCase() ?? '') ?? 0
 }
 
-export function sortReposByContributorsThenStarsSizeRecent (
+function repoLanguageCount (
+  repo: IGithubResponseRepo,
+  languageCounts: Map<string, string[]>
+): number {
+  const langs = languageCounts.get(repo.name?.toLowerCase() ?? '')
+  if (langs && langs.length > 0) return langs.length
+
+  const config = projectsConfig.find(
+    (p) => p.repoName?.toLowerCase() === repo.name?.toLowerCase()
+  )
+  if (config?.languages?.length) return config.languages.length
+
+  return repo.language ? 1 : 0
+}
+
+export function sortReposByRelevance (
   a: IGithubResponseRepo,
   b: IGithubResponseRepo,
-  contributorCounts: Map<string, number>
+  contributorCounts: Map<string, number>,
+  languageCounts: Map<string, string[]> = new Map()
 ): number {
   const contribDiff =
     repoContributorCount(b, contributorCounts) -
     repoContributorCount(a, contributorCounts)
   if (contribDiff !== 0) return contribDiff
 
-  return sortReposByStarsSizeThenRecent(a, b)
+  const langDiff =
+    repoLanguageCount(b, languageCounts) - repoLanguageCount(a, languageCounts)
+  if (langDiff !== 0) return langDiff
+
+  const sizeDiff = (b.size ?? 0) - (a.size ?? 0)
+  if (sizeDiff !== 0) return sizeDiff
+
+  const starDiff = (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
+  if (starDiff !== 0) return starDiff
+
+  const dateA = new Date(a.updated_at ?? 0).getTime()
+  const dateB = new Date(b.updated_at ?? 0).getTime()
+  return dateB - dateA
+}
+
+export function sortReposByContributorsThenStarsSizeRecent (
+  a: IGithubResponseRepo,
+  b: IGithubResponseRepo,
+  contributorCounts: Map<string, number>
+): number {
+  return sortReposByRelevance(a, b, contributorCounts, new Map())
 }
 
 export function collectPortfolioRepoCandidates (
@@ -137,10 +174,29 @@ function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string
   }
 }
 
+function resolveRepoLanguages (
+  repo: IGithubResponseRepo,
+  languageCounts: Map<string, string[]>
+): string[] {
+  const config = projectsConfig.find(
+    (p) => p.repoName?.toLowerCase() === repo.name?.toLowerCase()
+  )
+  const apiLangs = languageCounts.get(repo.name?.toLowerCase() ?? '') ?? []
+
+  if (apiLangs.length > 0) {
+    return mapGithubLanguagesToBadges(apiLangs, repo.topics)
+  }
+
+  if (config?.languages?.length) return config.languages
+
+  return mapLanguageToFilter(repo.language)
+}
+
 function repoToCard (
   repo: IGithubResponseRepo,
   locale: 'pt' | 'en',
   pinned: boolean,
+  languageCounts: Map<string, string[]>,
   media?: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
   const repoName = repo.name ?? ''
@@ -152,7 +208,7 @@ function repoToCard (
     ? config.description[locale]
     : repo.description ?? ''
 
-  const languages = config?.languages ?? mapLanguageToFilter(repo.language)
+  const languages = resolveRepoLanguages(repo, languageCounts)
 
   if (media) {
     const fields = mediaToCardFields(media, githubOgImage(repoName))
@@ -195,7 +251,8 @@ export function mergeGitHubProjects (
   pinned: IGithubResponseRepo[],
   recent: IGithubResponseRepo[],
   locale: 'pt' | 'en',
-  contributorCounts: Map<string, number> = new Map()
+  contributorCounts: Map<string, number> = new Map(),
+  languageCounts: Map<string, string[]> = new Map()
 ): ProjectCardData[] {
   const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
     0,
@@ -207,13 +264,13 @@ export function mergeGitHubProjects (
 
   const sorted = collectPortfolioRepoCandidates(pinned, recent)
     .sort((a, b) =>
-      sortReposByContributorsThenStarsSizeRecent(a, b, contributorCounts)
+      sortReposByRelevance(a, b, contributorCounts, languageCounts)
     )
     .slice(0, PROJECT_DISPLAY_LIMIT)
 
   const cards = sorted.map((repo) => {
     const key = repo.name?.toLowerCase() ?? ''
-    return repoToCard(repo, locale, pinnedNames.has(key))
+    return repoToCard(repo, locale, pinnedNames.has(key), languageCounts)
   })
 
   if (cards.length === 0) {

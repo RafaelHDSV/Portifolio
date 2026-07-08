@@ -1,3 +1,4 @@
+import { FORCE_EXCLUDED_REPO_NAMES } from '../constants/projects.config'
 import { IGithubResponseRepo } from '../types/IGithub'
 import { IProjectConfig } from '../types/IProject'
 import {
@@ -6,11 +7,23 @@ import {
   isProjectForceIncluded
 } from './projectConfigLookup'
 
+function isForceExcludedByName (repoName: string): boolean {
+  const normalized = repoName.trim().toLowerCase()
+  if (!normalized) return false
+
+  return FORCE_EXCLUDED_REPO_NAMES.some(
+    (excluded) => excluded.trim().toLowerCase() === normalized
+  )
+}
+
 export function shouldIncludeRepo (
   repo: IGithubResponseRepo,
   username: string
 ): boolean {
   const name = repo.name?.toLowerCase() ?? ''
+
+  if (isForceExcludedByName(name)) return false
+
   const config = findProjectConfig(name)
 
   if (isProjectForceExcluded(config)) return false
