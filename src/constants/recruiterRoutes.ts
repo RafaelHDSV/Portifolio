@@ -10,9 +10,10 @@ export function navigateToRecruiterPath (): void {
   window.history.pushState({}, '', RECRUITER_PATH)
 }
 
-export function navigateToHomePath (): void {
-  if (window.location.pathname === '/' || window.location.pathname === '') return
-  window.history.pushState({}, '', '/')
+export function navigateToHomePath (hash: string = window.location.hash): void {
+  const target = hash ? `/${hash}` : '/'
+  if (window.location.pathname === '/' && window.location.hash === hash) return
+  window.history.pushState({}, '', target)
 }
 
 export function replaceWithRecruiterPath (): void {

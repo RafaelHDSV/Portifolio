@@ -5,6 +5,7 @@ import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
 import ScrollProgressBar from './components/ScrollProgressBar/ScrollProgressBar'
 import SectionFallback from './components/SectionFallback/SectionFallback'
 import { RecruiterModeProvider } from './context/RecruiterModeProvider'
+import { useHashScroll } from './hooks/useHashScroll'
 import { useRecruiterMode } from './context/useRecruiterMode'
 import { EasterEggProvider } from './hooks/EasterEggProvider'
 import About from './screens/About/About'
@@ -21,6 +22,7 @@ const RecruiterView = lazy(() => import('./screens/Recruiter/RecruiterView'))
 
 function AppContent () {
   const { isRecruiterMode } = useRecruiterMode()
+  useHashScroll(!isRecruiterMode)
 
   if (isRecruiterMode) {
     return (

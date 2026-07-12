@@ -5,6 +5,7 @@ import {
   navigateToRecruiterPath,
   replaceWithRecruiterPath
 } from '../constants/recruiterRoutes'
+import { isHomeAnchorHash } from '../hooks/useHashScroll'
 import { useRecruiterNoIndex } from '../hooks/useRecruiterNoIndex'
 import { RecruiterModeContext } from './RecruiterModeContext'
 
@@ -37,6 +38,21 @@ export function RecruiterModeProvider ({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    const hash = window.location.hash
+
+    if (hash && isHomeAnchorHash(hash)) {
+      localStorage.removeItem(STORAGE_KEY)
+      setIsRecruiterMode(false)
+
+      if (isRecruiterPath(window.location.pathname)) {
+        window.history.replaceState({}, '', `/${hash}`)
+      }
+
+      const onPopState = () => syncFromPath(window.location.pathname)
+      window.addEventListener('popstate', onPopState)
+      return () => window.removeEventListener('popstate', onPopState)
+    }
+
     const shouldEnable = readRecruiterModeFromBrowser()
 
     if (shouldEnable) {

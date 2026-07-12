@@ -13,6 +13,15 @@ html {
   overflow-x: clip;
 }
 
+#home,
+#about,
+#languages,
+#projects,
+#linkedin-posts,
+#contact {
+  scroll-margin-top: 5.5rem;
+}
+
 body {
   font-family: $font-outfit;
   font-size: var(--text-body);

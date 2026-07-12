@@ -19,6 +19,8 @@ import Container from '../../components/Container/Container'
 import { CV_DOWNLOAD_NAME, CV_URL, GITHUB_USERNAME } from '../../constants/cv'
 import {
   matchRepoName,
+  normalizeRepoSlug,
+  RECRUITER_FEATURED_PROJECTS,
   RECRUITER_FEATURED_REPO_ORDER,
   RECRUITER_PROJECT_CATEGORY,
   RECRUITER_STACK_PRIMARY,
@@ -28,6 +30,7 @@ import { useContributorCounts } from '../../hooks/useContributorCounts'
 import useGetMe from '../../hooks/useGetMe'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
 import { useRepoLanguages } from '../../hooks/useRepoLanguages'
+import { configToSyntheticRepo } from '../../utils/repoFilters'
 import {
   collectPortfolioRepoCandidates,
   mergeGitHubProjects
@@ -70,6 +73,20 @@ export default function RecruiterView() {
     [pinned, recent]
   )
 
+  const recruiterRecent = useMemo(() => {
+    const merged = [...recent]
+    const known = new Set(
+      [...pinned, ...recent].map((repo) => normalizeRepoSlug(repo.name ?? ''))
+    )
+
+    for (const target of RECRUITER_FEATURED_REPO_ORDER) {
+      if (known.has(normalizeRepoSlug(target))) continue
+      merged.push(configToSyntheticRepo(RECRUITER_FEATURED_PROJECTS[target]))
+    }
+
+    return merged
+  }, [pinned, recent])
+
   const repoNames = useMemo(
     () =>
       repoCandidates
@@ -84,21 +101,15 @@ export default function RecruiterView() {
   const featuredProjects = useMemo(() => {
     const all = mergeGitHubProjects(
       pinned,
-      recent,
+      recruiterRecent,
       locale,
       contributorCounts,
       languageCounts
     )
-    const picked = RECRUITER_FEATURED_REPO_ORDER.map((target) =>
+    return RECRUITER_FEATURED_REPO_ORDER.map((target) =>
       all.find((p) => matchRepoName(p.repoName, target))
     ).filter((p): p is NonNullable<typeof p> => Boolean(p))
-
-    if (picked.length > 0) return picked
-
-    return all.filter((p) => p.pinned).slice(0, 3).length
-      ? all.filter((p) => p.pinned).slice(0, 3)
-      : all.slice(0, 3)
-  }, [pinned, recent, locale, contributorCounts, languageCounts])
+  }, [pinned, recruiterRecent, locale, contributorCounts, languageCounts])
 
   const handleViewAllProjects = () => {
     window.open('https://github.com/RafaelHDSV?tab=repositories', '_blank')
