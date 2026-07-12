@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const SECTION_IDS = ['about', 'languages', 'projects', 'contact'] as const
+const SECTION_IDS = ['about', 'languages', 'projects', 'linkedin-posts', 'contact'] as const
 
 const VIEWPORT_ANCHOR_RATIO = 0.35
 

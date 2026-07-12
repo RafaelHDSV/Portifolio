@@ -15,6 +15,7 @@ import styles from './App.module.scss'
 import './styles/main.scss'
 
 const Projects = lazy(() => import('./screens/Projects/Projects'))
+const LinkedInPosts = lazy(() => import('./screens/LinkedInPosts/LinkedInPosts'))
 const Contact = lazy(() => import('./screens/Contact/Contact'))
 const RecruiterView = lazy(() => import('./screens/Recruiter/RecruiterView'))
 
@@ -42,6 +43,9 @@ function AppContent () {
       <Languages />
       <Suspense fallback={<SectionFallback minHeight='24rem' />}>
         <Projects />
+      </Suspense>
+      <Suspense fallback={<SectionFallback minHeight='20rem' />}>
+        <LinkedInPosts />
       </Suspense>
       <Suspense fallback={<SectionFallback minHeight='16rem' />}>
         <Contact />

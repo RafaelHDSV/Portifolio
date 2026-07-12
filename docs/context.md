@@ -49,6 +49,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue LinkedIn posts** (jun/2026): Seção implementada e **removida novamente** (jun/2026) — complexidade de integração (RSS, Apify, API, Voyager) superou o benefício; link de perfil permanece em Contato/Footer/Recrutador.
 
+**Posts LinkedIn (jul/2026):** seção reintroduzida com cache próprio no Supabase. A SPA consulta `GET /api/linkedin-posts`; a Function Vercel usa `SUPABASE_SERVICE_ROLE_KEY` apenas no servidor. A atualização do cache acontece localmente pelo repositório `linkedin-posts`, nunca durante a navegação do visitante.
+
 **Issue #44** (maio/2026): Easter egg **filtro ninja** — desbloqueio no catálogo na 1ª vez com 3+ filtros AND em Projetos; **efeito visual (pulse nos chips ativos) repete** sempre que um filtro é adicionado com 3+ ativos; `playEggEffect` reinicia animação se já estiver rodando; catálogo 8/8.
 
 **Issue #47** (jun/2026): CV publico acessivel — repo [`cvs`](https://github.com/RafaelHDSV/cvs) publico; `CV_URL` aponta para raw `Curriculo.pdf` sem auth; E2E valida href + HTTP 200.
@@ -270,6 +272,12 @@ Tokens em `src/styles/_variables.scss`:
 ### EmailJS
 - Variáveis: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
 - Egg `rocket-email` quando mensagem contém "vieira"
+
+### Posts LinkedIn (Supabase)
+- Function Vercel: `api/linkedin-posts.ts`
+- Cliente: `src/hooks/useLinkedInPosts.ts` e seção lazy `src/screens/LinkedInPosts/`
+- Variáveis server-only na Vercel: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (sem prefixo `VITE_`)
+- A Function lê até cinco posts cacheados de `linkedin_posts_posts`; não inicia scraping nem expõe a service role.
 
 ### Vieira Analytics
 - `@vieira/analytics` via `main.tsx` (`projectKey: "portifolio"`)

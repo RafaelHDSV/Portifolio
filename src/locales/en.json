@@ -3,6 +3,7 @@
     "about": "About",
     "stack": "Stack",
     "projects": "Projects",
+    "linkedin": "LinkedIn",
     "contact": "Contact",
     "cv": "CV",
     "menu": "Open menu",
@@ -91,6 +92,28 @@
       "cSharp": "C#",
       "PowerShell": "PowerShell"
     }
+  },
+  "linkedinPosts": {
+    "title": "Recent posts",
+    "subtitle": "Content published on LinkedIn",
+    "loading": "Loading recent posts...",
+    "readPost": "View post on LinkedIn",
+    "seeMore": "see more",
+    "seeLess": "see less",
+    "reactions_one": "{{count}} reaction",
+    "reactions_other": "{{count}} reactions",
+    "like": "Like",
+    "comment": "Comment",
+    "share": "Share",
+    "openPost": "Open {{name}}'s post on LinkedIn",
+    "mediaAlt": "LinkedIn post media",
+    "videoLabel": "Post video",
+    "watchOnLinkedIn": "Watch on LinkedIn",
+    "loadMore": "View more posts on LinkedIn",
+    "role": "Full-Stack Developer | Javascript | Typescript | React | Node.js | MongoDB | Sass | Less | Git | GitHub",
+    "empty": "There are no posts available to show yet.",
+    "error": "Posts could not be loaded right now.",
+    "viewProfile": "View LinkedIn profile"
   },
   "contact": {
     "title": "Contact",

@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
+import { viteApiDevPlugin } from './lib/vite-api-dev-plugin'
 
 function googleSiteVerificationPlugin (): Plugin {
   return {
@@ -19,7 +20,7 @@ function googleSiteVerificationPlugin (): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), googleSiteVerificationPlugin()],
+  plugins: [react(), viteApiDevPlugin(), googleSiteVerificationPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
