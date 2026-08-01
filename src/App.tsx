@@ -1,5 +1,4 @@
 import { lazy, Suspense } from 'react'
-import BuyMeCoffee from './components/BuyMeCoffee/BuyMeCoffee'
 import CustomCursor from './components/CustomCursor/CustomCursor'
 import Navbar from './components/Navbar/Navbar'
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton'
@@ -55,7 +54,6 @@ function AppContent () {
       </Suspense>
       <Footer />
       <ScrollToTopButton />
-      <BuyMeCoffee />
       <CustomCursor />
     </div>
   )
