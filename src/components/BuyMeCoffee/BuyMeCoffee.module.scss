@@ -1,0 +1,33 @@
+.link {
+  position: fixed;
+  bottom: 4.75rem;
+  right: 1.25rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: #0b1220;
+  color: #fff;
+  border: 1px solid #ffdd00;
+  text-decoration: none;
+  font: 600 14px/1.2 system-ui, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ffdd00;
+    outline-offset: 3px;
+  }
+}
+
+.icon {
+  color: #ffdd00;
+  line-height: 1;
+}
