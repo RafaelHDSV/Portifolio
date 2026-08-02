@@ -1,0 +1,42 @@
+/* Match ScrollToTopButton footprint (~48px) and sit just above it */
+#bmc-wbtn {
+  position: fixed !important;
+  right: 1rem !important;
+  bottom: 4.75rem !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 9998 !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+  background-size: 55% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+#bmc-wbtn img,
+#bmc-wbtn svg {
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  display: block !important;
+}

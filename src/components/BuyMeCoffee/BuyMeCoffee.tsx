@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useRecruiterMode } from '../../context/useRecruiterMode'
+import './bmcWidget.scss'
 
 /**
  * Widget script lives in index.html (same pattern as static sites).
