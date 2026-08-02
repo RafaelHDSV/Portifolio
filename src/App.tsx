@@ -55,7 +55,6 @@ function AppContent () {
       </Suspense>
       <Footer />
       <ScrollToTopButton />
-      <BuyMeCoffee />
       <CustomCursor />
     </div>
   )
@@ -66,6 +65,7 @@ export default function App () {
     <EasterEggProvider>
       <RecruiterModeProvider>
         <AppContent />
+        <BuyMeCoffee />
       </RecruiterModeProvider>
     </EasterEggProvider>
   )
