@@ -11,7 +11,9 @@ export default function CustomCursor () {
     'button',
     'input[type="submit"]',
     'input[type="button"]',
-    '.cursor-hover'
+    '.cursor-hover',
+    '#bmc-wbtn',
+    '.bmc-btn'
   ]
 
   const refreshAccent = () => {
@@ -43,6 +45,9 @@ export default function CustomCursor () {
 
   if (!enabled || !rgbColor) return null
 
+  // Above BMC widget (and other fixed overlays) so the cursor never sits under the badge
+  const cursorLayer = 2147483646
+
   return (
     <AnimatedCursor
       key={rgbColor}
@@ -54,6 +59,8 @@ export default function CustomCursor () {
       outerScale={2}
       trailingSpeed={8}
       clickables={clickables}
+      innerStyle={{ zIndex: cursorLayer }}
+      outerStyle={{ zIndex: cursorLayer - 1 }}
     />
   )
 }
