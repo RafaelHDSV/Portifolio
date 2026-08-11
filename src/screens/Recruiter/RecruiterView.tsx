@@ -26,14 +26,13 @@ import {
   RECRUITER_STACK_PRIMARY,
   RECRUITER_STACK_SECONDARY
 } from '../../constants/recruiterFeatured'
-import { useContributorCounts } from '../../hooks/useContributorCounts'
 import useGetMe from '../../hooks/useGetMe'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
 import { useRepoLanguages } from '../../hooks/useRepoLanguages'
 import { configToSyntheticRepo } from '../../utils/repoFilters'
 import {
   collectPortfolioRepoCandidates,
-  mergeGitHubProjects
+  pickProjectsByRepoNames
 } from '../../utils/mergeProjects'
 import styles from './RecruiterView.module.scss'
 
@@ -95,21 +94,17 @@ export default function RecruiterView() {
     [repoCandidates]
   )
 
-  const contributorCounts = useContributorCounts(repoNames)
   const languageCounts = useRepoLanguages(repoNames)
 
   const featuredProjects = useMemo(() => {
-    const all = mergeGitHubProjects(
+    return pickProjectsByRepoNames(
       pinned,
       recruiterRecent,
+      RECRUITER_FEATURED_REPO_ORDER,
       locale,
-      contributorCounts,
       languageCounts
     )
-    return RECRUITER_FEATURED_REPO_ORDER.map((target) =>
-      all.find((p) => matchRepoName(p.repoName, target))
-    ).filter((p): p is NonNullable<typeof p> => Boolean(p))
-  }, [pinned, recruiterRecent, locale, contributorCounts, languageCounts])
+  }, [pinned, recruiterRecent, locale, languageCounts])
 
   const handleViewAllProjects = () => {
     window.open('https://github.com/RafaelHDSV?tab=repositories', '_blank')

@@ -29,15 +29,10 @@ export const MEDIA_CACHE_TTL_MS = 5 * 60 * 1000
 
 
 /** Bump ao mudar heuristica de selecao (invalida cache antigo). */
-
-export const MEDIA_CACHE_VERSION = 4
-
-
+export const MEDIA_CACHE_VERSION = 5
 
 function buildCacheKey (owner: string, repoName: string): string {
-
   return `v${MEDIA_CACHE_VERSION}/${owner}/${repoName}`
-
 }
 
 

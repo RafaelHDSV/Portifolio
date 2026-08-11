@@ -1,12 +1,14 @@
 import { AxiosRequestConfig } from 'axios'
 import { githubApi } from '../services/gitHub'
-import { gitHubToken } from '../utils/environment'
 import {
   IGithubResponseRepo,
   IGithubResponseUser,
   IUser
 } from '../types/IGithub'
-import { filterReposForPortfolio } from '../utils/repoFilters'
+import {
+  filterPinnedReposForPortfolio,
+  filterReposForPortfolio
+} from '../utils/repoFilters'
 import {
   getCachedRepoLanguages,
   setCachedRepoLanguages
@@ -26,6 +28,7 @@ function mapRepo (repo: IGithubResponseRepo): IGithubResponseRepo {
     homepage: repo.homepage,
     html_url: repo.html_url,
     updated_at: repo.updated_at,
+    pushed_at: repo.pushed_at,
     topics: repo.topics,
     fork: repo.fork,
     private: repo.private
@@ -202,23 +205,9 @@ class GithubRepositoryClass {
   }
 
   async getPinnedRepos (username: string): Promise<IGithubResponseRepo[]> {
-    const authenticated = Boolean(gitHubToken)
-
-    const viewerQuery = `
-      query {
-        viewer {
-          pinnedItems(first: 6, types: REPOSITORY) {
-            nodes {
-              ... on Repository {
-                ${PINNED_REPO_FIELDS}
-              }
-            }
-          }
-        }
-      }
-    `
-
-    const publicQuery = `
+    // Always resolve pins for GITHUB_USERNAME via user(login), not viewer —
+    // token is only for auth/rate limit and must not change pin identity.
+    const query = `
       query($login: String!) {
         user(login: $login) {
           pinnedItems(first: 6, types: REPOSITORY) {
@@ -235,32 +224,27 @@ class GithubRepositoryClass {
     try {
       const response = await githubApi.post<{
         data?: {
-          viewer?: {
-            pinnedItems?: { nodes?: PinnedNode[] }
-          }
           user?: {
             pinnedItems?: { nodes?: PinnedNode[] }
           }
         }
         errors?: Array<{ message: string }>
       }>('/graphql', {
-        query: authenticated ? viewerQuery : publicQuery,
-        variables: authenticated ? undefined : { login: username }
+        query,
+        variables: { login: username }
       })
 
       if (response.data?.errors?.length) {
         console.error('GraphQL pinned repos:', response.data.errors)
       }
 
-      const nodes = authenticated
-        ? response.data?.data?.viewer?.pinnedItems?.nodes ?? []
-        : response.data?.data?.user?.pinnedItems?.nodes ?? []
+      const nodes = response.data?.data?.user?.pinnedItems?.nodes ?? []
 
       const repos = nodes
-        .filter((node) => !node.isFork)
+        .filter((node) => node?.name && !node.isFork)
         .map(mapPinnedNode)
 
-      return filterReposForPortfolio(repos, username)
+      return filterPinnedReposForPortfolio(repos, username)
     } catch (err) {
       console.error('Failed to fetch pinned repos:', err)
       return []

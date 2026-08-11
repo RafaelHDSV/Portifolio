@@ -1,6 +1,7 @@
 import { ReadmeMedia } from './readmeMedia'
 
-const CACHE_PREFIX = 'portifolio:repo-media:v4'
+/** Bump together with MEDIA_CACHE_VERSION in resolveRepoMedia.ts */
+const CACHE_PREFIX = 'portifolio:repo-media:v5'
 
 type SessionMediaValue = ReadmeMedia | 'placeholder'
 

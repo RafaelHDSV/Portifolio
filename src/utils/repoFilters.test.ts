@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest'
 import { IGithubResponseRepo } from '../types/IGithub'
 import {
   configToSyntheticRepo,
+  filterPinnedReposForPortfolio,
   filterReposForPortfolio,
+  isEligibleNonPinnedRepo,
+  shouldIncludePinnedRepo,
   shouldIncludeRepo
 } from './repoFilters'
 
@@ -68,5 +71,122 @@ describe('filterReposForPortfolio', () => {
     ]
 
     expect(filterReposForPortfolio(repos, USERNAME)).toHaveLength(1)
+  })
+})
+
+describe('shouldIncludePinnedRepo', () => {
+  it('keeps curso-* pins that would be excluded from recent list', () => {
+    expect(
+      shouldIncludePinnedRepo(makeRepo({ name: 'curso-react-avancado' }), USERNAME)
+    ).toBe(true)
+    expect(
+      shouldIncludeRepo(makeRepo({ name: 'curso-react-avancado' }), USERNAME)
+    ).toBe(false)
+  })
+
+  it('still excludes forks and profile README from pins', () => {
+    expect(shouldIncludePinnedRepo(makeRepo({ fork: true }), USERNAME)).toBe(
+      false
+    )
+    expect(
+      shouldIncludePinnedRepo(makeRepo({ name: USERNAME }), USERNAME)
+    ).toBe(false)
+  })
+
+  it('excludes FORCE_EXCLUDED pin names', () => {
+    expect(shouldIncludePinnedRepo(makeRepo({ name: 'cvs' }), USERNAME)).toBe(
+      false
+    )
+  })
+})
+
+describe('filterPinnedReposForPortfolio', () => {
+  it('keeps soft-filtered pins including curso prefix', () => {
+    const repos = [
+      makeRepo({ name: 'MedIT' }),
+      makeRepo({ name: 'curso-node' }),
+      makeRepo({ name: 'cvs' }),
+      makeRepo({ name: 'forked-pin', fork: true })
+    ]
+
+    expect(
+      filterPinnedReposForPortfolio(repos, USERNAME).map((r) => r.name)
+    ).toEqual(['MedIT', 'curso-node'])
+  })
+})
+
+describe('isEligibleNonPinnedRepo', () => {
+  it('rejects markup-only challenge without homepage', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'Tip-Calculator-App',
+          language: 'CSS',
+          homepage: null
+        })
+      )
+    ).toBe(false)
+  })
+
+  it('accepts TypeScript repo with homepage', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'keep-alive',
+          language: 'TypeScript',
+          homepage: 'https://www.npmjs.com/package/@rafaelhdsv/keep-alive'
+        })
+      )
+    ).toBe(true)
+  })
+
+  it('does not treat projectsConfig alone as eligibility bypass', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'Oak-Tecnologia',
+          language: 'JavaScript',
+          homepage: 'https://oak-tecnologia.vercel.app'
+        })
+      )
+    ).toBe(false)
+  })
+
+  it('accepts Frontend Mentor challenges with demo at low priority eligibility', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'Product-list-with-cart',
+          language: 'TypeScript',
+          homepage: 'https://product-list-with-cart-gilt-five.vercel.app',
+          description:
+            'Este projeto é uma solução para o desafio Product List with Cart do Frontend Mentor.'
+        })
+      )
+    ).toBe(true)
+  })
+
+  it('accepts Portifolio with homepage', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'Portifolio',
+          language: 'TypeScript',
+          homepage: 'https://rafaelhdsv.vercel.app'
+        })
+      )
+    ).toBe(true)
+  })
+
+  it('accepts forceInclude repo without homepage (linkedin-posts)', () => {
+    expect(
+      isEligibleNonPinnedRepo(
+        makeRepo({
+          name: 'linkedin-posts',
+          language: 'TypeScript',
+          homepage: null
+        })
+      )
+    ).toBe(true)
   })
 })

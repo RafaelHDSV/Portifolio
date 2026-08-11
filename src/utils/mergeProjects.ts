@@ -6,12 +6,19 @@ import { ReadmeMedia } from './readmeMedia'
 import { mapGithubLanguagesToBadges } from './mapGithubLanguages'
 import {
   configToSyntheticRepo,
-  filterReposForPortfolio
+  filterPinnedReposForPortfolio,
+  filterReposForPortfolio,
+  isEligibleNonPinnedRepo,
+  isLowPriorityPortfolioRepo
 } from './repoFilters'
 import { listForceIncludeConfigs } from './projectConfigLookup'
 
 export const PINNED_PROJECT_LIMIT = 6
-export const PROJECT_DISPLAY_LIMIT = 18
+export const PROJECT_DISPLAY_LIMIT = 12
+
+function repoActivityDate (repo: IGithubResponseRepo): number {
+  return new Date(repo.pushed_at ?? repo.updated_at ?? 0).getTime()
+}
 
 function githubOgImage (repoName: string): string {
   return `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${encodeURIComponent(repoName)}`
@@ -69,10 +76,18 @@ export function sortReposByRelevance (
   contributorCounts: Map<string, number>,
   languageCounts: Map<string, string[]> = new Map()
 ): number {
+  const lowPriorityDiff =
+    Number(isLowPriorityPortfolioRepo(a)) -
+    Number(isLowPriorityPortfolioRepo(b))
+  if (lowPriorityDiff !== 0) return lowPriorityDiff
+
   const contribDiff =
     repoContributorCount(b, contributorCounts) -
     repoContributorCount(a, contributorCounts)
   if (contribDiff !== 0) return contribDiff
+
+  const dateDiff = repoActivityDate(b) - repoActivityDate(a)
+  if (dateDiff !== 0) return dateDiff
 
   const langDiff =
     repoLanguageCount(b, languageCounts) - repoLanguageCount(a, languageCounts)
@@ -81,12 +96,7 @@ export function sortReposByRelevance (
   const sizeDiff = (b.size ?? 0) - (a.size ?? 0)
   if (sizeDiff !== 0) return sizeDiff
 
-  const starDiff = (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
-  if (starDiff !== 0) return starDiff
-
-  const dateA = new Date(a.updated_at ?? 0).getTime()
-  const dateB = new Date(b.updated_at ?? 0).getTime()
-  return dateB - dateA
+  return (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
 }
 
 export function sortReposByContributorsThenStarsSizeRecent (
@@ -101,10 +111,10 @@ export function collectPortfolioRepoCandidates (
   pinned: IGithubResponseRepo[],
   recent: IGithubResponseRepo[]
 ): IGithubResponseRepo[] {
-  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
-    0,
-    PINNED_PROJECT_LIMIT
-  )
+  const pinnedFiltered = filterPinnedReposForPortfolio(
+    pinned,
+    GITHUB_USERNAME
+  ).slice(0, PINNED_PROJECT_LIMIT)
 
   const repoByName = new Map<string, IGithubResponseRepo>()
 
@@ -247,6 +257,52 @@ function repoToCard (
   }
 }
 
+function orderPortfolioRepos (
+  pinned: IGithubResponseRepo[],
+  recent: IGithubResponseRepo[],
+  contributorCounts: Map<string, number>,
+  languageCounts: Map<string, string[]>
+): { repos: IGithubResponseRepo[]; pinnedNames: Set<string> } {
+  const pinnedFiltered = filterPinnedReposForPortfolio(
+    pinned,
+    GITHUB_USERNAME
+  ).slice(0, PINNED_PROJECT_LIMIT)
+  const pinnedNames = new Set(
+    pinnedFiltered
+      .map((r) => r.name?.toLowerCase())
+      .filter((name): name is string => Boolean(name))
+  )
+
+  const candidates = collectPortfolioRepoCandidates(pinned, recent)
+  const byName = new Map(
+    candidates
+      .filter((repo) => repo.name)
+      .map((repo) => [repo.name!.toLowerCase(), repo])
+  )
+
+  const pinnedOrdered = pinnedFiltered
+    .map((repo) => byName.get(repo.name?.toLowerCase() ?? ''))
+    .filter((repo): repo is IGithubResponseRepo => Boolean(repo))
+
+  const pinnedKeys = new Set(
+    pinnedOrdered.map((repo) => repo.name?.toLowerCase() ?? '')
+  )
+
+  const remainingSlots = Math.max(0, PROJECT_DISPLAY_LIMIT - pinnedOrdered.length)
+  const nonPinned = candidates
+    .filter((repo) => !pinnedKeys.has(repo.name?.toLowerCase() ?? ''))
+    .filter((repo) => isEligibleNonPinnedRepo(repo))
+    .sort((a, b) =>
+      sortReposByRelevance(a, b, contributorCounts, languageCounts)
+    )
+    .slice(0, remainingSlots)
+
+  return {
+    repos: [...pinnedOrdered, ...nonPinned],
+    pinnedNames
+  }
+}
+
 export function mergeGitHubProjects (
   pinned: IGithubResponseRepo[],
   recent: IGithubResponseRepo[],
@@ -254,21 +310,14 @@ export function mergeGitHubProjects (
   contributorCounts: Map<string, number> = new Map(),
   languageCounts: Map<string, string[]> = new Map()
 ): ProjectCardData[] {
-  const pinnedFiltered = filterReposForPortfolio(pinned, GITHUB_USERNAME).slice(
-    0,
-    PINNED_PROJECT_LIMIT
-  )
-  const pinnedNames = new Set(
-    pinnedFiltered.map((r) => r.name?.toLowerCase()).filter(Boolean)
+  const { repos, pinnedNames } = orderPortfolioRepos(
+    pinned,
+    recent,
+    contributorCounts,
+    languageCounts
   )
 
-  const sorted = collectPortfolioRepoCandidates(pinned, recent)
-    .sort((a, b) =>
-      sortReposByRelevance(a, b, contributorCounts, languageCounts)
-    )
-    .slice(0, PROJECT_DISPLAY_LIMIT)
-
-  const cards = sorted.map((repo) => {
+  const cards = repos.map((repo) => {
     const key = repo.name?.toLowerCase() ?? ''
     return repoToCard(repo, locale, pinnedNames.has(key), languageCounts)
   })
@@ -291,6 +340,44 @@ export function mergeGitHubProjects (
   }
 
   return cards
+}
+
+/**
+ * Resolve cards by exact repo names, ignoring PROJECT_DISPLAY_LIMIT ranking.
+ * Used by recruiter featured list so highlights never vanish after enrichment.
+ */
+export function pickProjectsByRepoNames (
+  pinned: IGithubResponseRepo[],
+  recent: IGithubResponseRepo[],
+  repoNames: readonly string[],
+  locale: 'pt' | 'en',
+  languageCounts: Map<string, string[]> = new Map()
+): ProjectCardData[] {
+  const candidates = collectPortfolioRepoCandidates(pinned, recent)
+  const pinnedFiltered = filterPinnedReposForPortfolio(
+    pinned,
+    GITHUB_USERNAME
+  ).slice(0, PINNED_PROJECT_LIMIT)
+  const pinnedNames = new Set(
+    pinnedFiltered
+      .map((r) => r.name?.toLowerCase())
+      .filter((name): name is string => Boolean(name))
+  )
+
+  const normalize = (value: string) =>
+    value.toLowerCase().replace(/[\s_-]+/g, '')
+
+  return repoNames
+    .map((target) => {
+      const repo = candidates.find(
+        (candidate) =>
+          normalize(candidate.name ?? '') === normalize(target)
+      )
+      if (!repo) return null
+      const key = repo.name?.toLowerCase() ?? ''
+      return repoToCard(repo, locale, pinnedNames.has(key), languageCounts)
+    })
+    .filter((card): card is ProjectCardData => Boolean(card))
 }
 
 export function applyMediaToCard (

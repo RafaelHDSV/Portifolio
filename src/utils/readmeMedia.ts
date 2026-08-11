@@ -45,6 +45,9 @@ const NON_DEMO_PATTERNS = [
   /avatar/i,
   /profile/i,
   /favicon/i,
+  /buymeacoffee\.com/i,
+  /cdn\.buymeacoffee\.com/i,
+  /nodei\.co\/npm/i,
   /github\.com\/[^/]+\/[^/]+\/blob\/main\/README/i
 ]
 
@@ -145,7 +148,18 @@ function pushMedia (
   repo: string,
   options?: { poster?: string; type?: ReadmeMediaType }
 ) {
-  if (!url || url.includes('shields.io') || url.includes('badge')) return
+  if (!url) return
+
+  const lowerUrl = url.toLowerCase()
+  if (
+    lowerUrl.includes('shields.io') ||
+    lowerUrl.includes('badge') ||
+    lowerUrl.includes('buymeacoffee.com') ||
+    lowerUrl.includes('cdn.buymeacoffee.com') ||
+    lowerUrl.includes('nodei.co/npm')
+  ) {
+    return
+  }
 
   let resolved = url.trim().replace(/^["']|["']$/g, '')
 

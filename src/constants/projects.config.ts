@@ -19,10 +19,31 @@ import { images } from './images'
 export const FORCE_EXCLUDED_REPO_NAMES: string[] = [
   'cvs',
   'serveruler-redirect',
-  'Mario-Game'
+  'Mario-Game',
+  // Demos simples / CRUD legado — não priorizar no perfil atual
+  'Oak-Tecnologia',
+  'Zip-Code-Finder',
+  'Financial-Control',
+  'Todo-app',
+  'Calculator-app',
+  'Mazzi-Fiori-Casamentos'
 ]
 
 export const projectsConfig: IProjectConfig[] = [
+  {
+    key: 'li-posts',
+    repoName: 'linkedin-posts',
+    name: 'LinkedIn Posts',
+    image: '',
+    description: {
+      pt: 'Scraper local de posts públicos do LinkedIn com cache no Supabase e API para consumo no portfólio — sem hospedar o scraper na nuvem.',
+      en: 'Local scraper for public LinkedIn posts with Supabase cache and an API for portfolio consumption — without hosting the scraper in the cloud.'
+    },
+    languages: ['Typescript', 'Node', 'API'],
+    urlGitHub: 'https://github.com/RafaelHDSV/linkedin-posts',
+    forceInclude: true,
+    order: 0
+  },
   {
     key: '1',
     repoName: 'Plann.er',
@@ -65,7 +86,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['React', 'Javascript', 'CSS', 'HTML'],
     urlProject: 'https://oak-tecnologia.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Oak-Tecnologia',
-    featured: true,
+    forceExclude: true,
     order: 3
   },
   {
@@ -80,7 +101,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['React', 'Javascript', 'CSS', 'HTML'],
     urlProject: 'https://financial-control-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Financial-Control',
-    featured: true,
+    forceExclude: true,
     order: 4
   },
   {
@@ -95,6 +116,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'Bibliotecas'],
     urlProject: 'https://todo-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Todo-app',
+    forceExclude: true,
     order: 5
   },
   {
@@ -137,6 +159,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'Bibliotecas'],
     urlProject: 'https://mazzi-fiori-casamentos.netlify.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Mazzi-Fiori-Casamentos',
+    forceExclude: true,
     order: 8
   },
   {
@@ -165,6 +188,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript'],
     urlProject: 'https://calculator-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Calculator-app',
+    forceExclude: true,
     order: 10
   },
   {

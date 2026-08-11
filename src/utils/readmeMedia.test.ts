@@ -64,6 +64,22 @@ describe('isLikelyDemoMedia', () => {
       isLikelyDemoMedia('https://example.com/preview/demo.mp4')
     ).toBe(true)
   })
+
+  it('rejects buymeacoffee sponsor buttons', () => {
+    expect(
+      isLikelyDemoMedia(
+        'https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png'
+      )
+    ).toBe(false)
+  })
+
+  it('rejects nodei.co npm badge images', () => {
+    expect(
+      isLikelyDemoMedia(
+        'https://nodei.co/npm/@rafaelhdsv/keep-alive.svg?data=d,s'
+      )
+    ).toBe(false)
+  })
 })
 
 describe('isEmbeddableMediaUrl', () => {
@@ -207,5 +223,29 @@ Aplicacao web em PHP sem imagens no README.
 `
 
     expect(parseReadmeMedia(readme, owner, 'Upload-de-Arquivos')).toBeNull()
+  })
+
+  it('ignores buymeacoffee html button and returns null without other media', () => {
+    const readme = `
+# keep-alive
+
+## Apoie
+
+<a href="https://www.buymeacoffee.com/vieira" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="32" width="117" style="height: 32px !important; width: 117px !important;" ></a>
+`
+    expect(parseReadmeMedia(readme, owner, 'keep-alive')).toBeNull()
+  })
+
+  it('ignores buymeacoffee and keeps real demo image', () => {
+    const readme = `
+# Ativus
+
+![demo](https://raw.githubusercontent.com/RafaelHDSV/Ativus/HEAD/public/desktop.png)
+
+<a href="https://www.buymeacoffee.com/vieira"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee"></a>
+`
+    const result = parseReadmeMedia(readme, owner, 'Ativus')
+    expect(result?.url).toContain('public/desktop.png')
+    expect(result?.url).not.toContain('buymeacoffee')
   })
 })
