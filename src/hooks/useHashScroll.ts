@@ -15,6 +15,15 @@ const RETRY_INTERVAL_MS = 200
 const MAX_ATTEMPTS = 40
 const MAX_DURATION_MS = 8000
 
+// Eventos de intenção de scroll do visitante. O evento `scroll` fica de fora
+// de propósito: ele também dispara nas correções do próprio hook.
+const USER_INTENT_EVENTS = [
+  'wheel',
+  'touchstart',
+  'pointerdown',
+  'keydown'
+] as const
+
 export function isHomeAnchorHash (hash: string): boolean {
   const id = hash.replace(/^#/, '').trim().toLowerCase()
   return HOME_SECTION_IDS.has(id)
@@ -39,6 +48,7 @@ export function useHashScroll (enabled: boolean): void {
     let stopTimer: number | undefined
     let stableTicks = 0
     let attempts = 0
+    let userTookOver = false
 
     const clearTimers = () => {
       if (retryTimer !== undefined) window.clearInterval(retryTimer)
@@ -47,9 +57,15 @@ export function useHashScroll (enabled: boolean): void {
       stopTimer = undefined
     }
 
+    const releaseToUser = () => {
+      userTookOver = true
+      clearTimers()
+    }
+
     const ensureScroll = (behavior: ScrollBehavior = 'auto') => {
       const hash = window.location.hash
       if (!hash || !isHomeAnchorHash(hash)) return
+      if (userTookOver) return
 
       clearTimers()
       stableTicks = 0
@@ -84,19 +100,29 @@ export function useHashScroll (enabled: boolean): void {
       stopTimer = window.setTimeout(clearTimers, MAX_DURATION_MS)
     }
 
-    const onHashChange = () => ensureScroll('smooth')
+    // Uma nova âncora é intenção explícita de navegar: devolve o controle ao hook.
+    const onHashChange = () => {
+      userTookOver = false
+      ensureScroll('smooth')
+    }
 
     const onLoad = () => ensureScroll('auto')
 
     ensureScroll('auto')
     window.addEventListener('hashchange', onHashChange)
     window.addEventListener('load', onLoad)
+    USER_INTENT_EVENTS.forEach((event) => {
+      window.addEventListener(event, releaseToUser, { passive: true })
+    })
     void document.fonts.ready.then(() => ensureScroll('auto'))
 
     return () => {
       clearTimers()
       window.removeEventListener('hashchange', onHashChange)
       window.removeEventListener('load', onLoad)
+      USER_INTENT_EVENTS.forEach((event) => {
+        window.removeEventListener(event, releaseToUser)
+      })
     }
   }, [enabled])
 }
