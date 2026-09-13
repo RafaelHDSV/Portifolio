@@ -10,6 +10,10 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
+    assignees:
+      - "RafaelHDSV"
+    reviewers:
+      - "RafaelHDSV"
     commit-message:
       prefix: "deps"
     groups:
@@ -33,6 +37,10 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
+    assignees:
+      - "RafaelHDSV"
+    reviewers:
+      - "RafaelHDSV"
     commit-message:
       prefix: "deps"
     groups:
@@ -56,6 +64,10 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
+    assignees:
+      - "RafaelHDSV"
+    reviewers:
+      - "RafaelHDSV"
     commit-message:
       prefix: "deps"
     groups:
@@ -79,6 +91,10 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
+    assignees:
+      - "RafaelHDSV"
+    reviewers:
+      - "RafaelHDSV"
     commit-message:
       prefix: "deps"
     groups:
@@ -102,5 +118,9 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
+    assignees:
+      - "RafaelHDSV"
+    reviewers:
+      - "RafaelHDSV"
     commit-message:
       prefix: "deps"
