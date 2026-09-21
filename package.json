@@ -20,7 +20,7 @@
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@phosphor-icons/react": "^2.1.10",
-    "satori": "0.25.0",
+    "satori": "0.33.4",
     "@vieira/analytics": "file:./vendor/vieira-analytics",
     "axios": "^1.20.0",
     "dayjs": "^1.11.23",
@@ -30,7 +30,7 @@
     "react-animated-cursor": "^2.11.2",
     "react-awesome-reveal": "^4.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^17.0.13",
+    "react-i18next": "^17.0.14",
     "react-icons": "^5.7.0",
     "sharp": "^0.35.4",
     "typewriter-effect": "^2.22.0"
