@@ -25,7 +25,7 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 
 **Issue #27** (maio/2026): fallback `onError` nos cards — URL inválida cai para placeholder genérico; preview OG do GitHub só no hover (stats + imagem).
 
-**Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `@vercel/og`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estático; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade).
+**Issue #28** (maio/2026): OG image gerada no **build** (`scripts/generate-og.ts` + `satori` + `sharp`) em `public/og-pt.png` e `og-en.png`. Meta tags apontam para PNG estático; `/api/og` redireciona via rewrite em `vercel.json` (compatibilidade). Não usar `@vercel/og` 1.x: o bundle ESM quebra no Node 24 (`Dynamic require of "fs"` via harfbuzzjs).
 
 **Issue #29** (maio/2026): Playwright E2E — fluxos críticos em `e2e/` (home PT/EN, tema, filtros multi AND, modal contato, links CV/GitHub, modo recrutador, easter eggs). Comando: `yarn test:e2e`. Mocks de rede para GitHub e EmailJS.
 

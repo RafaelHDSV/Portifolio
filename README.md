@@ -103,7 +103,7 @@ Servidor de desenvolvimento: [http://localhost:5173](http://localhost:5173)
 | Motion | react-awesome-reveal, typewriter-effect, react-animated-cursor |
 | Dados | axios, GitHub REST + GraphQL |
 | Contato | EmailJS |
-| Imagens OG | `@vercel/og`, Sharp (`scripts/generate-og.ts`) |
+| Imagens OG | `satori` + Sharp (`scripts/generate-og.ts`) |
 | Analytics | `@vieira/analytics` |
 | Testes | Vitest, Playwright, Lighthouse CI |
 

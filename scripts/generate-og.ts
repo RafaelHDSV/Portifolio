@@ -1,6 +1,7 @@
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { ImageResponse } from '@vercel/og'
-import type { ReactElement } from 'react'
+import type { ReactNode } from 'react'
+import satori from 'satori'
+import sharp from 'sharp'
 import { getOgCopy, type OgLang } from '../api/og/copy'
 import { buildOgElement } from '../api/og/template'
 
@@ -8,6 +9,8 @@ const AVATAR_PATH = 'public/og/avatar.jpg'
 const LOGO_PATH = 'public/og/logo-rv.png'
 const OG_WIDTH = 1200
 const OG_HEIGHT = 630
+const INTER_CDN =
+  'https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.8/latin-{weight}-normal.woff'
 
 function loadImageDataUrl (filePath: string): string {
   if (!existsSync(filePath)) {
@@ -34,16 +37,28 @@ function loadLogoDataUrl (): string {
   return loadImageDataUrl(LOGO_PATH)
 }
 
+async function loadInter (weight: 400 | 600 | 700): Promise<ArrayBuffer> {
+  const url = INTER_CDN.replace('{weight}', String(weight))
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error(`failed to download Inter ${weight}: ${response.status} ${url}`)
+  }
+
+  return response.arrayBuffer()
+}
+
 async function generateOgImage (
   lang: OgLang,
   avatarSrc: string,
-  logoSrc: string
+  logoSrc: string,
+  fonts: { name: string, data: ArrayBuffer, weight: 400 | 600 | 700, style: 'normal' }[]
 ): Promise<void> {
-  const response = await new ImageResponse(
-    buildOgElement(getOgCopy(lang), { avatarSrc, logoSrc }) as ReactElement,
-    { width: OG_WIDTH, height: OG_HEIGHT }
+  const svg = await satori(
+    buildOgElement(getOgCopy(lang), { avatarSrc, logoSrc }) as unknown as ReactNode,
+    { width: OG_WIDTH, height: OG_HEIGHT, fonts }
   )
-  const buffer = Buffer.from(await response.arrayBuffer())
+  const buffer = await sharp(Buffer.from(svg)).png().toBuffer()
   writeFileSync(`public/og-${lang}.png`, buffer)
   console.log(`generated public/og-${lang}.png (${buffer.byteLength} bytes)`)
 }
@@ -51,9 +66,19 @@ async function generateOgImage (
 async function main (): Promise<void> {
   const avatarSrc = loadAvatarDataUrl()
   const logoSrc = loadLogoDataUrl()
+  const [regular, semibold, bold] = await Promise.all([
+    loadInter(400),
+    loadInter(600),
+    loadInter(700)
+  ])
+  const fonts = [
+    { name: 'sans-serif', data: regular, weight: 400 as const, style: 'normal' as const },
+    { name: 'sans-serif', data: semibold, weight: 600 as const, style: 'normal' as const },
+    { name: 'sans-serif', data: bold, weight: 700 as const, style: 'normal' as const }
+  ]
 
-  await generateOgImage('pt', avatarSrc, logoSrc)
-  await generateOgImage('en', avatarSrc, logoSrc)
+  await generateOgImage('pt', avatarSrc, logoSrc, fonts)
+  await generateOgImage('en', avatarSrc, logoSrc, fonts)
 
   copyFileSync('public/og-pt.png', 'public/main.png')
   console.log('copied public/og-pt.png → public/main.png')
