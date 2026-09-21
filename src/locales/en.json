@@ -1,6 +1,7 @@
 {
   "nav": {
     "about": "About",
+    "experience": "Experience",
     "stack": "Stack",
     "projects": "Projects",
     "linkedin": "LinkedIn",
@@ -22,7 +23,7 @@
   "about": {
     "title": "About me",
     "subtitle": "Who I am and what I deliver",
-    "bio": "Full-Stack Developer focused on React, TypeScript and Node.js. I build complete products — from UI to back-end — with attention to quality, accessibility and team delivery.",
+    "bio": "Full-Stack Developer focused on React, TypeScript and Node.js. At AGX Software I am Mid-level I and lead one of the squads: products from UI to back-end, always as a team.",
     "workingAt": "Working at",
     "location": "Location",
     "followers": "Followers",
@@ -36,6 +37,33 @@
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
     }
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "Production work, as a team",
+    "role": "Mid-level Full Stack Developer I · Team Lead",
+    "company": "AGX Software · Sorocaba, SP",
+    "period": "Jul 2024 — present",
+    "intro": "At AGX Software, with the team, we build white-label CRM for financial services — credit and consortium journeys, and the platform as a SaaS product. I lead one of the development squads. I also triage production tickets and route each case to the developer best able to solve it. The work below is the team's.",
+    "confidentiality": "Client names, banks and internal repositories omitted for confidentiality.",
+    "tracks": [
+      {
+        "title": "Platform as a product (SaaS)",
+        "body": "With the team, we package the white-label CRM as a product: onboarding, plans, billing and per-customer isolation. The work is still evolving."
+      },
+      {
+        "title": "Credit journeys for correspondents",
+        "body": "With the team, we delivered simulation and proposal-submission flows — including vehicle-backed credit and payroll loans — in React and TypeScript, with automation when the partner did not cover the step."
+      },
+      {
+        "title": "Consortium and production simulation",
+        "body": "With the team, we maintain simulation, proposals and day-to-day correspondent operations, from the self-contracting front end to the back-end chain."
+      },
+      {
+        "title": "Leadership and the ticket queue",
+        "body": "I lead one of the teams: review, prioritization and squad standards. I triage the production ticket queue: I classify what support escalates, analyze the case and route it to the developer best able to solve it, among everyone on the team."
+      }
+    ]
   },
   "stack": {
     "title": "Stack and tools",
@@ -143,8 +171,8 @@
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
     "role": "Full Stack Developer",
-    "bio": "Mid-level Full Stack Developer I and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB for scalable web systems.",
-    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Mid-level Full Stack I with team leadership. I build with React, TypeScript, Sass, Node.js and MongoDB, combining technical delivery with mentorship, code review and business alignment.",
+    "bio": "Mid-level Full Stack Developer I and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB on web systems, as a team.",
+    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Mid-level Full Stack I, leading one of the squads. With the team, we build with React, TypeScript, Sass, Node.js and MongoDB. I also triage production tickets and route each case to the developer best able to solve it.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
@@ -174,10 +202,10 @@
     },
     "deliverablesTitle": "What I deliver",
     "deliverables": [
-      "Scalable web systems with React, TypeScript and Node.js",
-      "Technical leadership, mentorship and team code review",
-      "Responsive interfaces with Sass and user experience focus",
-      "REST APIs, MongoDB and business-aligned integrations"
+      "Squad leadership: review, prioritization and on-time delivery",
+      "Production ticket triage: I classify what support escalates, analyze the case and route it to the developer best able to solve it, among everyone on the team",
+      "With the team, packaging the CRM platform as SaaS (onboarding, plans, billing)",
+      "With the team, credit and consortium journeys for correspondents"
     ],
     "experienceTitle": "Recent experience",
     "experienceSubtitle": "AGX Software · Sorocaba, SP",
@@ -199,7 +227,7 @@
         "period": "Jun 2026 — Present",
         "title": "Mid-level Full Stack Developer I · Team Lead",
         "company": "AGX Software",
-        "description": "Scalable web systems with React, TypeScript, Sass, Node.js and MongoDB; greater autonomy in requirements analysis and solution design; squad leadership and on-time, quality-focused delivery."
+        "description": "With the team, web systems in React, TypeScript, Sass, Node.js and MongoDB. I lead the squad and triage production tickets, routing each case to the developer best able to solve it."
       },
       {
         "period": "Oct 2025 — Jun 2026",

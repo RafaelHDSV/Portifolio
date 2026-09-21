@@ -1,6 +1,7 @@
 {
   "nav": {
     "about": "Sobre",
+    "experience": "Experiência",
     "stack": "Stack",
     "projects": "Projetos",
     "linkedin": "LinkedIn",
@@ -22,7 +23,7 @@
   "about": {
     "title": "Sobre mim",
     "subtitle": "Quem sou e o que entrego",
-    "bio": "Desenvolvedor Full-Stack com foco em React, TypeScript e Node.js. Construo produtos completos — da interface ao back-end — com atenção a qualidade, acessibilidade e entrega em equipe.",
+    "bio": "Desenvolvedor Full-Stack com foco em React, TypeScript e Node.js. Na AGX Software sou Pleno I e líder de um dos squads: produtos da interface ao back-end, sempre em equipe.",
     "workingAt": "Trabalhando em",
     "location": "Localização",
     "followers": "Seguidores",
@@ -36,6 +37,33 @@
       "role": "Full-Stack Developer",
       "focus": "React · TypeScript · Node.js"
     }
+  },
+  "experience": {
+    "title": "Experiência",
+    "subtitle": "Trabalho em produção, em equipe",
+    "role": "Desenvolvedor Full Stack Pleno I · Líder de equipe",
+    "company": "AGX Software · Sorocaba, SP",
+    "period": "Jul 2024 — presente",
+    "intro": "Na AGX Software, com o time, construímos CRM white-label para o mercado financeiro — jornadas de crédito e consórcio, e a plataforma como produto SaaS. Lidero um dos squads de desenvolvimento. Também triageio os tickets de produção e direciono cada caso ao desenvolvedor mais capaz de resolvê-lo. As entregas abaixo são do time.",
+    "confidentiality": "Nomes de clientes, bancos e repositórios internos omitidos por confidencialidade.",
+    "tracks": [
+      {
+        "title": "Plataforma como produto (SaaS)",
+        "body": "Com o time, empacotamos o CRM white-label como produto: onboarding, planos, cobrança e isolamento por cliente. O trabalho segue em evolução."
+      },
+      {
+        "title": "Jornadas de crédito em correspondente",
+        "body": "Com o time, entregamos fluxos de simulação e inserção de proposta — inclusive crédito com garantia veicular e consignado — em React e TypeScript, com automação quando o parceiro não cobria o passo."
+      },
+      {
+        "title": "Consórcio e simulação em produção",
+        "body": "Com o time, mantemos simulação, proposta e operação do correspondente, do front da autocontratação ao encadeamento no back."
+      },
+      {
+        "title": "Liderança e fila de tickets",
+        "body": "Lidero um dos times: review, priorização e padrão do squad. Triageio a fila de tickets de produção: classifico o que o suporte escala, analiso o caso e direciono ao desenvolvedor mais capaz de resolvê-lo, entre todos do time."
+      }
+    ]
   },
   "stack": {
     "title": "Stack e ferramentas",
@@ -143,8 +171,8 @@
     "back": "Voltar à exibição normal",
     "modeLabel": "Modo recrutador",
     "role": "Desenvolvedor Full Stack",
-    "bio": "Desenvolvedor Full Stack Pleno I e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web escaláveis.",
-    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Pleno I com liderança de equipe. Desenvolvo com React, TypeScript, Sass, Node.js e MongoDB, combinando entrega técnica com mentoria, code review e alinhamento com objetivos de negócio.",
+    "bio": "Desenvolvedor Full Stack Pleno I e líder de equipe na AGX Software (Sorocaba): React, TypeScript, Node.js e MongoDB em sistemas web, em equipe.",
+    "aboutExtended": "Graduando em Análise e Desenvolvimento de Sistemas, atuo na AGX Software desde jul/2024 — de estágio front-end a Full Stack Pleno I, liderando um dos squads. Com o time, desenvolvemos em React, TypeScript, Sass, Node.js e MongoDB. Também triageio os tickets de produção e direciono cada caso ao desenvolvedor mais capaz de resolvê-lo.",
     "stackTitle": "Stack principal",
     "stackSubtitle": "Ferramentas que uso no dia a dia",
     "stackAlsoLabel": "Também trabalho com",
@@ -174,10 +202,10 @@
     },
     "deliverablesTitle": "O que entrego",
     "deliverables": [
-      "Sistemas web escaláveis com React, TypeScript e Node.js",
-      "Liderança técnica, mentoria e code review em equipe",
-      "Interfaces responsivas com Sass e foco em experiência do usuário",
-      "APIs REST, MongoDB e integrações alinhadas ao negócio"
+      "Liderança de squad: review, priorização e entrega no prazo",
+      "Triagem da fila de tickets de produção: classifico o que o suporte escala, analiso o caso e direciono ao desenvolvedor mais capaz de resolvê-lo, entre todos do time",
+      "Com o time, empacotamento da plataforma CRM como SaaS (onboarding, planos, cobrança)",
+      "Com o time, jornadas de crédito e consórcio em correspondente"
     ],
     "experienceTitle": "Experiência recente",
     "experienceSubtitle": "AGX Software · Sorocaba, SP",
@@ -199,7 +227,7 @@
         "period": "Jun 2026 — Presente",
         "title": "Desenvolvedor Full Stack Pleno I · Líder de Equipe",
         "company": "AGX Software",
-        "description": "Sistemas web escaláveis com React, TypeScript, Sass, Node.js e MongoDB; maior autonomia na análise de requisitos e definição de soluções; liderança do squad e entregas alinhadas a prazos e qualidade."
+        "description": "Com o time, sistemas web em React, TypeScript, Sass, Node.js e MongoDB. Lidero o squad e triageio os tickets de produção, direcionando cada caso ao desenvolvedor mais capaz de resolvê-lo."
       },
       {
         "period": "Out 2025 — Jun 2026",

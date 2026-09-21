@@ -1,12 +1,11 @@
-# Issue #44 — Easter egg filtro ninja (3+ filtros AND)
+# Experiência em produção (em equipe)
 
-GitHub: https://github.com/RafaelHDSV/Portifolio/issues/44
+Proposta: `.issues/2026-09-20-experiencia-producao-equipe.md`
 
-- [x] Egg `filter-ninja` ao ativar 3+ filtros AND
-- [x] Pulse nos chips + catalogo i18n
-- [x] TOTAL_EGGS 8; E2E
-- [x] Docs atualizados
+- [x] Seção `#experience` na home (time no produto; liderança + triagem de tickets)
+- [x] Navbar, footer e scroll spy
+- [x] Modo recrutador e bio do Sobre
+- [x] `PERSONAL-CVs/Currículo.html` alinhado (PDF: exportar no Chrome/Edge)
+- [x] E2E + `docs/context.md`
 
-Proposta: `.issues/2026-05-28-easter-egg-filtro-ninja.md`
-
-Decisoes: 1=A, 2=A, 3=A (secao 14).
+Aprovado em 20/09/2026. Sem commit/push nesta entrega.

@@ -10,6 +10,7 @@ import { useHashScroll } from './hooks/useHashScroll'
 import { useRecruiterMode } from './context/useRecruiterMode'
 import { EasterEggProvider } from './hooks/EasterEggProvider'
 import About from './screens/About/About'
+import Experience from './screens/Experience/Experience'
 import Footer from './screens/Footer/Footer'
 import Header from './screens/Header/Header'
 import Languages from './screens/Languages/Languages'
@@ -43,6 +44,7 @@ function AppContent () {
       <ScrollProgressBar />
       <Header />
       <About />
+      <Experience />
       <Languages />
       <Suspense fallback={<SectionFallback minHeight='24rem' />}>
         <Projects />

@@ -9,6 +9,7 @@ test.describe('Home PT e EN', () => {
   test('carrega navegacao em portugues', async ({ page }) => {
     await page.goto('/?lang=pt')
     await expect(page.getByRole('navigation', { name: 'Navegação principal' }).getByRole('link', { name: 'Sobre' })).toBeVisible()
+    await expect(page.getByRole('navigation', { name: 'Navegação principal' }).getByRole('link', { name: 'Experiência' })).toBeVisible()
     await expect(page.getByRole('heading', { level: 1, name: 'Rafael Vieira' })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Ver projetos' })).toBeVisible()
   })
@@ -16,6 +17,7 @@ test.describe('Home PT e EN', () => {
   test('carrega navegacao em ingles', async ({ page }) => {
     await page.goto('/?lang=en')
     await expect(page.getByRole('navigation', { name: 'Navegação principal' }).getByRole('link', { name: 'About' })).toBeVisible()
+    await expect(page.getByRole('navigation', { name: 'Navegação principal' }).getByRole('link', { name: 'Experience' })).toBeVisible()
     await expect(page.getByRole('link', { name: 'View projects' })).toBeVisible()
   })
 })

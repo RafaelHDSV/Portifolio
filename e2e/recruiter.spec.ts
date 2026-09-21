@@ -14,6 +14,7 @@ test.describe('Modo recrutador', () => {
     await expect(page).toHaveURL(/\/recruiter/)
     await expect(page.getByRole('button', { name: 'Voltar à exibição normal' })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Rafael Vieira' })).toBeVisible()
+    await expect(page.getByText(/tickets de produção/i).first()).toBeVisible()
   })
 
   test('ativa, persiste apos reload e volta para home', async ({ page }) => {

@@ -33,7 +33,8 @@ Para arquitetura completa, decisões e histórico de issues, consulte [`docs/con
 
 | Área | Destaques |
 |------|-----------|
-| **Hero e Sobre** | Headline typewriter, fundo mesh, bio sincronizada com o perfil GitHub |
+| **Hero e Sobre** | Headline typewriter, fundo mesh, bio sincronizada com o perfil GitHub (AGX + liderança) |
+| **Experiência** | Produção na AGX em equipe: SaaS, crédito, consórcio, liderança e triagem da fila de tickets |
 | **Stack** | Grid responsivo de tecnologias com hover |
 | **Projetos** | Pins + repos recentes, filtros multi AND, curadoria híbrida, cards 16:9, skeleton, estado vazio, overlay de stats em touch |
 | **Contato** | Cards com hover + formulário em modal (EmailJS) |

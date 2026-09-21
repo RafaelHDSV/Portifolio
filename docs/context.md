@@ -9,7 +9,7 @@ Documento de referência sobre o estado atual do repositório após a implementa
 
 ## 1. Resumo
 
-Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica perfil, stack, projetos e contato em uma única página com navegação por âncoras, além do **modo recrutador** em `/recruiter`.
+Portfólio SPA de Rafael Vieira, desenvolvedor **Full-Stack**. O site comunica perfil, experiência em produção (em equipe), stack, projetos e contato em uma única página com navegação por âncoras, além do **modo recrutador** em `/recruiter`.
 
 A v2 focou em refino UI/UX: identidade Full-Stack, hero simplificado, stack em grid, projetos dinâmicos (pins + recentes GitHub), contato com modal, footer full-width e easter eggs revisados (8 total).
 
@@ -103,6 +103,7 @@ src/
 ├── screens/
 │   ├── Header/                # Hero mesh, typewriter, 2 CTAs, seta (egg)
 │   ├── About/                 # Bio + skeleton + dados GitHub (sem tag oportunidades)
+│   ├── Experience/            # Produção AGX em equipe (quatro blocos + nota de confidencialidade)
 │   ├── Languages/             # Grid de stack (substituiu carrossel)
 │   ├── Projects/              # Grade única 3 col, filtros multi AND, skeleton, empty state
 │   ├── Contact/               # Cards hover + modal com form
@@ -147,6 +148,8 @@ e2e/
 ├── projects-touch-stats.spec.ts
 ├── contact-modal.spec.ts
 ├── links.spec.ts
+├── hash-scroll.spec.ts
+├── experience.spec.ts
 ├── recruiter.spec.ts
 └── easter-eggs.spec.ts
 
@@ -199,6 +202,7 @@ Tokens em `src/styles/_variables.scss`:
 ### Navbar
 - Logo component `RV` (5 cliques = egg console)
 - Toggle PT | EN e tema em estilo **pill**
+- Âncoras: Sobre, Experiência, Stack, Projetos, LinkedIn, Contato
 - Link "CV" aponta para PDF publico no GitHub ([`cvs`](https://github.com/RafaelHDSV/cvs), `constants/cv.ts`)
 - Botão **Recrutador** ativa modo e navega para `/recruiter`
 - Menu hamburger `< 768px`, link ativo via `useActiveSection`
@@ -211,9 +215,18 @@ Tokens em `src/styles/_variables.scss`:
 
 ### About
 - Identidade **Full-Stack** (i18n + meta tags)
+- Bio cita AGX Software e liderança de squad
 - Grid 2 colunas info; ícones alinhados em `UserInfoItem`
 - Sem tag "Aberto a oportunidades"
 - CV publico (GitHub raw) + "Ver no GitHub"
+
+### Experiência
+- Seção `#experience` entre Sobre e Stack
+- AGX nomeada; entregas de produto no tom "com o time"
+- Quatro blocos: SaaS da plataforma, jornadas de crédito, consórcio, liderança e fila de tickets
+- Tickets: triagem do que o suporte escala, análise do caso e direcionamento ao desenvolvedor mais capaz, entre todos do time
+- Nota de confidencialidade (sem nomes de banco/cliente)
+- Copy em `locales/pt.json` e `en.json` (`experience.*`)
 
 ### Stack (Languages)
 - Grid responsivo com ícones grandes (~2.25rem)
@@ -241,6 +254,7 @@ Tokens em `src/styles/_variables.scss`:
 
 ### Modo recrutador (`/recruiter`)
 - Layout em cards: perfil, stats GitHub, entregas, stack, experiência, projetos destaque, contato
+- Copy de entregas e cargo atual alinhado à seção Experiência (time + triagem da fila de tickets)
 - `@media print`, meta `noindex`, deep link compartilhável
 
 ### Footer
@@ -399,4 +413,4 @@ yarn lhci     # Lighthouse CI (autorun local)
 
 ---
 
-*Última atualização: maio/2026 — pós Issue #44 (filter-ninja repetível) e docs README/context.*
+*Última atualização: setembro/2026 — seção Experiência em produção (em equipe), triagem da fila de tickets e CV HTML em PERSONAL-CVs.*

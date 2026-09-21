@@ -11,6 +11,7 @@ import styles from './Footer.module.scss'
 
 const FOOTER_LINKS = [
   { href: '#about', key: 'about' as const },
+  { href: '#experience', key: 'experience' as const },
   { href: '#languages', key: 'stack' as const },
   { href: '#projects', key: 'projects' as const },
   { href: '#linkedin-posts', key: 'linkedin' as const },
