@@ -228,10 +228,10 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@emailjs/browser@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-4.4.1.tgz#ad5684af5a912c0ab415202184845eb3270c4c81"
-  integrity sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==
+"@emailjs/browser@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-5.0.2.tgz#0ee305ca890b14b97ec8070e57ea9452fb30993e"
+  integrity sha512-yhfjhO6q6843CXUxZcJ5iw+HLtLvNbdt0wx/cJ6upREmD/biKoB7hAAO1HnYqhSH7owIUgwIbZOxSOblZyN3cQ==
 
 "@emnapi/runtime@^1.11.3":
   version "1.11.3"

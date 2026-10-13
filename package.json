@@ -17,7 +17,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
+    "@emailjs/browser": "^5.0.2",
     "@emotion/react": "^11.14.0",
     "@phosphor-icons/react": "^2.1.10",
     "satori": "0.34.1",
