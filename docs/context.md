@@ -292,6 +292,7 @@ Tokens em `src/styles/_variables.scss`:
 - Cliente: `src/hooks/useLinkedInPosts.ts` e seção lazy `src/screens/LinkedInPosts/`
 - Variáveis server-only na Vercel: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (sem prefixo `VITE_`)
 - A Function lê até cinco posts cacheados de `linkedin_posts_posts`; não inicia scraping nem expõe a service role.
+- Atualização do cache: repo irmão [`linkedin-posts`](https://github.com/RafaelHDSV/linkedin-posts) (`yarn scrape <username>` / tarefa de logon). O HTML do LinkedIn mudou para SDUI (`role=listitem`); o scraper resolve URL via "Copiar link da publicação" quando o card não expõe `/feed/update/`.
 
 ### Vieira Analytics
 - `@vieira/analytics` via `main.tsx` (`projectKey: "portifolio"`)
@@ -354,7 +355,7 @@ yarn preview  # preview do build
 yarn lhci     # Lighthouse CI (autorun local)
 ```
 
-**Node recomendado:** 22 LTS. Node 23 pode causar problemas com Vitest.
+**Node:** `engines.node` = `24.x` (local e Lighthouse CI em `.github/workflows/lighthouse.yml`).
 
 ---
 
