@@ -49,6 +49,10 @@
       opacity: 0;
     }
   }
+
+  .card.metricsAsDefault & {
+    opacity: 0;
+  }
 }
 
 .mediaLoading {
@@ -109,6 +113,23 @@
     .card.statsExpanded & {
       opacity: 1;
     }
+  }
+
+  .card.metricsAsDefault & {
+    opacity: 1;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      var(--color-surface),
+      var(--color-surface-elevated)
+    );
+  }
+}
+
+.card.metricsAsDefault {
+  .githubStats span {
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--color-accent) 14%, var(--color-surface));
   }
 }
 
@@ -322,14 +343,45 @@
   color: var(--color-text-primary);
 }
 
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
 .description {
+  margin: 0;
   font-size: var(--text-small);
   color: var(--color-text-secondary);
   line-height: 1.5;
+}
+
+.descriptionCollapsed {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.descriptionToggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 .badges {

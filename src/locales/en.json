@@ -91,6 +91,8 @@
     "viewStats": "View stats",
     "hideStats": "Hide stats",
     "viewMore": "View more on GitHub",
+    "seeMore": "See more",
+    "seeLess": "See less",
     "loading": "Loading projects...",
     "mediaLoading": "Loading project preview",
     "error": "Could not load repositories.",

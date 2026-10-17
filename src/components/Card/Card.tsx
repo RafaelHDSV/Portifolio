@@ -59,6 +59,8 @@ interface CardProps {
   activeLanguageFilters?: string[]
 }
 
+const DESCRIPTION_COLLAPSE_LIMIT = 140
+
 export default function Card ({
   project,
   onLanguageClick,
@@ -71,6 +73,7 @@ export default function Card ({
   const [contributors, setContributors] = useState<string[]>([])
   const [loadingContributors, setLoadingContributors] = useState(false)
   const [statsExpanded, setStatsExpanded] = useState(false)
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const [canHover, setCanHover] = useState(() =>
     typeof window !== 'undefined'
       ? window.matchMedia('(hover: hover)').matches
@@ -92,6 +95,7 @@ export default function Card ({
     setImageStage('primary')
     setVideoError(false)
     setStatsExpanded(false)
+    setDescriptionExpanded(false)
   }, [project.id, primaryImage, project.media?.url])
 
   useEffect(() => {
@@ -108,6 +112,12 @@ export default function Card ({
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
   const thumbImage = project.image || project.media?.poster || ''
+  // Sem midia propria (tipico de privado sem README/demo): metricas no lugar do placeholder.
+  const metricsAsDefault = Boolean(
+    project.github && !project.mediaLoading && !isVideo && !imageDisplay.src
+  )
+  const shouldCollapseDescription =
+    project.description.trim().length > DESCRIPTION_COLLAPSE_LIMIT
 
   const handleImageError = useCallback(() => {
     setImageStage(() => nextFallbackStage())
@@ -132,8 +142,14 @@ export default function Card ({
   }, [contributors.length, loadingContributors, project.repoName])
 
   useEffect(() => {
+    if (metricsAsDefault) {
+      void loadContributors()
+    }
+  }, [metricsAsDefault, loadContributors])
+
+  useEffect(() => {
     const card = cardRef.current
-    if (!card || !project.repoName || canHover) return
+    if (!card || !project.repoName || canHover || metricsAsDefault) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -146,7 +162,7 @@ export default function Card ({
 
     observer.observe(card)
     return () => observer.disconnect()
-  }, [canHover, loadContributors, project.repoName, project.id])
+  }, [canHover, loadContributors, metricsAsDefault, project.repoName, project.id])
 
   const handleStatsToggle = useCallback(() => {
     setStatsExpanded((prev) => {
@@ -217,6 +233,10 @@ export default function Card ({
       )
     }
 
+    if (metricsAsDefault) {
+      return null
+    }
+
     return (
       <div className={styles.imagePlaceholder} aria-hidden='true'>
         <ImageIcon size={40} weight='duotone' />
@@ -227,6 +247,9 @@ export default function Card ({
   const renderGithubOverlay = () => {
     if (!project.github) return null
 
+    const showOgBackdrop =
+      !metricsAsDefault && Boolean(project.github.ogImage) && !project.private
+
     return (
       <div
         id={statsOverlayId}
@@ -234,13 +257,15 @@ export default function Card ({
         role='group'
         aria-label={t('projects.githubStatsLabel', { name: project.name })}
       >
-        <img
-          className={styles.githubOgImage}
-          src={project.github.ogImage}
-          alt=''
-          loading='lazy'
-          aria-hidden
-        />
+        {showOgBackdrop && (
+          <img
+            className={styles.githubOgImage}
+            src={project.github.ogImage}
+            alt=''
+            loading='lazy'
+            aria-hidden
+          />
+        )}
         <div className={styles.githubOverlayMeta}>
           <div className={styles.githubStats}>
             <span
@@ -276,7 +301,8 @@ export default function Card ({
 
   const cardClassName = [
     styles.card,
-    statsExpanded ? styles.statsExpanded : ''
+    statsExpanded ? styles.statsExpanded : '',
+    metricsAsDefault ? styles.metricsAsDefault : ''
   ]
     .filter(Boolean)
     .join(' ')
@@ -330,9 +356,31 @@ export default function Card ({
           })}
         </div>
 
-        <p className={styles.description}>{project.description}</p>
+        <div className={styles.descriptionBlock}>
+          <p
+            className={`${styles.description} ${
+              shouldCollapseDescription && !descriptionExpanded
+                ? styles.descriptionCollapsed
+                : ''
+            }`}
+          >
+            {project.description}
+          </p>
+          {shouldCollapseDescription && (
+            <button
+              type='button'
+              className={styles.descriptionToggle}
+              onClick={() => setDescriptionExpanded((prev) => !prev)}
+              aria-expanded={descriptionExpanded}
+            >
+              {descriptionExpanded
+                ? t('projects.seeLess')
+                : t('projects.seeMore')}
+            </button>
+          )}
+        </div>
 
-        {isTouchStatsDevice && project.github && (
+        {isTouchStatsDevice && project.github && !metricsAsDefault && (
           <Button
             type='button'
             variant='ghost'

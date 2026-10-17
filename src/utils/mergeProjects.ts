@@ -12,6 +12,7 @@ import {
   isLowPriorityPortfolioRepo
 } from './repoFilters'
 import { listForceIncludeConfigs } from './projectConfigLookup'
+import { displayRepoTitle } from './displayRepoTitle'
 
 export const PINNED_PROJECT_LIMIT = 6
 export const PROJECT_DISPLAY_LIMIT = 12
@@ -154,9 +155,16 @@ function mapLanguageToFilter (language?: string | null): string[] {
   return [map[language] ?? language]
 }
 
-function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string) {
+function mediaToCardFields (
+  media: ReadmeMedia | 'placeholder',
+  ogImage?: string,
+  options?: { allowGithubOg?: boolean }
+) {
+  const allowGithubOg = options?.allowGithubOg !== false
+
   if (media === 'placeholder') {
-    if (ogImage) {
+    // OG publico do GitHub nao funciona para repos privados — cai nas metricas do card.
+    if (ogImage && allowGithubOg) {
       return {
         image: ogImage,
         usesPlaceholder: false as const,
@@ -220,12 +228,17 @@ function repoToCard (
 
   const languages = resolveRepoLanguages(repo, languageCounts)
 
+  const displayName = config?.name ?? displayRepoTitle(repoName)
+  const allowGithubOg = !repo.private
+
   if (media) {
-    const fields = mediaToCardFields(media, githubOgImage(repoName))
+    const fields = mediaToCardFields(media, githubOgImage(repoName), {
+      allowGithubOg
+    })
     return {
       id: config?.key ?? repoName,
       repoName,
-      name: config?.name ?? repoName,
+      name: displayName,
       description,
       languages,
       urlProject: repo.homepage ?? config?.urlProject,
@@ -243,7 +256,7 @@ function repoToCard (
   return {
     id: config?.key ?? repoName,
     repoName,
-    name: config?.name ?? repoName,
+    name: displayName,
     image: configImage,
     usesPlaceholder: !configImage,
     usesGithubPreview: false,
@@ -385,14 +398,15 @@ export function applyMediaToCard (
   media: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
   const ogImage = card.github?.ogImage
+  const allowGithubOg = !card.private
 
   if (media === 'placeholder') {
     if (card.image && !card.usesPlaceholder && !card.usesGithubPreview) return card
-    const fields = mediaToCardFields('placeholder', ogImage)
+    const fields = mediaToCardFields('placeholder', ogImage, { allowGithubOg })
     return { ...card, ...fields, media: undefined }
   }
 
-  const fields = mediaToCardFields(media, ogImage)
+  const fields = mediaToCardFields(media, ogImage, { allowGithubOg })
   return { ...card, ...fields }
 }
 

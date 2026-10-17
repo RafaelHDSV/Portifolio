@@ -241,7 +241,9 @@ Tokens em `src/styles/_variables.scss`:
 - **A11y** (#35): labels Demo/GitHub, overlay stats acessível por teclado
 - **Touch** (#36): botão "Ver stats" sem hover; contributors lazy no viewport
 - Curadoria híbrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` (e `FORCE_EXCLUDED_REPO_NAMES`, ex. `React-Todo`) oculta; `demoPriority` controla ordem da mídia demo
-- Repos **privados**: badge permanece; botão/link GitHub do card **não** é exibido (modo recrutador usa demo se houver)
+- Repos **privados**: badge permanece; botão/link GitHub do card **não** é exibido (modo recrutador usa demo se houver); midia segue a mesma regra dos públicos (imagem propria se houver; senao metricas GitHub — sem OG publico)
+- Titulos: prefixo `PERSONAL-` removido na UI (`displayRepoTitle`)
+- Descrições longas no card: clamp de 2 linhas + "Ver mais" / "Ver menos"
 - `TechIcon`: ícones case-insensitive para badges (inclui Kotlin, PLpgSQL→Postgres, Python, Java, Shell, Node, Batchfile, MongoDB, MySQL)
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
 - Mídia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessão** (#24)
