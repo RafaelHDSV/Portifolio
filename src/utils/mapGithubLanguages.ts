@@ -12,6 +12,10 @@ const LANGUAGE_MAP: Record<string, string> = {
   PHP: 'PHP',
   Shell: 'Shell',
   Python: 'Python',
+  Kotlin: 'Kotlin',
+  PLpgSQL: 'PLpgSQL',
+  Java: 'Java',
+  Batchfile: 'Batchfile',
   TSQL: 'TSQL',
   'T-SQL': 'TSQL'
 }

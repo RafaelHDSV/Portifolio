@@ -1,12 +1,24 @@
 import {
   FaCss3Alt,
   FaHtml5,
+  FaJava,
+  FaNode,
+  FaPython,
   FaReact,
   FaSass
 } from 'react-icons/fa'
 import { IoLibrary, IoLogoJavascript, IoSettings } from 'react-icons/io5'
-import { SiPhp, SiSharp, SiTypescript } from 'react-icons/si'
-import { VscTerminalPowershell } from 'react-icons/vsc'
+import {
+  SiGnubash,
+  SiKotlin,
+  SiMongodb,
+  SiMysql,
+  SiPhp,
+  SiPostgresql,
+  SiSharp,
+  SiTypescript
+} from 'react-icons/si'
+import { VscTerminalCmd, VscTerminalPowershell } from 'react-icons/vsc'
 
 function TsqlIcon () {
   return (
@@ -23,29 +35,49 @@ function TsqlIcon () {
   )
 }
 
+/** Chaves em lowercase para lookup case-insensitive. */
 const iconMap: Record<string, React.ReactNode> = {
-  React: <FaReact />,
-  Typescript: <SiTypescript />,
-  TypeScript: <SiTypescript />,
-  Javascript: <IoLogoJavascript />,
-  JavaScript: <IoLogoJavascript />,
-  CSS: <FaCss3Alt />,
-  HTML: <FaHtml5 />,
-  Sass: <FaSass />,
-  SCSS: <FaSass />,
-  'C#': <SiSharp />,
-  PHP: <SiPhp />,
-  PowerShell: <VscTerminalPowershell />,
-  TSQL: <TsqlIcon />,
-  'T-SQL': <TsqlIcon />,
-  Bibliotecas: <IoLibrary />,
-  API: <IoSettings />
+  react: <FaReact />,
+  typescript: <SiTypescript />,
+  javascript: <IoLogoJavascript />,
+  css: <FaCss3Alt />,
+  html: <FaHtml5 />,
+  sass: <FaSass />,
+  scss: <FaSass />,
+  'c#': <SiSharp />,
+  csharp: <SiSharp />,
+  php: <SiPhp />,
+  powershell: <VscTerminalPowershell />,
+  tsql: <TsqlIcon />,
+  't-sql': <TsqlIcon />,
+  kotlin: <SiKotlin />,
+  plpgsql: <SiPostgresql />,
+  postgresql: <SiPostgresql />,
+  postgres: <SiPostgresql />,
+  python: <FaPython />,
+  java: <FaJava />,
+  shell: <SiGnubash />,
+  bash: <SiGnubash />,
+  batchfile: <VscTerminalCmd />,
+  node: <FaNode />,
+  'node.js': <FaNode />,
+  mongodb: <SiMongodb />,
+  mysql: <SiMysql />,
+  bibliotecas: <IoLibrary />,
+  api: <IoSettings />
 }
 
 interface TechIconProps {
   name: string
 }
 
+export function resolveTechIconKey (name: string): string | null {
+  const key = name.trim().toLowerCase()
+  return key in iconMap ? key : null
+}
+
 export default function TechIcon ({ name }: TechIconProps) {
-  return <>{iconMap[name] ?? null}</>
+  const key = resolveTechIconKey(name)
+  if (!key) return null
+  return <>{iconMap[key]}</>
 }

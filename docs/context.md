@@ -242,6 +242,7 @@ Tokens em `src/styles/_variables.scss`:
 - **Touch** (#36): botão "Ver stats" sem hover; contributors lazy no viewport
 - Curadoria híbrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` (e `FORCE_EXCLUDED_REPO_NAMES`, ex. `React-Todo`) oculta; `demoPriority` controla ordem da mídia demo
 - Repos **privados**: badge permanece; botão/link GitHub do card **não** é exibido (modo recrutador usa demo se houver)
+- `TechIcon`: ícones case-insensitive para badges (inclui Kotlin, PLpgSQL→Postgres, Python, Java, Shell, Node, Batchfile, MongoDB, MySQL)
 - Imagens via `projectImages.ts`; placeholder textual se asset faltar
 - Mídia enriquecida via `resolveRepoMedia.ts` (config > README > paths comuns > raiz); **cache in-memory TTL 5 min** (#23) + **sessionStorage na sessão** (#24)
 - Languages dos cards via **batch GraphQL** + cache sessionStorage (#24); fallback REST se GraphQL falhar
