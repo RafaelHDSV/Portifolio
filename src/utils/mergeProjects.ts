@@ -155,16 +155,10 @@ function mapLanguageToFilter (language?: string | null): string[] {
   return [map[language] ?? language]
 }
 
-function mediaToCardFields (
-  media: ReadmeMedia | 'placeholder',
-  ogImage?: string,
-  options?: { allowGithubOg?: boolean }
-) {
-  const allowGithubOg = options?.allowGithubOg !== false
-
+function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string) {
   if (media === 'placeholder') {
-    // OG publico do GitHub nao funciona para repos privados — cai nas metricas do card.
-    if (ogImage && allowGithubOg) {
+    // Mesma logica publico/privado: sem midia propria, usa o card OG do GitHub.
+    if (ogImage) {
       return {
         image: ogImage,
         usesPlaceholder: false as const,
@@ -229,12 +223,9 @@ function repoToCard (
   const languages = resolveRepoLanguages(repo, languageCounts)
 
   const displayName = config?.name ?? displayRepoTitle(repoName)
-  const allowGithubOg = !repo.private
 
   if (media) {
-    const fields = mediaToCardFields(media, githubOgImage(repoName), {
-      allowGithubOg
-    })
+    const fields = mediaToCardFields(media, githubOgImage(repoName))
     return {
       id: config?.key ?? repoName,
       repoName,
@@ -398,15 +389,14 @@ export function applyMediaToCard (
   media: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
   const ogImage = card.github?.ogImage
-  const allowGithubOg = !card.private
 
   if (media === 'placeholder') {
     if (card.image && !card.usesPlaceholder && !card.usesGithubPreview) return card
-    const fields = mediaToCardFields('placeholder', ogImage, { allowGithubOg })
+    const fields = mediaToCardFields('placeholder', ogImage)
     return { ...card, ...fields, media: undefined }
   }
 
-  const fields = mediaToCardFields(media, ogImage, { allowGithubOg })
+  const fields = mediaToCardFields(media, ogImage)
   return { ...card, ...fields }
 }
 

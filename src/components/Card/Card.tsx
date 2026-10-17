@@ -247,9 +247,6 @@ export default function Card ({
   const renderGithubOverlay = () => {
     if (!project.github) return null
 
-    const showOgBackdrop =
-      !metricsAsDefault && Boolean(project.github.ogImage) && !project.private
-
     return (
       <div
         id={statsOverlayId}
@@ -257,7 +254,7 @@ export default function Card ({
         role='group'
         aria-label={t('projects.githubStatsLabel', { name: project.name })}
       >
-        {showOgBackdrop && (
+        {Boolean(project.github.ogImage) && (
           <img
             className={styles.githubOgImage}
             src={project.github.ogImage}
