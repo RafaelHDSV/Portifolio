@@ -36,18 +36,17 @@ versions/*
 out/*
 
 # Issues
-issues
 .issues
-.issues/
 .issues/*
-*.issues
-*.issues/*
 
 # AI Tools
-cursor
+.ai
+.ai/*
+.claude
+.claude/*
 .cursor
-.cursor/
 .cursor/*
-*.cursor
-*.cursor/*
+.opencode
+.opencode/*
+
 .vercel
