@@ -25,6 +25,7 @@ export const FORCE_EXCLUDED_REPO_NAMES: string[] = [
   'Zip-Code-Finder',
   'Financial-Control',
   'Todo-app',
+  'React-Todo',
   'Calculator-app',
   'Mazzi-Fiori-Casamentos'
 ]

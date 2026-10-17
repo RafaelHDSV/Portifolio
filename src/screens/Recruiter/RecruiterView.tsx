@@ -379,33 +379,46 @@ function ProjectCard({
     ? t(`recruiter.projectCategories.${categoryKey}`)
     : null
 
+  const href = project.private
+    ? project.urlProject
+    : project.urlGitHub || project.urlProject
+  const content = (
+    <>
+      {project.pinned && (
+        <PushPinIcon
+          className={styles.projectPin}
+          size={16}
+          weight='fill'
+          aria-label={t('projects.pinned')}
+        />
+      )}
+      {categoryLabel && (
+        <span className={styles.projectCategory}>{categoryLabel}</span>
+      )}
+      <strong>{project.name}</strong>
+      <p>{project.description}</p>
+      <div className={styles.projectTags}>
+        {project.languages.slice(0, 4).map((lang) => (
+          <span key={lang}>{lang}</span>
+        ))}
+      </div>
+    </>
+  )
+
   return (
     <li>
-      <a
-        href={project.urlGitHub}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={styles.projectCard}
-      >
-        {project.pinned && (
-          <PushPinIcon
-            className={styles.projectPin}
-            size={16}
-            weight='fill'
-            aria-label={t('projects.pinned')}
-          />
-        )}
-        {categoryLabel && (
-          <span className={styles.projectCategory}>{categoryLabel}</span>
-        )}
-        <strong>{project.name}</strong>
-        <p>{project.description}</p>
-        <div className={styles.projectTags}>
-          {project.languages.slice(0, 4).map((lang) => (
-            <span key={lang}>{lang}</span>
-          ))}
-        </div>
-      </a>
+      {href ? (
+        <a
+          href={href}
+          target='_blank'
+          rel='noopener noreferrer'
+          className={styles.projectCard}
+        >
+          {content}
+        </a>
+      ) : (
+        <div className={styles.projectCard}>{content}</div>
+      )}
     </li>
   )
 }

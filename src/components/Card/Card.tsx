@@ -358,15 +358,17 @@ export default function Card ({
               {t('projects.viewDemo')}
             </Button>
           )}
-          <Button
-            href={project.urlGitHub}
-            variant='secondary'
-            className={styles.linkBtn}
-            aria-label={t('projects.openGitHub', { name: project.name })}
-          >
-            <GithubLogoIcon size={16} weight='bold' aria-hidden />
-            GitHub
-          </Button>
+          {!project.private && (
+            <Button
+              href={project.urlGitHub}
+              variant='secondary'
+              className={styles.linkBtn}
+              aria-label={t('projects.openGitHub', { name: project.name })}
+            >
+              <GithubLogoIcon size={16} weight='bold' aria-hidden />
+              GitHub
+            </Button>
+          )}
         </div>
       </div>
     </article>
