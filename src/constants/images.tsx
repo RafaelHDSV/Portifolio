@@ -1,6 +1,7 @@
 import adviceGeneratorApp from '../assets/advice-generator-app.png'
 import booker from '../assets/booker.png'
 import calculatorApp from '../assets/calculator-app.png'
+import devos from '../assets/devos.png'
 import financialControl from '../assets/financial-control.png'
 import forge from '../assets/forge.png'
 import logo from '../assets/logo-completed.png'
@@ -16,6 +17,7 @@ import tipCalculatorApp from '../assets/tip-calculator-app.png'
 import todoApp from '../assets/todo-app.png'
 import vieiraAnalytics from '../assets/vieira-analytics.png'
 import vieiraCenter from '../assets/vieira-center.png'
+import vital from '../assets/vital.png'
 
 export const images = {
   logo,
@@ -35,5 +37,7 @@ export const images = {
   booker,
   vieiraCenter,
   vieiraAnalytics,
-  forge
+  forge,
+  devos,
+  vital
 }

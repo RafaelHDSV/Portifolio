@@ -241,7 +241,7 @@ Tokens em `src/styles/_variables.scss`:
 - **A11y** (#35): labels Demo/GitHub, overlay stats acessível por teclado
 - **Touch** (#36): botão "Ver stats" sem hover; contributors lazy no viewport
 - Curadoria híbrida (#31): `forceInclude` injeta repo ausente na API; `forceExclude`/`hidden` (e `FORCE_EXCLUDED_REPO_NAMES`, ex. `React-Todo`) oculta; `demoPriority` controla ordem da mídia demo
-- Repos **privados**: badge permanece; botão/link GitHub do card **oculto em produção** (em `import.meta.env.DEV` / local o link GitHub aparece); modo recrutador em prod usa demo se houver; midia propria via `src/assets` + `projects.config.ts` (`demoPriority: 'config'`) quando o raw do GitHub nao e publico — ex. `booker` / `vieira-center` / `PERSONAL-Vieira-Analytics` / `forge`; no hover o overlay usa `GithubMetricsPreview` (nunca o OG generico do GitHub); sem foto, o mesmo preview vira a midia default
+- Repos **privados**: badge permanece; botão/link GitHub do card **oculto em produção** (em `import.meta.env.DEV` / local o link GitHub aparece); modo recrutador em prod usa demo se houver; midia propria via `src/assets` + `projects.config.ts` (`demoPriority: 'config'`) quando o raw do GitHub nao e publico — ex. `booker` / `vieira-center` / `PERSONAL-Vieira-Analytics` / `forge` / `Devos` / `vital`; no hover o overlay usa `GithubMetricsPreview` (nunca o OG generico do GitHub); sem foto, o mesmo preview vira a midia default
 - Titulos: prefixo `PERSONAL-` removido na UI (`displayRepoTitle`)
 - Descrições longas no card: clamp de 2 linhas + "Ver mais" / "Ver menos"
 - `TechIcon`: ícones case-insensitive para badges (inclui Kotlin, PLpgSQL→Postgres, Python, Java, Shell, Node, Batchfile, MongoDB, MySQL)

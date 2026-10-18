@@ -110,6 +110,40 @@ export const projectsConfig: IProjectConfig[] = [
     order: 4
   },
   {
+    key: 'devos',
+    repoName: 'Devos',
+    name: 'Devos',
+    image: images.devos,
+    description: {
+      pt: 'SaaS B2B para CTOs e líderes técnicos avaliarem desenvolvedores com evidências consolidadas (GitHub + dailies) em um painel com métricas, ranking e drill-down.',
+      en: 'B2B SaaS for CTOs and tech leads to evaluate developers with consolidated evidence (GitHub + dailies) in a panel with metrics, ranking and drill-down.'
+    },
+    languages: ['Typescript', 'React', 'Node', 'API'],
+    urlProject: 'https://devos-analytics.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/Devos',
+    demoPriority: 'config',
+    featured: true,
+    forceInclude: true,
+    order: 5
+  },
+  {
+    key: 'vital',
+    repoName: 'vital',
+    name: 'Vital',
+    image: images.vital,
+    description: {
+      pt: 'App pessoal de saúde: pressão arterial com gráficos e médias, medicamentos, ciclo do anticoncepcional e exportação em PDF — auth e dados no Supabase.',
+      en: 'Personal health app: blood pressure with charts and averages, medications, contraceptive cycle tracking and PDF export — auth and data on Supabase.'
+    },
+    languages: ['Typescript', 'React', 'API'],
+    urlProject: 'https://vital-vieira.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/vital',
+    demoPriority: 'config',
+    featured: true,
+    forceInclude: true,
+    order: 6
+  },
+  {
     key: '1',
     repoName: 'Plann.er',
     name: 'Plann.er',
@@ -122,7 +156,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://plann-er-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Plann.er',
     featured: true,
-    order: 5
+    order: 7
   },
   {
     key: '2',
@@ -137,7 +171,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://netflix-clone-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Netflix-Clone',
     featured: true,
-    order: 6
+    order: 8
   },
   {
     key: '3',
