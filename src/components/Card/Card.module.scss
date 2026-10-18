@@ -131,6 +131,18 @@
     color: var(--color-text-primary);
     background: color-mix(in srgb, var(--color-accent) 14%, var(--color-surface));
   }
+
+  .localMetricsOverlay {
+    opacity: 1;
+    justify-content: stretch;
+    padding: 0;
+    background: #f6f8fa;
+  }
+}
+
+.localMetricsOverlay {
+  padding: 0;
+  background: #f6f8fa;
 }
 
 .githubOgImage {

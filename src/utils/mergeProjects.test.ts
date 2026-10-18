@@ -390,6 +390,22 @@ describe('applyMediaToCard', () => {
     expect(result.media).toBeUndefined()
   })
 
+  it('marks private placeholder for local metrics preview (no generic OG image)', () => {
+    const card = makeCard({
+      private: true,
+      image: '',
+      usesGithubPreview: false,
+      usesPlaceholder: true
+    })
+
+    const result = applyMediaToCard(card, 'placeholder')
+
+    expect(result.image).toBe('')
+    expect(result.usesGithubPreview).toBe(true)
+    expect(result.usesPlaceholder).toBe(false)
+    expect(result.media).toBeUndefined()
+  })
+
   it('keeps existing resolved image when placeholder and card already has demo', () => {
     const card = makeCard({
       image: 'https://raw.githubusercontent.com/o/r/HEAD/public/desktop.png',

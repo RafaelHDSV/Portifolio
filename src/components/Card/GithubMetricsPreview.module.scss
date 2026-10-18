@@ -1,0 +1,167 @@
+.preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #f6f8fa;
+  color: #1f2328;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.9rem 1rem 0.75rem;
+  gap: 0.65rem;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 0;
+  flex: 1;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.repoPath {
+  margin: 0;
+  font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.owner {
+  color: #0969da;
+}
+
+.slash {
+  color: #656d76;
+  margin: 0 0.1rem;
+}
+
+.repo {
+  color: #1f2328;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: #656d76;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  margin-top: 0.15rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #656d76;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.45rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(31, 35, 40, 0.12);
+  background: #fff;
+}
+
+.langBar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 3px solid color-mix(in srgb, var(--lang-color, #58a6ff) 85%, #d0d7de);
+}
+
+.langDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--lang-color, #58a6ff);
+  flex-shrink: 0;
+}
+
+.langName {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #656d76;
+}
+
+.langBar[data-lang='Javascript'],
+.langBar[data-lang='JavaScript'] {
+  --lang-color: #f1e05a;
+}
+
+.langBar[data-lang='Typescript'],
+.langBar[data-lang='TypeScript'] {
+  --lang-color: #3178c6;
+}
+
+.langBar[data-lang='Kotlin'] {
+  --lang-color: #a97bff;
+}
+
+.langBar[data-lang='Python'] {
+  --lang-color: #3572a5;
+}
+
+.langBar[data-lang='HTML'] {
+  --lang-color: #e34c26;
+}
+
+.langBar[data-lang='CSS'] {
+  --lang-color: #563d7c;
+}
+
+.langBar[data-lang='Sass'],
+.langBar[data-lang='SCSS'] {
+  --lang-color: #c6538c;
+}
+
+.langBar[data-lang='PowerShell'] {
+  --lang-color: #012456;
+}
+
+.langBar[data-lang='React'] {
+  --lang-color: #61dafb;
+}
+
+.langBar[data-lang='Java'] {
+  --lang-color: #b07219;
+}
+
+.langBar[data-lang='PLpgSQL'],
+.langBar[data-lang='PostgreSQL'] {
+  --lang-color: #336791;
+}

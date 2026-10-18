@@ -155,9 +155,21 @@ function mapLanguageToFilter (language?: string | null): string[] {
   return [map[language] ?? language]
 }
 
-function mediaToCardFields (media: ReadmeMedia | 'placeholder', ogImage?: string) {
+function mediaToCardFields (
+  media: ReadmeMedia | 'placeholder',
+  ogImage?: string,
+  options?: { isPrivate?: boolean }
+) {
   if (media === 'placeholder') {
-    // Mesma logica publico/privado: sem midia propria, usa o card OG do GitHub.
+    // Privado: OG do GitHub e so o logo generico — o Card monta preview local.
+    if (options?.isPrivate) {
+      return {
+        image: '',
+        usesPlaceholder: false as const,
+        usesGithubPreview: true as const
+      }
+    }
+
     if (ogImage) {
       return {
         image: ogImage,
@@ -225,7 +237,9 @@ function repoToCard (
   const displayName = config?.name ?? displayRepoTitle(repoName)
 
   if (media) {
-    const fields = mediaToCardFields(media, githubOgImage(repoName))
+    const fields = mediaToCardFields(media, githubOgImage(repoName), {
+      isPrivate: Boolean(repo.private)
+    })
     return {
       id: config?.key ?? repoName,
       repoName,
@@ -389,14 +403,15 @@ export function applyMediaToCard (
   media: ReadmeMedia | 'placeholder'
 ): ProjectCardData {
   const ogImage = card.github?.ogImage
+  const options = { isPrivate: Boolean(card.private) }
 
   if (media === 'placeholder') {
     if (card.image && !card.usesPlaceholder && !card.usesGithubPreview) return card
-    const fields = mediaToCardFields('placeholder', ogImage)
+    const fields = mediaToCardFields('placeholder', ogImage, options)
     return { ...card, ...fields, media: undefined }
   }
 
-  const fields = mediaToCardFields(media, ogImage)
+  const fields = mediaToCardFields(media, ogImage, options)
   return { ...card, ...fields }
 }
 

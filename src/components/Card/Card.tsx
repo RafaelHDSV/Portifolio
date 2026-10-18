@@ -22,6 +22,7 @@ import {
 import Badge from '../Badge/Badge'
 import Button from '../Button/Button'
 import { getProjectFilterLabel } from '../../utils/filterLabels'
+import GithubMetricsPreview from './GithubMetricsPreview'
 import styles from './Card.module.scss'
 
 export interface ProjectGithubStats {
@@ -244,8 +245,26 @@ export default function Card ({
     )
   }
 
+  const useLocalMetricsPreview = Boolean(
+    project.private && project.usesGithubPreview && project.github
+  )
+
   const renderGithubOverlay = () => {
     if (!project.github) return null
+
+    // Privado sem midia propria: OG do GitHub e so o logo generico.
+    if (useLocalMetricsPreview) {
+      return (
+        <div
+          id={statsOverlayId}
+          className={`${styles.githubOverlay} ${styles.localMetricsOverlay}`}
+          role='group'
+          aria-label={t('projects.githubStatsLabel', { name: project.name })}
+        >
+          <GithubMetricsPreview project={project} />
+        </div>
+      )
+    }
 
     return (
       <div
