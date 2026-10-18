@@ -94,6 +94,22 @@ export const projectsConfig: IProjectConfig[] = [
     order: 3
   },
   {
+    key: 'forge',
+    repoName: 'forge',
+    name: 'Forge',
+    image: images.forge,
+    description: {
+      pt: 'App web pessoal para sustentar o retorno à rotina de treinos — carga, hábitos e acompanhamento no dia a dia.',
+      en: 'Personal web app to support getting back into a training routine — load, habits and day-to-day tracking.'
+    },
+    languages: ['Typescript', 'React', 'Kotlin', 'API'],
+    urlProject: 'https://forge-vieira.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/forge',
+    demoPriority: 'config',
+    featured: true,
+    order: 4
+  },
+  {
     key: '1',
     repoName: 'Plann.er',
     name: 'Plann.er',
@@ -106,7 +122,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://plann-er-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Plann.er',
     featured: true,
-    order: 4
+    order: 5
   },
   {
     key: '2',
@@ -121,7 +137,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://netflix-clone-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Netflix-Clone',
     featured: true,
-    order: 5
+    order: 6
   },
   {
     key: '3',

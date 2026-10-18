@@ -2,6 +2,7 @@ import adviceGeneratorApp from '../assets/advice-generator-app.png'
 import booker from '../assets/booker.png'
 import calculatorApp from '../assets/calculator-app.png'
 import financialControl from '../assets/financial-control.png'
+import forge from '../assets/forge.png'
 import logo from '../assets/logo-completed.png'
 import loopstudiosLandingPage from '../assets/loopstudios-landing-page.png'
 import mazziFioriCasamentos from '../assets/mazzi-fiori-casamentos.png'
@@ -33,5 +34,6 @@ export const images = {
   sunnysideAgencyLandingPage,
   booker,
   vieiraCenter,
-  vieiraAnalytics
+  vieiraAnalytics,
+  forge
 }
