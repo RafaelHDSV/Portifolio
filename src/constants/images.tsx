@@ -1,4 +1,5 @@
 import adviceGeneratorApp from '../assets/advice-generator-app.png'
+import booker from '../assets/booker.png'
 import calculatorApp from '../assets/calculator-app.png'
 import financialControl from '../assets/financial-control.png'
 import logo from '../assets/logo-completed.png'
@@ -12,6 +13,8 @@ import roboticHand from '../assets/robotic-hand.png'
 import sunnysideAgencyLandingPage from '../assets/sunnyside-agency-landing-page.png'
 import tipCalculatorApp from '../assets/tip-calculator-app.png'
 import todoApp from '../assets/todo-app.png'
+import vieiraAnalytics from '../assets/vieira-analytics.png'
+import vieiraCenter from '../assets/vieira-center.png'
 
 export const images = {
   logo,
@@ -27,5 +30,8 @@ export const images = {
   calculatorApp,
   tipCalculatorApp,
   loopstudiosLandingPage,
-  sunnysideAgencyLandingPage
+  sunnysideAgencyLandingPage,
+  booker,
+  vieiraCenter,
+  vieiraAnalytics
 }

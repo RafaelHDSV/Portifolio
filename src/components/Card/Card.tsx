@@ -114,14 +114,15 @@ export default function Card ({
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
   const thumbImage = project.image || project.media?.poster || ''
-  // Privado sem midia: preview local no lugar do OG (mesmo papel da imagem publica).
-  const useLocalMetricsPreview = Boolean(
-    project.private &&
+  // Privado: OG do GitHub e generico — preview local no hover (e como midia default se nao houver foto).
+  const useLocalMetricsOverlay = Boolean(project.private && project.github)
+  const useLocalMetricsAsDefault = Boolean(
+    useLocalMetricsOverlay &&
       project.usesGithubPreview &&
-      project.github &&
       !project.mediaLoading &&
       !isVideo &&
-      !project.media
+      !project.media &&
+      !imageDisplay.src
   )
   // Sem midia propria e sem preview local: overlay de metricas vira o default.
   const metricsAsDefault = Boolean(
@@ -129,7 +130,7 @@ export default function Card ({
       !project.mediaLoading &&
       !isVideo &&
       !imageDisplay.src &&
-      !useLocalMetricsPreview
+      !useLocalMetricsAsDefault
   )
   const shouldCollapseDescription =
     project.description.trim().length > DESCRIPTION_COLLAPSE_LIMIT
@@ -157,10 +158,10 @@ export default function Card ({
   }, [contributors.length, loadingContributors, project.repoName])
 
   useEffect(() => {
-    if (metricsAsDefault || useLocalMetricsPreview) {
+    if (metricsAsDefault || useLocalMetricsOverlay) {
       void loadContributors()
     }
-  }, [metricsAsDefault, useLocalMetricsPreview, loadContributors])
+  }, [metricsAsDefault, useLocalMetricsOverlay, loadContributors])
 
   useEffect(() => {
     const card = cardRef.current
@@ -237,7 +238,7 @@ export default function Card ({
       )
     }
 
-    if (useLocalMetricsPreview) {
+    if (useLocalMetricsAsDefault) {
       return (
         <GithubMetricsPreview
           project={project}
@@ -278,7 +279,7 @@ export default function Card ({
         role='group'
         aria-label={t('projects.githubStatsLabel', { name: project.name })}
       >
-        {useLocalMetricsPreview ? (
+        {useLocalMetricsOverlay ? (
           <div className={styles.githubOgFill} aria-hidden>
             <GithubMetricsPreview
               project={project}

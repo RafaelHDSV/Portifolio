@@ -46,6 +46,54 @@ export const projectsConfig: IProjectConfig[] = [
     order: 0
   },
   {
+    key: 'booker',
+    repoName: 'booker',
+    name: 'Booker',
+    image: images.booker,
+    description: {
+      pt: 'Diário privado de leitura: estante, ciclos (lendo/lido/abandonado), desejados, séries e retrospectiva anual — React, Express e Supabase.',
+      en: 'Private reading diary: shelf, reading cycles, wishlist, series and year-in-review — React, Express and Supabase.'
+    },
+    languages: ['Typescript', 'React', 'Node', 'API'],
+    urlProject: 'https://booker-vieira.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/booker',
+    demoPriority: 'config',
+    featured: true,
+    order: 1
+  },
+  {
+    key: 'vieira-center',
+    repoName: 'vieira-center',
+    name: 'Vieira Center',
+    image: images.vieiraCenter,
+    description: {
+      pt: 'Central pessoal de avisos: GitHub, visitas, deploys, Supabase, voz e agentes viram mensagens claras no Discord, no canal certo e na hora certa.',
+      en: 'Personal signal hub: GitHub, visits, deploys, Supabase, voice and agents become clear Discord messages in the right channel at the right time.'
+    },
+    languages: ['Typescript', 'Node', 'API'],
+    urlProject: 'https://vieira-center.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/vieira-center',
+    demoPriority: 'config',
+    featured: true,
+    order: 2
+  },
+  {
+    key: 'vieira-analytics',
+    repoName: 'PERSONAL-Vieira-Analytics',
+    name: 'Vieira Analytics',
+    image: images.vieiraAnalytics,
+    description: {
+      pt: 'Analytics web self-hosted no estilo Vercel Analytics: componente React nos sites, API central e dashboard para acompanhar todos os projetos.',
+      en: 'Self-hosted web analytics in the Vercel Analytics style: React component on your sites, a central API and a dashboard across projects.'
+    },
+    languages: ['Typescript', 'React', 'Node', 'API'],
+    urlProject: 'https://vieira-analytics.vercel.app',
+    urlGitHub: 'https://github.com/RafaelHDSV/PERSONAL-Vieira-Analytics',
+    demoPriority: 'config',
+    featured: true,
+    order: 3
+  },
+  {
     key: '1',
     repoName: 'Plann.er',
     name: 'Plann.er',
@@ -58,7 +106,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://plann-er-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Plann.er',
     featured: true,
-    order: 1
+    order: 4
   },
   {
     key: '2',
@@ -73,7 +121,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://netflix-clone-rafael.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Netflix-Clone',
     featured: true,
-    order: 2
+    order: 5
   },
   {
     key: '3',
@@ -88,7 +136,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://oak-tecnologia.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Oak-Tecnologia',
     forceExclude: true,
-    order: 3
+    order: 5
   },
   {
     key: '4',
@@ -103,7 +151,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://financial-control-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Financial-Control',
     forceExclude: true,
-    order: 4
+    order: 6
   },
   {
     key: '5',
@@ -118,7 +166,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://todo-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Todo-app',
     forceExclude: true,
-    order: 5
+    order: 7
   },
   {
     key: '6',
@@ -132,7 +180,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'API'],
     urlProject: 'https://advice-generator-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Advice-generator-app',
-    order: 6
+    order: 8
   },
   {
     key: '7',
@@ -146,7 +194,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'Bibliotecas'],
     urlProject: 'https://marg-tcc.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Robotic-Hand',
-    order: 7
+    order: 9
   },
   {
     key: '8',
@@ -161,7 +209,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://mazzi-fiori-casamentos.netlify.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Mazzi-Fiori-Casamentos',
     forceExclude: true,
-    order: 8
+    order: 10
   },
   {
     key: '9',
@@ -175,7 +223,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript'],
     urlProject: 'https://password-generator-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Password-Generator',
-    order: 9
+    order: 11
   },
   {
     key: '10',
@@ -190,7 +238,7 @@ export const projectsConfig: IProjectConfig[] = [
     urlProject: 'https://calculator-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Calculator-app',
     forceExclude: true,
-    order: 10
+    order: 12
   },
   {
     key: '11',
@@ -204,7 +252,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript'],
     urlProject: 'https://loopstudios-landing-page-rafael.netlify.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Loopstudios-landing-page',
-    order: 11
+    order: 13
   },
   {
     key: '12',
@@ -218,7 +266,7 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript'],
     urlProject: 'https://sunnyside-agency-landing-page-rafael.netlify.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Sunnyside-agency-landing-page',
-    order: 12
+    order: 14
   }
 ]
 
