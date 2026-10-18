@@ -28,6 +28,7 @@ import {
 } from '../../constants/recruiterFeatured'
 import useGetMe from '../../hooks/useGetMe'
 import useGitHubProjects from '../../hooks/useGitHubProjects'
+import { isDevelopment } from '../../utils/environment'
 import { useRepoLanguages } from '../../hooks/useRepoLanguages'
 import { configToSyntheticRepo } from '../../utils/repoFilters'
 import {
@@ -379,9 +380,11 @@ function ProjectCard({
     ? t(`recruiter.projectCategories.${categoryKey}`)
     : null
 
-  const href = project.private
-    ? project.urlProject
-    : project.urlGitHub || project.urlProject
+  // Em prod, privado so aponta para demo (se houver); em local, permite o GitHub.
+  const href =
+    project.private && !isDevelopment
+      ? project.urlProject
+      : project.urlGitHub || project.urlProject
   const content = (
     <>
       {project.pinned && (

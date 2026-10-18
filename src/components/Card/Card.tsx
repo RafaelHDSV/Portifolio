@@ -13,6 +13,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USERNAME } from '../../constants/cv'
 import { GithubRepository } from '../../repository/GithubRepository'
+import { isDevelopment } from '../../utils/environment'
 import {
   getPrimaryImageUrl,
   ImageFallbackStage,
@@ -435,7 +436,7 @@ export default function Card ({
               {t('projects.viewDemo')}
             </Button>
           )}
-          {!project.private && (
+          {(!project.private || isDevelopment) && project.urlGitHub && (
             <Button
               href={project.urlGitHub}
               variant='secondary'
