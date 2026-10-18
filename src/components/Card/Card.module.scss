@@ -133,32 +133,28 @@
     color: var(--color-text-primary);
     background: color-mix(in srgb, var(--color-accent) 14%, var(--color-surface));
   }
-
-  .localMetricsOverlay {
-    opacity: 1;
-    justify-content: stretch;
-    padding: 0;
-    background: #f6f8fa;
-  }
 }
 
-.localMetricsOverlay {
-  padding: 0;
-  background: #f6f8fa;
+.githubOgImage,
+.githubOgFill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.githubOgImage {
+  object-fit: cover;
+}
+
+.githubOgFill {
+  overflow: hidden;
 
   > * {
     width: 100%;
     height: 100%;
   }
-}
-
-.githubOgImage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
 }
 
 .githubOverlayMeta {

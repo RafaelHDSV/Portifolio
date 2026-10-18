@@ -113,9 +113,22 @@ export default function Card ({
   const isVideo = project.media?.type === 'video' && !videoError
   const videoUrl = project.media?.url ?? ''
   const thumbImage = project.image || project.media?.poster || ''
-  // Sem midia propria (tipico de privado sem README/demo): metricas no lugar do placeholder.
+  // Privado sem midia: preview local no lugar do OG (mesmo papel da imagem publica).
+  const useLocalMetricsPreview = Boolean(
+    project.private &&
+      project.usesGithubPreview &&
+      project.github &&
+      !project.mediaLoading &&
+      !isVideo &&
+      !project.media
+  )
+  // Sem midia propria e sem preview local: overlay de metricas vira o default.
   const metricsAsDefault = Boolean(
-    project.github && !project.mediaLoading && !isVideo && !imageDisplay.src
+    project.github &&
+      !project.mediaLoading &&
+      !isVideo &&
+      !imageDisplay.src &&
+      !useLocalMetricsPreview
   )
   const shouldCollapseDescription =
     project.description.trim().length > DESCRIPTION_COLLAPSE_LIMIT
@@ -223,6 +236,10 @@ export default function Card ({
       )
     }
 
+    if (useLocalMetricsPreview) {
+      return <GithubMetricsPreview project={project} />
+    }
+
     if (imageDisplay.src) {
       return (
         <img
@@ -245,26 +262,8 @@ export default function Card ({
     )
   }
 
-  const useLocalMetricsPreview = Boolean(
-    project.private && project.usesGithubPreview && project.github
-  )
-
   const renderGithubOverlay = () => {
     if (!project.github) return null
-
-    // Privado sem midia propria: OG do GitHub e so o logo generico.
-    if (useLocalMetricsPreview) {
-      return (
-        <div
-          id={statsOverlayId}
-          className={`${styles.githubOverlay} ${styles.localMetricsOverlay}`}
-          role='group'
-          aria-label={t('projects.githubStatsLabel', { name: project.name })}
-        >
-          <GithubMetricsPreview project={project} />
-        </div>
-      )
-    }
 
     return (
       <div
@@ -273,14 +272,20 @@ export default function Card ({
         role='group'
         aria-label={t('projects.githubStatsLabel', { name: project.name })}
       >
-        {Boolean(project.github.ogImage) && (
-          <img
-            className={styles.githubOgImage}
-            src={project.github.ogImage}
-            alt=''
-            loading='lazy'
-            aria-hidden
-          />
+        {useLocalMetricsPreview ? (
+          <div className={styles.githubOgFill} aria-hidden>
+            <GithubMetricsPreview project={project} />
+          </div>
+        ) : (
+          Boolean(project.github.ogImage) && (
+            <img
+              className={styles.githubOgImage}
+              src={project.github.ogImage}
+              alt=''
+              loading='lazy'
+              aria-hidden
+            />
+          )
         )}
         <div className={styles.githubOverlayMeta}>
           <div className={styles.githubStats}>
