@@ -21,7 +21,9 @@
   overflow: hidden;
   background-color: var(--color-surface);
 
-  img {
+  // So cobre midia do card / OG — nao o avatar do preview local de metricas.
+  .mediaDefault img,
+  .githubOgImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -143,6 +145,11 @@
 .localMetricsOverlay {
   padding: 0;
   background: #f6f8fa;
+
+  > * {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .githubOgImage {

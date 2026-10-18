@@ -1,20 +1,23 @@
 .preview {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: stretch;
-  justify-content: stretch;
   background: #f6f8fa;
   color: #1f2328;
+  overflow: hidden;
 }
 
 .inner {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 0.9rem 1rem 0.75rem;
-  gap: 0.65rem;
+  min-height: 0;
+  padding: 0.85rem 1rem 0.7rem;
+  gap: 0.5rem;
 }
 
 .top {
@@ -23,22 +26,22 @@
   justify-content: space-between;
   gap: 0.75rem;
   min-height: 0;
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .copy {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .repoPath {
   margin: 0;
-  font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+  font-size: 0.88rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   word-break: break-word;
 }
 
@@ -87,11 +90,13 @@
 }
 
 .avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.45rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  max-width: 2.75rem;
+  max-height: 2.75rem;
+  border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;
+  flex: 0 0 2.75rem;
   border: 1px solid rgba(31, 35, 40, 0.12);
   background: #fff;
 }
