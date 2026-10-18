@@ -156,10 +156,10 @@ export default function Card ({
   }, [contributors.length, loadingContributors, project.repoName])
 
   useEffect(() => {
-    if (metricsAsDefault) {
+    if (metricsAsDefault || useLocalMetricsPreview) {
       void loadContributors()
     }
-  }, [metricsAsDefault, loadContributors])
+  }, [metricsAsDefault, useLocalMetricsPreview, loadContributors])
 
   useEffect(() => {
     const card = cardRef.current
@@ -237,7 +237,12 @@ export default function Card ({
     }
 
     if (useLocalMetricsPreview) {
-      return <GithubMetricsPreview project={project} />
+      return (
+        <GithubMetricsPreview
+          project={project}
+          contributorCount={contributors.length || 1}
+        />
+      )
     }
 
     if (imageDisplay.src) {
@@ -274,7 +279,10 @@ export default function Card ({
       >
         {useLocalMetricsPreview ? (
           <div className={styles.githubOgFill} aria-hidden>
-            <GithubMetricsPreview project={project} />
+            <GithubMetricsPreview
+              project={project}
+              contributorCount={contributors.length || 1}
+            />
           </div>
         ) : (
           Boolean(project.github.ogImage) && (
