@@ -228,10 +228,10 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@emailjs/browser@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-5.0.2.tgz#0ee305ca890b14b97ec8070e57ea9452fb30993e"
-  integrity sha512-yhfjhO6q6843CXUxZcJ5iw+HLtLvNbdt0wx/cJ6upREmD/biKoB7hAAO1HnYqhSH7owIUgwIbZOxSOblZyN3cQ==
+"@emailjs/browser@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-5.0.3.tgz#e2b456aac814f5e405d653368510f7d3f5b6a8cc"
+  integrity sha512-4HGAkWdzql7mrG34ZFFj7IDJNRgtbl1+yVgHdQJ6XSfhq9gxGUHtttr4UKNi7Fk++1hMXRHy1lTeGZrkioOtsw==
 
 "@emnapi/runtime@^1.11.3":
   version "1.11.3"
@@ -3182,10 +3182,10 @@ https-proxy-agent@^9.0.0:
     debug "^4.3.4"
     proxy-agent-negotiate "1.1.0"
 
-i18next@^26.4.3:
-  version "26.4.3"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-26.4.3.tgz#bb607107a1f5f9fdf6b9ef16dc9ad10bbed6cd7b"
-  integrity sha512-QIIueUYS2giFVIY3hu/X5Dz7/qTzwcXE06H29m1DKVhUGVPCyT0wnsh14wEn/cTy9nZ/B6VhbDItdXotOKSO8A==
+i18next@^26.4.7:
+  version "26.4.7"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-26.4.7.tgz#9e366d66690f03c1793563d7060703f5edaa3ecd"
+  integrity sha512-p/3hqy6EcuqRs6wNwBYwGGC1fzBJSMxV9zMuN814ab/7QjdZbXfjXwuPZdQbngX6KDOTxM01uUiZyqmMB8ghZg==
 
 iconv-lite@^0.4.24, iconv-lite@~0.4.24:
   version "0.4.24"
@@ -4768,10 +4768,10 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
-react-i18next@^17.0.16:
-  version "17.0.16"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-17.0.16.tgz#72d3cd2f5a484aaf75bd76422dbc23a43bf693f5"
-  integrity sha512-7uImVD9hG5yUOaP5KHVied1x0A004Di/KU031ULR35Ma+9e9H5GdnNZHgQEIByyAz+IAXBkRDTedNVzjPUH8ZA==
+react-i18next@^17.0.19:
+  version "17.0.19"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-17.0.19.tgz#aba317f5167a2c1180399bce7e1faf7b2b333c0d"
+  integrity sha512-BRHqiqOfW4J/LBVtbBFHoBoZm/Ez2/tkHPitYtn0CSpkYhEaEAsZMPsg7hZlomu30UJYQ6ZKiP3pwa3QnxGvQw==
   dependencies:
     "@babel/runtime" "^7.29.7"
     html-parse-stringify "^4.0.1"
@@ -4941,10 +4941,10 @@ sass@^1.105.1:
   optionalDependencies:
     "@parcel/watcher" "^2.4.1"
 
-satori@0.47.1:
-  version "0.47.1"
-  resolved "https://registry.yarnpkg.com/satori/-/satori-0.47.1.tgz#8da9886dbeab918e792c3779223ebef73c8d61fd"
-  integrity sha512-hoRMFMXQ9o4VvcOZ+5pXKRAuWJkjvUzRz3fZJoFrAT3MVfuUvMWROe50lB7AREI1m9a0FAlEMDdQ3WPvHLm7FA==
+satori@0.62.0:
+  version "0.62.0"
+  resolved "https://registry.yarnpkg.com/satori/-/satori-0.62.0.tgz#f5a8e453f611f327d3983ea73b606c9d32389d31"
+  integrity sha512-6w3G54svVX9B3RY3S7XgZ3i9ZNtvO7Z8AWWUPcHM3HMhgvmYAZOl5TkWBqE8moxRxHW0i2XPbjI1mUsUmWGriA==
   dependencies:
     "@shuding/opentype.js" "1.4.0-beta.0"
     css-background-parser "^0.1.0"
