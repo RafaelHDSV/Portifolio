@@ -329,7 +329,7 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 **Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home, `/privacidade`, `/termos` e imagens OG). Host canônico: `https://rafaelhdsv.vercel.app`. Canonical da home em `/`; i18n client-side sem hreflang com query string.
 
-**Páginas institucionais (sem conta):** o app não usa react-router. `institucionalView` manda `/` e `/recruiter` para o site atual; `/privacidade` e `/termos` para `LegalPage`; qualquer outro caminho para `NotFoundPage`. O `vercel.json` reescreve esses caminhos (e o restante que não é `/api`) para `index.html`. Rodapé `SiteFooter` só com Privacidade e Termos. Sentry só em produção e só com `VITE_SENTRY_DSN`. Não há opt-out de analytics na interface.
+**Páginas institucionais (sem conta):** o app não usa react-router. `institucionalView` manda `/` e `/recruiter` para o site atual; `/privacidade` e `/termos` para `LegalPage`; qualquer outro caminho para `NotFoundPage`. O `vercel.json` reescreve esses caminhos (e o restante que não é `/api`) para `index.html`. Privacidade e Termos entram no rodapé já existente (`Footer` e o rodapé do modo recrutador), não num segundo `SiteFooter`. O reset Sass zera padding do institucional: 404 (botão Início) e páginas legais recebem o espaço de volta em `_institucional.scss`. Sentry só em produção e só com `VITE_SENTRY_DSN`. Não há opt-out de analytics na interface.
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global. Cards de projetos (#35): labels contextuais em links Demo/GitHub; overlay stats com `role="group"` e métricas nomeadas; visível em `:focus-within`.
 

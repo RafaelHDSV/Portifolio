@@ -1,4 +1,4 @@
-import { LegalPage, NotFoundPage, SiteFooter } from '@vieira/institucional'
+import { LegalPage, NotFoundPage } from '@vieira/institucional'
 import { lazy, Suspense } from 'react'
 import BuyMeCoffee from './components/BuyMeCoffee/BuyMeCoffee'
 import CustomCursor from './components/CustomCursor/CustomCursor'
@@ -35,7 +35,6 @@ function AppContent () {
         <Suspense fallback={<SectionFallback minHeight='60vh' />}>
           <RecruiterView />
         </Suspense>
-        <SiteFooter className={styles.legalFooter} />
         <CustomCursor />
       </div>
     )
@@ -59,7 +58,6 @@ function AppContent () {
         <Contact />
       </Suspense>
       <Footer />
-      <SiteFooter className={styles.legalFooter} />
       <ScrollToTopButton />
       <CustomCursor />
     </div>

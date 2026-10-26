@@ -361,6 +361,11 @@ export default function RecruiterView() {
               })}
             </p>
             <p className={styles.footerNote}>{t('recruiter.footerNote')}</p>
+            <nav className={styles.legalNav} aria-label={t('footer.legalNav')}>
+              <a href='/privacidade'>{t('footer.privacy')}</a>
+              <span aria-hidden>·</span>
+              <a href='/termos'>{t('footer.terms')}</a>
+            </nav>
           </footer>
         </Container>
       </div>

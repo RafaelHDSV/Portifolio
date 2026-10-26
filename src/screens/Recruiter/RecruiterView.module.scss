@@ -580,6 +580,23 @@
   color: var(--color-text-muted) !important;
 }
 
+.legalNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+
+  a {
+    color: var(--color-text-muted);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
 @media print {
   .recruiter {
     min-height: auto;

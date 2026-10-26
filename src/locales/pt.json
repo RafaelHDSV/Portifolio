@@ -165,7 +165,10 @@
   },
   "footer": {
     "role": "Desenvolvedor Full-Stack",
-    "eggCounter": "Easter egg: {{count}}/{{total}} descobertos"
+    "eggCounter": "Easter egg: {{count}}/{{total}} descobertos",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "legalNav": "Documentos legais"
   },
   "recruiter": {
     "enable": "Modo recrutador",

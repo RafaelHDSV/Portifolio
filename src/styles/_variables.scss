@@ -66,6 +66,10 @@ $font-outfit: 'Outfit', sans-serif;
   --vi-border: var(--color-border);
   --vi-accent: var(--color-accent);
   --vi-accent-fg: #ffffff;
+  --vi-danger: #c62828;
+  --vi-danger-fg: #ffffff;
+  --vi-radius: 10px;
+  --vi-max-width: 44rem;
 }
 
 html.dark,
