@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
-    "@sentry/vite-plugin": "^4",
+    "@sentry/vite-plugin": "^11",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "@types/react": "^18.3.3",
