@@ -35,7 +35,7 @@
     "react-i18next": "^17.1.4",
     "react-icons": "^5.7.0",
     "sharp": "^0.35.5",
-    "typewriter-effect": "^2.22.0"
+    "typewriter-effect": "^3.3.0"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
