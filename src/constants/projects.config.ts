@@ -87,7 +87,7 @@ export const projectsConfig: IProjectConfig[] = [
       en: 'Self-hosted web analytics in the Vercel Analytics style: React component on your sites, a central API and a dashboard across projects.'
     },
     languages: ['Typescript', 'React', 'Node', 'API'],
-    urlProject: 'https://vieira-analytics.vercel.app',
+    urlProject: 'https://analytics.getvieira.com',
     urlGitHub: 'https://github.com/RafaelHDSV/PERSONAL-Vieira-Analytics',
     demoPriority: 'config',
     featured: true,
