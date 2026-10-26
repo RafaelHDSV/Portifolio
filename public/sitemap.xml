@@ -2,29 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://rafaelhdsv.vercel.app/</loc>
+    <loc>https://rafael.getvieira.com/</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://rafaelhdsv.vercel.app/og-pt.png</image:loc>
+      <image:loc>https://rafael.getvieira.com/og-pt.png</image:loc>
       <image:title>Rafael Vieira — Desenvolvedor Full-Stack</image:title>
       <image:caption>Portfolio de Rafael Vieira, desenvolvedor Full-Stack</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://rafaelhdsv.vercel.app/og/avatar.jpg</image:loc>
+      <image:loc>https://rafael.getvieira.com/og/avatar.jpg</image:loc>
       <image:title>Rafael Vieira</image:title>
       <image:caption>Foto de perfil — Rafael Vieira</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://rafaelhdsv.vercel.app/privacidade</loc>
+    <loc>https://rafael.getvieira.com/privacidade</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://rafaelhdsv.vercel.app/termos</loc>
+    <loc>https://rafael.getvieira.com/termos</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

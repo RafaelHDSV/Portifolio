@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "yarn install --frozen-lockfile --force",
   "buildCommand": "yarn build",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "rafaelhdsv.vercel.app" }],
+      "destination": "https://rafael.getvieira.com/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/og",
