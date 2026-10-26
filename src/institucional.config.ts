@@ -1,7 +1,6 @@
 import { defineInstitucionalConfig } from '@vieira/institucional'
 
-/** Host de produção atual. Não trocar por getvieira.com. */
-const PUBLIC_URL = 'https://rafaelhdsv.vercel.app'
+const PUBLIC_URL = 'https://rafael.getvieira.com'
 
 export const institucionalConfig = defineInstitucionalConfig({
   appName: 'Portfólio',

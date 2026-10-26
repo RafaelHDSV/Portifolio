@@ -55,7 +55,7 @@ export const projectsConfig: IProjectConfig[] = [
       en: 'Private reading diary: shelf, reading cycles, wishlist, series and year-in-review — React, Express and Supabase.'
     },
     languages: ['Typescript', 'React', 'Node', 'API'],
-    urlProject: 'https://booker-vieira.vercel.app',
+    urlProject: 'https://booker.getvieira.com',
     urlGitHub: 'https://github.com/RafaelHDSV/booker',
     demoPriority: 'config',
     featured: true,
@@ -103,7 +103,7 @@ export const projectsConfig: IProjectConfig[] = [
       en: 'Personal web app to support getting back into a training routine — load, habits and day-to-day tracking.'
     },
     languages: ['Typescript', 'React', 'Kotlin', 'API'],
-    urlProject: 'https://forge-vieira.vercel.app',
+    urlProject: 'https://forge.getvieira.com',
     urlGitHub: 'https://github.com/RafaelHDSV/forge',
     demoPriority: 'config',
     featured: true,
@@ -119,7 +119,7 @@ export const projectsConfig: IProjectConfig[] = [
       en: 'B2B SaaS for CTOs and tech leads to evaluate developers with consolidated evidence (GitHub + dailies) in a panel with metrics, ranking and drill-down.'
     },
     languages: ['Typescript', 'React', 'Node', 'API'],
-    urlProject: 'https://devos-analytics.vercel.app',
+    urlProject: 'https://devos.getvieira.com',
     urlGitHub: 'https://github.com/RafaelHDSV/Devos',
     demoPriority: 'config',
     featured: true,
@@ -136,7 +136,7 @@ export const projectsConfig: IProjectConfig[] = [
       en: 'Personal health app: blood pressure with charts and averages, medications, contraceptive cycle tracking and PDF export — auth and data on Supabase.'
     },
     languages: ['Typescript', 'React', 'API'],
-    urlProject: 'https://vital-vieira.vercel.app',
+    urlProject: 'https://vital.getvieira.com',
     urlGitHub: 'https://github.com/RafaelHDSV/vital',
     demoPriority: 'config',
     featured: true,
