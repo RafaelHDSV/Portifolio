@@ -2,7 +2,7 @@
 
 Documento de referência sobre o estado atual do repositório após a implementação da [especificação v2](./especificacao-v2-refino-ui-ux.md) (maio/2026), evoluindo a [v1.1](./especificacao.md).
 
-**URL de deploy:** https://rafaelhdsv.vercel.app  
+**URL de deploy:** https://rafael.getvieira.com  
 **Stack:** React 18 · TypeScript · Vite 7 · SASS · Emotion · i18next · EmailJS
 
 ---
@@ -327,7 +327,7 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 **index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200×630, gerado no build, #28/#37). Verificação Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
 
-**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home, `/privacidade`, `/termos` e imagens OG). Host canônico: `https://rafaelhdsv.vercel.app`. Canonical da home em `/`; i18n client-side sem hreflang com query string.
+**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home, `/privacidade`, `/termos` e imagens OG). Host canônico: `https://rafael.getvieira.com`. Canonical da home em `/`; i18n client-side sem hreflang com query string.
 
 **Páginas institucionais (sem conta):** o app não usa react-router. `institucionalView` manda `/` e `/recruiter` para o site atual; `/privacidade` e `/termos` para `LegalPage`; qualquer outro caminho para `NotFoundPage`. O `vercel.json` reescreve esses caminhos (e o restante que não é `/api`) para `index.html`. Privacidade e Termos entram no rodapé já existente (`Footer` e o rodapé do modo recrutador), não num segundo `SiteFooter`. O reset Sass zera padding do institucional: 404 (botão Início) e páginas legais recebem o espaço de volta em `_institucional.scss`. Sentry só em produção e só com `VITE_SENTRY_DSN`. Não há opt-out de analytics na interface.
 
