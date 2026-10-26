@@ -1,0 +1,90 @@
+/* O reset `* { padding: 0; margin: 0 }` vence o @layer do institucional. */
+
+a.vi-link {
+  color: var(--vi-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.vi-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.85rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--vi-border);
+  border-radius: var(--vi-radius);
+  background: var(--vi-surface);
+  color: var(--vi-fg);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.vi-button--primary {
+  background: var(--vi-accent);
+  border-color: var(--vi-accent);
+  color: var(--vi-accent-fg);
+}
+
+.vi-status-page {
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+}
+
+.vi-status-page__actions {
+  margin: 0.75rem 0;
+}
+
+.vi-legal__main {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.75rem 5rem;
+  line-height: 1.65;
+}
+
+.vi-legal__back {
+  margin-bottom: 1.5rem;
+}
+
+.vi-legal__title {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.vi-legal__version {
+  margin: 0 0 1.5rem;
+}
+
+.vi-legal__toc {
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.vi-legal__toc ol {
+  padding: 0;
+  list-style: none;
+}
+
+.vi-legal__section {
+  margin-bottom: 2rem;
+}
+
+.vi-legal__section h2 {
+  margin: 0 0 0.6rem;
+}
+
+.vi-legal__section p,
+.vi-legal__section ul {
+  margin: 0 0 0.75rem;
+}
+
+.vi-legal__section ul {
+  padding-left: 1.25rem;
+}
+
+.vi-footer {
+  padding: 2rem 1.5rem 2.5rem;
+}

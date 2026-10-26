@@ -17,4 +17,16 @@
       <image:caption>Foto de perfil — Rafael Vieira</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://rafaelhdsv.vercel.app/privacidade</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://rafaelhdsv.vercel.app/termos</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

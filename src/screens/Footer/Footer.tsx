@@ -60,6 +60,8 @@ export default function Footer () {
                     {t(`nav.${key}`)}
                   </a>
                 ))}
+                <a href='/privacidade'>{t('footer.privacy')}</a>
+                <a href='/termos'>{t('footer.terms')}</a>
               </nav>
 
               <div className={styles.social}>

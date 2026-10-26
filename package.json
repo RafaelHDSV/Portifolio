@@ -18,10 +18,12 @@
   },
   "dependencies": {
     "@emailjs/browser": "^5.0.3",
+    "@sentry/react": "^10",
     "@emotion/react": "^11.14.0",
     "@phosphor-icons/react": "^2.1.10",
     "satori": "0.62.0",
     "@vieira/analytics": "file:./vendor/vieira-analytics",
+    "@vieira/institucional": "file:./vendor/vieira-institucional",
     "axios": "^1.20.0",
     "dayjs": "^1.11.23",
     "i18next": "^26.4.7",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
+    "@sentry/vite-plugin": "^4",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "@types/react": "^18.3.3",

@@ -64,7 +64,8 @@ A **v3.1** (maio/2026) redesenha o modo recrutador com layout em cards (perfil, 
 ```
 src/
 ├── App.tsx                    # Shell principal + lazy sections
-├── main.tsx                   # Bootstrap React + I18nextProvider + analytics
+├── main.tsx                   # Bootstrap React + InstitucionalProvider + Sentry + I18nextProvider + analytics
+├── institucional.config.ts    # Páginas legais (sem conta)
 ├── i18n/index.ts              # Configuração i18next (PT padrão, EN fallback)
 ├── locales/
 │   ├── pt.json                # Traduções PT-BR (UI completa)
@@ -326,7 +327,9 @@ Descobertas em `localStorage` (`eggs-unlocked`). Implementação: `EasterEggProv
 
 **index.html:** meta/OG/JSON-LD com **Full-Stack Developer**; preconnect GitHub + Fonts. `og:image` e `twitter:image` apontam para `/og-pt.png` (1200×630, gerado no build, #28/#37). Verificação Google Search Console via `VITE_GOOGLE_SITE_VERIFICATION` (build). Guia: [`docs/google-search-console.md`](./google-search-console.md).
 
-**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home + imagens OG). Canonical único em `/`; i18n client-side sem hreflang com query string.
+**Arquivos SEO estáticos:** `public/robots.txt`, `public/sitemap.xml` (home, `/privacidade`, `/termos` e imagens OG). Host canônico: `https://rafaelhdsv.vercel.app`. Canonical da home em `/`; i18n client-side sem hreflang com query string.
+
+**Páginas institucionais (sem conta):** o app não usa react-router. `institucionalView` manda `/` e `/recruiter` para o site atual; `/privacidade` e `/termos` para `LegalPage`; qualquer outro caminho para `NotFoundPage`. O `vercel.json` reescreve esses caminhos (e o restante que não é `/api`) para `index.html`. Privacidade e Termos entram no rodapé já existente (`Footer` e o rodapé do modo recrutador), não num segundo `SiteFooter`. O reset Sass zera padding do institucional: 404 (botão Início) e páginas legais recebem o espaço de volta em `_institucional.scss`. Sentry só em produção e só com `VITE_SENTRY_DSN`. Não há opt-out de analytics na interface.
 
 **A11y:** focus-visible, aria-labels, 44×44px em controles, reduced-motion global. Cards de projetos (#35): labels contextuais em links Demo/GitHub; overlay stats com `role="group"` e métricas nomeadas; visível em `:focus-within`.
 
@@ -340,6 +343,10 @@ VITE_EMAILJS_SERVICE_ID=
 VITE_EMAILJS_TEMPLATE_ID=
 VITE_EMAILJS_PUBLIC_KEY=
 VITE_GOOGLE_SITE_VERIFICATION=
+VITE_SENTRY_DSN=
+SENTRY_AUTH_TOKEN=
+SENTRY_ORG=
+SENTRY_PROJECT=portifolio
 ```
 
 Copiar de `.env.example`. **Nunca commitar** `.env` com valores reais.

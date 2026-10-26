@@ -4,10 +4,6 @@
   "buildCommand": "yarn build",
   "rewrites": [
     {
-      "source": "/recruiter",
-      "destination": "/index.html"
-    },
-    {
       "source": "/api/og",
       "has": [{ "type": "query", "key": "lang", "value": "en" }],
       "destination": "/og-en.png"
@@ -15,6 +11,10 @@
     {
       "source": "/api/og",
       "destination": "/og-pt.png"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

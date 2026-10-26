@@ -57,6 +57,19 @@ $font-outfit: 'Outfit', sans-serif;
   --hero-mesh-1: rgba(14, 165, 233, 0.15);
   --hero-mesh-2: rgba(56, 189, 248, 0.1);
   --fade-edge: var(--color-bg);
+
+  --vi-font: #{$font-outfit}, sans-serif;
+  --vi-fg: var(--color-text-primary);
+  --vi-muted: var(--color-text-muted);
+  --vi-bg: var(--color-bg);
+  --vi-surface: var(--color-surface-elevated);
+  --vi-border: var(--color-border);
+  --vi-accent: var(--color-accent);
+  --vi-accent-fg: #ffffff;
+  --vi-danger: #c62828;
+  --vi-danger-fg: #ffffff;
+  --vi-radius: 10px;
+  --vi-max-width: 44rem;
 }
 
 html.dark,
