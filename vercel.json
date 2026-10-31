@@ -6,7 +6,19 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "rafaelhdsv.vercel.app" }],
-      "destination": "https://rafael.getvieira.com/$1",
+      "destination": "https://getvieira.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "rafael.getvieira.com" }],
+      "destination": "https://getvieira.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.getvieira.com" }],
+      "destination": "https://getvieira.com/$1",
       "permanent": true
     }
   ],

@@ -172,7 +172,7 @@ describe('isEligibleNonPinnedRepo', () => {
         makeRepo({
           name: 'Portifolio',
           language: 'TypeScript',
-          homepage: 'https://rafael.getvieira.com'
+          homepage: 'https://getvieira.com'
         })
       )
     ).toBe(true)
