@@ -2,9 +2,11 @@
 
 Guia para registrar o site no [Google Search Console](https://search.google.com/search-console) e enviar o sitemap.
 
-**URL do site:** https://rafaelhdsv.vercel.app  
-**Sitemap:** https://rafaelhdsv.vercel.app/sitemap.xml  
-**Robots:** https://rafaelhdsv.vercel.app/robots.txt
+**URL do site:** https://getvieira.com  
+**Sitemap:** https://getvieira.com/sitemap.xml  
+**Robots:** https://getvieira.com/robots.txt
+
+A propriedade correta no Search Console e a **de dominio** `getvieira.com` (TXT na Cloudflare). Ela cobre o apex e todos os subdominios. Nao crie uma propriedade nova so de prefixo `https://rafael.getvieira.com/`.
 
 ---
 
@@ -25,14 +27,13 @@ Guia para registrar o site no [Google Search Console](https://search.google.com/
 
 1. Acesse https://search.google.com/search-console e entre com a conta Google desejada.
 2. Clique em **Adicionar propriedade**.
-3. Escolha **Prefixo do URL** e informe:
+3. Escolha **Dominio** (nao Prefixo do URL) e informe:
    ```
-   https://rafaelhdsv.vercel.app/
+   getvieira.com
    ```
-   (Use exatamente `https` e a barra final, como acima.)
-4. Clique em **Continuar**.
+4. Clique em **Continuar**. O Google pede um TXT na zona Cloudflare; o registro `google-site-verification` do apex ja existe.
 
-> Se no futuro voce usar dominio proprio (ex.: `rafaelvieira.dev`), crie uma **nova** propriedade para esse dominio ou migre usando redirecionamento 301 da Vercel.
+> Hosts antigos (`rafael.getvieira.com`, `rafaelhdsv.vercel.app`) redirecionam 308 para `https://getvieira.com`. O Google deve indexar so o apex.
 
 ---
 
@@ -69,7 +70,7 @@ VITE_GOOGLE_SITE_VERIFICATION=SEU_TOKEN_AQUI
 
 ### 3.4. Confirmar no site
 
-Apos o deploy, abra o codigo-fonte de https://rafaelhdsv.vercel.app/ (Ctrl+U) e confira se existe:
+Apos o deploy, abra o codigo-fonte de https://getvieira.com/ (Ctrl+U) e confira se existe:
 
 ```html
 <meta name="google-site-verification" content="SEU_TOKEN_AQUI" />
@@ -89,7 +90,7 @@ Se preferir nao usar variavel de ambiente:
 2. Baixe o arquivo (ex.: `google1234567890abcdef.html`).
 3. Coloque o arquivo em `public/` do repositorio (mesmo nivel de `robots.txt`).
 4. Commit, push e deploy.
-5. Teste no navegador: `https://rafaelhdsv.vercel.app/google1234567890abcdef.html`
+5. Teste no navegador: `https://getvieira.com/google1234567890abcdef.html`
 6. Clique em **Verificar** no Search Console.
 
 Remova o arquivo depois da verificacao, se quiser — a propriedade permanece verificada.
@@ -110,15 +111,15 @@ Status esperado: **Sucesso** (pode levar algumas horas para processar).
 
 URLs uteis para conferir manualmente:
 
-- https://rafaelhdsv.vercel.app/sitemap.xml
-- https://rafaelhdsv.vercel.app/robots.txt
+- https://getvieira.com/sitemap.xml
+- https://getvieira.com/robots.txt
 
 ---
 
 ## 6. Inspecao de URL e indexacao
 
 1. Menu **Inspecao de URL**.
-2. Cole `https://rafaelhdsv.vercel.app/` e pressione Enter.
+2. Cole `https://getvieira.com/` e pressione Enter.
 3. Se a pagina nao estiver indexada, use **Solicitar indexacao**.
 
 O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode levar dias na primeira vez. O JSON-LD e as meta tags em `index.html` ajudam o rastreador mesmo antes do JS carregar.
@@ -127,7 +128,7 @@ O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode l
 
 ## 7. Checklist pos-configuracao
 
-- [ ] Propriedade criada (`https://rafaelhdsv.vercel.app/`)
+- [ ] Propriedade criada (`https://getvieira.com/`)
 - [ ] Verificacao concluida (meta tag ou arquivo HTML)
 - [ ] Sitemap enviado (`sitemap.xml`)
 - [ ] Inspecao de URL solicitada para a home
@@ -152,7 +153,7 @@ O portfolio e uma SPA (React). O Google renderiza JavaScript; a indexacao pode l
 
 **Correcao aplicada:**
 
-- Canonical fixo em `https://rafaelhdsv.vercel.app/` (HTML estatico; JS nao altera mais).
+- Canonical fixo em `https://getvieira.com/` (HTML estatico; JS nao altera mais).
 - hreflang com query string removido do `index.html` e do `sitemap.xml` (SPA com i18n client-side usa uma unica URL).
 - Parametro `?lang=` continua funcionando para links compartilhados, mas e removido da barra de endereco com `history.replaceState` apos aplicar o idioma.
 
@@ -167,7 +168,7 @@ Esse status para URLs antigas `/?lang=*` deve sumir apos re-rastreamento (dias).
 **Apos deploy:**
 
 1. Search Console → **Sitemaps** → reenviar `sitemap.xml` (opcional, acelera).
-2. **Inspecao de URL** → `https://rafaelhdsv.vercel.app/` → **Solicitar indexacao**.
+2. **Inspecao de URL** → `https://getvieira.com/` → **Solicitar indexacao**.
 3. Em **Indexacao → Paginas**, aguarde 3–14 dias; espere **1 URL indexada** (`/`) e queda das nao indexadas.
 
 ---
@@ -199,12 +200,12 @@ Gerados no build: `yarn tsx scripts/generate-icon.ts` e `yarn tsx scripts/genera
 ### Acelerar a atualizacao
 
 1. **Deploy** com as alteracoes de SEO (favicon + OG + JSON-LD).
-2. Search Console → **Inspecao de URL** → `https://rafaelhdsv.vercel.app/` → **Solicitar indexacao**.
+2. Search Console → **Inspecao de URL** → `https://getvieira.com/` → **Solicitar indexacao**.
 3. Confirme que abrem no navegador:
-   - https://rafaelhdsv.vercel.app/icon-48.png
-   - https://rafaelhdsv.vercel.app/og-pt.png
+   - https://getvieira.com/icon-48.png
+   - https://getvieira.com/og-pt.png
 4. Teste de compartilhamento: [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) ou [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) (valida OG).
-5. **Thumbnail no Google nao e garantida** — o algoritmo decide por relevancia da query. Buscar pelo **dominio** (`rafaelhdsv.vercel.app`) costuma mostrar antes que busca por nome.
+5. **Thumbnail no Google nao e garantida** — o algoritmo decide por relevancia da query. Buscar pelo **dominio** (`getvieira.com`) costuma mostrar antes que busca por nome.
 
 ### Search Console mostra "Dados em processamento"
 

@@ -4,4 +4,4 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
-Sitemap: https://rafael.getvieira.com/sitemap.xml
+Sitemap: https://getvieira.com/sitemap.xml

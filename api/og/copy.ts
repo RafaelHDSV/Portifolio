@@ -1,4 +1,4 @@
-export const OG_SITE_URL = 'https://rafael.getvieira.com'
+export const OG_SITE_URL = 'https://getvieira.com'
 
 export type OgLang = 'pt' | 'en'
 

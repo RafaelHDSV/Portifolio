@@ -1,6 +1,6 @@
 import { defineInstitucionalConfig } from '@vieira/institucional'
 
-const PUBLIC_URL = 'https://rafael.getvieira.com'
+const PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL || 'https://getvieira.com'
 
 export const institucionalConfig = defineInstitucionalConfig({
   appName: 'Portfólio',

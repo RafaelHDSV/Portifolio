@@ -23,7 +23,7 @@ describe('getOgCopy', () => {
 describe('buildOgImageUrl', () => {
   it('builds absolute api url with lang', () => {
     expect(buildOgImageUrl('en')).toBe(
-      'https://rafael.getvieira.com/og-en.png'
+      'https://getvieira.com/og-en.png'
     )
   })
 })
