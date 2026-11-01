@@ -426,4 +426,8 @@ yarn lhci     # Lighthouse CI (autorun local)
 
 ---
 
-*Última atualização: outubro/2026 — host canônico no apex `getvieira.com` (board#9).*
+**Sentry PORTIFOLIO-1:** Vite `lazy()` + CSS code-split — se o preload do chunk falha (deploy/CDN), `installStaleAssetRecovery` em `src/main.tsx` recarrega a página uma vez (`vite:preloadError`).
+
+---
+
+*Última atualização: novembro/2026 — recovery de chunk CSS stale (Sentry PORTIFOLIO-1); host canônico no apex `getvieira.com` (board#9).*

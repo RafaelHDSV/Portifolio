@@ -7,7 +7,10 @@ import { AppErrorBoundary, initSentry } from '@vieira/institucional/sentry'
 import App from './App'
 import i18n from './i18n'
 import { institucionalConfig } from './institucional.config'
+import { installStaleAssetRecovery } from './utils/staleAssetRecovery'
 import '@vieira/institucional/styles.css'
+
+installStaleAssetRecovery()
 
 initSentry({
   enabled: import.meta.env.PROD,
