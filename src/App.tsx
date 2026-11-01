@@ -1,4 +1,4 @@
-import { LegalPage, NotFoundPage } from '@vieira/institucional'
+import { LegalPage, NotFoundPage, Seo } from '@vieira/institucional'
 import { lazy, Suspense } from 'react'
 import BuyMeCoffee from './components/BuyMeCoffee/BuyMeCoffee'
 import CustomCursor from './components/CustomCursor/CustomCursor'
@@ -31,6 +31,7 @@ function AppContent () {
   if (isRecruiterMode) {
     return (
       <div className={styles.app}>
+        <Seo title="Recrutador" />
         <Navbar recruiterOnly />
         <Suspense fallback={<SectionFallback minHeight='60vh' />}>
           <RecruiterView />
@@ -42,6 +43,7 @@ function AppContent () {
 
   return (
     <div className={styles.app}>
+      <Seo title="Portfólio" />
       <Navbar />
       <ScrollProgressBar />
       <Header />
