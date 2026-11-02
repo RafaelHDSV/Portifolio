@@ -5,10 +5,10 @@
 
 ## SEO e indexação
 
-Site público no apex `https://getvieira.com`. Metadados de crawler (Open Graph, JSON-LD, canonical) ficam no `index.html`. A imagem OG canônica é `/og-pt.png` (1200×630, gerada no build); `/api/og` redireciona por compatibilidade.
+Site público no apex `https://getvieira.com`. Metadados de crawler (Open Graph, JSON-LD, canonical) ficam no `index.html`. A imagem OG canônica é `/og-pt.png` (1200×630, gerada no build com a marca e o avatar); `/api/og` redireciona por compatibilidade. Não usar um `og.png` genérico neste repo.
 
 `public/robots.txt` permite `/` e aponta o sitemap. O sitemap lista home, `/privacidade`, `/termos` e imagens OG.
 
-Ícones: `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png` / `icons/icon-192.png` e `icon-512`.
+Ícones: o conjunto já existente em `public/` (`favicon.ico`, `icon-48.png`, `icon-192.png`, `icon.png` 512, `apple-touch-icon.png`) e `site.webmanifest`. A marca RV e o OG com foto não devem ser substituídos pelo gerador genérico dos outros apps.
 
 `<Seo>` define o título da aba (`Portfólio` / `Recrutador`). `/privacidade` e `/termos` usam o `Seo` do `LegalPage`.
