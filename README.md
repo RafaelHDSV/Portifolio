@@ -1,4 +1,4 @@
-# Portfólio — Rafael Vieira
+﻿# Portfólio — Rafael Vieira
 
 ![React](https://img.shields.io/badge/React-005CFE?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
@@ -147,3 +147,7 @@ Contribuições são bem-vindas. Leia [CONTRIBUTING.md](./CONTRIBUTING.md) antes
 ## Apoie
 
 <a href="https://www.buymeacoffee.com/vieira" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="32" width="117" style="height: 32px !important; width: 117px !important;" ></a>
+
+---
+
+Comunidade: [CHANGELOG](CHANGELOG.md) · [CONTRIBUTING](CONTRIBUTING.md) · [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
