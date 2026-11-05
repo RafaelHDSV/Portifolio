@@ -24,4 +24,5 @@
 
 | Método / comando | Caminho | Auth | Nota |
 |---|---|---|---|
-| | | | Preencher a partir do código |
+| GET | `/api/linkedin-posts?limit=1..5` | pública | Lê cache Supabase (`linkedin_posts_posts`). `Cache-Control: public, s-maxage=60, stale-while-revalidate=120`; `Cache-Tag: linkedin-posts`. |
+| GET | `/api/linkedin-media?url=` | pública | Proxy de mídia LinkedIn com cache longo. |

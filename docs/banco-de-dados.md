@@ -10,6 +10,7 @@
 - Cliente: `src/hooks/useLinkedInPosts.ts` e seção lazy `src/screens/LinkedInPosts/`
 - Variáveis server-only na Vercel: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (sem prefixo `VITE_`)
 - A Function lê até cinco posts cacheados de `linkedin_posts_posts`; não inicia scraping nem expõe a service role.
+- CDN: `s-maxage=60` + `stale-while-revalidate=120` (antes 300/3600 — visitante via `?limit=3` podia ver posts velhos por até ~1h após o scrape).
 - Atualização do cache: repo irmão [`linkedin-posts`](https://github.com/RafaelHDSV/linkedin-posts) (`yarn scrape <username>` / tarefa de logon). O HTML do LinkedIn mudou para SDUI (`role=listitem`); o scraper resolve URL via "Copiar link da publicação" quando o card não expõe `/feed/update/`.
 
 ## Tabelas / coleções principais

@@ -26,7 +26,9 @@ function getLimit (url: string | undefined): number {
 function sendJson (res: ServerResponse, statusCode: number, body: unknown): void {
   res.statusCode = statusCode
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600')
+  // TTL curto: scrape local atualiza o Supabase; SWR 3600 mantinha posts velhos por até 1h.
+  res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=120')
+  res.setHeader('Cache-Tag', 'linkedin-posts')
   res.end(JSON.stringify(body))
 }
 
