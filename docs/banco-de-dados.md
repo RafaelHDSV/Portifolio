@@ -12,6 +12,7 @@
 - A Function lê até cinco posts cacheados de `linkedin_posts_posts`; não inicia scraping nem expõe a service role.
 - CDN: `s-maxage=60` + `stale-while-revalidate=120` (antes 300/3600 — visitante via `?limit=3` podia ver posts velhos por até ~1h após o scrape).
 - Atualização do cache: repo irmão [`linkedin-posts`](https://github.com/RafaelHDSV/linkedin-posts) (`yarn scrape <username>` / tarefa de logon). O HTML do LinkedIn mudou para SDUI (`role=listitem`); o scraper resolve URL via "Copiar link da publicação" quando o card não expõe `/feed/update/`.
+- UI: `getPostImages` escolhe a melhor resolução por asset (`high-res` > `shrink_N`); o cache costuma trazer várias variantes do mesmo arquivo — sem isso a grade usava `shrink_20`/`160` e pixelava.
 
 ## Tabelas / coleções principais
 
