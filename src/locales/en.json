@@ -23,7 +23,7 @@
   "about": {
     "title": "About me",
     "subtitle": "Who I am and what I deliver",
-    "bio": "Full-Stack Developer focused on React, TypeScript and Node.js. At AGX Software I am Mid-level I and lead one of the squads: products from UI to back-end, always as a team.",
+    "bio": "Full-Stack Developer focused on React, TypeScript and Node.js. At AGX Software I am Mid-level II and lead one of the squads: products from UI to back-end, always as a team.",
     "workingAt": "Working at",
     "location": "Location",
     "followers": "Followers",
@@ -41,7 +41,7 @@
   "experience": {
     "title": "Experience",
     "subtitle": "Production work, as a team",
-    "role": "Mid-level Full Stack Developer I · Team Lead",
+    "role": "Mid-level Full Stack Developer II · Team Lead",
     "company": "AGX Software · Sorocaba, SP",
     "period": "Jul 2024 — present",
     "intro": "At AGX Software, with the team, we build white-label CRM for financial services — credit and consortium journeys, and the platform as a SaaS product. I lead one of the development squads. I also triage production tickets and route each case to the developer best able to solve it. The work below is the team's.",
@@ -176,8 +176,8 @@
     "back": "Back to full view",
     "modeLabel": "Recruiter mode",
     "role": "Full Stack Developer",
-    "bio": "Mid-level Full Stack Developer I and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB on web systems, as a team.",
-    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Mid-level Full Stack I, leading one of the squads. With the team, we build with React, TypeScript, Sass, Node.js and MongoDB. I also triage production tickets and route each case to the developer best able to solve it.",
+    "bio": "Mid-level Full Stack Developer II and team lead at AGX Software (Sorocaba): React, TypeScript, Node.js and MongoDB on web systems, as a team.",
+    "aboutExtended": "Systems Analysis and Development student at Anhembi Morumbi. At AGX Software since Jul 2024 — from front-end internship to Mid-level Full Stack II, leading one of the squads. With the team, we build with React, TypeScript, Sass, Node.js and MongoDB. I also triage production tickets and route each case to the developer best able to solve it.",
     "stackTitle": "Core stack",
     "stackSubtitle": "Tools I use day to day",
     "stackAlsoLabel": "Also work with",
@@ -229,7 +229,13 @@
     ],
     "experienceItems": [
       {
-        "period": "Jun 2026 — Present",
+        "period": "Nov 2026 — Present",
+        "title": "Mid-level Full Stack Developer II · Team Lead",
+        "company": "AGX Software",
+        "description": "With the team, web systems in React, TypeScript, Sass, Node.js and MongoDB. I lead the squad and triage production tickets, routing each case to the developer best able to solve it."
+      },
+      {
+        "period": "Jun 2026 — Oct 2026",
         "title": "Mid-level Full Stack Developer I · Team Lead",
         "company": "AGX Software",
         "description": "With the team, web systems in React, TypeScript, Sass, Node.js and MongoDB. I lead the squad and triage production tickets, routing each case to the developer best able to solve it."
