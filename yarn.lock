@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@awesome-reveal/core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@awesome-reveal/core/-/core-1.0.0.tgz#5696c8545a19d94f334a270695a4616d005659bb"
+  integrity sha512-t1H1L5KYy2hEA+MHE7r9P7Wbvfe0vY07ydMh6S3nppBIxBaRDimzrJg3DjkgjBbh4Z4z8Vi9SJF2BkXLwSmdwg==
+
+"@awesome-reveal/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@awesome-reveal/react/-/react-1.0.0.tgz#b773f0436cc180e38028392858ef0cd159116dbf"
+  integrity sha512-iF+Kz/nWbbe6GOF9UXXfYeOOSrwBaDrShfC+9dD86xFzH2g2St7kZTou0HEJE9n59u5kvJXQXV11UQqIXHALrA==
+  dependencies:
+    "@awesome-reveal/core" "1.0.0"
+
 "@babel/code-frame@^7.0.0":
   version "7.26.2"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.26.2.tgz"
@@ -4953,13 +4965,12 @@ react-animated-cursor@^2.11.2:
   resolved "https://registry.yarnpkg.com/react-animated-cursor/-/react-animated-cursor-2.11.2.tgz#c87ee77ecea22cc6c234918375ace6bceca6b3c7"
   integrity sha512-LV0PtST61tdeW/chCqFt1JLp6i0d5fD9v2uradBcPAkKKCi2Iw7sAcD11ADS1TjXPPj9MOoD9YubEt++/IbZ+g==
 
-react-awesome-reveal@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/react-awesome-reveal/-/react-awesome-reveal-4.3.1.tgz#ffbd474b346e9581657ab335f74f995d251361a0"
-  integrity sha512-eMQqjNbk979ltKK/VUjw6+pGNa0Zg08ikCo7xCsi3BBX9sQSc2eVJMHXspEA/dS/1UiqFiZwgz19wlCL19+/qA==
+react-awesome-reveal@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-awesome-reveal/-/react-awesome-reveal-5.0.0.tgz#370e8e09eb23c6b3948b21dd930dbec8f6dcaa9a"
+  integrity sha512-8XpqIiGPpR8hFlwm8Wb62amwPEa9Xrq7PZAFTx48UNbDIO0fezJn4EKhE765UNBBYlFZSf8Ws+Y8KaC7RDt5kQ==
   dependencies:
-    react-intersection-observer "^9.13.0"
-    react-is "^18.3.1"
+    "@awesome-reveal/react" "^1.0.0"
 
 react-dom@^18.3.1:
   version "18.3.1"
@@ -4983,20 +4994,10 @@ react-icons@^5.7.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.7.0.tgz#8969db00968ffdfc57fdc2ec9dd1ed88e35b3de9"
   integrity sha512-LBLy340Rzqy6+/yVhZKT3B/QpP1BZaesGqasf09HPOBzRarcDIFH0WwXlXQfE7q7ipxK4MSiC5DIBWURCny6fw==
 
-react-intersection-observer@^9.13.0:
-  version "9.16.0"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.16.0.tgz#7376d54edc47293300961010844d53b273ee0fb9"
-  integrity sha512-w9nJSEp+DrW9KmQmeWHQyfaP6b03v+TdXynaoA964Wxt7mdR3An11z4NNCQgL4gKSK7y1ver2Fq+JKH6CWEzUA==
-
 react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-is@^18.3.1:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
-  integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
 react@^18.3.1:
   version "18.3.1"
