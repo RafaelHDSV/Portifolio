@@ -53,6 +53,10 @@ export default function Footer () {
                     total: totalEggs
                   })}
                 </button>
+                <VisitCountFooter
+                  projectKey='portifolio'
+                  className={styles.visitCount}
+                />
               </div>
 
               <nav className={styles.footerNav} aria-label='Footer'>
@@ -92,10 +96,6 @@ export default function Footer () {
                 </a>
               </div>
             </div>
-            <VisitCountFooter
-              projectKey='portifolio'
-              className={styles.visitCount}
-            />
           </Container>
         </footer>
       </Fade>
