@@ -1,8 +1,8 @@
-import { VisitCountFooter } from '@vieira/analytics/react'
-import { useState } from 'react'
+import { fetchPublicSummary, shouldShowVisitCount } from '@vieira/analytics'
+import { useEffect, useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import Container from '../../components/Container/Container'
 import Modal from '../../components/Modal/Modal'
@@ -18,6 +18,70 @@ const FOOTER_LINKS = [
   { href: '#linkedin-posts', key: 'linkedin' as const },
   { href: '#contact', key: 'contact' as const }
 ] as const
+
+const SOCIAL = [
+  {
+    href: 'mailto:rafaelvieira1720@gmail.com',
+    label: 'Email',
+    Icon: MdEmail
+  },
+  {
+    href: 'https://wa.me/5511947100007',
+    label: 'WhatsApp',
+    Icon: FaWhatsapp
+  },
+  {
+    href: 'https://github.com/RafaelHDSV',
+    label: 'GitHub',
+    Icon: FaGithub
+  },
+  {
+    href: 'https://www.linkedin.com/in/rafael-vieira1720/',
+    label: 'LinkedIn',
+    Icon: FaLinkedin
+  }
+] as const
+
+function FooterVisitCount () {
+  const { t, i18n } = useTranslation()
+  const [pageviews, setPageviews] = useState<number | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    const controller = new AbortController()
+
+    void fetchPublicSummary('portifolio', { signal: controller.signal }).then(
+      summary => {
+        if (cancelled) return
+        if (!shouldShowVisitCount(summary) || !summary) {
+          setPageviews(null)
+          return
+        }
+        setPageviews(summary.pageviews)
+      }
+    )
+
+    return () => {
+      cancelled = true
+      controller.abort()
+    }
+  }, [])
+
+  if (pageviews == null) return null
+
+  const formatted = new Intl.NumberFormat(
+    i18n.language?.startsWith('en') ? 'en-US' : 'pt-BR'
+  ).format(pageviews)
+
+  return (
+    <p className={styles.visitCount} aria-live='polite'>
+      <span className={styles.visitCountNum}>{formatted}</span>{' '}
+      <span className={styles.visitCountSuffix}>
+        {t('footer.visitCountSuffix')}
+      </span>
+    </p>
+  )
+}
 
 export default function Footer () {
   const { t } = useTranslation()
@@ -36,8 +100,9 @@ export default function Footer () {
       <Fade triggerOnce>
         <footer className={styles.footer}>
           <Container className={styles.inner}>
-            <div className={styles.row}>
-              <div className={styles.brand}>
+            <div className={styles.grid}>
+              <div className={styles.col}>
+                <p className={styles.colLabel}>{t('footer.colCredits')}</p>
                 <span className={styles.copyright}>
                   &copy; {new Date().getFullYear()} Rafael Vieira &middot;{' '}
                   {t('footer.role')}
@@ -53,47 +118,37 @@ export default function Footer () {
                     total: totalEggs
                   })}
                 </button>
-                <VisitCountFooter
-                  projectKey='portifolio'
-                  className={styles.visitCount}
-                />
+                <FooterVisitCount />
               </div>
 
-              <nav className={styles.footerNav} aria-label='Footer'>
-                {FOOTER_LINKS.map(({ href, key }) => (
-                  <a key={key} href={href}>
-                    {t(`nav.${key}`)}
-                  </a>
-                ))}
-                <a href='/privacidade'>{t('footer.privacy')}</a>
-                <a href='/termos'>{t('footer.terms')}</a>
-              </nav>
+              <div className={styles.col}>
+                <p className={styles.colLabel}>{t('footer.colLinks')}</p>
+                <nav className={styles.footerNav} aria-label='Footer'>
+                  {FOOTER_LINKS.map(({ href, key }) => (
+                    <a key={key} href={href}>
+                      {t(`nav.${key}`)}
+                    </a>
+                  ))}
+                  <a href='/privacidade'>{t('footer.privacy')}</a>
+                  <a href='/termos'>{t('footer.terms')}</a>
+                </nav>
+              </div>
 
-              <div className={styles.social}>
-                <a
-                  href='mailto:rafaelvieira1720@gmail.com'
-                  aria-label='Email'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <MdEmail size={22} />
-                </a>
-                <a
-                  href='https://github.com/RafaelHDSV'
-                  aria-label='GitHub'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FaGithub size={22} />
-                </a>
-                <a
-                  href='https://www.linkedin.com/in/rafael-vieira1720/'
-                  aria-label='LinkedIn'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FaLinkedin size={22} />
-                </a>
+              <div className={styles.col}>
+                <p className={styles.colLabel}>{t('footer.colSocial')}</p>
+                <div className={styles.social}>
+                  {SOCIAL.map(({ href, label, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      <Icon size={22} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </Container>
@@ -116,7 +171,7 @@ export default function Footer () {
             </button>
           )}
           <div className={styles.catalogGrid}>
-            {EASTER_EGG_CATALOG.map((egg) => {
+            {EASTER_EGG_CATALOG.map(egg => {
               const unlocked = isUnlocked(egg.id)
               const visible = unlocked || catalogRevealAll
 

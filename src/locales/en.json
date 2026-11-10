@@ -168,7 +168,11 @@
     "eggCounter": "Easter egg: {{count}}/{{total}} discovered",
     "privacy": "Privacy",
     "terms": "Terms",
-    "legalNav": "Legal"
+    "legalNav": "Legal",
+    "colCredits": "Credits",
+    "colLinks": "Navigate",
+    "colSocial": "Social",
+    "visitCountSuffix": "visits in the last 30 days"
   },
   "recruiter": {
     "enable": "Recruiter mode",
