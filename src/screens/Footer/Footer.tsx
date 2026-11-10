@@ -1,3 +1,4 @@
+import { VisitCountFooter } from '@vieira/analytics/react'
 import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
@@ -91,6 +92,10 @@ export default function Footer () {
                 </a>
               </div>
             </div>
+            <VisitCountFooter
+              projectKey='portifolio'
+              className={styles.visitCount}
+            />
           </Container>
         </footer>
       </Fade>

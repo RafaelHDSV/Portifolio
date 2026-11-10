@@ -194,6 +194,15 @@
   }
 }
 
+.visitCount {
+  margin: 1rem 0 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
 .explorerBadge {
   position: fixed;
   bottom: 5rem;
