@@ -24,7 +24,7 @@
     "satori": "0.63.2",
     "@vieira/analytics": "file:./vendor/vieira-analytics",
     "@vieira/institucional": "file:./vendor/vieira-institucional",
-    "axios": "^1.21.0",
+    "axios": "^1.21.1",
     "dayjs": "^1.11.23",
     "i18next": "^26.7.2",
     "npm": "^12.2.2",
