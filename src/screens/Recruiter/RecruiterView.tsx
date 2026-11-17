@@ -9,6 +9,7 @@ import {
   MapPinIcon,
   PushPinIcon
 } from '@phosphor-icons/react'
+import type { TFunction } from 'i18next'
 import { useMemo } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { useTranslation } from 'react-i18next'
@@ -378,7 +379,7 @@ function ProjectCard({
   t
 }: {
   project: ProjectCardData
-  t: (key: string, options?: Record<string, unknown>) => string
+  t: TFunction
 }) {
   const categoryKey = resolveProjectCategory(project.repoName)
   const categoryLabel = categoryKey
