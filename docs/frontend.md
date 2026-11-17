@@ -9,7 +9,7 @@ Site público no apex `https://getvieira.com`. Metadados de crawler (Open Graph,
 
 `public/robots.txt` permite `/` e aponta o sitemap. O sitemap lista home, `/privacidade`, `/termos` e imagens OG.
 
-Query `?lang=en|pt` na home: redirect **301** em `vercel.json` para `/` (evita URL indexável duplicada no Search Console); o cliente ainda remove `lang` via `history.replaceState` em `src/i18n/index.ts`.
+Query `?lang=en|pt` na home: redirect permanente em `vercel.json` para `https://getvieira.com/` (URL absoluta — destino relativo `/` preservava a query no Vercel); o cliente ainda remove `lang` via `history.replaceState` em `src/i18n/index.ts`.
 
 Ícones: o conjunto já existente em `public/` (`favicon.ico`, `icon-48.png`, `icon-192.png`, `icon.png` 512, `apple-touch-icon.png`) e `site.webmanifest`. A marca RV e o OG com foto não devem ser substituídos pelo gerador genérico dos outros apps.
 
