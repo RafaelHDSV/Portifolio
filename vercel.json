@@ -4,18 +4,6 @@
   "buildCommand": "yarn build",
   "redirects": [
     {
-      "source": "/",
-      "has": [{ "type": "query", "key": "lang", "value": "en" }],
-      "destination": "https://getvieira.com/?",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "query", "key": "lang", "value": "pt" }],
-      "destination": "https://getvieira.com/?",
-      "permanent": true
-    },
-    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "rafaelhdsv.vercel.app" }],
       "destination": "https://getvieira.com/$1",
