@@ -6,13 +6,13 @@
     {
       "source": "/",
       "has": [{ "type": "query", "key": "lang", "value": "en" }],
-      "destination": "https://getvieira.com/",
+      "destination": "https://getvieira.com/?",
       "permanent": true
     },
     {
       "source": "/",
       "has": [{ "type": "query", "key": "lang", "value": "pt" }],
-      "destination": "https://getvieira.com/",
+      "destination": "https://getvieira.com/?",
       "permanent": true
     },
     {
