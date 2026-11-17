@@ -6,6 +6,12 @@
 
 Use `CHANGELOG.md` na raiz para releases Keep a Changelog. Este arquivo guarda o detalhe por data.
 
+## 2026-11-17
+
+### Search Console — redirect `?lang=` (board#26)
+
+- `vercel.json`: 301 de `/?lang=en` e `/?lang=pt` para `/`.
+
 ## 2026-11-03
 
 ### Living docs (board#7)
