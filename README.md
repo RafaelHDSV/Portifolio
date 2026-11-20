@@ -1,5 +1,8 @@
 ﻿<p align="center">
-  <strong>Portfólio · Rafael Vieira</strong>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logos/logo-lockup.png">
+    <img src="assets/logos/logo-lockup-light.png" alt="Rafael Vieira" width="120">
+  </picture>
 </p>
 
 <p align="center">
