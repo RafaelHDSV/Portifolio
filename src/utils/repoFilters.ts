@@ -1,7 +1,4 @@
-import {
-  FORCE_EXCLUDED_REPO_NAMES,
-  HIDE_PORTFOLIO_TOPIC
-} from '../constants/projects.config'
+import { HIDE_PORTFOLIO_TOPIC } from '../constants/projects.config'
 import { IGithubResponseRepo } from '../types/IGithub'
 import { IProjectConfig } from '../types/IProject'
 import {
@@ -19,15 +16,6 @@ const MARKUP_ONLY_LANGUAGES = new Set([
 ])
 
 const HIDE_TOPIC = HIDE_PORTFOLIO_TOPIC.trim().toLowerCase()
-
-function isForceExcludedByName (repoName: string): boolean {
-  const normalized = repoName.trim().toLowerCase()
-  if (!normalized) return false
-
-  return FORCE_EXCLUDED_REPO_NAMES.some(
-    (excluded) => excluded.trim().toLowerCase() === normalized
-  )
-}
 
 /** True when the repo's GitHub topics include `hide-portfolio` (case-insensitive). */
 export function hasHidePortfolioTopic (topics?: string[]): boolean {
@@ -55,7 +43,6 @@ export function shouldIncludeRepo (
 ): boolean {
   const name = repo.name?.toLowerCase() ?? ''
 
-  if (isForceExcludedByName(name)) return false
   if (hasHidePortfolioTopic(repo.topics)) return false
 
   const config = findProjectConfig(name)
@@ -80,7 +67,6 @@ export function shouldIncludePinnedRepo (
   const name = repo.name?.toLowerCase() ?? ''
 
   if (!name) return false
-  if (isForceExcludedByName(name)) return false
   if (hasHidePortfolioTopic(repo.topics)) return false
 
   const config = findProjectConfig(name)
@@ -136,7 +122,6 @@ export function isEligibleNonPinnedRepo (repo: IGithubResponseRepo): boolean {
   const config = findProjectConfig(name)
 
   if (isProjectForceExcluded(config)) return false
-  if (isForceExcludedByName(name)) return false
   if (hasHidePortfolioTopic(repo.topics)) return false
 
   if (isProjectForceIncluded(config)) return true

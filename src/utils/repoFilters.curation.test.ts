@@ -8,7 +8,6 @@ import {
 
 vi.mock('../constants/projects.config', () => ({
   HIDE_PORTFOLIO_TOPIC: 'hide-portfolio',
-  FORCE_EXCLUDED_REPO_NAMES: ['quick-hide'],
   projectsConfig: [
     {
       key: '1',
@@ -91,20 +90,6 @@ describe('shouldIncludeRepo curation flags', () => {
           name: 'legacy-hidden',
           fork: false,
           html_url: 'https://github.com/RafaelHDSV/legacy-hidden'
-        },
-        'RafaelHDSV'
-      )
-    ).toBe(false)
-  })
-
-  it('exclui repo listado em FORCE_EXCLUDED_REPO_NAMES', () => {
-    expect(
-      shouldIncludeRepo(
-        {
-          id: 4,
-          name: 'quick-hide',
-          fork: false,
-          html_url: 'https://github.com/RafaelHDSV/quick-hide'
         },
         'RafaelHDSV'
       )

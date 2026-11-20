@@ -4,10 +4,9 @@ import { images } from './images'
 /**
  * Curadoria hibrida (Issue #31 + #94):
  * - forceInclude: inclui repo mesmo se filtro API excluiria; sintetiza card se ausente na API
- * - forceExclude: oculta repo mesmo se pinned/recente (preferir sobre hidden)
- * - hidden: alias legado de forceExclude
+ * - forceExclude / hidden: escape hatch opcional por entrada (preferir topic hide-portfolio)
  * - demoPriority: 'config' | 'root' | 'readme' — ordem de busca da midia demo no card
- * - topic GitHub `hide-portfolio` (HIDE_PORTFOLIO_TOPIC): oculta sem editar este arquivo;
+ * - topic GitHub `hide-portfolio` (HIDE_PORTFOLIO_TOPIC): forma primaria de ocultar;
  *   se forceInclude e o topic coexistirem, o topic vence
  *
  * Exemplo (nao ativo):
@@ -16,24 +15,6 @@ import { images } from './images'
 
 /** Topic GitHub que remove o repo da listagem automatica (case-insensitive). */
 export const HIDE_PORTFOLIO_TOPIC = 'hide-portfolio'
-
-/**
- * Lista rapida para ocultar repositorios da listagem sem precisar criar
- * uma entrada completa em projectsConfig. Nome do repo, case-insensitive.
- */
-export const FORCE_EXCLUDED_REPO_NAMES: string[] = [
-  'cvs',
-  'serveruler-redirect',
-  'Mario-Game',
-  // Demos simples / CRUD legado — não priorizar no perfil atual
-  'Oak-Tecnologia',
-  'Zip-Code-Finder',
-  'Financial-Control',
-  'Todo-app',
-  'React-Todo',
-  'Calculator-app',
-  'Mazzi-Fiori-Casamentos'
-]
 
 export const projectsConfig: IProjectConfig[] = [
   {
@@ -190,7 +171,6 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['React', 'Javascript', 'CSS', 'HTML'],
     urlProject: 'https://oak-tecnologia.vercel.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Oak-Tecnologia',
-    forceExclude: true,
     order: 5
   },
   {
@@ -205,7 +185,6 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['React', 'Javascript', 'CSS', 'HTML'],
     urlProject: 'https://financial-control-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Financial-Control',
-    forceExclude: true,
     order: 6
   },
   {
@@ -220,7 +199,6 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'Bibliotecas'],
     urlProject: 'https://todo-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Todo-app',
-    forceExclude: true,
     order: 7
   },
   {
@@ -263,7 +241,6 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript', 'Bibliotecas'],
     urlProject: 'https://mazzi-fiori-casamentos.netlify.app',
     urlGitHub: 'https://github.com/RafaelHDSV/Mazzi-Fiori-Casamentos',
-    forceExclude: true,
     order: 10
   },
   {
@@ -292,7 +269,6 @@ export const projectsConfig: IProjectConfig[] = [
     languages: ['HTML', 'CSS', 'Javascript'],
     urlProject: 'https://calculator-app-rafael.netlify.app/',
     urlGitHub: 'https://github.com/RafaelHDSV/Calculator-app',
-    forceExclude: true,
     order: 12
   },
   {

@@ -4,7 +4,6 @@ import { collectPortfolioRepoCandidates } from './mergeProjects'
 
 vi.mock('../constants/projects.config', () => ({
   HIDE_PORTFOLIO_TOPIC: 'hide-portfolio',
-  FORCE_EXCLUDED_REPO_NAMES: [],
   projectsConfig: [
     {
       key: 'forced',

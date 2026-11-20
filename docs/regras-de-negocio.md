@@ -8,16 +8,15 @@
 
 Fonte: `src/utils/repoFilters.ts`, `src/constants/projects.config.ts`.
 
-1. **Topic `hide-portfolio`:** qualquer repositório cujo array `topics` da API contenha
-   `hide-portfolio` (case-insensitive) **não** entra na listagem automática (pins, recentes,
-   slots non-pin). Uso operacional: no GitHub do repo → Settings → Topics → adicionar
-   `hide-portfolio`.
-2. **`FORCE_EXCLUDED_REPO_NAMES`:** lista rápida em código; oculta pelo nome sem topic.
-3. **`forceExclude` / `hidden`:** flags por entrada em `projectsConfig`; mesmo efeito de ocultar.
-4. **`forceInclude`:** injeta ou mantém o repo mesmo se outras regras de elegibilidade o
-   excluiriam — **exceto** quando há topic `hide-portfolio` ou exclusão forçada (nome/flag).
-   Precedência: **hide (topic / FORCE_EXCLUDED / forceExclude) > forceInclude**.
-5. Demais regras (fork, prefixo `estudo`/`curso`, repo = username, demo URL para non-pin)
+1. **Topic `hide-portfolio` (forma primaria):** qualquer repositório cujo array `topics` da API
+   contenha `hide-portfolio` (case-insensitive) **não** entra na listagem automática (pins,
+   recentes, slots non-pin). Uso: no GitHub do repo → Settings → Topics → `hide-portfolio`.
+2. **`forceExclude` / `hidden`:** escape hatch opcional por entrada em `projectsConfig` (sem lista
+   hardcoded de nomes). Preferir o topic.
+3. **`forceInclude`:** injeta ou mantém o repo mesmo se outras regras de elegibilidade o
+   excluiriam — **exceto** quando há topic `hide-portfolio` ou `forceExclude`/`hidden`.
+   Precedência: **hide (topic / forceExclude) > forceInclude**.
+4. Demais regras (fork, prefixo `estudo`/`curso`, repo = username, demo URL para non-pin)
    permanecem em `shouldIncludeRepo` / `isEligibleNonPinnedRepo`.
 
 ## Outras regras de produto
