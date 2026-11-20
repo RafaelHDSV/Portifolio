@@ -1,71 +1,109 @@
 ﻿<p align="center">
-  <strong>Portfólio — Rafael Vieira</strong>
+  <strong>Portfólio · Rafael Vieira</strong>
 </p>
 
 <p align="center">
-  <strong>Full-Stack, em uma página que conta a história certa.</strong><br />
-  Projetos vivos do GitHub, modo recrutador, i18n PT/EN e SEO de verdade.
+  <strong>Full-Stack em produção, em equipe.</strong><br>
+  Uma página: perfil, experiência AGX, stack, projetos GitHub e contato — com modo recrutador.
 </p>
 
 <p align="center">
-  <img src="./public/main.png" alt="Rafael Vieira — Desenvolvedor Full-Stack" width="720"/>
+  <img alt="Público" src="https://img.shields.io/badge/uso-p%C3%BAblico-0ea5e9">
+  <img alt="React 18" src="https://img.shields.io/badge/React-18-0ea5e9?logo=react&logoColor=white">
+  <img alt="Vite 8" src="https://img.shields.io/badge/Vite-8-0ea5e9?logo=vite&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-0ea5e9?logo=typescript&logoColor=white">
+  <img alt="i18n" src="https://img.shields.io/badge/i18n-PT%2FEN-0284c7">
 </p>
 
 <p align="center">
-  <a href="https://getvieira.com"><b>getvieira.com</b></a>
-  · React 18 · TypeScript · Vite 7 · SASS
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/inicio-escuro.png">
+    <img src="assets/screenshots/inicio.png" alt="Hero: Rafael Vieira, Ver projetos e Baixar CV" width="560">
+  </picture>
 </p>
 
----
+<p align="center">
+  🇧🇷 Português · <a href="README.en.md">🇺🇸 English</a>
+</p>
 
-## Por que este site
+## 🤔 O problema
 
-Currículo PDF não mostra o que está no ar. GitHub sozinho não fala em português com recrutador. Este portfólio junta perfil, experiência em produção (AGX), stack, projetos curados e contato — com um modo `/recruiter` pensado para impressão e deep link.
+Currículo PDF e LinkedIn não mostram o trabalho em produção nem os projetos com demo. Recrutador precisa de uma triagem rápida; visitante precisa de PT/EN e tema sem atrito.
 
-## O que você ganha (visitante / recrutador)
+**Este portfólio** é a página única que faz os dois: narrativa Full-Stack + `/recruiter` condensado.
+
+## ✨ O que só ele garante
 
 | | |
 |---|---|
-| **Hero e Sobre** | Headline typewriter, bio alinhada ao GitHub |
-| **Experiência** | Produção em equipe: SaaS, crédito, consórcio, liderança |
-| **Projetos** | Pins + recentes, filtros AND, cards 16:9, stats |
-| **Contato** | Modal EmailJS + canais |
-| **Modo recrutador** | `/recruiter`, print, `noindex` |
-| **i18n + tema** | PT/EN · claro/escuro |
-| **SEO** | OG no build (PT/EN), sitemap, robots, JSON-LD |
+| 🧭 **Uma página, âncoras claras** | Sobre, Experiência, Stack, Projetos, Contato — spy na navbar. |
+| 🧳 **Modo recrutador** | `/recruiter`: perfil, entregas, stack e projetos destaque para triagem. |
+| 📌 **Projetos do GitHub** | Pins + recentes, filtros multi AND, demos e curadoria híbrida. |
+| 🌐 **PT / EN + tema** | i18next e toggle claro/escuro persistidos. |
+| 🥚 **Oito easter eggs** | Nunca bloqueiam conteúdo; catálogo no rodapé. |
 
-## Como funciona
+## 🧭 Como usar
 
-```text
-Vite SPA  →  GitHub (projetos / languages / mídia)
-    ↓
-seções lazy + cache de mídia  →  EmailJS no contato
-    ↓
-OG PNG gerado no build (satori + sharp)
+1. **Abrir** [getvieira.com](https://getvieira.com).
+2. **Navegar** pelas seções ou tocar **Recrutador** para a visão condensada.
+3. **Baixar o CV** ou **enviar mensagem** pelo modal de contato.
+
+<details>
+<summary><strong>📸 Ver as telas</strong></summary>
+<br>
+
+<table>
+  <tr>
+    <td width="50%"><a href="assets/screenshots/inicio.png"><img src="assets/screenshots/inicio.png" alt="Hero"></a><br><sub><b>Início</b>: nome, typewriter e CTAs</sub></td>
+    <td width="50%"><a href="assets/screenshots/experiencia.png"><img src="assets/screenshots/experiencia.png" alt="Experiência"></a><br><sub><b>Experiência</b>: AGX em equipe</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="assets/screenshots/projetos.png"><img src="assets/screenshots/projetos.png" alt="Projetos"></a><br><sub><b>Projetos</b>: grade GitHub com filtros</sub></td>
+    <td width="50%"><a href="assets/screenshots/recrutador.png"><img src="assets/screenshots/recrutador.png" alt="Modo recrutador"></a><br><sub><b>Recrutador</b>: triagem em cards</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="assets/screenshots/inicio-escuro.png"><img src="assets/screenshots/inicio-escuro.png" alt="Hero tema escuro"></a><br><sub><b>Tema escuro</b>: o mesmo hero</sub></td>
+    <td width="50%"></td>
+  </tr>
+</table>
+
+</details>
+
+## 🚀 Rodar
+
+**Precisa de:** Node 24.x, Yarn 1 e as variáveis do `.env.example` (GitHub token e EmailJS para demos locais completas).
+
+```bash
+yarn
+cp .env.example .env
+yarn dev
 ```
 
-Posts LinkedIn (quando ativos) vêm de `GET /api/linkedin-posts` com cache no Supabase — atualização pelo repo `linkedin-posts`, não na navegação do visitante.
+Detalhes: [`docs/ambiente-e-operacao.md`](docs/ambiente-e-operacao.md) · [`docs/context.md`](docs/context.md).
 
-## Demo / produção
+## 🧰 Comandos do dia a dia
 
-https://getvieira.com
-
-## Posicionamento
-
-| Este portfólio é | Não é |
+| Comando | Para quê |
 |---|---|
-| Vitrine Full-Stack pessoal | Blog genérico |
-| Projetos com evidência no GitHub | Lista estática eternamente desatualizada |
-| Modo recrutador explícito | Só dark theme com badges |
+| `yarn dev` | Vite (com `git pull` + install) |
+| `yarn build` | `tsc` + OG + build Vite |
+| `yarn test` | Vitest |
+| `yarn test:e2e` | Playwright |
+| `yarn lint` | ESLint |
+| `yarn lhci` | Lighthouse CI local |
 
-## Stack (em uma linha)
+## 📚 Documentação
 
-React 18 + TypeScript + Vite 7 + SASS + Emotion + i18next + EmailJS · Vitest + Playwright + Lighthouse CI.
+| Para | Leia |
+|---|---|
+| Estado e mapa do repo | [`docs/context.md`](docs/context.md) |
+| Spec de produto | [`docs/especificacao.md`](docs/especificacao.md) |
+| Rotas e SEO | [`docs/frontend.md`](docs/frontend.md) |
+| Tokens e tipografia | [`docs/DESIGN.md`](docs/DESIGN.md) |
+| Env e deploy | [`docs/ambiente-e-operacao.md`](docs/ambiente-e-operacao.md) |
 
-Detalhes: [`docs/context.md`](docs/context.md) · especificação: [`docs/especificacao.md`](docs/especificacao.md) · front: [`docs/frontend.md`](docs/frontend.md).
+## 🔐 Governança
 
-## Começar
-
-Pré-requisitos, `.env` e scripts: use [`docs/ambiente-e-operacao.md`](docs/ambiente-e-operacao.md) (e `.env.example`). Setup longo não vive neste README.
-
-Contribuição: [`CONTRIBUTING.md`](CONTRIBUTING.md) · conduta: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) · mudanças: [`CHANGELOG.md`](CHANGELOG.md).
+- Site **público**: [getvieira.com](https://getvieira.com).
+- Repositório: `RafaelHDSV/Portifolio`.
+- Sem lockup em `assets/logos/` — monograma RV no app; skill `logo` se quiser SVG de repositório.
