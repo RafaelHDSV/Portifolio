@@ -3,7 +3,7 @@ import { IGithubResponseRepo } from '../types/IGithub'
 import { collectPortfolioRepoCandidates } from './mergeProjects'
 
 vi.mock('../constants/projects.config', () => ({
-  FORCE_EXCLUDED_REPO_NAMES: [],
+  HIDE_PORTFOLIO_TOPIC: 'hide-portfolio',
   projectsConfig: [
     {
       key: 'forced',

@@ -93,10 +93,13 @@ describe('shouldIncludePinnedRepo', () => {
     ).toBe(false)
   })
 
-  it('excludes FORCE_EXCLUDED pin names', () => {
-    expect(shouldIncludePinnedRepo(makeRepo({ name: 'cvs' }), USERNAME)).toBe(
-      false
-    )
+  it('excludes pins with hide-portfolio topic', () => {
+    expect(
+      shouldIncludePinnedRepo(
+        makeRepo({ name: 'cvs', topics: ['hide-portfolio'] }),
+        USERNAME
+      )
+    ).toBe(false)
   })
 })
 
@@ -105,7 +108,7 @@ describe('filterPinnedReposForPortfolio', () => {
     const repos = [
       makeRepo({ name: 'MedIT' }),
       makeRepo({ name: 'curso-node' }),
-      makeRepo({ name: 'cvs' }),
+      makeRepo({ name: 'cvs', topics: ['hide-portfolio'] }),
       makeRepo({ name: 'forked-pin', fork: true })
     ]
 
@@ -140,13 +143,14 @@ describe('isEligibleNonPinnedRepo', () => {
     ).toBe(true)
   })
 
-  it('does not treat projectsConfig alone as eligibility bypass', () => {
+  it('excludes eligible-looking repo when hide-portfolio topic is set', () => {
     expect(
       isEligibleNonPinnedRepo(
         makeRepo({
           name: 'Oak-Tecnologia',
           language: 'JavaScript',
-          homepage: 'https://oak-tecnologia.vercel.app'
+          homepage: 'https://oak-tecnologia.vercel.app',
+          topics: ['hide-portfolio']
         })
       )
     ).toBe(false)

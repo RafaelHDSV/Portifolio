@@ -41,7 +41,7 @@ A PDF CV and LinkedIn do not show production work or demos. Recruiters need a fa
 |---|---|
 | 🧭 **One page, clear anchors** | About, Experience, Stack, Projects, Contact — navbar scroll spy. |
 | 🧳 **Recruiter mode** | `/recruiter`: profile, deliveries, stack and featured projects for triage. |
-| 📌 **GitHub projects** | Pins + recent, multi AND filters, demos and hybrid curation. |
+| 📌 **GitHub projects** | Pins + recent, multi AND filters, demos and hybrid curation. To hide a repo without a PR: GitHub topic `hide-portfolio`. |
 | 🌐 **PT / EN + theme** | i18next and light/dark toggle, persisted. |
 | 🥚 **Eight easter eggs** | Never block content; catalog in the footer. |
 
