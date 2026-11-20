@@ -1,7 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
-import { shouldIncludeRepo } from './repoFilters'
+import {
+  hasHidePortfolioTopic,
+  isEligibleNonPinnedRepo,
+  shouldIncludePinnedRepo,
+  shouldIncludeRepo
+} from './repoFilters'
 
 vi.mock('../constants/projects.config', () => ({
+  HIDE_PORTFOLIO_TOPIC: 'hide-portfolio',
   FORCE_EXCLUDED_REPO_NAMES: ['quick-hide'],
   projectsConfig: [
     {
@@ -33,6 +39,17 @@ vi.mock('../constants/projects.config', () => ({
       languages: ['React'],
       urlGitHub: 'https://github.com/RafaelHDSV/legacy-hidden',
       hidden: true
+    },
+    {
+      key: '4',
+      repoName: 'force-include-hidden-topic',
+      name: 'Force Include Hidden Topic',
+      image: 'https://example.com/d.png',
+      description: { pt: 'p', en: 'e' },
+      languages: ['React'],
+      urlGitHub: 'https://github.com/RafaelHDSV/force-include-hidden-topic',
+      urlProject: 'https://example.com/demo',
+      forceInclude: true
     }
   ]
 }))
@@ -91,6 +108,104 @@ describe('shouldIncludeRepo curation flags', () => {
         },
         'RafaelHDSV'
       )
+    ).toBe(false)
+  })
+
+  it('exclui repo com topic hide-portfolio', () => {
+    expect(
+      shouldIncludeRepo(
+        {
+          id: 5,
+          name: 'visible-elsewhere',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/visible-elsewhere',
+          topics: ['react', 'hide-portfolio']
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(false)
+  })
+
+  it('exclui topic hide-portfolio case-insensitive', () => {
+    expect(
+      shouldIncludeRepo(
+        {
+          id: 6,
+          name: 'casing-topic',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/casing-topic',
+          topics: ['Hide-Portfolio']
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(false)
+  })
+
+  it('mantem regras atuais quando o topic hide-portfolio esta ausente', () => {
+    expect(
+      shouldIncludeRepo(
+        {
+          id: 7,
+          name: 'normal-app',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/normal-app',
+          topics: ['typescript']
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(true)
+  })
+
+  it('hide-portfolio vence forceInclude', () => {
+    expect(
+      shouldIncludeRepo(
+        {
+          id: 8,
+          name: 'force-include-hidden-topic',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/force-include-hidden-topic',
+          homepage: 'https://example.com/demo',
+          topics: ['hide-portfolio']
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(false)
+  })
+})
+
+describe('hide-portfolio em pinned e elegibilidade', () => {
+  it('hasHidePortfolioTopic detecta o topic', () => {
+    expect(hasHidePortfolioTopic(['a', 'hide-portfolio'])).toBe(true)
+    expect(hasHidePortfolioTopic(['Hide-Portfolio'])).toBe(true)
+    expect(hasHidePortfolioTopic(['react'])).toBe(false)
+    expect(hasHidePortfolioTopic(undefined)).toBe(false)
+  })
+
+  it('exclui pin com hide-portfolio', () => {
+    expect(
+      shouldIncludePinnedRepo(
+        {
+          id: 9,
+          name: 'pinned-hidden',
+          fork: false,
+          html_url: 'https://github.com/RafaelHDSV/pinned-hidden',
+          topics: ['hide-portfolio']
+        },
+        'RafaelHDSV'
+      )
+    ).toBe(false)
+  })
+
+  it('exclui non-pin elegivel com hide-portfolio mesmo com forceInclude', () => {
+    expect(
+      isEligibleNonPinnedRepo({
+        id: 10,
+        name: 'force-include-hidden-topic',
+        fork: false,
+        html_url: 'https://github.com/RafaelHDSV/force-include-hidden-topic',
+        homepage: 'https://example.com/demo',
+        topics: ['hide-portfolio']
+      })
     ).toBe(false)
   })
 })

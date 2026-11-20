@@ -49,7 +49,7 @@ const PINNED_REPO_FIELDS = `
   isFork
   isPrivate
   primaryLanguage { name }
-  repositoryTopics(first: 10) {
+  repositoryTopics(first: 20) {
     nodes { topic { name } }
   }
 `

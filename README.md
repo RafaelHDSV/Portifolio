@@ -41,7 +41,7 @@ Currículo PDF e LinkedIn não mostram o trabalho em produção nem os projetos 
 |---|---|
 | 🧭 **Uma página, âncoras claras** | Sobre, Experiência, Stack, Projetos, Contato — spy na navbar. |
 | 🧳 **Modo recrutador** | `/recruiter`: perfil, entregas, stack e projetos destaque para triagem. |
-| 📌 **Projetos do GitHub** | Pins + recentes, filtros multi AND, demos e curadoria híbrida. |
+| 📌 **Projetos do GitHub** | Pins + recentes, filtros multi AND, demos e curadoria híbrida. Para ocultar um repo sem PR: topic GitHub `hide-portfolio`. |
 | 🌐 **PT / EN + tema** | i18next e toggle claro/escuro persistidos. |
 | 🥚 **Oito easter eggs** | Nunca bloqueiam conteúdo; catálogo no rodapé. |
 

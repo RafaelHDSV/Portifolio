@@ -6,6 +6,16 @@
 
 Use `CHANGELOG.md` na raiz para releases Keep a Changelog. Este arquivo guarda o detalhe por data.
 
+## 2026-11-20
+
+### Topic `hide-portfolio` (Portifolio#94)
+
+- `repoFilters` exclui repos cujo `topics` contenha `hide-portfolio` (case-insensitive), inclusive
+  contra `forceInclude`.
+- `FORCE_EXCLUDED_REPO_NAMES` / `forceExclude` / `hidden` permanecem.
+- GraphQL pinned: `repositoryTopics(first: 20)`.
+- Doc: `docs/regras-de-negocio.md`, menção em `docs/context.md` e `README.md`.
+
 ## 2026-11-17
 
 ### Search Console — redirect `?lang=` (board#26)

@@ -2,15 +2,20 @@ import { IProjectConfig } from '../types/IProject'
 import { images } from './images'
 
 /**
- * Curadoria hibrida (Issue #31):
+ * Curadoria hibrida (Issue #31 + #94):
  * - forceInclude: inclui repo mesmo se filtro API excluiria; sintetiza card se ausente na API
  * - forceExclude: oculta repo mesmo se pinned/recente (preferir sobre hidden)
  * - hidden: alias legado de forceExclude
  * - demoPriority: 'config' | 'root' | 'readme' — ordem de busca da midia demo no card
+ * - topic GitHub `hide-portfolio` (HIDE_PORTFOLIO_TOPIC): oculta sem editar este arquivo;
+ *   se forceInclude e o topic coexistirem, o topic vence
  *
  * Exemplo (nao ativo):
  * { repoName: 'MedIT', demoPriority: 'root', forceInclude: true, ... }
  */
+
+/** Topic GitHub que remove o repo da listagem automatica (case-insensitive). */
+export const HIDE_PORTFOLIO_TOPIC = 'hide-portfolio'
 
 /**
  * Lista rapida para ocultar repositorios da listagem sem precisar criar
