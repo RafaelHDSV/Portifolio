@@ -65,7 +65,7 @@ export const projectsConfig: IProjectConfig[] = [
   },
   {
     key: 'vieira-analytics',
-    repoName: 'PERSONAL-Vieira-Analytics',
+    repoName: 'vieira-analytics',
     name: 'Vieira Analytics',
     image: images.vieiraAnalytics,
     description: {
@@ -74,7 +74,7 @@ export const projectsConfig: IProjectConfig[] = [
     },
     languages: ['Typescript', 'React', 'Node', 'API'],
     urlProject: 'https://analytics.getvieira.com',
-    urlGitHub: 'https://github.com/RafaelHDSV/PERSONAL-Vieira-Analytics',
+    urlGitHub: 'https://github.com/RafaelHDSV/vieira-analytics',
     demoPriority: 'config',
     featured: true,
     order: 3
